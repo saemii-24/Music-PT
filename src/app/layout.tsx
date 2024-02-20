@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
-import "./globals.css";
-import Header from "@/component/Header";
+import type { Metadata } from 'next';
+import { Noto_Sans_KR } from 'next/font/google';
+import './globals.css';
+import Header from '@/component/Header';
+import Footer from '@/component/Footer';
 
-const noto = Noto_Sans_KR({ subsets: ["latin"] });
+const noto = Noto_Sans_KR({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Music-PT",
-  description: "좋아하는 음악으로 공부해요!",
+  title: 'Music-PT',
+  description: '좋아하는 음악으로 공부해요!',
 };
 
 export default function RootLayout({
@@ -19,9 +20,11 @@ export default function RootLayout({
     <html lang="ko">
       <head />
       <body className={noto.className}>
-        <Header />
-        {children}
-        <footer className="w-full h-10 bg-slate-100"></footer>
+        <div className="flex flex-col">
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
