@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
+import { Noto_Sans_JP } from 'next/font/google';
 import './globals.css';
+import { NextProvider } from '@/providers';
+
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-const noto = Noto_Sans_KR({ subsets: ['latin'] });
+const notoKR = Noto_Sans_KR({ subsets: ['latin'], variable: '--ko' });
+const notoJP = Noto_Sans_JP({ subsets: ['latin'], variable: '--jp' });
 
 export const metadata: Metadata = {
   title: 'Music-PT',
@@ -18,14 +22,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <head />
-      <body className={noto.className}>
-        <div className="flex flex-col">
+      <NextProvider>
+        <head />
+        <body className={`${notoKR.variable} ${notoJP.variable}`}>
           <Header />
-          <main>{children}</main>
+          {children}
           <Footer />
-        </div>
-      </body>
+        </body>
+      </NextProvider>
     </html>
   );
 }

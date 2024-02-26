@@ -3,10 +3,10 @@ import { FaGithub } from 'react-icons/fa';
 
 export default function Footer() {
   return (
-    <footer className="flex border-t p-4 font-medium align-center bg-gray-100">
+    <footer className=" flex border-t bg-gray-100 p-4 font-medium">
       <div className="flex">
         <Link href="/">
-          <div className="bg-sky-400">Music-PT</div>
+          <div>Music-PT</div>
         </Link>
         <div>좋아하는 음악을 번역하고, 새로운 언어를 공부해요!</div>
       </div>

@@ -1,4 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* 
+@font-face {
+  font-family: 'music-pt';
+  src: url('"https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..9000&display=swap')
+    format('truetype');
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'music-pt';
+  src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap')
+    format('truetype');
+  font-style: normal;
+  unicode-range: U+AC00-D7AF, U+1100-11FF, U+3130-318F;
+} */

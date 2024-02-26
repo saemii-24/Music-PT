@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import colors from 'tailwindcss/colors';
 
 const config: Config = {
   content: [
@@ -13,8 +14,23 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontFamily: {
+        ko: ['var(--ko)'],
+        jp: ['var(--jp)'],
+      },
+    },
+    container: {
+      center: true,
     },
     colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      black: colors.black,
+      white: colors.white,
+      gray: colors.gray,
+      emerald: colors.emerald,
+      indigo: colors.indigo,
+      yellow: colors.yellow,
       music: {
         100: '#E9F6FC',
         200: '#BEE6FF',
@@ -24,9 +40,10 @@ const config: Config = {
         600: '#1764C0',
         700: '#015C93',
       },
-      // ...
+      bluegray: {
+        100: '#94A3B8',
+      },
     },
   },
-  plugins: [],
 };
 export default config;
