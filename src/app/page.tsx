@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <main className=" h-full min-h-screen">
+    <main className="flex-1">
       <div>뿅</div>
     </main>
   );

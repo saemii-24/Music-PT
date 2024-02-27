@@ -1,18 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* 
+
 @font-face {
-  font-family: 'music-pt';
-  src: url('"https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..9000&display=swap')
+  font-family: 'noto';
+  src: url('../../public/font/NotoSansJP-VariableFont_wght.ttf')
     format('truetype');
-  font-style: normal;
 }
 
 @font-face {
-  font-family: 'music-pt';
-  src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap')
+  font-family: 'noto';
+  src: url('../../public/font/NotoSansKR-VariableFont_wght.ttf')
     format('truetype');
-  font-style: normal;
-  unicode-range: U+AC00-D7AF, U+1100-11FF, U+3130-318F;
-} */
+  unicode-range: U+AC00-D7A3;
+}
+
+body {
+  color: #333333;
+}

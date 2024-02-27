@@ -24,10 +24,12 @@ export default function RootLayout({
     <html lang="ko">
       <NextProvider>
         <head />
-        <body className={`${notoKR.variable} ${notoJP.variable}`}>
-          <Header />
-          {children}
-          <Footer />
+        <body className={`font-[noto]`}>
+          <div className="flex min-h-screen flex-col ">
+            <Header />
+            {children}
+            <Footer />
+          </div>
         </body>
       </NextProvider>
     </html>

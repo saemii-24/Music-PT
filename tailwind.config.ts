@@ -21,6 +21,13 @@ const config: Config = {
     },
     container: {
       center: true,
+      padding: {
+        DEFAULT: '1rem',
+        sm: '2rem',
+        lg: '4rem',
+        xl: '5rem',
+        '2xl': '6rem',
+      },
     },
     colors: {
       transparent: 'transparent',
@@ -32,16 +39,11 @@ const config: Config = {
       indigo: colors.indigo,
       yellow: colors.yellow,
       music: {
-        100: '#E9F6FC',
-        200: '#BEE6FF',
-        300: '#38BDF8',
-        400: '#3FA4F4',
-        500: '#1D85E6',
-        600: '#1764C0',
-        700: '#015C93',
-      },
-      bluegray: {
-        100: '#94A3B8',
+        lightgray: '#F6F8F9',
+        bluegray: '#94A3B8',
+        darkgray: '#E5E8EA',
+        blue: '#1F57F7',
+        orange: '#FF530A',
       },
     },
   },

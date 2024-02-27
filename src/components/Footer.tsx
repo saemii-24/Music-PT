@@ -1,18 +1,37 @@
+'use client';
+import { languageMode } from '@/recoil';
 import Link from 'next/link';
 import { FaGithub } from 'react-icons/fa';
+import { useRecoilValue } from 'recoil';
 
 export default function Footer() {
+  const lan = useRecoilValue(languageMode);
+
   return (
-    <footer className=" flex border-t bg-gray-100 p-4 font-medium">
-      <div className="flex">
-        <Link href="/">
-          <div>Music-PT</div>
-        </Link>
-        <div>좋아하는 음악을 번역하고, 새로운 언어를 공부해요!</div>
+    <footer className="w-screen overflow-hidden border-t-2 border-gray-100">
+      <div className="container flex flex-col py-10">
+        <div className="flex">
+          <Link
+            href="/"
+            className="cursor-pointer text-2xl font-black tracking-tight"
+          >
+            Music PT
+          </Link>
+          <Link
+            className="ml-auto flex items-center justify-center"
+            href="https://github.com/saemii-24/Music-PT"
+            target="_blank"
+          >
+            <FaGithub className="text-3xl" />
+          </Link>
+        </div>
+        <div className="mt-5 text-sm font-normal">
+          {lan['footer-introduce']}
+        </div>
+        <div className="mt-1 text-sm font-normal text-[#cccccc]">
+          {lan['footer-notice']}
+        </div>
       </div>
-      <Link href="https://github.com/saemii-24/Music-PT" target="_blank">
-        <FaGithub />
-      </Link>
     </footer>
   );
 }
