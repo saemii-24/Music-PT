@@ -120,39 +120,53 @@ export default function Header() {
           </li>
         </ul>
       </div>
+      {/* 모바일 사이즈 */}
       {menuOpen && (
-        <ul className='container absolute inset-0 z-0 h-screen w-screen bg-white pt-20'>
+        <ul className='container absolute inset-0 z-0 block h-screen w-screen bg-white pt-20 sm:hidden '>
           <li>
-            <span>Page</span>
+            <div className=' mb-4 text-2xl font-extrabold text-music-bluegray'>
+              Page
+            </div>
             <ul>
-              <li>
+              <li className='mb-2 block'>
                 <Link
+                  onClick={() => {
+                    setMenuOpen(false);
+                  }}
                   href='/addmusic'
-                  className=' font-medium hover:text-music-bluegray'>
+                  className=' text-lg font-medium hover:text-music-bluegray'>
                   {lan['header-btn-add']}
                 </Link>
               </li>
-              <li>
+              <li className='mb-2 block'>
                 <Link
+                  onClick={() => {
+                    setMenuOpen(false);
+                  }}
                   href='/searchmusic'
-                  className=' font-medium hover:text-music-bluegray'>
+                  className=' text-lg font-medium hover:text-music-bluegray'>
                   {lan['header-btn-all']}
                 </Link>
               </li>
-              <li>
+              <li className='mb-2 block'>
                 <Link
+                  onClick={() => {
+                    setMenuOpen(false);
+                  }}
                   href='/mypage'
-                  className=' font-medium hover:text-music-bluegray'>
+                  className=' text-lg font-medium hover:text-music-bluegray'>
                   {lan['header-btn-mypage']}
                 </Link>
               </li>
             </ul>
           </li>
           <li>
-            <span>Language</span>
+            <div className=' mb-4 mt-8 text-2xl  font-extrabold text-music-bluegray'>
+              Language
+            </div>
             <ul>
               <li
-                className='cursor-pointer font-medium '
+                className='mb-3 cursor-pointer text-lg font-medium tracking-wide'
                 onClick={() => {
                   setNowLanguage('ko');
                   setLanSelectOpen(false);
@@ -160,7 +174,7 @@ export default function Header() {
                 한국어
               </li>
               <li
-                className='mt-1 cursor-pointer font-medium '
+                className='mt-1 cursor-pointer text-lg font-medium'
                 onClick={() => {
                   setNowLanguage('jp');
                   setLanSelectOpen(false);
@@ -169,12 +183,14 @@ export default function Header() {
               </li>
             </ul>
           </li>
-          <li>
-            <span>Mode</span>
+          <li onClick={handleToggleMode}>
+            <div className=' mb-4 mt-8 text-2xl  font-extrabold text-music-bluegray'>
+              Screen mode
+            </div>
             {isDarkMode ? (
-              <IoMoon className='text-lg text-music-bluegray' />
+              <IoMoon className='text-lg' />
             ) : (
-              <FiSun className='text-lg text-music-bluegray' />
+              <FiSun className='text-lg' />
             )}
           </li>
         </ul>

@@ -1,14 +1,9 @@
-import type { Metadata } from 'next';
-import { Noto_Sans_KR } from 'next/font/google';
-import { Noto_Sans_JP } from 'next/font/google';
+import type {Metadata} from 'next';
 import './globals.css';
-import { NextProvider } from '@/providers';
+import {NextProvider} from '@/providers';
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-
-const notoKR = Noto_Sans_KR({ subsets: ['latin'], variable: '--ko' });
-const notoJP = Noto_Sans_JP({ subsets: ['latin'], variable: '--jp' });
 
 export const metadata: Metadata = {
   title: 'Music-PT',
@@ -21,11 +16,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang='ko'>
       <NextProvider>
         <head />
         <body className={`font-[noto]`}>
-          <div className="flex min-h-screen flex-col ">
+          <div className='flex min-h-screen flex-col '>
             <Header />
             {children}
             <Footer />
