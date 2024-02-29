@@ -1,5 +1,4 @@
 'use client';
-import {useRouter} from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -13,7 +12,6 @@ import {mode, language, languageMode} from '@/recoil/index';
 import {useState} from 'react';
 
 export default function Header() {
-  const router = useRouter();
   //recoil값
   const [isDarkMode, setIsDarkMode] = useRecoilState(mode);
   const [nowLanguage, setNowLanguage] = useRecoilState(language);
