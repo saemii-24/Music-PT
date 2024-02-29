@@ -10,9 +10,11 @@ export default async function Home() {
   // console.log(data);
 
   return (
-    <main className='container flex-1'>
-      <HomeTitle />
-      <MusicCard />
+    <main className=' flex-1 bg-[#F8F9FA]'>
+      <div className='container'>
+        <HomeTitle />
+        <MusicCard />
+      </div>
     </main>
   );
 }
