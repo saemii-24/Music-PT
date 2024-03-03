@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss';
+import type {Config} from 'tailwindcss';
 import colors from 'tailwindcss/colors';
 
 const config: Config = {
@@ -44,6 +44,7 @@ const config: Config = {
         darkgray: '#E5E8EA',
         blue: '#1F57F7',
         orange: '#FF530A',
+        focusblue: '#001962',
       },
     },
   },

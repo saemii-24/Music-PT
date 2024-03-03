@@ -18,3 +18,10 @@
 body {
   color: #333333;
 }
+textarea {
+  resize: none;
+}
+input[type='text'] {
+  padding-left: 10px;
+  padding-right: 10px;
+}
