@@ -152,7 +152,7 @@ export default function AddMusic() {
                         />
                       </label>
                       <p className='pl-1'>
-                        {lan['addmusic-input-thumbnail-descrirption']}
+                        {lan['addmusic-input-thumbnail-description']}
                       </p>
                     </div>
                     <p className='text-xs leading-5 text-gray-600'>
