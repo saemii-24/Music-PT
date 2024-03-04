@@ -20,7 +20,7 @@ export default function RootLayout({
       <NextProvider>
         <head />
         <body className={`font-[noto]`}>
-          <div className='flex min-h-screen flex-col '>
+          <div className='flex min-h-screen flex-col overflow-x-hidden'>
             <Header />
             {children}
             <Footer />

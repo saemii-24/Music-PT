@@ -1,10 +1,41 @@
-// import {createClient} from '@/supabase/server';
+import {PrismaClient} from '@prisma/client';
+import {NextResponse} from 'next/server';
 
-// //정보 모두 가져오기
-// export async function GET(req: Response) {
-//   const supabase = createClient();
-//   let {data: music} = await supabase.from('music').select('*');
+const prisma = new PrismaClient();
 
-//   console.log(music);
-//   return Response.json(music, {status: 200});
-// }
+export async function main() {
+  try {
+    await prisma.$connect();
+  } catch (err) {
+    return Error('DB 접속에 실패했습니다.');
+  }
+}
+//모든 정보를 불러온다
+export const GET = async (req: Request, res: NextResponse) => {
+  try {
+    await main();
+    const posts = await prisma.post.findMany();
+    return NextResponse.json({message: 'Success', posts}, {status: 200});
+  } catch (err) {
+    return NextResponse.json({message: 'Error', err}, {status: 500});
+  } finally {
+    //error가 발생해도 finally는 반드시 실행 됨
+    await prisma.$disconnect();
+  }
+};
+//음악을 작성한다.
+export const POST = async (req: Request, res: NextResponse) => {
+  try {
+    //body 값 받아오기
+    const {title, singer} = await req.json();
+    await main();
+    const post = await prisma.post.create({data: {title, singer}});
+    return NextResponse.json({message: 'Success', post}, {status: 201});
+  } catch (err) {
+    return NextResponse.json({message: 'Error', err}, {status: 500});
+  } finally {
+    //error가 발생해도 finally는 반드시 실행 됨
+    await prisma.$disconnect();
+  }
+};
+//
