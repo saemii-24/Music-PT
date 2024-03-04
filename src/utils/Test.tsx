@@ -1,8 +1,7 @@
 'use client';
 
-import {createClient} from '@/supabase/client';
-import axios from 'axios';
-import React from 'react';
+import {supabase} from '@/utils/supabase';
+import React, {FormEvent, useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
 
 interface FormData {
@@ -11,35 +10,45 @@ interface FormData {
 }
 
 const Test = () => {
-  const {register, handleSubmit} = useForm<FormData>();
+  // const {register, handleSubmit} = useForm<FormData>();
+  const [file, setFile] = useState<File>();
 
-  async function onSubmit(formData: FormData) {
-    const supabase = createClient();
-    const {singer, thumbnail} = formData;
+  const handleChangeFile = (e: any) => {
+    if (e.target.files.length !== 0) {
+      setFile(e.target.files[0]);
+    }
+    console.log(file);
+  };
 
-    const formDataToSend = new FormData();
-    formDataToSend.append('singer', singer);
-    formDataToSend.append('thumbnail', thumbnail[0]);
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
 
-    const {data, error} = await supabase.storage
-      .from('thumbnail')
-      .upload('public/avatar1.png', thumbnail[0], {
-        cacheControl: '3600',
-        upsert: false,
-      });
-  }
+    let fileName = new Date().getTime();
+    console.log(fileName);
+
+    if (file) {
+      const {data: uploadData, error} = await supabase.storage
+        .from('thumbnail')
+        .upload(`image_${fileName}`, file);
+
+      const {data: uploadUrl} = await supabase.storage
+        .from('thumbnail')
+        .getPublicUrl(uploadData!.path);
+
+      console.log(uploadUrl.publicUrl);
+    }
+  };
+
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className='mt-2'>
-          <input
-            type='text'
-            id='singer'
-            className='block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6'
-            {...register('singer')}
-          />
-        </div>
-        <input type='file' {...register('thumbnail')} />
+      <form onSubmit={handleSubmit}>
+        <input
+          type='file'
+          id='thumbnail'
+          onChange={(e) => {
+            handleChangeFile(e);
+          }}
+        />
         <button type='submit'>제출하기</button>
       </form>
     </div>
