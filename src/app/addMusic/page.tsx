@@ -6,7 +6,6 @@ export default function AddMusic() {
   return (
     <main className=' flex-1 '>
       <div className='container py-20'>
-        {/* 페이지 제목 */}
         <AddMusicTitle />
         <AddMusicForm />
       </div>
