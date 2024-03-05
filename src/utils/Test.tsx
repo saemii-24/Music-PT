@@ -1,8 +1,10 @@
 'use client';
 
-import {supabase} from '@/utils/supabase';
+import {createClient} from '@/supabase/client';
+// import {supabase} from '@/utils/supabase';
 import React, {FormEvent, useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
+import FormTest from './FormTest';
 
 interface FormData {
   singer: string;
@@ -21,10 +23,12 @@ const Test = () => {
   };
 
   const handleSubmit = async (event: any) => {
+    const supabase = createClient();
     event.preventDefault();
 
     let fileName = new Date().getTime();
     console.log(fileName);
+    console.log(file);
 
     if (file) {
       const {data: uploadData, error} = await supabase.storage
@@ -51,6 +55,7 @@ const Test = () => {
         />
         <button type='submit'>제출하기</button>
       </form>
+      <FormTest />
     </div>
   );
 };
