@@ -15,15 +15,21 @@ datasource db {
 
 model Post{
   id Int @id @default(autoincrement())
-  title String
-  singer String
-  album String
-  release String
-  lyrics String
-  ko String?
-  jp String?
+  kotitle String?
+  kosinger String?
   koyoutube String?
+  koalbum String?
+  korelease String?
+  kothumbnail String?
+  kolyrics String?
+  kotranslate String?
+  jptitle String?
   jpyoutube String?
-  thumbnail String?
+  jpsinger String?
+  jpalbum String?
+  jprelease String?
+  jpthumbnail String?
+  jplyrics String?
+  jptranslate String?
   date DateTime @default(now())
 }

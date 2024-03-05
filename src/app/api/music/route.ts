@@ -24,55 +24,49 @@ export const GET = async (req: Request, res: NextResponse) => {
     await prisma.$disconnect();
   }
 };
+
 //음악을 작성한다.
 export const POST = async (req: Request, res: NextResponse) => {
   try {
-    const {title, singer} = await req.json();
-    let post = await prisma.post.create({
-      data: {
-        title,
-        singer,
-      },
-    });
     //body 값 받아오기
-    // const {
-    //   title,
-    //   singer,
-    //   youtube,
-    //   album,
-    //   release,
-    //   thumbnail,
-    //   thumbnailUrl,
-    //   language,
-    //   lyrics,
-    // }: FormValues = await req.json();
-    // await main();
-    // let post;
-    // if (language === '한국어') {
-    //   post = await prisma.post.create({
-    //     data: {
-    //       title,
-    //       singer,
-    //       koyoutube: youtube,
-    //       album,
-    //       release,
-    //       thumbnail: thumbnailUrl,
-    //       lyrics,
-    //     },
-    //   });
-    // } else {
-    //   post = await prisma.post.create({
-    //     data: {
-    //       title,
-    //       singer,
-    //       jpyoutube: youtube,
-    //       album,
-    //       release,
-    //       thumbnail: thumbnailUrl,
-    //       lyrics,
-    //     },
-    //   });
-    // }
+    const {
+      title,
+      singer,
+      youtube,
+      album,
+      release,
+      thumbnail,
+      language,
+      lyrics,
+    } = await req.json();
+    await main();
+
+    let post;
+    if (language === '한국어') {
+      post = await prisma.post.create({
+        data: {
+          kotitle: title,
+          kosinger: singer,
+          koyoutube: youtube,
+          koalbum: album,
+          korelease: release,
+          kothumbnail: thumbnail,
+          kolyrics: lyrics,
+        },
+      });
+    } else {
+      post = await prisma.post.create({
+        data: {
+          jptitle: title,
+          jpsinger: singer,
+          jpyoutube: youtube,
+          jpalbum: album,
+          jprelease: release,
+          jpthumbnail: thumbnail,
+          jplyrics: lyrics,
+        },
+      });
+    }
     return NextResponse.json({message: 'Success', post}, {status: 201});
   } catch (err) {
     return NextResponse.json({message: 'Error', err}, {status: 500});

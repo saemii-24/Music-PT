@@ -21,8 +21,18 @@ export default function AddMusicForm() {
     formState: {errors},
   } = useForm<FormValues>();
 
+  //제출 후 id 값을 받아온다.
+  const formSubmit = async (data: any) => {
+    // toast.success('업데이트 중입니다.');
+    const res = await onSubmit(data);
+    console.log(res);
+
+    const obj: any = Object.values(res)[1];
+    console.log(obj.id);
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(formSubmit)}>
       {/* 음악 정보 업로드 */}
       <div className='gap-20 border-b border-gray-900/10 py-12 md:grid md:grid-cols-3'>
         <div className='sm:col-span-12 md:col-span-1'>
