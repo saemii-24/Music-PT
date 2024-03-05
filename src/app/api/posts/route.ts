@@ -37,34 +37,27 @@ const prisma = new PrismaClient();
 //   }
 // };
 //
-
 export async function POST(request: NextRequest) {
-  console.log(request);
-
   const supabase = await createClient();
   const formData = await request.formData();
-  const singer = formData.get('singer') as string;
-  const thumbnail = formData.get('thumbnail');
-  console.log(singer, thumbnail);
 
-  // //supabase storage 업로드
-  // if (thumbnail) {
+  const singer = formData.get('singer') as string;
+  // const thumbnail = formData.get('thumbnail');
+
+  // let thumbnailFileList: FileList | null = null;
+  // if (thumbnail instanceof FileList) {
+  //   thumbnailFileList = thumbnail;
+  // }
+
+  // if (thumbnailFileList && thumbnailFileList.length > 0) {
+  //   const thumbnailFile = thumbnailFileList[0];
   //   const {data: thumbnailData} = await supabase.storage
   //     .from('thumbnail')
-  //     .upload(`${1}-${new Date()}`, thumbnail, {
+  //     .upload(`${1}-${new Date()}`, thumbnailFile, {
   //       cacheControl: '259200',
   //     });
-
-  //   const thumbnailURL = thumbnailData?.path;
-
-  //supabase에 create
-  const post = await prisma.post.create({
-    data: {
-      title: '테스트',
-      singer: singer,
-      thumbnail: 'http',
-    },
-  });
-  return NextResponse.json({singer, thumbnail}, {status: 200});
   // }
+
+  // 서버에서 파일 업로드가 정상적으로 처리되었음을 확인하기 위해 임시로 formData를 반환합니다.
+  return NextResponse.json({formData}, {status: 200});
 }

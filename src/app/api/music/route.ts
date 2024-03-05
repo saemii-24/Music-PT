@@ -1,3 +1,4 @@
+import {FormValues} from '@/types/form';
 import {PrismaClient} from '@prisma/client';
 import {NextResponse} from 'next/server';
 
@@ -26,10 +27,52 @@ export const GET = async (req: Request, res: NextResponse) => {
 //음악을 작성한다.
 export const POST = async (req: Request, res: NextResponse) => {
   try {
-    //body 값 받아오기
     const {title, singer} = await req.json();
-    await main();
-    const post = await prisma.post.create({data: {title, singer}});
+    let post = await prisma.post.create({
+      data: {
+        title,
+        singer,
+      },
+    });
+    //body 값 받아오기
+    // const {
+    //   title,
+    //   singer,
+    //   youtube,
+    //   album,
+    //   release,
+    //   thumbnail,
+    //   thumbnailUrl,
+    //   language,
+    //   lyrics,
+    // }: FormValues = await req.json();
+    // await main();
+    // let post;
+    // if (language === '한국어') {
+    //   post = await prisma.post.create({
+    //     data: {
+    //       title,
+    //       singer,
+    //       koyoutube: youtube,
+    //       album,
+    //       release,
+    //       thumbnail: thumbnailUrl,
+    //       lyrics,
+    //     },
+    //   });
+    // } else {
+    //   post = await prisma.post.create({
+    //     data: {
+    //       title,
+    //       singer,
+    //       jpyoutube: youtube,
+    //       album,
+    //       release,
+    //       thumbnail: thumbnailUrl,
+    //       lyrics,
+    //     },
+    //   });
+    // }
     return NextResponse.json({message: 'Success', post}, {status: 201});
   } catch (err) {
     return NextResponse.json({message: 'Error', err}, {status: 500});

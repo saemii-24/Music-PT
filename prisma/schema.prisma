@@ -17,6 +17,9 @@ model Post{
   id Int @id @default(autoincrement())
   title String
   singer String
+  album String
+  release String
+  lyrics String
   ko String?
   jp String?
   koyoutube String?
