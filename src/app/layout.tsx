@@ -17,16 +17,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <NextProvider>
-        <head />
-        <body className={`font-[noto]`}>
+      <head />
+      <body className={`font-[noto]`}>
+        <NextProvider>
           <div className='flex min-h-screen flex-col overflow-x-hidden'>
             <Header />
             {children}
             <Footer />
           </div>
-        </body>
-      </NextProvider>
+        </NextProvider>
+      </body>
     </html>
   );
 }

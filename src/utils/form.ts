@@ -1,10 +1,10 @@
 import {FormValues} from '@/types/form';
 import {createClient} from '@/supabase/client';
 import axios from 'axios';
+import {toast} from 'react-toastify';
 
 //react-hook-form 폼
 export const onSubmit = async (data: FormValues) => {
-  console.log(data);
   const supabase = createClient();
 
   //file 이 업로드 되었을 때 처리
@@ -21,22 +21,32 @@ export const onSubmit = async (data: FormValues) => {
     //만약 업로드가 실패한 경우
     if (error) {
       console.error('이미지 업로드 실패:', error.message);
+      toast.error('이미지 업로드에 실패했습니다.');
     } else {
       const {data: uploadUrl} = await supabase.storage
         .from('thumbnail')
         .getPublicUrl(uploadData!.path);
 
-      console.log(uploadUrl.publicUrl);
       fileUrl = uploadUrl.publicUrl;
-      data.thumbnailUrl = fileUrl;
     }
   }
+
   //파일 url로 변경 완료, api에 post 요청
   try {
-    const response = await axios.post('/api/music', data);
-    console.log(response);
+    const response = await axios.post('/api/music', {
+      title: data.title,
+      singer: data.singer,
+      youtube: data.youtube,
+      album: data.album,
+      release: data.release,
+      thumbnail: fileUrl,
+      language: data.language,
+      lyrics: data.lyrics,
+    });
+    return response.data;
   } catch (err) {
     console.error('에러가 발생했습니다: ', err);
+    toast.error('다시 시도해주세요.');
   }
 };
 
