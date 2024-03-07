@@ -9,10 +9,13 @@ import {FormValues} from '@/types/form';
 
 import Error from './Error';
 import {onSubmit, checkFileType} from '@/utils/form';
+import {toast} from 'react-toastify';
+import {useRouter} from 'next/navigation';
 
 export default function AddMusicForm() {
   //recoil 언어모드
   const lan = useRecoilValue(languageMode);
+  const router = useRouter();
 
   //react-hook-form
   const {
@@ -21,14 +24,23 @@ export default function AddMusicForm() {
     formState: {errors},
   } = useForm<FormValues>();
 
-  //제출 후 id 값을 받아온다.
+  //폼 제출
   const formSubmit = async (data: any) => {
-    // toast.success('업데이트 중입니다.');
-    const res = await onSubmit(data);
-    console.log(res);
+    // 로딩 메시지 표시
+    const loadingToast = toast.loading('음악을 등록 중입니다.');
 
-    const obj: any = Object.values(res)[1];
-    console.log(obj.id);
+    try {
+      const res = await onSubmit(data);
+      const obj: any = Object.values(res)[1];
+
+      //업로드 완료시 로딩메세지 닫고, 페이지 이동
+      toast.dismiss(loadingToast);
+      router.replace('/musicpt/' + obj.id);
+      toast.success('음악이 등록 되었습니다.');
+    } catch (err) {
+      console.error('업로드 오류:', err);
+      toast.error('다시 시도해주세요.');
+    }
   };
 
   return (
