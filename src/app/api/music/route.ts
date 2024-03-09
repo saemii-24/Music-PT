@@ -11,12 +11,35 @@ export async function main() {
     return Error('DB 접속에 실패했습니다.');
   }
 }
+
 //모든 정보를 불러온다
+// export const GET = async (req: Request, res: NextResponse) => {
+//   try {
+//     await main();
+//     const posts = await prisma.post.findMany();
+//     return NextResponse.json({message: 'Success', posts}, {status: 200});
+//   } catch (err) {
+//     return NextResponse.json({message: 'Error', err}, {status: 500});
+//   } finally {
+//     //error가 발생해도 finally는 반드시 실행 됨
+//     await prisma.$disconnect();
+//   }
+// };
 export const GET = async (req: Request, res: NextResponse) => {
   try {
     await main();
-    const posts = await prisma.post.findMany();
-    return NextResponse.json({message: 'Success', posts}, {status: 200});
+    try {
+      const posts = await prisma.post.findMany({
+        take: 10,
+        orderBy: {
+          date: 'desc',
+        },
+      });
+      return NextResponse.json({message: 'Success', posts}, {status: 200});
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      throw error;
+    }
   } catch (err) {
     return NextResponse.json({message: 'Error', err}, {status: 500});
   } finally {
