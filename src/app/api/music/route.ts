@@ -25,28 +25,6 @@ export async function main() {
 //     await prisma.$disconnect();
 //   }
 // };
-export const GET = async (req: Request, res: NextResponse) => {
-  try {
-    await main();
-    try {
-      const posts = await prisma.post.findMany({
-        take: 10,
-        orderBy: {
-          date: 'desc',
-        },
-      });
-      return NextResponse.json({message: 'Success', posts}, {status: 200});
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      throw error;
-    }
-  } catch (err) {
-    return NextResponse.json({message: 'Error', err}, {status: 500});
-  } finally {
-    //error가 발생해도 finally는 반드시 실행 됨
-    await prisma.$disconnect();
-  }
-};
 
 //음악을 작성한다.
 export const POST = async (req: Request, res: NextResponse) => {
