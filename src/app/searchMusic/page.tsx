@@ -1,5 +1,6 @@
 'use client';
 
+import Pagination from '@/components/Pagination';
 import {createClient} from '@/supabase/client';
 import {useInfiniteQuery, useQuery} from '@tanstack/react-query';
 import axios from 'axios';
@@ -12,7 +13,10 @@ export default function SearchMusic() {
 
   //tanstack query사용
   const getMusicData = async ({pageParam}: {pageParam: number}) => {
-    const {data} = await axios(`/api/searchmusic/${pageParam}`);
+    let postCount: number = 10;
+    const {data} = await axios(
+      `/api/searchmusic?pageParam=${pageParam}&postCount=${postCount}`,
+    );
     return data;
   };
 
@@ -45,19 +49,11 @@ export default function SearchMusic() {
 
   return (
     <main className='flex-1'>
-      {/* post 목록 */}
-      <div className='h-[20vw]'></div>
-      <div className='h-[20vw]'></div>
-      <div className='h-[20vw]'></div>
-      <div className='h-[20vw]'></div>
-      <div className='h-[20vw]'></div>
-      <div className='h-[20vw]'></div>
-      <div className='h-[20vw]'></div>
-      <div className='h-[20vw]'></div>
-      <div className='h-[20vw]'></div>
-      <div className='h-[20vw]'></div>
-      <div className='h-[20vw]'></div>
+      {/* music 목록 */}
+
       <div className='h-4 w-full bg-music-blue' ref={ref}></div>
+
+      <Pagination />
     </main>
   );
 }
