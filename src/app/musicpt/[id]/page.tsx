@@ -43,7 +43,7 @@ export default function MusicPt({params}: ParamsProps) {
     <div className='flex-1'>
       <main className='my-20'>
         <section>
-          <div className='container flex items-center gap-20 border-b pb-20'>
+          <div className='container flex items-center gap-20 pb-20'>
             <div className='size-[20vw] overflow-hidden rounded-3xl'>
               <Image
                 priority={true}
@@ -93,6 +93,7 @@ export default function MusicPt({params}: ParamsProps) {
                 </Link>
               </div>
             </div>
+            <hr className='border' />
           </div>
         </section>
 
