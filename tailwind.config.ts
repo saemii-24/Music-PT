@@ -33,6 +33,8 @@ const config: Config = {
       transparent: 'transparent',
       current: 'currentColor',
       black: colors.black,
+      red: colors.red,
+      orange: colors.orange,
       white: colors.white,
       gray: colors.gray,
       emerald: colors.emerald,
