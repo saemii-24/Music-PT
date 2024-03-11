@@ -9,7 +9,7 @@ export const GET = async (req: Request, res: NextResponse) => {
   try {
     await main();
     //쿼리스트링 값을 받아옴
-    const id: number = parseInt(req.url.split('/searchmusic/')[1]);
+    const id: number = parseInt(req.url.split('/music/')[1]);
     console.log(id);
     const post = await prisma.post.findFirst({where: {id}});
     return NextResponse.json({message: 'Success', post}, {status: 200});
