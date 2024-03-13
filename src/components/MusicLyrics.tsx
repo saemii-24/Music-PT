@@ -6,7 +6,6 @@ import type {SupabaseType} from '@/types/form';
 import {useRouter} from 'next/navigation';
 import React from 'react';
 
-import {BsTranslate} from 'react-icons/bs';
 import {CgAddR} from 'react-icons/cg';
 
 export default function Lyrics({
@@ -42,7 +41,7 @@ export default function Lyrics({
             <div className='flex flex-col items-center gap-2'>
               <button
                 onClick={() => {
-                  route.push(`/addtranslate/${id}?lang=ko`);
+                  route.push(`/musicpt/${id}/addlyrics-jp`);
                 }}
                 className='mb-10 flex items-center gap-2 rounded-md bg-music-orange px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600'>
                 <CgAddR className='text-lg' />
@@ -74,7 +73,7 @@ export default function Lyrics({
               <div className='mt-10 flex items-center justify-center gap-x-6'>
                 <button
                   onClick={() => {
-                    route.push(`/addtranslate/${id}?lang=ko`);
+                    route.push(`/musicpt/${id}/addlyrics-ko`);
                   }}
                   className='mb-10 flex items-center gap-2 rounded-md bg-music-blue px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
                   <CgAddR />
@@ -105,7 +104,7 @@ export default function Lyrics({
             <div className='flex flex-col items-center gap-2'>
               <button
                 onClick={() => {
-                  route.push(`/addtranslate/${id}?lang=jp`);
+                  route.push(`/musicpt/${id}/addlyrics-jp`);
                 }}
                 className='mb-10 flex items-center gap-2 rounded-md bg-music-orange px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600'>
                 <CgAddR className='text-lg' />
@@ -137,7 +136,7 @@ export default function Lyrics({
               <div className='mt-10 flex items-center justify-center gap-x-6'>
                 <button
                   onClick={() => {
-                    route.push(`/addtranslate/${id}?lang=ko`);
+                    route.push(`/musicpt/${id}/addlyrics-ko`);
                   }}
                   className='mb-10 flex items-center gap-2 rounded-md bg-music-blue px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
                   <CgAddR />
