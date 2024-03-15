@@ -12,7 +12,7 @@ export type FormValues = {
 
 export type SupabaseType = {
   date: string;
-  update: string;
+  updatedAt: string;
   id: number;
   jpalbum: string | null;
   jplyrics: string | null;
@@ -31,3 +31,7 @@ export type SupabaseType = {
   kotranslate: string | null;
   koyoutube: string | null;
 };
+
+export interface ParamsProps {
+  params: {id: string};
+}

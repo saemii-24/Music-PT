@@ -28,9 +28,11 @@ export default function AddMusicForm() {
   const formSubmit = async (data: any) => {
     // 로딩 메시지 표시
     const loadingToast = toast.loading('음악을 등록 중입니다.');
+    console.log(data);
 
     try {
       const res = await onSubmit(data);
+      // console.log(res);
       const obj: any = Object.values(res)[1];
 
       //업로드 완료시 로딩메세지 닫고, 페이지 이동
@@ -38,6 +40,7 @@ export default function AddMusicForm() {
       router.replace('/musicpt/' + obj.id);
       toast.success('음악이 등록 되었습니다.');
     } catch (err) {
+      toast.dismiss(loadingToast);
       console.error('업로드 오류:', err);
       toast.error('다시 시도해주세요.');
     }

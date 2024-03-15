@@ -25,6 +25,7 @@ export const PUT = async (req: Request, res: NextResponse) => {
           id: id,
         },
         data: {
+          updatedAt: new Date(),
           kotranslate: lyrics,
         },
       });
@@ -34,7 +35,7 @@ export const PUT = async (req: Request, res: NextResponse) => {
           id: id,
         },
         data: {
-          date: new Date(),
+          updatedAt: new Date(),
           jptranslate: lyrics,
         },
       });

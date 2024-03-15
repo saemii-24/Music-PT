@@ -1,5 +1,5 @@
 import MusicLyricsAdd from '@/components/MusicLyricsAdd';
-import {ParamsProps} from '../page';
+import {ParamsProps} from '@/types/form';
 
 //일본어 버전에 한국어 번역을 추가하는 페이지
 export default function AddLyricsKo({params}: ParamsProps) {
