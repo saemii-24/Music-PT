@@ -31,5 +31,6 @@ model Post{
   jpthumbnail String?
   jplyrics String?
   jptranslate String?
+  update DateTime @updatedAt
   date DateTime @default(now())
 }

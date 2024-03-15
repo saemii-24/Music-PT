@@ -8,6 +8,7 @@ import {BsTranslate} from 'react-icons/bs';
 import {useForm} from 'react-hook-form';
 import {toast} from 'react-toastify';
 import {useRouter} from 'next/navigation';
+import axios from 'axios';
 
 export default function MusicLyricsAdd({id}: {id: string}) {
   const route = useRouter();
@@ -22,22 +23,37 @@ export default function MusicLyricsAdd({id}: {id: string}) {
     formState: {errors},
   } = useForm();
 
+  //현재 업로드 하는 언어
+  const translateto = 'jp';
   //폼 제출
-  const formSubmit = async (data: any) => {
-    console.log(data);
+  const formSubmit = async (data: object) => {
+    //객체형태로 들어오는 폼 데이터들을 줄바꿈된 하나의 string 값으로 바꾼다.
+    let lyricsData = Object.values(data)
+      .map((line: string, index: number) => {
+        if (index === Object.keys(data).length - 1) {
+          return line;
+        } else {
+          return line + '\n';
+        }
+      })
+      .reduce((prev: string, cul: string) => prev + cul, '');
+
     // 로딩 메시지 표시
     const loadingToast = toast.loading('음악을 등록 중입니다.');
 
     try {
-      // const res = await onSubmit(data);
-      // const obj: any = Object.values(res)[1];
+      const {data} = await axios.put(`/api/addlyrics/${id}`, {
+        translateto: translateto,
+        lyrics: lyricsData,
+      });
+      toast.dismiss(loadingToast);
 
       //업로드 완료시 로딩메세지 닫고, 페이지 이동
-      toast.dismiss(loadingToast);
-      // router.replace('/musicpt/' + obj.id);
       toast.success('음악이 등록 되었습니다.');
+      route.replace('/musicpt/' + id);
+      return data;
     } catch (err) {
-      // console.error('업로드 오류:', err);
+      console.error('업로드 오류:', err);
       toast.error('다시 시도해주세요.');
     }
   };
@@ -80,7 +96,7 @@ export default function MusicLyricsAdd({id}: {id: string}) {
             </button>
             <button
               type='submit'
-              className='rounded-md bg-music-blue px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
+              className='rounded-md bg-music-orange px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-music-lightorange focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
               등록하기
             </button>
           </div>

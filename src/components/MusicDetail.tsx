@@ -28,7 +28,7 @@ export default function MusicDetail({
       <section className='container mt-[10rem]'>
         <div className='relative '>
           <p className='mb-1 flex items-center gap-1'>
-            <MdOutlineUpdate /> {music?.date?.slice(0, 10)}
+            <MdOutlineUpdate /> {music?.update?.slice(0, 10)}
           </p>
           <h2 className='text-4xl font-extrabold'>{lyricsVer}</h2>
 

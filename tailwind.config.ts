@@ -46,6 +46,7 @@ const config: Config = {
         darkgray: '#E5E8EA',
         blue: '#1F57F7',
         orange: '#FF530A',
+        lightorange: '#FF9669',
         focusblue: '#001962',
       },
     },
