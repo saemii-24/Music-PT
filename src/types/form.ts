@@ -12,6 +12,7 @@ export type FormValues = {
 
 export type SupabaseType = {
   date: string;
+  update: string;
   id: number;
   jpalbum: string | null;
   jplyrics: string | null;

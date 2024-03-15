@@ -3,6 +3,7 @@ import {createClient} from '@/supabase/client';
 import axios from 'axios';
 import {toast} from 'react-toastify';
 
+//기본 음악 업로드
 //react-hook-form 폼
 export const onSubmit = async (data: FormValues) => {
   const supabase = createClient();
@@ -72,3 +73,4 @@ export const checkFileType = (value?: FileList) => {
   }
   return true;
 };
+
