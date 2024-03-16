@@ -53,6 +53,7 @@ export const POST = async (req: Request, res: NextResponse) => {
           korelease: release,
           kothumbnail: thumbnail,
           kolyrics: lyrics,
+          updatedAt: new Date(),
         },
       });
     } else {
@@ -65,6 +66,7 @@ export const POST = async (req: Request, res: NextResponse) => {
           jprelease: release,
           jpthumbnail: thumbnail,
           jplyrics: lyrics,
+          updatedAt: new Date(),
         },
       });
     }

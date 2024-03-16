@@ -1,11 +1,9 @@
 'use client';
 
 import MusicDetail from '@/components/MusicDetail';
+import {ParamsProps} from '@/types/form';
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
-export interface ParamsProps {
-  params: {id: string};
-}
 
 export default function MusicPt({params}: ParamsProps) {
   const id = params.id;

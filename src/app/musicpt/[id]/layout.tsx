@@ -5,7 +5,8 @@ import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 import MusicProfile from '@/components/MusicProfile';
 import {atom, useRecoilState} from 'recoil';
-import {musicAtom} from '@/recoil';
+import {musicAtom, needRefetch} from '@/recoil';
+import {useEffect} from 'react';
 
 interface ParamsChildrenProps {
   params: {id: string};
@@ -20,6 +21,7 @@ export default function MusicPtLayout({
 
   //recoil
   const [musicData, setMusicData] = useRecoilState(musicAtom);
+  const [needFetch, setNeedFetch] = useRecoilState(needRefetch);
 
   //tanstack query사용
   const getMusicData = async () => {
@@ -28,13 +30,24 @@ export default function MusicPtLayout({
     return data;
   };
 
-  const {status, data: music} = useQuery({
+  const {
+    status,
+    data: music,
+    refetch,
+  } = useQuery({
     queryKey: ['music-pt', id],
     queryFn: getMusicData,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
+
+  useEffect(() => {
+    if (needFetch) {
+      refetch();
+      setNeedFetch(false);
+    }
+  }, [needFetch]);
 
   if (status === 'pending') {
     return <span>Loading...</span>;

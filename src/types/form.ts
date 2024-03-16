@@ -12,7 +12,7 @@ export type FormValues = {
 
 export type SupabaseType = {
   date: string;
-  update: string;
+  updatedAt: string;
   id: number;
   jpalbum: string | null;
   jplyrics: string | null;
@@ -30,4 +30,17 @@ export type SupabaseType = {
   kotitle: string | null;
   kotranslate: string | null;
   koyoutube: string | null;
+};
+
+export interface ParamsProps {
+  params: {id: string};
+}
+
+export type TextAreaValue = {
+  lyrics: string;
+};
+
+export type PropsType = {
+  lang: string;
+  id: string;
 };

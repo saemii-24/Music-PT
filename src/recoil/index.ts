@@ -26,3 +26,8 @@ export const musicAtom = atom<Partial<SupabaseType>>({
   key: 'musicData',
   default: {},
 });
+
+export const needRefetch = atom<boolean>({
+  key: 'musicRefetch',
+  default: false,
+});

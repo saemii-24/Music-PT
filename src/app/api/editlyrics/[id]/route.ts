@@ -4,28 +4,28 @@ import {main} from '../../music/route';
 
 const prisma = new PrismaClient();
 
-//id에 맞는 음악 데이터를 추가한다.
+//id에 맞는 음악의 가사를 수정한다.
 export const PUT = async (req: Request, res: NextResponse) => {
   try {
     await main();
     //쿼리스트링 값을 받아옴
-    const id: number = parseInt(req.url.split('/addlyrics/')[1]);
+    const id: number = parseInt(req.url.split('/editlyrics/')[1]);
     console.log(id);
 
     //body 값 받아오기
-    const {translateto, lyrics} = await req.json();
+    const {lyricsLang, lyrics} = await req.json();
     await main();
 
-    //만약 translateto 가 jp면 한국어 -> 일본어 가사 번역이며,
-    //sdupabase kotranslate에 업로드한다.
+    //만약 lyricsLang이ko면 한국어 가사, jp면 일본어가사를 업데이트 한다.
     let updateMusic;
-    if (translateto === 'jp') {
+    if (lyricsLang === 'jp') {
       updateMusic = await prisma.post.update({
         where: {
           id: id,
         },
         data: {
-          kotranslate: lyrics,
+          updatedAt: new Date(),
+          jplyrics: lyrics,
         },
       });
     } else {
@@ -34,8 +34,8 @@ export const PUT = async (req: Request, res: NextResponse) => {
           id: id,
         },
         data: {
-          date: new Date(),
-          jptranslate: lyrics,
+          updatedAt: new Date(),
+          kolyrics: lyrics,
         },
       });
     }
