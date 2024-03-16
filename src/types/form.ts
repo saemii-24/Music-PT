@@ -39,3 +39,8 @@ export interface ParamsProps {
 export type TextAreaValue = {
   lyrics: string;
 };
+
+export type PropsType = {
+  lang: string;
+  id: string;
+};

@@ -7,12 +7,9 @@ import {FiEdit} from 'react-icons/fi';
 import {useForm} from 'react-hook-form';
 
 import {onSubmitEditLyrics} from '@/utils/form';
-import type {TextAreaValue} from '@/types/form';
+import type {PropsType, TextAreaValue} from '@/types/form';
 
-type PropsType = {
-  lang: string;
-  id: string;
-};
+import TextAreaForm from './TextAreaForm';
 
 export default function MusicLyricsEdit({lang, id}: PropsType) {
   const route = useRouter();
@@ -23,17 +20,17 @@ export default function MusicLyricsEdit({lang, id}: PropsType) {
 
   //textarea 가사에 맞춰 높이 계산
   const [length, setLength] = useState<number>(0);
-  const [defaultLyrcis, setDefaultLyrcis] = useState<string>('');
+  const [defaultlyrics, setDefaultLyrics] = useState<string>('');
 
   useEffect(() => {
     if (lang === 'ko' && music.kolyrics) {
       let lyricslength = music.kolyrics?.split('\n').length;
       setLength(lyricslength);
-      setDefaultLyrcis(music.kolyrics);
+      setDefaultLyrics(music.kolyrics);
     } else if (lang === 'jp' && music.jplyrics) {
       let lyricslength = music.jplyrics?.split('\n').length;
       setLength(lyricslength);
-      setDefaultLyrcis(music.jplyrics);
+      setDefaultLyrics(music.jplyrics);
     }
   }, [lang, music.kolyrics, music.jplyrics]);
 
@@ -63,28 +60,12 @@ export default function MusicLyricsEdit({lang, id}: PropsType) {
           onSubmit={handleSubmit((data) =>
             onSubmitEditLyrics(data, id, lang, route, setNeedFetch),
           )}>
-          <textarea
-            id='lyrics'
-            {...register('lyrics')}
-            rows={length}
-            defaultValue={defaultLyrcis}
-            className='rounded-lg border-2 border-black py-10 text-center  text-base leading-8 focus-visible:outline-indigo-600 lg:text-lg lg:leading-9'></textarea>
-          {/* 제출 */}
-          <div className='mt-6 flex items-center justify-center gap-x-6'>
-            <button
-              onClick={() => {
-                route.push(`/musicpt/${id}`);
-              }}
-              type='button'
-              className='text-sm font-semibold leading-6 text-gray-900'>
-              취소하기
-            </button>
-            <button
-              type='submit'
-              className='rounded-md bg-music-orange px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-music-lightorange focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-              수정완료
-            </button>
-          </div>
+          <TextAreaForm
+            register={register}
+            defaultlyrics={defaultlyrics}
+            route={route}
+            id={id}
+          />
         </form>
       </section>
     </div>

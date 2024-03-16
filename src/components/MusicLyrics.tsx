@@ -74,7 +74,7 @@ export default function Lyrics({
             {music?.kotranslate ? (
               <button
                 onClick={() => {
-                  route.push(`/musicpt/${id}/addlyrics-jp`);
+                  route.push(`/musicpt/${id}/edittranslate-ko`);
                 }}
                 className='mb-10 flex items-center gap-2 rounded-md bg-music-orange px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600'>
                 <BsTranslate className='text-lg' />
@@ -83,7 +83,7 @@ export default function Lyrics({
             ) : (
               <button
                 onClick={() => {
-                  route.push(`/musicpt/${id}/addlyrics-jp`);
+                  route.push(`/musicpt/${id}/addtranslate-ko`);
                 }}
                 className='mb-10 flex items-center gap-2 rounded-md bg-music-orange px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600'>
                 <BsTranslate className='text-lg' />
@@ -133,7 +133,7 @@ export default function Lyrics({
           <div className='flex flex-col items-center gap-2'>
             <button
               onClick={() => {
-                route.push(`/musicpt/${id}/addlyrics-jp`);
+                route.push(`/musicpt/${id}/addtranslate-jp`);
               }}
               className='mb-10 flex items-center gap-2 rounded-md bg-music-orange px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600'>
               <CgAddR className='text-lg' />

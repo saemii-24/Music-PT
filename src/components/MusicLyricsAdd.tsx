@@ -1,105 +1,75 @@
 'use client';
 
-import {musicAtom} from '@/recoil';
-import {useRecoilValue} from 'recoil';
+import {useRouter} from 'next/navigation';
+import {useEffect, useState} from 'react';
 
-import {BsTranslate} from 'react-icons/bs';
+import {needRefetch} from '@/recoil';
+import {useRecoilState} from 'recoil';
+
+import {MdOutlineUpdate} from 'react-icons/md';
+import {IoAlertCircle} from 'react-icons/io5';
 
 import {useForm} from 'react-hook-form';
-import {toast} from 'react-toastify';
-import {useRouter} from 'next/navigation';
-import axios from 'axios';
 
-export default function MusicLyricsAdd({id}: {id: string}) {
+import TextAreaForm from './TextAreaForm';
+import type {PropsType, TextAreaValue} from '@/types/form';
+import {onSubmitAddLyrics} from '@/utils/form';
+
+export default function MusicLyricsAdd({lang, id}: PropsType) {
   const route = useRouter();
 
   //recoil
-  const music = useRecoilValue(musicAtom);
+  const [needFetch, setNeedFetch] = useRecoilState(needRefetch);
 
   //react-hook-form
   const {
     register,
     handleSubmit,
     formState: {errors},
-  } = useForm();
+    watch,
+  } = useForm<TextAreaValue>();
 
-  //현재 업로드 하는 언어
-  const translateto = 'jp';
-  //폼 제출
-  const formSubmit = async (data: object) => {
-    //객체형태로 들어오는 폼 데이터들을 줄바꿈된 하나의 string 값으로 바꾼다.
-    let lyricsData = Object.values(data)
-      .map((line: string, index: number) => {
-        if (index === Object.keys(data).length - 1) {
-          return line;
-        } else {
-          return line + '\n';
-        }
-      })
-      .reduce((prev: string, cul: string) => prev + cul, '');
+  // 'lyrics'필드 입력 enter 수에 따라 textarea 길이가 변동한다.
+  let [length, setLength] = useState<number>(1);
+  const lyricsValue = watch('lyrics');
 
-    // 로딩 메시지 표시
-    const loadingToast = toast.loading('음악을 등록 중입니다.');
-
-    try {
-      const {data} = await axios.put(`/api/addtranslate/${id}`, {
-        translateto: translateto,
-        lyrics: lyricsData,
-      });
-      toast.dismiss(loadingToast);
-
-      //업로드 완료시 로딩메세지 닫고, 페이지 이동
-      toast.success('음악이 등록 되었습니다.');
-      route.replace('/musicpt/' + id);
-      return data;
-    } catch (err) {
-      console.error('업로드 오류:', err);
-      toast.error('다시 시도해주세요.');
+  useEffect(() => {
+    if (lyricsValue) {
+      const linelength = lyricsValue.split('\n').length;
+      setLength(linelength);
+    } else {
+      setLength(1);
     }
-  };
+  }, [lyricsValue]);
 
   return (
     <div className='flex flex-col items-center gap-20 '>
       <section className='container mt-[10rem]'>
         <div className='relative'>
           <p className='mb-1 flex items-center gap-1'>
-            <BsTranslate /> 한국어 가사를 일본어로 번역합니다.
+            <MdOutlineUpdate /> 한국어 가사를 추가합니다.
           </p>
-          <h2 className='text-4xl font-extrabold'>일본어 번역 등록</h2>
+          <h2 className='text-4xl font-extrabold'>한국어 가사 추가</h2>
           <div className='mt-10 flex gap-6 border-b'></div>
         </div>
       </section>
-      <section className='max-w-full'>
-        <form onSubmit={handleSubmit(formSubmit)} className='flex flex-col'>
-          {music?.kolyrics?.split('\n').map((koline: string, index: number) => (
-            <div key={index} className='mb-8'>
-              <p className='text-center text-base leading-8 lg:text-lg lg:leading-9'>
-                {koline}
-              </p>
-              <input
-                type='text'
-                {...register(`lyrics_${index}`, {required: true})}
-                id='title'
-                className='block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6'
-              />
-            </div>
-          ))}
-          {/* 제출 */}
-          <div className='mt-6 flex items-center justify-center gap-x-6'>
-            <button
-              onClick={() => {
-                route.push(`/musicpt/${id}`);
-              }}
-              type='button'
-              className='text-sm font-semibold leading-6 text-gray-900'>
-              취소하기
-            </button>
-            <button
-              type='submit'
-              className='rounded-md bg-music-orange px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-music-lightorange focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-              등록하기
-            </button>
-          </div>
+      <section className='container flex flex-col gap-3'>
+        <p className='flex items-center justify-center gap-1 text-music-orange'>
+          <IoAlertCircle />한 문장씩 줄바꿈하며 입력해주세요.
+        </p>
+        <form
+          className='flex flex-col'
+          onSubmit={handleSubmit((data) =>
+            onSubmitAddLyrics(data, id, lang, route, setNeedFetch),
+          )}>
+          <TextAreaForm
+            register={register}
+            defaultlyrics={''}
+            route={route}
+            id={id}
+            buttontext={'작성완료'}
+            length={length}
+          />
         </form>
       </section>
     </div>
