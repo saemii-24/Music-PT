@@ -1,7 +1,18 @@
-import {FormValues} from '@/types/form';
-import {createClient} from '@/supabase/client';
 import axios from 'axios';
+import {useRouter} from 'next/navigation';
+
+import {createClient} from '@/supabase/client';
 import {toast} from 'react-toastify';
+
+import type {FormValues, TextAreaValue} from '@/types/form';
+import type {AppRouterInstance} from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import {SetterOrUpdater} from 'recoil';
+
+export function UseRoute(address: string) {
+  const route = useRouter();
+  route.push(address);
+  return;
+}
 
 //기본 음악 업로드
 //react-hook-form 폼
@@ -74,3 +85,32 @@ export const checkFileType = (value?: FileList) => {
   return true;
 };
 
+//자막 수정
+export const onSubmitEditLyrics = async (
+  formdata: TextAreaValue,
+  id: string,
+  lang: string,
+  route: AppRouterInstance,
+  setNeedFetch: SetterOrUpdater<boolean>,
+) => {
+  const loadingToast = toast.loading('가사를 수정 중입니다.');
+
+  try {
+    const {data} = await axios.put(`/api/editlyrics/${id}`, {
+      lyricsLang: lang,
+      lyrics: formdata.lyrics,
+    });
+    toast.dismiss(loadingToast);
+    route.push('/musicpt/' + id);
+    //내용이 수정되었으므로, data를 refetch 해야한다.
+    setNeedFetch(true);
+    toast.success('가사가 수정 되었습니다.');
+    return data;
+  } catch (err) {
+    toast.dismiss(loadingToast);
+    console.error(err);
+    toast.error('다시 시도해주세요.');
+  }
+
+  return;
+};

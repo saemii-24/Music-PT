@@ -42,7 +42,7 @@ export default function MusicLyricsAdd({id}: {id: string}) {
     const loadingToast = toast.loading('음악을 등록 중입니다.');
 
     try {
-      const {data} = await axios.put(`/api/addlyrics/${id}`, {
+      const {data} = await axios.put(`/api/addtranslate/${id}`, {
         translateto: translateto,
         lyrics: lyricsData,
       });

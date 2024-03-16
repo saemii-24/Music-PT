@@ -35,3 +35,7 @@ export type SupabaseType = {
 export interface ParamsProps {
   params: {id: string};
 }
+
+export type TextAreaValue = {
+  lyrics: string;
+};

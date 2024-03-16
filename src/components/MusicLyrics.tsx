@@ -165,7 +165,7 @@ export default function Lyrics({
             <div className='mt-10 flex items-center justify-center gap-x-6'>
               <button
                 onClick={() => {
-                  route.push(`/musicpt/${id}/addlyrics-ko`);
+                  route.push(`/musicpt/${id}/addlyrics-jp`);
                 }}
                 className='mb-10 flex items-center gap-2 rounded-md bg-music-blue px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
                 <CgAddR />

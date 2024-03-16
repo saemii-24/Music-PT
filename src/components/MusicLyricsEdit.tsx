@@ -1,9 +1,13 @@
 'use client';
-import {musicAtom} from '@/recoil';
-import {useRecoilValue} from 'recoil';
+import {musicAtom, needRefetch} from '@/recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 import {useRouter} from 'next/navigation';
 import {useEffect, useState} from 'react';
 import {FiEdit} from 'react-icons/fi';
+import {useForm} from 'react-hook-form';
+
+import {onSubmitEditLyrics} from '@/utils/form';
+import type {TextAreaValue} from '@/types/form';
 
 type PropsType = {
   lang: string;
@@ -12,23 +16,33 @@ type PropsType = {
 
 export default function MusicLyricsEdit({lang, id}: PropsType) {
   const route = useRouter();
-  console.log(id);
 
   //recoil
   const music = useRecoilValue(musicAtom);
+  const [needFetch, setNeedFetch] = useRecoilState(needRefetch);
 
   //textarea 가사에 맞춰 높이 계산
   const [length, setLength] = useState<number>(0);
+  const [defaultLyrcis, setDefaultLyrcis] = useState<string>('');
 
   useEffect(() => {
     if (lang === 'ko' && music.kolyrics) {
       let lyricslength = music.kolyrics?.split('\n').length;
       setLength(lyricslength);
+      setDefaultLyrcis(music.kolyrics);
     } else if (lang === 'jp' && music.jplyrics) {
       let lyricslength = music.jplyrics?.split('\n').length;
       setLength(lyricslength);
+      setDefaultLyrcis(music.jplyrics);
     }
   }, [lang, music.kolyrics, music.jplyrics]);
+
+  //react-hook-form
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+  } = useForm<TextAreaValue>();
 
   return (
     <div className='flex flex-col items-center gap-20 '>
@@ -44,12 +58,17 @@ export default function MusicLyricsEdit({lang, id}: PropsType) {
         </div>
       </section>
       <section className='container '>
-        <form className='flex flex-col'>
+        <form
+          className='flex flex-col'
+          onSubmit={handleSubmit((data) =>
+            onSubmitEditLyrics(data, id, lang, route, setNeedFetch),
+          )}>
           <textarea
+            id='lyrics'
+            {...register('lyrics')}
             rows={length}
-            className='rounded-lg border-2 border-black py-10 text-center  text-base leading-8 focus-visible:outline-indigo-600 lg:text-lg lg:leading-9'>
-            {lang === 'ko' ? music.kolyrics : music.jplyrics}
-          </textarea>
+            defaultValue={defaultLyrcis}
+            className='rounded-lg border-2 border-black py-10 text-center  text-base leading-8 focus-visible:outline-indigo-600 lg:text-lg lg:leading-9'></textarea>
           {/* 제출 */}
           <div className='mt-6 flex items-center justify-center gap-x-6'>
             <button
