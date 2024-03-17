@@ -1,20 +1,22 @@
 'use client';
 
-import {musicAtom} from '@/recoil';
-import {useRecoilValue} from 'recoil';
+import {musicAtom, needRefetch} from '@/recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 
 import {BsTranslate} from 'react-icons/bs';
 
 import {useForm} from 'react-hook-form';
-import {toast} from 'react-toastify';
 import {useRouter} from 'next/navigation';
-import axios from 'axios';
 
-export default function MusicTranslateAdd({id}: {id: string}) {
+import type {PropsType} from '@/types/form';
+import {onSumbitAddTranslate} from '@/utils/form';
+
+export default function MusicTranslateAdd({id, lang}: PropsType) {
   const route = useRouter();
 
   //recoil
   const music = useRecoilValue(musicAtom);
+  const [needFetch, setNeedFetch] = useRecoilState(needRefetch);
 
   //react-hook-form
   const {
@@ -23,40 +25,7 @@ export default function MusicTranslateAdd({id}: {id: string}) {
     formState: {errors},
   } = useForm();
 
-  //현재 업로드 하는 언어
-  const translateto = 'jp';
-  //폼 제출
-  const formSubmit = async (data: object) => {
-    //객체형태로 들어오는 폼 데이터들을 줄바꿈된 하나의 string 값으로 바꾼다.
-    let lyricsData = Object.values(data)
-      .map((line: string, index: number) => {
-        if (index === Object.keys(data).length - 1) {
-          return line;
-        } else {
-          return line + '\n';
-        }
-      })
-      .reduce((prev: string, cul: string) => prev + cul, '');
-
-    // 로딩 메시지 표시
-    const loadingToast = toast.loading('음악을 등록 중입니다.');
-
-    try {
-      const {data} = await axios.put(`/api/addtranslate/${id}`, {
-        translateto: translateto,
-        lyrics: lyricsData,
-      });
-      toast.dismiss(loadingToast);
-
-      //업로드 완료시 로딩메세지 닫고, 페이지 이동
-      toast.success('음악이 등록 되었습니다.');
-      route.replace('/musicpt/' + id);
-      return data;
-    } catch (err) {
-      console.error('업로드 오류:', err);
-      toast.error('다시 시도해주세요.');
-    }
-  };
+  console.log(id, lang);
 
   return (
     <div className='flex flex-col items-center gap-20 '>
@@ -70,20 +39,43 @@ export default function MusicTranslateAdd({id}: {id: string}) {
         </div>
       </section>
       <section className='max-w-full'>
-        <form onSubmit={handleSubmit(formSubmit)} className='flex flex-col'>
-          {music?.kolyrics?.split('\n').map((koline: string, index: number) => (
-            <div key={index} className='mb-8'>
-              <p className='text-center text-base leading-8 lg:text-lg lg:leading-9'>
-                {koline}
-              </p>
-              <input
-                type='text'
-                {...register(`lyrics_${index}`, {required: true})}
-                id='title'
-                className='block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6'
-              />
-            </div>
-          ))}
+        <form
+          className='flex flex-col'
+          onSubmit={handleSubmit((data) =>
+            onSumbitAddTranslate(data, id, lang, route, setNeedFetch),
+          )}>
+          {lang === 'ko'
+            ? music?.kolyrics
+                ?.split('\n')
+                .map((koline: string, index: number) => (
+                  <div key={index} className='mb-8'>
+                    <p className='text-center text-base leading-8 lg:text-lg lg:leading-9'>
+                      {koline}
+                    </p>
+                    <input
+                      type='text'
+                      {...register(`lyrics_${index}`, {required: true})}
+                      id='title'
+                      className='block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6'
+                    />
+                  </div>
+                ))
+            : music?.jplyrics
+                ?.split('\n')
+                .map((koline: string, index: number) => (
+                  <div key={index} className='mb-8'>
+                    <p className='text-center text-base leading-8 lg:text-lg lg:leading-9'>
+                      {koline}
+                    </p>
+                    <input
+                      type='text'
+                      {...register(`lyrics_${index}`, {required: true})}
+                      id='title'
+                      className='block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6'
+                    />
+                  </div>
+                ))}
+
           {/* 제출 */}
           <div className='mt-6 flex items-center justify-center gap-x-6'>
             <button

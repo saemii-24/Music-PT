@@ -65,6 +65,7 @@ export default function MusicLyricsEdit({lang, id}: PropsType) {
             defaultlyrics={defaultlyrics}
             route={route}
             id={id}
+            length={length}
           />
         </form>
       </section>

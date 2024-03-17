@@ -39,7 +39,7 @@ export default function MusicDetail({
                   setLyricsVer('한국어 버전 가사');
                 }}
                 className={cn(
-                  'cursor-pointer',
+                  'cursor-pointer break-keep',
                   lyricsVer === '한국어 버전 가사' &&
                     'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
                 )}>
@@ -50,7 +50,7 @@ export default function MusicDetail({
                   setLyricsVer('일본어 버전 가사');
                 }}
                 className={cn(
-                  'cursor-pointer',
+                  'cursor-pointer break-keep',
                   lyricsVer === '일본어 버전 가사' &&
                     'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
                 )}>
@@ -61,7 +61,7 @@ export default function MusicDetail({
                   setLyricsVer('한국어 비교하기');
                 }}
                 className={cn(
-                  'cursor-pointer',
+                  'cursor-pointer break-keep',
                   lyricsVer === '한국어 비교하기' &&
                     'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
                 )}>
@@ -72,7 +72,7 @@ export default function MusicDetail({
                   setLyricsVer('일본어 비교하기');
                 }}
                 className={cn(
-                  'cursor-pointer',
+                  'cursor-pointer break-keep',
                   lyricsVer === '일본어 비교하기' &&
                     'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
                 )}>

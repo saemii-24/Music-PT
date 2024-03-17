@@ -47,9 +47,12 @@ export default function MusicLyricsAdd({lang, id}: PropsType) {
       <section className='container mt-[10rem]'>
         <div className='relative'>
           <p className='mb-1 flex items-center gap-1'>
-            <MdOutlineUpdate /> 한국어 가사를 추가합니다.
+            <MdOutlineUpdate /> {lang === 'ko' ? '한국어' : '일본어'} 가사를
+            추가합니다.
           </p>
-          <h2 className='text-4xl font-extrabold'>한국어 가사 추가</h2>
+          <h2 className='text-4xl font-extrabold'>
+            {lang === 'ko' ? '한국어' : '일본어'} 가사 추가
+          </h2>
           <div className='mt-10 flex gap-6 border-b'></div>
         </div>
       </section>

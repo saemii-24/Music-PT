@@ -7,6 +7,7 @@ import {toast} from 'react-toastify';
 import type {FormValues, TextAreaValue} from '@/types/form';
 import type {AppRouterInstance} from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import {SetterOrUpdater} from 'recoil';
+import {FieldValues} from 'react-hook-form';
 
 export function UseRoute(address: string) {
   const route = useRouter();
@@ -105,13 +106,11 @@ export const onSubmitAddLyrics = async (
     //내용이 수정되었으므로, data를 refetch 해야한다.
     setNeedFetch(true);
     toast.success('가사가 추가 되었습니다.');
-    return data;
   } catch (err) {
     toast.dismiss(loadingToast);
     console.error(err);
     toast.error('다시 시도해주세요.');
   }
-  return;
 };
 
 //가사 수정
@@ -142,3 +141,54 @@ export const onSubmitEditLyrics = async (
   }
   return;
 };
+
+//번역을 등록한다
+export const onSumbitAddTranslate = async (
+  formdata: FieldValues,
+  id: string,
+  lang: string,
+  route: AppRouterInstance,
+  setNeedFetch: SetterOrUpdater<boolean>,
+) => {
+  //객체형태로 들어오는 폼 데이터들을 줄바꿈된 하나의 string 값으로 바꾼다.
+  let lyricsData = Object.values(formdata)
+    .map((line: string, index: number) => {
+      if (index === Object.keys(formdata).length - 1) {
+        return line;
+      } else {
+        return line + '\n';
+      }
+    })
+    .reduce((prev: string, cul: string) => prev + cul, '');
+
+  // 로딩 메시지 표시
+  const loadingToast = toast.loading('번역을 등록 중입니다.');
+
+  try {
+    const {data} = await axios.put(`/api/addtranslate/${id}`, {
+      translateto: lang,
+      lyrics: lyricsData,
+    });
+    toast.dismiss(loadingToast);
+
+    //업로드 완료시 로딩메세지 닫고, 페이지 이동
+    route.push('/musicpt/' + id);
+    toast.success('번역이 등록 되었습니다.');
+    //내용이 수정되었으므로, data를 refetch 해야한다.
+    setNeedFetch(true);
+    return data;
+  } catch (err) {
+    console.error('업로드 오류:', err);
+    toast.error('다시 시도해주세요.');
+  }
+};
+
+//react-hook-form defaultValue를 만들기 위한 함수
+export function makeDefaultObj(arr: string[]) {
+  let defaultValueObj: {[key: string]: string} = {};
+  arr.forEach(
+    (item: string, index: number) =>
+      (defaultValueObj[`lyrics_${index}`] = item),
+  );
+  return defaultValueObj;
+}
