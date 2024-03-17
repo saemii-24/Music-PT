@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import {LyricsVerType} from './MusicDetail';
+import Button from './Button';
 
 import type {SupabaseType} from '@/types/form';
 
@@ -11,6 +12,8 @@ import React, {useEffect, useState} from 'react';
 import {CgAddR} from 'react-icons/cg';
 import {BsTranslate} from 'react-icons/bs';
 import {FiEdit} from 'react-icons/fi';
+import {FaRegWindowRestore} from 'react-icons/fa';
+import cn from 'classnames';
 
 export default function Lyrics({
   lyricsVer,
@@ -24,8 +27,7 @@ export default function Lyrics({
   const route = useRouter();
 
   let [condition, setCondition] = useState<number>(11);
-  console.log(music);
-  console.log(lyricsVer);
+  let [showTranslate, setShowTranslate] = useState<boolean>(false);
 
   /*분기
   (한국어 버전 탭을 클릭한 경우)
@@ -62,46 +64,83 @@ export default function Lyrics({
       {/* 한국어 버전 탭 */}
       {condition === 11 && (
         <React.Fragment>
-          <div className='flex items-center gap-4'>
-            <button
+          <div className='grid grid-cols-2 gap-4 sm:grid-cols-3'>
+            <Button
+              text={'한국어 가사 수정하기'}
+              icon='add'
               onClick={() => {
                 route.push(`/musicpt/${id}/editlyrics-ko`);
               }}
-              className='mb-10 flex items-center gap-2 rounded-md bg-music-blue px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-              <FiEdit className='text-lg' />
-              한국어 가사 수정하기
-            </button>
+            />
+
             {music?.kotranslate ? (
-              <button
+              <Button
+                text={'일본어 번역 수정하기'}
+                icon='translate'
                 onClick={() => {
                   route.push(`/musicpt/${id}/edittranslate-ko`);
                 }}
-                className='mb-10 flex items-center gap-2 rounded-md bg-music-orange px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600'>
-                <BsTranslate className='text-lg' />
-                일본어 번역 수정하기
-              </button>
+              />
             ) : (
-              <button
+              <Button
+                text={'일본어 번역 추가하기'}
+                icon='add'
                 onClick={() => {
                   route.push(`/musicpt/${id}/addtranslate-ko`);
                 }}
-                className='mb-10 flex items-center gap-2 rounded-md bg-music-orange px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600'>
-                <BsTranslate className='text-lg' />
-                일본어 번역 추가하기
-              </button>
+              />
+            )}
+            {/* 불가능 할 때 */}
+
+            {music?.kotranslate === null || music?.kotranslate === '' ? (
+              <Button
+                text={'일본어 번역 함께 보기'}
+                icon='divide'
+                addclass='col-span-2 sm:col-span-1 cursor-default'
+              />
+            ) : (
+              <Button
+                text={'일본어 번역 함께 보기'}
+                icon='divide'
+                addclass={
+                  showTranslate
+                    ? 'col-span-2 sm:col-span-1 bg-music-blue text-white'
+                    : 'col-span-2 sm:col-span-1'
+                }
+                onClick={() => {
+                  setShowTranslate(!showTranslate);
+                }}
+              />
             )}
           </div>
-          <div>
-            {music?.kolyrics
-              ?.split('\n')
-              .map((koline: string, index: number) => (
-                <p
-                  className='text-center text-base leading-8 lg:text-lg lg:leading-9'
-                  key={index}>
-                  {koline}
-                </p>
-              ))}
-          </div>
+          {showTranslate ? (
+            <div className='mt-10'>
+              {music?.kolyrics
+                ?.split('\n')
+                .map((koline: string, index: number) => (
+                  <React.Fragment key={index}>
+                    <p className='text-center text-base leading-8 lg:text-lg lg:leading-9'>
+                      {koline}
+                    </p>
+                    <p className='mb-4 text-center text-base leading-8 text-music-blue lg:text-lg lg:leading-9'>
+                      {music?.kotranslate?.split('\n')[index]}
+                    </p>
+                  </React.Fragment>
+                ))}
+            </div>
+          ) : (
+            <div className='mt-10'>
+              {music?.kolyrics
+                ?.split('\n')
+                .map((koline: string, index: number) => (
+                  <p
+                    className='text-center text-base leading-8 lg:text-lg lg:leading-9'
+                    key={index}>
+                    {koline}
+                  </p>
+                ))}
+            </div>
+          )}
         </React.Fragment>
       )}
 
@@ -115,44 +154,102 @@ export default function Lyrics({
               가사를 추가하고 번역을 시작해보세요.
             </p>
             <div className='mt-10 flex items-center justify-center gap-x-6'>
-              <button
+              <Button
+                text={'가사 등록하기'}
+                icon='add'
+                addclass='w-fit '
                 onClick={() => {
                   route.push(`/musicpt/${id}/addlyrics-ko`);
                 }}
-                className='mb-10 flex items-center gap-2 rounded-md bg-music-blue px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-                <CgAddR />
-                가사 등록하기
-              </button>
+              />
             </div>
           </div>
         </div>
       )}
+
       {/* 일본어 버전 탭 */}
       {condition === 21 && (
         <React.Fragment>
-          <div className='flex flex-col items-center gap-2'>
-            <button
+          <div className='grid grid-cols-2 gap-4 sm:grid-cols-3'>
+            <Button
+              text={'일본어 가사 수정하기'}
+              icon='add'
               onClick={() => {
-                route.push(`/musicpt/${id}/addtranslate-jp`);
+                route.push(`/musicpt/${id}/editlyrics-jp`);
               }}
-              className='mb-10 flex items-center gap-2 rounded-md bg-music-orange px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600'>
-              <CgAddR className='text-lg' />
-              한국어 번역 수정하기
-            </button>
+            />
+
+            {music?.kotranslate ? (
+              <Button
+                text={'한국어 번역 수정하기'}
+                icon='translate'
+                onClick={() => {
+                  route.push(`/musicpt/${id}/edittranslate-jp`);
+                }}
+              />
+            ) : (
+              <Button
+                text={'한국어 번역 추가하기'}
+                icon='add'
+                onClick={() => {
+                  route.push(`/musicpt/${id}/addtranslate-jp`);
+                }}
+              />
+            )}
+            {/* 불가능 할 때 */}
+
+            {music?.kotranslate === null || music?.kotranslate === '' ? (
+              <Button
+                text={'한국어 번역 함께 보기'}
+                icon='divide'
+                addclass='col-span-2 sm:col-span-1 cursor-default'
+              />
+            ) : (
+              <Button
+                text={'한국어 번역 함께 보기'}
+                icon='divide'
+                addclass={
+                  showTranslate
+                    ? 'col-span-2 sm:col-span-1 bg-music-blue text-white'
+                    : 'col-span-2 sm:col-span-1'
+                }
+                onClick={() => {
+                  setShowTranslate(!showTranslate);
+                }}
+              />
+            )}
           </div>
-          <div>
-            {music?.jplyrics
-              ?.split('\n')
-              .map((jpline: string, index: number) => (
-                <p
-                  className='text-center text-base leading-8 lg:text-lg lg:leading-9'
-                  key={index}>
-                  {jpline}
-                </p>
-              ))}
-          </div>
+          {showTranslate ? (
+            <div className='mt-10'>
+              {music?.jplyrics
+                ?.split('\n')
+                .map((jpline: string, index: number) => (
+                  <React.Fragment key={index}>
+                    <p className='text-center text-base leading-8 lg:text-lg lg:leading-9'>
+                      {jpline}
+                    </p>
+                    <p className='mb-4 text-center text-base leading-8 text-music-blue lg:text-lg lg:leading-9'>
+                      {music?.jptranslate?.split('\n')[index]}
+                    </p>
+                  </React.Fragment>
+                ))}
+            </div>
+          ) : (
+            <div className='mt-10'>
+              {music?.jplyrics
+                ?.split('\n')
+                .map((jpline: string, index: number) => (
+                  <p
+                    className='text-center text-base leading-8 lg:text-lg lg:leading-9'
+                    key={index}>
+                    {jpline}
+                  </p>
+                ))}
+            </div>
+          )}
         </React.Fragment>
       )}
+
       {condition === 22 && (
         <div className='grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8'>
           <div className='text-center'>
@@ -163,14 +260,14 @@ export default function Lyrics({
               가사를 추가하고 번역을 시작해보세요.
             </p>
             <div className='mt-10 flex items-center justify-center gap-x-6'>
-              <button
+              <Button
+                text={'가사 등록하기'}
+                icon='add'
+                addclass='w-fit '
                 onClick={() => {
                   route.push(`/musicpt/${id}/addlyrics-jp`);
                 }}
-                className='mb-10 flex items-center gap-2 rounded-md bg-music-blue px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-                <CgAddR />
-                가사 등록하기
-              </button>
+              />
             </div>
           </div>
         </div>

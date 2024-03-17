@@ -16,10 +16,10 @@ export const PUT = async (req: Request, res: NextResponse) => {
     const {translateto, lyrics} = await req.json();
     await main();
 
-    //만약 translateto 가 jp면 한국어 -> 일본어 가사 번역이며,
+    //만약 translateto 가 ko면 한국어 -> 일본어 가사 번역이며,
     //sdupabase kotranslate에 업로드한다.
     let updateMusic;
-    if (translateto === 'jp') {
+    if (translateto === 'ko') {
       updateMusic = await prisma.post.update({
         where: {
           id: id,
