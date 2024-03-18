@@ -1,3 +1,5 @@
+import {UseFormRegister, UseFormReset, UseFormWatch} from 'react-hook-form';
+
 export type FormValues = {
   title: string;
   singer: string;
@@ -62,3 +64,9 @@ export type LyricsVerType =
   | '일본어 버전 가사'
   | '한국어 비교하기'
   | '일본어 비교하기';
+
+export type UploadImagePropsType = {
+  watch: UseFormWatch<FormValues>;
+  register: UseFormRegister<FormValues>;
+  reset: UseFormReset<FormValues>;
+};
