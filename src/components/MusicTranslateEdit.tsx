@@ -38,6 +38,7 @@ export default function MusicTranslateEdit({id, lang}: PropsType) {
       const splitTranslate = translatedText.split('\n');
       setDefaultTranslate(splitTranslate);
       const defaultObj = makeDefaultObj(splitTranslate);
+      setDefaultFormValue(defaultObj);
       reset(defaultObj); //react-hook-form의 기본값 설정
     }
   }, [music, lang]);
@@ -48,11 +49,13 @@ export default function MusicTranslateEdit({id, lang}: PropsType) {
     handleSubmit,
     formState: {errors},
     reset,
-  } = useForm();
+  } = useForm({
+    defaultValues: defaultFormValue,
+  });
 
   return (
     <div className='flex flex-col items-center gap-20 '>
-      <section className='container mt-[10rem]'>
+      <section className='container mt-0 sm:mt-[10rem]'>
         <div className='relative'>
           <p className='mb-1 flex items-center gap-1'>
             <BsTranslate />{' '}
