@@ -11,6 +11,7 @@ import Error from './Error';
 import {onSubmit, checkFileType} from '@/utils/form';
 import {toast} from 'react-toastify';
 import {useRouter} from 'next/navigation';
+import UploadImage from './UploadImage';
 
 export default function AddMusicForm() {
   //recoil 언어모드
@@ -22,6 +23,8 @@ export default function AddMusicForm() {
     register,
     handleSubmit,
     formState: {errors},
+    watch,
+    reset,
   } = useForm<FormValues>();
 
   //폼 제출
@@ -165,33 +168,7 @@ export default function AddMusicForm() {
               className='mt-6 block text-sm font-medium leading-6 text-gray-900'>
               {lan['addmusic-input-thumbnail']}
             </label>
-            <div className='mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10'>
-              <div className='text-center'>
-                <HiPhoto
-                  className='mx-auto size-12 text-gray-300'
-                  aria-hidden='true'
-                />
-                <div className='mt-4 flex text-sm leading-6 text-gray-600'>
-                  <label
-                    htmlFor='thumbnail'
-                    className='relative cursor-pointer rounded-md bg-white font-semibold text-music-blue focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500'>
-                    <span>{lan['addmusic-input-thumbnail-foucs']}</span>
-                    <input
-                      id='thumbnail'
-                      {...register('thumbnail', {
-                        validate: checkFileType,
-                      })}
-                      type='file'
-                      className='sr-only'
-                    />
-                  </label>
-                  <p>{lan['addmusic-input-thumbnail-description']}</p>
-                </div>
-                <p className='text-xs leading-5 text-gray-600'>
-                  PNG, JPG up to 1MB
-                </p>
-              </div>
-            </div>
+            <UploadImage watch={watch} register={register} reset={reset} />
             {errors.thumbnail && (
               <p className=' mt-1 text-sm text-music-orange'>
                 {errors.thumbnail.message}
