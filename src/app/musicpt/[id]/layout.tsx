@@ -61,8 +61,8 @@ export default function MusicPtLayout({
     <div className='flex-1'>
       <main className='my-20'>
         <MusicProfile music={music?.post} id={id} />
-        <div>{children}</div>;
       </main>
+      <div>{children}</div>;
     </div>
   );
 }

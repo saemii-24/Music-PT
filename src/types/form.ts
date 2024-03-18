@@ -44,3 +44,21 @@ export type PropsType = {
   lang: string;
   id: string;
 };
+
+export type MusicPtProps = {
+  lyricsVer: LyricsVerType;
+  music: Partial<SupabaseType> | null;
+  id: string;
+};
+
+export type MusicPtPropsOmitId = {
+  setLyricsVer: React.Dispatch<React.SetStateAction<LyricsVerType>>;
+  lyricsVer: LyricsVerType;
+  music: Partial<SupabaseType> | null;
+};
+
+export type LyricsVerType =
+  | '한국어 버전 가사'
+  | '일본어 버전 가사'
+  | '한국어 비교하기'
+  | '일본어 비교하기';
