@@ -31,43 +31,45 @@ export const POST = async (req: Request, res: NextResponse) => {
   try {
     //body 값 받아오기
     const {
-      title_ko,
-      singer_ko,
-      youtube_ko,
-      album_ko,
-      release_ko,
-      thumbnail_ko,
-      lyrics_ko,
-      title_jp,
-      singer_jp,
-      youtube_jp,
-      album_jp,
-      release_jp,
-      thumbnail_jp,
-      lyrics_jp,
+      title,
+      singer,
+      youtube,
+      album,
+      release,
+      thumbnail,
+      language,
+      lyrics,
     } = await req.json();
     await main();
 
-    const post = await prisma.post.create({
-      data: {
-        updatedAt: new Date(),
-        kotitle: title_ko,
-        kosinger: singer_ko,
-        koyoutube: youtube_ko,
-        koalbum: album_ko,
-        korelease: release_ko,
-        kothumbnail: thumbnail_ko,
-        kolyrics: lyrics_ko,
-        jptitle: title_jp,
-        jpsinger: singer_jp,
-        jpyoutube: youtube_jp,
-        jpalbum: album_jp,
-        jprelease: release_jp,
-        jpthumbnail: thumbnail_jp,
-        jplyrics: lyrics_jp,
-      },
-    });
-
+    let post;
+    if (language === '한국어') {
+      post = await prisma.post.create({
+        data: {
+          kotitle: title,
+          kosinger: singer,
+          koyoutube: youtube,
+          koalbum: album,
+          korelease: release,
+          kothumbnail: thumbnail,
+          kolyrics: lyrics,
+          updatedAt: new Date(),
+        },
+      });
+    } else {
+      post = await prisma.post.create({
+        data: {
+          jptitle: title,
+          jpsinger: singer,
+          jpyoutube: youtube,
+          jpalbum: album,
+          jprelease: release,
+          jpthumbnail: thumbnail,
+          jplyrics: lyrics,
+          updatedAt: new Date(),
+        },
+      });
+    }
     return NextResponse.json({message: 'Success', post}, {status: 201});
   } catch (err) {
     return NextResponse.json({message: 'Error', err}, {status: 500});

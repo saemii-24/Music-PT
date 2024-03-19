@@ -45,6 +45,7 @@ export default function MusicPtLayout({
   useEffect(() => {
     if (needFetch) {
       refetch();
+      console.log(needFetch);
       setNeedFetch(false);
     }
   }, [needFetch]);

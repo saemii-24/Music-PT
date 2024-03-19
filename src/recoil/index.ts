@@ -22,6 +22,7 @@ export const languageMode = selector({
   },
 });
 
+//musicpt/** 경로에서 사용되는 데이터
 export const musicAtom = atom<Partial<SupabaseType>>({
   key: 'musicData',
   default: {},

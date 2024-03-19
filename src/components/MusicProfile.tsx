@@ -9,8 +9,6 @@ import {IoPlayCircleOutline} from 'react-icons/io5';
 import type {SupabaseType} from '@/types/form';
 import {useRouter} from 'next/navigation';
 import {deleteMusic} from '@/utils/form';
-import {useRecoilState} from 'recoil';
-import {needRefetch} from '@/recoil';
 
 export default function MusicProfile({
   music,
@@ -20,13 +18,11 @@ export default function MusicProfile({
   id: string;
 }) {
   const route = useRouter();
-  //recoil
-  const [needFetch, setNeedFetch] = useRecoilState(needRefetch);
 
   return (
     <section>
       <div className='container grid grid-cols-4 xl:grid-cols-6 2xl:grid-cols-7 '>
-        <div className='col-span-4 aspect-square overflow-hidden rounded-xl bg-red-100 xl:col-span-2 xl:row-span-5 xl:mr-20'>
+        <div className='col-span-4 aspect-square overflow-hidden rounded-xl xl:col-span-2 xl:row-span-5 xl:mr-20'>
           <Image
             priority={true}
             src={music?.kothumbnail ? music?.kothumbnail : '/default_card.png'}
