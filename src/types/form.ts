@@ -1,15 +1,20 @@
 import {UseFormRegister, UseFormReset, UseFormWatch} from 'react-hook-form';
 
 export type FormValues = {
-  title: string;
-  singer: string;
-  youtube?: string;
-  album: string;
-  release: string;
-  thumbnail?: FileList;
-  thumbnailUrl?: string;
-  language: string;
-  lyrics: string;
+  title_ko: string;
+  singer_ko: string;
+  youtube_ko: string;
+  album_ko: string;
+  release_ko: string;
+  thumbnail_ko: FileList;
+  lyrics_ko: string;
+  title_jp: string;
+  singer_jp: string;
+  youtube_jp: string;
+  album_jp: string;
+  release_jp: string;
+  thumbnail_jp: FileList;
+  lyrics_jp: string;
 };
 
 export type SupabaseType = {
