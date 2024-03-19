@@ -9,14 +9,30 @@ import type {AppRouterInstance} from 'next/dist/shared/lib/app-router-context.sh
 import {SetterOrUpdater} from 'recoil';
 import {FieldValues} from 'react-hook-form';
 
-export function UseRoute(address: string) {
-  const route = useRouter();
-  route.push(address);
-  return;
-}
+//각 페이지의 폼 제출시 사용되는 함수입니다.
 
-//기본 음악 업로드
-//react-hook-form 폼
+//addmusic, editmusic 제출
+export const formSubmit = async (data: any, route: AppRouterInstance) => {
+  // 로딩 메시지 표시
+  const loadingToast = toast.loading('음악을 등록 중입니다.');
+
+  try {
+    const res = await onSubmit(data);
+    // console.log(res);
+    const obj: any = Object.values(res)[1];
+
+    //업로드 완료시 로딩메세지 닫고, 페이지 이동
+    toast.dismiss(loadingToast);
+    route.push('/musicpt/' + obj.id);
+    toast.success('음악이 등록 되었습니다.');
+  } catch (err) {
+    toast.dismiss(loadingToast);
+    console.error('업로드 오류:', err);
+    toast.error('다시 시도해주세요.');
+  }
+};
+
+//addmusic, editmusic에서 supabase storage thumbnail 업로드
 export const onSubmit = async (data: FormValues) => {
   const supabase = createClient();
 
@@ -63,7 +79,7 @@ export const onSubmit = async (data: FormValues) => {
   }
 };
 
-//file 확인
+//file 확장자, 사이즈 확인
 export const checkFileType = (value?: FileList) => {
   if (value && value[0]) {
     // 확장자 확인
@@ -86,7 +102,7 @@ export const checkFileType = (value?: FileList) => {
   return true;
 };
 
-//가사 추가
+//addlyrics
 export const onSubmitAddLyrics = async (
   formdata: TextAreaValue,
   id: string,
@@ -113,7 +129,7 @@ export const onSubmitAddLyrics = async (
   }
 };
 
-//가사 수정
+//editlyrics
 export const onSubmitEditLyrics = async (
   formdata: TextAreaValue,
   id: string,
@@ -142,7 +158,7 @@ export const onSubmitEditLyrics = async (
   return;
 };
 
-//번역을 등록한다
+//addtranslate, edittranslate
 export const onSumbitAddTranslate = async (
   formdata: FieldValues,
   id: string,

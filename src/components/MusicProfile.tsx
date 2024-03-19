@@ -7,6 +7,7 @@ import Link from 'next/link';
 import {IoPlayCircleOutline} from 'react-icons/io5';
 
 import type {SupabaseType} from '@/types/form';
+import {useRouter} from 'next/navigation';
 
 export default function MusicProfile({
   music,
@@ -15,6 +16,8 @@ export default function MusicProfile({
   music: SupabaseType;
   id: string;
 }) {
+  const route = useRouter();
+
   return (
     <section>
       <div className='container grid grid-cols-4 xl:grid-cols-6 2xl:grid-cols-7 '>
@@ -34,7 +37,13 @@ export default function MusicProfile({
         </div>
         <div className='order-first col-span-4 mt-[-2.5rem] flex justify-end xl:order-none xl:col-auto xl:mt-10'>
           <div className='right-0 top-[-100vw] flex gap-2 md:top-0'>
-            <p className=' after:ml-2 after:content-["|"]'>수정</p>
+            <p
+              className=' cursor-pointer after:ml-2 after:content-["|"]'
+              onClick={() => {
+                route.push(`/editmusic/${id}/`);
+              }}>
+              수정
+            </p>
             <p>삭제</p>
           </div>
         </div>
