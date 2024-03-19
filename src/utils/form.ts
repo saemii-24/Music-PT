@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {useRouter} from 'next/navigation';
 
 import {createClient} from '@/supabase/client';
 import {toast} from 'react-toastify';
@@ -16,9 +15,20 @@ export const formSubmit = async (data: any, route: AppRouterInstance) => {
   // 로딩 메시지 표시
   const loadingToast = toast.loading('음악을 등록 중입니다.');
 
+  /*만약 일본어 버전을 클릭하지 않았을 경우, react-hook-form에서 해당 값을 
+  인식하지 못하므로, 기본값을 지정한다.*/
+  if (!data.album_jp) {
+    data.title_jp = '';
+    data.singer_jp = '';
+    data.youtube_jp = '';
+    data.album_jp = '';
+    data.release_jp = '';
+    data.thumbnail_jp = {};
+    data.lyrics_jp = '';
+  }
+
   try {
     const res = await onSubmit(data);
-    // console.log(res);
     const obj: any = Object.values(res)[1];
 
     //업로드 완료시 로딩메세지 닫고, 페이지 이동
@@ -34,18 +44,24 @@ export const formSubmit = async (data: any, route: AppRouterInstance) => {
 
 //addmusic, editmusic에서 supabase storage thumbnail 업로드
 export const onSubmit = async (data: FormValues) => {
+  //일본어 버전의 경우 기본값을 지정해주어야 한다.
+
   const supabase = createClient();
 
   //file 이 업로드 되었을 때 처리
-  let fileName = new Date().getTime();
-  let file = data.thumbnail![0];
+  let file_ko = data.thumbnail_ko![0];
+  let file_jp = data.thumbnail_jp![0];
 
-  let fileUrl = null;
+  let fileUrl_ko = '';
+  let fileUrl_jp = '';
 
-  if (file) {
+  let fileName_ko = 'ko_' + new Date().getTime();
+  let fileName_jp = 'jp_' + new Date().getTime();
+
+  if (file_ko) {
     const {data: uploadData, error} = await supabase.storage
       .from('thumbnail')
-      .upload(`image_${fileName}`, file);
+      .upload(`image_${fileName_ko}`, file_ko);
 
     //만약 업로드가 실패한 경우
     if (error) {
@@ -56,21 +72,45 @@ export const onSubmit = async (data: FormValues) => {
         .from('thumbnail')
         .getPublicUrl(uploadData!.path);
 
-      fileUrl = uploadUrl.publicUrl;
+      fileUrl_ko = uploadUrl.publicUrl;
+    }
+  }
+
+  if (file_jp) {
+    const {data: uploadData, error} = await supabase.storage
+      .from('thumbnail')
+      .upload(`image_${fileName_jp}`, file_jp);
+
+    //만약 업로드가 실패한 경우
+    if (error) {
+      console.error('이미지 업로드 실패:', error.message);
+      toast.error('이미지 업로드에 실패했습니다.');
+    } else {
+      const {data: uploadUrl} = await supabase.storage
+        .from('thumbnail')
+        .getPublicUrl(uploadData!.path);
+
+      fileUrl_jp = uploadUrl.publicUrl;
     }
   }
 
   //파일 url로 변경 완료, api에 post 요청
   try {
     const response = await axios.post('/api/music', {
-      title: data.title,
-      singer: data.singer,
-      youtube: data.youtube,
-      album: data.album,
-      release: data.release,
-      thumbnail: fileUrl,
-      language: data.language,
-      lyrics: data.lyrics,
+      title_ko: data.title_ko,
+      singer_ko: data.singer_ko,
+      youtube_ko: data.youtube_ko,
+      album_ko: data.album_ko,
+      release_ko: data.release_ko,
+      thumbnail_ko: fileUrl_ko,
+      lyrics_ko: data.lyrics_ko,
+      title_jp: data.title_jp,
+      singer_jp: data.singer_jp,
+      youtube_jp: data.youtube_jp,
+      album_jp: data.album_jp,
+      release_jp: data.release_jp,
+      thumbnail_jp: fileUrl_jp,
+      lyrics_jp: data.lyrics_jp,
     });
     return response.data;
   } catch (err) {
@@ -208,3 +248,15 @@ export function makeDefaultObj(arr: string[]) {
   );
   return defaultValueObj;
 }
+
+//muiscpt/[id] 음악을 삭제
+export const deleteMusic = async (id: string, route: AppRouterInstance) => {
+  try {
+    await axios.delete(`/api/music/${id}`);
+    route.push('/');
+    toast.success('음악이 삭제되었습니다');
+  } catch (err) {
+    console.error('업로드 오류:', err);
+    toast.error('다시 시도해주세요.');
+  }
+};

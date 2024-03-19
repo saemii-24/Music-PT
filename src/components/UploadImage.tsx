@@ -16,13 +16,17 @@ export default function UploadImage({
   watch,
   register,
   reset,
-}: UploadImagePropsType) {
+  uploadVer,
+}: UploadImagePropsType & {uploadVer: string}) {
   //recoil 언어모드
   const lan = useRecoilValue(languageMode);
   const [checkImage, setCheckImage] = useState<string>('none');
 
+  const thumbnail_lang: 'thumbnail_ko' | 'thumbnail_jp' =
+    `thumbnail_${uploadVer}` as 'thumbnail_ko' | 'thumbnail_jp';
+
   useEffect(() => {
-    const fileList: any = watch('thumbnail');
+    const fileList: any = watch(thumbnail_lang);
 
     if (!fileList || !fileList[0]) {
       setCheckImage('none');
@@ -47,7 +51,7 @@ export default function UploadImage({
       console.log('파일이 올바릅니다.');
       setCheckImage('ok');
     }
-  }, [watch('thumbnail')]);
+  }, [watch(thumbnail_lang)]);
 
   return (
     <div className='mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10'>
@@ -64,7 +68,7 @@ export default function UploadImage({
               <span>앨범 이미지</span>
               <input
                 id='thumbnail'
-                {...register('thumbnail', {
+                {...register(thumbnail_lang, {
                   validate: checkFileType,
                 })}
                 type='file'
@@ -91,7 +95,7 @@ export default function UploadImage({
               <span>앨범 이미지</span>
               <input
                 id='thumbnail'
-                {...register('thumbnail', {
+                {...register(thumbnail_lang, {
                   validate: checkFileType,
                 })}
                 type='file'
@@ -118,7 +122,7 @@ export default function UploadImage({
               <span>앨범 이미지</span>
               <input
                 id='thumbnail'
-                {...register('thumbnail', {
+                {...register(thumbnail_lang, {
                   validate: checkFileType,
                 })}
                 type='file'
