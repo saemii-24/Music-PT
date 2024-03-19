@@ -5,18 +5,20 @@ import {languageMode} from '@/recoil';
 import {useRecoilValue} from 'recoil';
 
 import {useForm} from 'react-hook-form';
-import {FormValues} from '@/types/form';
+import type {FormValues} from '@/types/form';
 
 import Error from './Error';
-import {onSubmit, checkFileType} from '@/utils/form';
+import {formSubmit} from '@/utils/form';
 import {toast} from 'react-toastify';
 import {useRouter} from 'next/navigation';
+
 import UploadImage from './UploadImage';
+import SubmitButton from './SubmitButton';
 
 export default function AddMusicForm() {
   //recoil 언어모드
   const lan = useRecoilValue(languageMode);
-  const router = useRouter();
+  const route = useRouter();
 
   //react-hook-form
   const {
@@ -27,30 +29,8 @@ export default function AddMusicForm() {
     reset,
   } = useForm<FormValues>();
 
-  //폼 제출
-  const formSubmit = async (data: any) => {
-    // 로딩 메시지 표시
-    const loadingToast = toast.loading('음악을 등록 중입니다.');
-    console.log(data);
-
-    try {
-      const res = await onSubmit(data);
-      // console.log(res);
-      const obj: any = Object.values(res)[1];
-
-      //업로드 완료시 로딩메세지 닫고, 페이지 이동
-      toast.dismiss(loadingToast);
-      router.replace('/musicpt/' + obj.id);
-      toast.success('음악이 등록 되었습니다.');
-    } catch (err) {
-      toast.dismiss(loadingToast);
-      console.error('업로드 오류:', err);
-      toast.error('다시 시도해주세요.');
-    }
-  };
-
   return (
-    <form onSubmit={handleSubmit(formSubmit)}>
+    <form onSubmit={handleSubmit((data) => formSubmit(data, route))}>
       {/* 음악 정보 업로드 */}
       <div className='gap-20 border-b border-gray-900/10 py-12 md:grid md:grid-cols-3'>
         <div className='sm:col-span-12 md:col-span-1'>
@@ -224,18 +204,7 @@ export default function AddMusicForm() {
         </div>
       </div>
       {/* 제출 */}
-      <div className='mt-6 flex items-center justify-end gap-x-6'>
-        <button
-          type='button'
-          className='text-sm font-semibold leading-6 text-gray-900'>
-          {lan['addmusic-button-cancle']}
-        </button>
-        <button
-          type='submit'
-          className='rounded-md bg-music-blue px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-          {lan['addmusic-button-submit']}
-        </button>
-      </div>
+      <SubmitButton />
     </form>
   );
 }
