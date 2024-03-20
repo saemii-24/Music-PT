@@ -3,7 +3,7 @@ import axios from 'axios';
 import {createClient} from '@/supabase/client';
 import {toast} from 'react-toastify';
 
-import type {FormValues, TextAreaValue} from '@/types/form';
+import type {FormValues, SupabaseType, TextAreaValue} from '@/types/form';
 import type {AppRouterInstance} from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import {SetterOrUpdater} from 'recoil';
 import {FieldValues} from 'react-hook-form';
@@ -259,4 +259,151 @@ export const deleteMusic = async (id: string, route: AppRouterInstance) => {
     console.error('업로드 오류:', err);
     toast.error('다시 시도해주세요.');
   }
+};
+
+//editmusic
+export const editMusicForm = async (
+  id: string,
+  data: any,
+  route: AppRouterInstance,
+  music: Partial<SupabaseType>,
+  setNeedFetch: SetterOrUpdater<boolean>,
+) => {
+  // 로딩 메시지 표시
+  const loadingToast = toast.loading('음악을 등록 중입니다.');
+
+  /*새로 입력된 폼에 이미지가 입력되지 않았다면 
+  오류가 발생하므로 기본 값을 설정한다 */
+  if (!data.thumbnail_ko) {
+    data.thumbnail_ko = {};
+  }
+  if (!data.thumbnail_jp) {
+    data.thumbnail_jp = {};
+  }
+
+  /*기본값이 없는 경우 기본값을 지정한다.*/
+  data.title_jp = data.title_jp || '';
+  data.singer_jp = data.singer_jp || '';
+  data.youtube_jp = data.youtube_jp || '';
+  data.album_jp = data.album_jp || '';
+  data.release_jp = data.release_jp || '';
+  data.lyrics_jp = data.lyrics_jp || '';
+
+  /*이전 사진과 비교해서 결정한다*/
+  let fileUrl_ko = '';
+  let fileUrl_jp = '';
+
+  if (!data.thumbnail_ko[0]) {
+    //만약 새로 들어온 이미지가 없고,
+    if (music.kothumbnail) {
+      fileUrl_ko = music.kothumbnail;
+    }
+  } else {
+    //새로 들어온 이미지가 있는 경우
+    const result = await onImageEdit(data);
+    if (result) {
+      fileUrl_ko = result;
+    }
+  }
+
+  if (!data.thumbnail_jp[0]) {
+    //만약 새로 들어온 이미지가 없고,
+    if (music.jpthumbnail) {
+      fileUrl_jp = music.jpthumbnail;
+    }
+  } else {
+    //새로 들어온 이미지가 있는 경우
+    console.log('이전 사진 있음, 새로 들어온 이미지 있음');
+    const result = await onImageEdit(data);
+    if (result) {
+      fileUrl_jp = result;
+    }
+  }
+
+  //api에 수정 요청
+  try {
+    const res = await axios.put(`/api/music/${id}`, {
+      kotitle: data.title_ko,
+      kosinger: data.singer_ko,
+      koyoutube: data.youtube_ko,
+      koalbum: data.album_ko,
+      korelease: data.release_ko,
+      kothumbnail: fileUrl_ko,
+      kolyrics: data.lyrics_ko,
+      jptitle: data.title_jp,
+      jpsinger: data.singer_jp,
+      jpyoutube: data.youtube_jp,
+      jpalbum: data.album_jp,
+      jprelease: data.release_jp,
+      jpthumbnail: fileUrl_jp,
+      jplyrics: data.lyrics_jp,
+    });
+    //업로드 완료시 로딩메세지 닫고, 페이지 이동
+    toast.dismiss(loadingToast);
+    setNeedFetch(true);
+    route.push('/musicpt/' + id);
+    toast.success('음악이 수정 되었습니다.');
+  } catch (err) {
+    toast.dismiss(loadingToast);
+    console.error('업로드 오류:', err);
+    toast.error('다시 시도해주세요.');
+  }
+};
+
+//addmusic, editmusic에서 supabase storage thumbnail 업로드
+export const onImageEdit = async (data: FormValues) => {
+  //일본어 버전의 경우 기본값을 지정해주어야 한다.
+  console.log(data);
+  const supabase = createClient();
+
+  //file 이 업로드 되었을 때 처리
+  let file_ko = data.thumbnail_ko![0];
+  let file_jp = data.thumbnail_jp![0];
+
+  let fileUrl_ko = '';
+  let fileUrl_jp = '';
+
+  let fileName_ko = 'ko_' + new Date().getTime();
+  let fileName_jp = 'jp_' + new Date().getTime();
+
+  if (file_ko) {
+    const {data: uploadData, error} = await supabase.storage
+      .from('thumbnail')
+      .upload(`image_${fileName_ko}`, file_ko);
+
+    //만약 업로드가 실패한 경우
+    if (error) {
+      console.error('이미지 업로드 실패:', error.message);
+      toast.error('이미지 업로드에 실패했습니다.');
+      return false;
+    } else {
+      const {data: uploadUrl} = await supabase.storage
+        .from('thumbnail')
+        .getPublicUrl(uploadData!.path);
+
+      fileUrl_ko = uploadUrl.publicUrl;
+      return fileUrl_ko;
+    }
+  }
+
+  if (file_jp) {
+    const {data: uploadData, error} = await supabase.storage
+      .from('thumbnail')
+      .upload(`image_${fileName_jp}`, file_jp);
+
+    //만약 업로드가 실패한 경우
+    if (error) {
+      console.error('이미지 업로드 실패:', error.message);
+      toast.error('이미지 업로드에 실패했습니다.');
+      return false;
+    } else {
+      const {data: uploadUrl} = await supabase.storage
+        .from('thumbnail')
+        .getPublicUrl(uploadData!.path);
+
+      fileUrl_jp = uploadUrl.publicUrl;
+      return fileUrl_jp;
+    }
+  }
+  return false;
 };

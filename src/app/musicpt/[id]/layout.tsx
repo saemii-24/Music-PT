@@ -45,6 +45,7 @@ export default function MusicPtLayout({
   useEffect(() => {
     if (needFetch) {
       refetch();
+      console.log(needFetch);
       setNeedFetch(false);
     }
   }, [needFetch]);
@@ -59,9 +60,8 @@ export default function MusicPtLayout({
 
   return (
     <div className='flex-1'>
-      <main className='my-20'>
-        <MusicProfile music={music?.post} id={id} />
-      </main>
+      <main className='my-20'></main>
+      <MusicProfile music={music?.post} id={id} />
       <div>{children}</div>;
     </div>
   );

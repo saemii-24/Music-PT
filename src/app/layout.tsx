@@ -1,9 +1,11 @@
 import type {Metadata} from 'next';
 import './globals.css';
-import {NextProvider} from '@/providers';
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import {NextProvider} from '@/NextProvider';
+
+import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
 
 export const metadata: Metadata = {
   title: 'Music-PT',
@@ -20,9 +22,10 @@ export default function RootLayout({
       <head />
       <body className={`font-[noto]`}>
         <NextProvider>
+          <ReactQueryDevtools />
           <div className='flex min-h-screen flex-col overflow-x-hidden'>
             <Header />
-            {children}
+            <div>{children}</div>
             <Footer />
           </div>
         </NextProvider>

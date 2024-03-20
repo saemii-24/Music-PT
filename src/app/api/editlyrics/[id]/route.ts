@@ -10,7 +10,6 @@ export const PUT = async (req: Request, res: NextResponse) => {
     await main();
     //쿼리스트링 값을 받아옴
     const id: number = parseInt(req.url.split('/editlyrics/')[1]);
-    console.log(id);
 
     //body 값 받아오기
     const {lyricsLang, lyrics} = await req.json();
