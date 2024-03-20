@@ -13,25 +13,31 @@ import {useInView} from 'react-intersection-observer';
 export default function Home() {
   const {ref, inView} = useInView();
 
-  //tanstack query사용
+  // //tanstack query사용
   const getMusicData = async ({pageParam}: {pageParam: number}) => {
-    let postCount: number = 6;
-    const {data} = await axios(
-      `/api/searchmusic?pageParam=${pageParam}&postCount=${postCount}`,
-    );
-    return data;
+    try {
+      let postCount: number = 6;
+      const {data} = await axios.get(
+        `/api/searchmusic?pageParam=${pageParam}&postCount=${postCount}`,
+      );
+      return data;
+    } catch (error) {
+      console.error('에러가 발생했습니다.:', error);
+    }
   };
 
   const {
     data: music,
     isError,
     isLoading,
+    isFetched,
+    isFetchedAfterMount,
     fetchNextPage,
     hasNextPage,
+    refetch,
   } = useInfiniteQuery({
     queryKey: ['searchmusic'],
     queryFn: getMusicData,
-    staleTime: 2000,
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages, lastPageParam) => {
       if (lastPage.length === 0) {
@@ -39,7 +45,18 @@ export default function Home() {
       }
       return lastPageParam + 1;
     },
+    refetchInterval: 2000, // 2초마다 refetch 시도
+    refetchOnMount: true, // 컴포넌트가 마운트될 때 refetch하지 않음
+    refetchOnReconnect: false, // 재연결 시 refetch하지 않음
+    refetchOnWindowFocus: false, // 창 포커스 시 refetch하지 않음
   });
+
+  console.log(isFetched, isFetchedAfterMount);
+  useEffect(() => {
+    if (!isFetchedAfterMount) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, isFetchedAfterMount]);
 
   useEffect(() => {
     if (inView && hasNextPage) fetchNextPage();
@@ -47,6 +64,9 @@ export default function Home() {
 
   if (isLoading) {
     return <div>로딩중입니다.</div>;
+  }
+  if (isError) {
+    return <div>에러입니다.</div>;
   }
 
   return (
