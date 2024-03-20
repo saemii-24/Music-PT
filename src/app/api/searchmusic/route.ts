@@ -10,9 +10,17 @@ export const GET = async (req: Request, res: NextResponse) => {
   const pageParam = Number(searchParams.get('pageParam'));
   const postCount = Number(searchParams.get('postCount'));
 
+  console.log(pageParam);
+  console.log(postCount);
   await main();
   try {
-    const skip = pageParam * postCount;
+    // const skip = pageParam * postCount;
+    let skip;
+    if (pageParam === 1) {
+      skip = 0;
+    } else {
+      skip = pageParam * postCount;
+    }
     const posts = await prisma.post.findMany({
       take: postCount,
       skip: skip,
@@ -20,6 +28,7 @@ export const GET = async (req: Request, res: NextResponse) => {
         date: 'desc',
       },
     });
+    console.log(posts);
     return NextResponse.json({message: 'Success', posts}, {status: 200});
   } catch (err) {
     return NextResponse.json({message: 'Error', err}, {status: 500});
