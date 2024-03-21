@@ -10,8 +10,6 @@ export const GET = async (req: Request, res: NextResponse) => {
   const pageParam = Number(searchParams.get('pageParam'));
   const postCount = Number(searchParams.get('postCount'));
 
-  console.log(pageParam);
-  console.log(postCount);
   await main();
   try {
     // const skip = pageParam * postCount;
