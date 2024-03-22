@@ -1,12 +1,14 @@
 'use client';
 
 import Pagination from '@/components/Pagination';
-import {createClient} from '@/supabase/client';
-import {useInfiniteQuery, useQuery} from '@tanstack/react-query';
+import {useInfiniteQuery} from '@tanstack/react-query';
 import axios from 'axios';
+
+import {useForm} from 'react-hook-form';
 
 import {useEffect} from 'react';
 import {useInView} from 'react-intersection-observer';
+import SearchForm from '@/components/SearchForm';
 
 export default function SearchMusic() {
   const {ref, inView} = useInView();
@@ -45,15 +47,22 @@ export default function SearchMusic() {
     if (inView && hasNextPage) fetchNextPage();
   }, [inView, hasNextPage, fetchNextPage]);
 
-  console.log(music);
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+    watch,
+    reset,
+  } = useForm();
 
   return (
     <main className='flex-1'>
-      {/* music 목록 */}
-
-      <div className='h-4 w-full bg-music-blue' ref={ref}></div>
-
-      <Pagination />
+      <div className='container'>
+        {/* music 목록 */}
+        <SearchForm register={register} />
+        <div className='h-4 w-full bg-music-blue' ref={ref}></div>
+        {/* <Pagination /> */}
+      </div>
     </main>
   );
 }
