@@ -11,7 +11,7 @@ import {useEffect} from 'react';
 export default async function Home() {
   //getStaticProps
   const firstMusicData = await fetch(
-    `http://localhost:3000/api/searchmusic?pageParam=1&postCount=9`,
+    `http://localhost:3000/api/searchmusic?pageParam=1&postCount=9&select=all`,
     {
       next: {revalidate: 10},
     },
