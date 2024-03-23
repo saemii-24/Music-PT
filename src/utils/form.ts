@@ -3,10 +3,16 @@ import axios from 'axios';
 import {createClient} from '@/supabase/client';
 import {toast} from 'react-toastify';
 
-import type {FormValues, SupabaseType, TextAreaValue} from '@/types/form';
+import type {
+  FormValues,
+  SelectType,
+  SupabaseType,
+  TextAreaValue,
+} from '@/types/form';
 import type {AppRouterInstance} from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import {SetterOrUpdater} from 'recoil';
 import {FieldValues} from 'react-hook-form';
+import {LargeNumberLike} from 'crypto';
 
 //각 페이지의 폼 제출시 사용되는 함수입니다.
 
@@ -353,7 +359,6 @@ export const editMusicForm = async (
 //addmusic, editmusic에서 supabase storage thumbnail 업로드
 export const onImageEdit = async (data: FormValues) => {
   //일본어 버전의 경우 기본값을 지정해주어야 한다.
-  console.log(data);
   const supabase = createClient();
 
   //file 이 업로드 되었을 때 처리
