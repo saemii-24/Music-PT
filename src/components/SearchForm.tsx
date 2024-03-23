@@ -52,7 +52,7 @@ export default function SearchForm({
         <div className='relative hidden w-[8rem]  flex-col items-center justify-center sm:flex'>
           <div
             className={cn(
-              'text-base relative z-10 flex size-full cursor-pointer items-center justify-center text-center',
+              'text-base relative z-20 flex size-full cursor-pointer items-center justify-center text-center',
               {
                 'bg-white  border-2 h-11 rounded-[100rem] border-black':
                   selectOpen,
@@ -70,14 +70,14 @@ export default function SearchForm({
           </div>
           <ul
             className={cn(
-              'text-sm pt-5 rounded-b-lg border-2 border-black cursor-pointer ease-in-out absolute duration-1000 w-full top-6 bg-white flex flex-col transition opacity-0',
+              'overflow-hidden z-10 text-sm pt-5 rounded-b-lg border-2 border-black cursor-pointer ease-in-out absolute duration-1000 w-full top-6 bg-white flex flex-col transition opacity-0',
               {
                 'visible opacity-100': selectOpen,
                 'hidden opacity-0': !selectOpen,
               },
             )}>
             <li
-              className='pb-1  pt-2 text-center text-sm  hover:bg-music-lightgray'
+              className='py-2 text-center text-sm  hover:bg-music-lightgray'
               onClick={() => {
                 setSelect('all');
                 setSelectOpen(false);
@@ -93,7 +93,7 @@ export default function SearchForm({
               제목
             </li>
             <li
-              className='py-1 text-center  hover:bg-music-lightgray'
+              className='py-2 text-center  hover:bg-music-lightgray'
               onClick={() => {
                 setSelect('singer');
                 setSelectOpen(false);
