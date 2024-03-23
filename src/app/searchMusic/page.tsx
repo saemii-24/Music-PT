@@ -1,5 +1,6 @@
 'use client';
 
+import React, {useEffect, useState} from 'react';
 import Pagination from '@/components/Pagination';
 import {useInfiniteQuery} from '@tanstack/react-query';
 import axios from 'axios';
@@ -8,11 +9,14 @@ import type {SelectType} from '@/types/form';
 
 import {FieldValues, useForm} from 'react-hook-form';
 
-import React, {useEffect, useState} from 'react';
 import {useInView} from 'react-intersection-observer';
+
 import SearchForm from '@/components/SearchForm';
 import SearchMusicCard from '@/components/SearchMusicCard';
+import MusicCard from '@/components/MusicCard';
 import SearchMusicTitle from '@/components/SearchMusicTitle';
+
+import cn from 'classnames';
 
 export default function SearchMusic() {
   const {ref, inView} = useInView();
@@ -20,7 +24,7 @@ export default function SearchMusic() {
   const [clientSelect, setClientSelect] = useState('제목');
   const [selectOpen, setSelectOpen] = useState<boolean>(false);
 
-  const [music, setMusic] = useState<any>();
+  // const [music, setMusic] = useState<any>();
   const [search, setSearch] = useState<string>('');
 
   //tanstack query사용
@@ -62,6 +66,11 @@ export default function SearchMusic() {
     refetch();
   }, [select, search]);
 
+  useEffect(() => {
+    setSearch('');
+    refetch();
+  }, [select]);
+
   //react-hook-form
   const {
     register,
@@ -69,7 +78,8 @@ export default function SearchMusic() {
     formState: {errors},
   } = useForm();
 
-  console.log();
+  // console.log(data);
+  // console.log(data?.pages.map((item) => item.posts).flat());
 
   return (
     <main className='flex-1'>
@@ -93,18 +103,20 @@ export default function SearchMusic() {
           data?.pages
             .map((item) => item.posts)
             .flat()
-            .map((item, index) => {
+            .map((music, index) => {
               return (
                 <React.Fragment key={index}>
-                  <SearchMusicCard item={item} />
+                  <div className={cn({'border-t': index != 0})}>
+                    <SearchMusicCard music={music} />
+                  </div>
                 </React.Fragment>
               );
             })
         ) : (
           <div>없음</div>
         )}
-        <div className='h-4 w-full bg-music-blue' ref={ref}></div>
-        {/* <Pagination /> */}
+        {data && <div className='h-4 w-full bg-music-blue' ref={ref}></div>}
+        {/* { <Pagination />} */}
       </div>
     </main>
   );

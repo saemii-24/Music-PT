@@ -48,6 +48,11 @@ export const GET = async (req: Request, res: NextResponse) => {
 
   let skip = pageParam * postCount;
 
+  // //만약 사용자가 아무것도 입력하지 않았다면 무조건 빈 배열
+  if (select != 'all' && search == '') {
+    return NextResponse.json({message: 'Success', posts: []}, {status: 200});
+  }
+
   if (select === 'all') {
     try {
       // const skip = pageParam * postCount;
@@ -58,6 +63,7 @@ export const GET = async (req: Request, res: NextResponse) => {
           date: 'desc',
         },
       });
+      console.log(posts);
       return NextResponse.json({message: 'Success', posts}, {status: 200});
     } catch (err) {
       return NextResponse.json({message: 'Error', err}, {status: 500});
@@ -66,9 +72,9 @@ export const GET = async (req: Request, res: NextResponse) => {
       await prisma.$disconnect();
     }
   } else if (select === 'title') {
-    console.log('실행');
+    console.log(pageParam, postCount, search);
     try {
-      const titlePost = await prisma.post.findMany({
+      const posts = await prisma.post.findMany({
         take: postCount, // 가져올 데이터 개수
         skip: skip, // 건너뛸 데이터 개수
         where: {
@@ -89,7 +95,7 @@ export const GET = async (req: Request, res: NextResponse) => {
           date: 'desc', // 날짜 기준 내림차순 정렬
         },
       });
-      return NextResponse.json({message: 'Success', titlePost}, {status: 200});
+      return NextResponse.json({message: 'Success', posts}, {status: 200});
     } catch (err) {
       return NextResponse.json({message: 'Error', err}, {status: 500});
     } finally {
@@ -97,9 +103,8 @@ export const GET = async (req: Request, res: NextResponse) => {
       await prisma.$disconnect();
     }
   } else if (select === 'singer') {
-    console.log('실행');
     try {
-      const singerPost = await prisma.post.findMany({
+      const posts = await prisma.post.findMany({
         take: postCount, // 가져올 데이터 개수
         skip: skip, // 건너뛸 데이터 개수
         where: {
@@ -107,11 +112,13 @@ export const GET = async (req: Request, res: NextResponse) => {
             {
               kosinger: {
                 contains: search,
+                mode: 'insensitive',
               },
             },
             {
               jpsinger: {
                 contains: search,
+                mode: 'insensitive',
               },
             },
           ],
@@ -120,7 +127,7 @@ export const GET = async (req: Request, res: NextResponse) => {
           date: 'desc', // 날짜 기준 내림차순 정렬
         },
       });
-      return NextResponse.json({message: 'Success', singerPost}, {status: 200});
+      return NextResponse.json({message: 'Success', posts}, {status: 200});
     } catch (err) {
       return NextResponse.json({message: 'Error', err}, {status: 500});
     } finally {
