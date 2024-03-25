@@ -63,7 +63,6 @@ export const GET = async (req: Request, res: NextResponse) => {
           date: 'desc',
         },
       });
-      console.log(posts);
       return NextResponse.json({message: 'Success', posts}, {status: 200});
     } catch (err) {
       return NextResponse.json({message: 'Error', err}, {status: 500});

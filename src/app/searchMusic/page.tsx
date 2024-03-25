@@ -23,6 +23,7 @@ export default function SearchMusic() {
   const [select, setSelect] = useState<SelectType>('all');
   const [clientSelect, setClientSelect] = useState('제목');
   const [selectOpen, setSelectOpen] = useState<boolean>(false);
+  const [isNull, setIsNull] = useState<boolean>(false);
 
   // const [music, setMusic] = useState<any>();
   const [search, setSearch] = useState<string>('');
@@ -78,8 +79,20 @@ export default function SearchMusic() {
     formState: {errors},
   } = useForm();
 
-  // console.log(data);
-  // console.log(data?.pages.map((item) => item.posts).flat());
+  //사이즈 별로 렌더링하기 위해, 사이즈 값을 얻는다.
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const windowResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', windowResize);
+
+    return () => {
+      window.removeEventListener('resize', windowResize);
+    };
+  }, []);
 
   return (
     <main className='flex-1'>
@@ -100,6 +113,35 @@ export default function SearchMusic() {
           />
         </div>
         {data ? (
+          (data?.pages.map((item) => item.posts).flat()).length > 0 ? (
+            data?.pages
+              .map((item) => item.posts)
+              .flat()
+              .map((music, index) => {
+                return (
+                  <div key={index}>
+                    {windowWidth <= 640 ? (
+                      <MusicCard musicData={music} />
+                    ) : (
+                      <div
+                        className={
+                          index !== 0 ? 'hidden border-t sm:block' : ''
+                        }>
+                        <SearchMusicCard music={music} />
+                      </div>
+                    )}
+                  </div>
+                );
+              })
+          ) : (
+            <div>
+              <p>찾으시는 내용이 없습니다.</p>
+            </div>
+          )
+        ) : (
+          <div>로딩중...</div>
+        )}
+        {/* {data ? (
           data?.pages
             .map((item) => item.posts)
             .flat()
@@ -114,7 +156,7 @@ export default function SearchMusic() {
             })
         ) : (
           <div>없음</div>
-        )}
+        )} */}
         {data && <div className='h-4 w-full bg-music-blue' ref={ref}></div>}
         {/* { <Pagination />} */}
       </div>
