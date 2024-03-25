@@ -64,6 +64,18 @@ export default function Header() {
               {lan['header-btn-all']}
             </Link>
           </li>
+          <li className='cursor-pointer text-music-bluegray'>
+            로그인
+            {/* <Link href='/mypage'>
+              <Image
+                priority={true}
+                src='/default_profile.png'
+                alt='프로필 이미지'
+                width={20}
+                height={20}
+              />
+            </Link> */}
+          </li>
           <div className='relative cursor-pointer '>
             <li>
               <GrLanguage
@@ -98,23 +110,13 @@ export default function Header() {
               )}
             </li>
           </div>
+
           <li className='cursor-pointer ' onClick={handleToggleMode}>
             {isDarkMode ? (
               <IoMoon className='text-lg text-music-bluegray' />
             ) : (
               <FiSun className='text-lg text-music-bluegray' />
             )}
-          </li>
-          <li className='cursor-pointer'>
-            <Link href='/mypage'>
-              <Image
-                priority={true}
-                src='/default_profile.png'
-                alt='프로필 이미지'
-                width={20}
-                height={20}
-              />
-            </Link>
           </li>
         </ul>
       </div>
