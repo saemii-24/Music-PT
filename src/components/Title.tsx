@@ -3,13 +3,13 @@ import {languageMode} from '@/recoil';
 import {useRecoilValue} from 'recoil';
 
 interface TitleProps {
-  LoginTitleInfo: {
+  titleInfo: {
     title: string;
     description: string;
   };
 }
-export default function Title({LoginTitleInfo}: TitleProps) {
-  const {title, description} = LoginTitleInfo;
+export default function Title({titleInfo}: TitleProps) {
+  const {title, description} = titleInfo;
   const lan = useRecoilValue(languageMode);
   return (
     <div className=' border-gray-900/10 pb-12'>

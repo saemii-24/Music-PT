@@ -1,10 +1,10 @@
 'use client';
 
-import EditMusicTitle from '@/components/EditMusicTitle';
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 
 import EditMusicForm from '@/components/EditMusicForm';
+import Title from '@/components/Title';
 
 interface ParamsChildrenProps {
   params: {id: string};
@@ -43,10 +43,15 @@ export default function EditMusic({
     return <span>에러가 발생</span>;
   }
 
+  const titleInfo = {
+    title: '음악 수정하기',
+    description: '기존에 등록한 음악 내용을 수정합니다.',
+  };
+
   return (
     <main className=' flex-1 '>
       <div className='container py-20'>
-        <EditMusicTitle />
+        <Title titleInfo={titleInfo} />
         <EditMusicForm id={id} music={music?.post} />
       </div>
     </main>
