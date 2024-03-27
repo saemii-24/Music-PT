@@ -18,6 +18,7 @@ import {LargeNumberLike} from 'crypto';
 
 //addmusic, editmusic 제출
 export const formSubmit = async (data: any, route: AppRouterInstance) => {
+  console.log(data);
   // 로딩 메시지 표시
   const loadingToast = toast.loading('음악을 등록 중입니다.');
 
