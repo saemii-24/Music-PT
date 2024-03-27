@@ -1,7 +1,9 @@
-import {RiKakaoTalkFill} from 'react-icons/ri';
+'use client';
 import {SiNaver} from 'react-icons/si';
 import {FcGoogle} from 'react-icons/fc';
 import Image from 'next/image';
+
+import {signIn} from 'next-auth/react';
 
 export default function Login() {
   const titleInfo = {
@@ -9,7 +11,7 @@ export default function Login() {
     description: 'SNS를 이용해 간편하게 로그인하고, Music PT를 시작해보세요.',
   };
   return (
-    <main className='flex-1'>
+    <main className='mb-20 flex flex-1'>
       <div className='container flex flex-col items-center justify-center py-20'>
         <div className=' flex flex-col items-center justify-center border-gray-900/10'>
           <h1 className='flex flex-col items-center justify-center gap-3 text-center text-4xl font-extrabold leading-tight'>
@@ -25,15 +27,17 @@ export default function Login() {
         </div>
         <div className='mt-8 flex w-[20rem] flex-col gap-3'>
           <button
+            onClick={() => signIn('google')}
             type='button'
-            className='flex h-12 items-center rounded-md border-2'>
-            <FcGoogle className='mx-10 text-xl text-white' />
+            className='relative  flex h-12 items-center justify-center rounded-md border-2'>
+            <FcGoogle className='absolute left-6 text-xl text-white' />
             <span>구글로 시작하기</span>
           </button>
           <button
+            onClick={() => signIn('kakao')}
             type='button'
-            className='flex h-12 items-center rounded-md	bg-[#FEE500]'>
-            <div className='mx-10 aspect-square w-5'>
+            className=' relative flex h-12 items-center justify-center rounded-md	bg-[#FEE500]'>
+            <div className='absolute left-6 aspect-square w-5'>
               <Image
                 priority={true}
                 src={'/kakao.svg'}
@@ -47,9 +51,10 @@ export default function Login() {
             <span className='text-[#191919]'>카카오로 시작하기</span>
           </button>
           <button
+            onClick={() => signIn('naver')}
             type='button'
-            className='flex h-12 items-center rounded-md bg-[#03c75a]'>
-            <SiNaver className='mx-10 text-white' />
+            className='relative flex  h-12 items-center justify-center rounded-md bg-[#03c75a]'>
+            <SiNaver className='absolute left-6 text-white' />
             <span className='text-white'>네이버로 시작하기</span>
           </button>
         </div>
