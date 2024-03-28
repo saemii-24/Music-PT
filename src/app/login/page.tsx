@@ -3,13 +3,22 @@ import {SiNaver} from 'react-icons/si';
 import {FcGoogle} from 'react-icons/fc';
 import Image from 'next/image';
 
-import {signIn} from 'next-auth/react';
+import {signIn, useSession} from 'next-auth/react';
+import {useEffect} from 'react';
+import {useRouter} from 'next/navigation';
 
 export default function Login() {
-  const titleInfo = {
-    title: '언어를 즐겁게, Music PT 입니다.',
-    description: 'SNS를 이용해 간편하게 로그인하고, Music PT를 시작해보세요.',
-  };
+  const {status} = useSession();
+  const route = useRouter();
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      route.replace('/');
+    } else if (status === 'loading') {
+      //스켈레톤 추가 예정
+    }
+  }, [route, status]);
+
   return (
     <main className='mb-20 flex flex-1'>
       <div className='container flex flex-col items-center justify-center py-20'>
@@ -27,14 +36,14 @@ export default function Login() {
         </div>
         <div className='mt-8 flex w-[20rem] flex-col gap-3'>
           <button
-            onClick={() => signIn('google')}
+            onClick={() => signIn('google', {callbackUrl: '/'})}
             type='button'
             className='relative  flex h-12 items-center justify-center rounded-md border-2'>
             <FcGoogle className='absolute left-6 text-xl text-white' />
             <span>구글로 시작하기</span>
           </button>
           <button
-            onClick={() => signIn('kakao')}
+            onClick={() => signIn('kakao', {callbackUrl: '/'})}
             type='button'
             className=' relative flex h-12 items-center justify-center rounded-md	bg-[#FEE500]'>
             <div className='absolute left-6 aspect-square w-5'>
@@ -51,7 +60,7 @@ export default function Login() {
             <span className='text-[#191919]'>카카오로 시작하기</span>
           </button>
           <button
-            onClick={() => signIn('naver')}
+            onClick={() => signIn('naver', {callbackUrl: '/'})}
             type='button'
             className='relative flex  h-12 items-center justify-center rounded-md bg-[#03c75a]'>
             <SiNaver className='absolute left-6 text-white' />

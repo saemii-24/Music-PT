@@ -11,6 +11,9 @@ import {useRecoilState, useRecoilValue} from 'recoil';
 import {mode, language, languageMode} from '@/recoil/index';
 import {useState} from 'react';
 
+import {signOut, useSession} from 'next-auth/react';
+import {useRouter} from 'next/navigation';
+
 export default function Header() {
   //recoil값
   const [isDarkMode, setIsDarkMode] = useRecoilState(mode);
@@ -24,6 +27,10 @@ export default function Header() {
   //언어 선택창 열기 닫기
   const [lanSelectOpen, setLanSelectOpen] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+
+  //로그인 상태
+  const {status} = useSession();
+  const route = useRouter();
 
   return (
     <header className='relative h-14 w-screen border-b-2 border-gray-100'>
@@ -64,18 +71,35 @@ export default function Header() {
               {lan['header-btn-all']}
             </Link>
           </li>
-          <li className='cursor-pointer text-music-bluegray'>
-            로그인
-            {/* <Link href='/mypage'>
-              <Image
-                priority={true}
-                src='/default_profile.png'
-                alt='프로필 이미지'
-                width={20}
-                height={20}
-              />
-            </Link> */}
-          </li>
+          {status === 'authenticated' ? (
+            <>
+              <li
+                onClick={() => {
+                  signOut();
+                }}
+                className='cursor-pointer text-music-bluegray'>
+                로그아웃
+              </li>
+              <li
+                onClick={() => {
+                  route.push('/mypage');
+                }}
+                className='cursor-pointer'>
+                <Image
+                  priority={true}
+                  src='/default_profile.png'
+                  alt='프로필 이미지'
+                  width={20}
+                  height={20}
+                />
+              </li>
+            </>
+          ) : (
+            <li className='cursor-pointer text-music-bluegray'>
+              <Link href='/api/auth/signin'>로그인</Link>
+            </li>
+          )}
+
           <div className='relative cursor-pointer '>
             <li>
               <GrLanguage
