@@ -25,8 +25,6 @@ export default function MusicTranslateAdd({id, lang}: PropsType) {
     formState: {errors},
   } = useForm();
 
-  console.log(id, lang);
-
   return (
     <div className='flex flex-col items-center gap-20 '>
       <section className='container mt-[10rem]'>

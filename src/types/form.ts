@@ -75,3 +75,11 @@ export type UploadImagePropsType = {
   register: UseFormRegister<FormValues>;
   reset: UseFormReset<FormValues>;
 };
+
+export type SelectType = 'title' | 'singer' | 'all';
+
+export interface UserInterfaceType {
+  name?: string;
+  email?: string;
+  image?: string;
+}

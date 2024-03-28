@@ -46,7 +46,6 @@ export default function MusicCardLayout() {
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
-  console.log(isFetched, isFetchedAfterMount);
 
   if (!isFetchedAfterMount) {
     fetchNextPage();
