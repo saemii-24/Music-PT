@@ -47,6 +47,8 @@ export default function Home() {
     return <span>에러가 발생</span>;
   }
 
+  console.log(needFetch);
+
   return (
     <main className=' flex-1 bg-[#F8F9FA] '>
       <div className='container py-20'>
