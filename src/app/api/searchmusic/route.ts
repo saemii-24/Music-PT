@@ -54,6 +54,10 @@ export const GET = async (req: Request, res: NextResponse) => {
   }
 
   if (select === 'all') {
+    //만약 home에서 해당 api에 요청한 것 이라면 skip은 0이 되어야 한다.
+    if (search === 'first') {
+      skip = 0;
+    }
     try {
       // const skip = pageParam * postCount;
       let posts = await prisma.post.findMany({

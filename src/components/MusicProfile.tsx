@@ -9,6 +9,8 @@ import {IoPlayCircleOutline} from 'react-icons/io5';
 import type {SupabaseType} from '@/types/form';
 import {useRouter} from 'next/navigation';
 import {deleteMusic} from '@/utils/form';
+import {useRecoilState} from 'recoil';
+import {needRefetch} from '@/recoil';
 
 export default function MusicProfile({
   music,
@@ -18,6 +20,9 @@ export default function MusicProfile({
   id: string;
 }) {
   const route = useRouter();
+
+  //recoil
+  const [needFetch, setNeedFetch] = useRecoilState(needRefetch);
 
   return (
     <section>
@@ -42,6 +47,7 @@ export default function MusicProfile({
               className=' cursor-pointer after:ml-2 after:content-["|"]'
               onClick={() => {
                 route.push(`/editmusic/${id}/`);
+                setNeedFetch(true);
               }}>
               수정
             </p>
@@ -49,6 +55,7 @@ export default function MusicProfile({
               className='cursor-pointer'
               onClick={() => {
                 deleteMusic(id, route);
+                setNeedFetch(true);
               }}>
               삭제
             </p>
