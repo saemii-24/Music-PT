@@ -7,11 +7,9 @@ export default function HomeTitle() {
   const lan = useRecoilValue(languageMode);
 
   return (
-    <div className='mt-10'>
-      <h1 className='flex flex-col gap-3 text-4xl font-extrabold'>
-        {lan['home-title'].split('\n').map((item, index) => {
-          return <span key={index}>{item}</span>;
-        })}
+    <div className='mt-5 sm:mt-10'>
+      <h1 className='flex max-w-[400px] flex-col gap-3 break-keep text-3xl font-bold leading-[140%] sm:text-4xl sm:font-extrabold sm:leading-[143%]'>
+        {lan['home-title']}
       </h1>
     </div>
   );
