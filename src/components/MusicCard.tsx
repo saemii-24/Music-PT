@@ -8,6 +8,10 @@ import {MdOutlineUpdate} from 'react-icons/md';
 
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {mode, language, languageMode} from '@/recoil/index';
+import {useState} from 'react';
+import cn from 'classnames';
+
+type LangType = 'ko' | 'jp';
 
 export default function MusicCard({musicData}: {musicData: SupabaseType}) {
   const {
@@ -34,16 +38,38 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
   const lan = useRecoilValue(languageMode);
   const route = useRouter();
 
+  //현재 보고 있는 버전 설정
+  const [selectLang, setSelectLang] = useState<LangType>(kotitle ? 'ko' : 'jp');
+
+  console.log(selectLang);
+
   return (
-    <div
-      onClick={() => {
-        route.push(`/musicpt/${musicData.id}`);
-      }}
-      className='mt-20 w-full cursor-pointer overflow-hidden rounded-lg bg-white shadow-sm'>
-      <div className='aspect-[8/5] w-full overflow-hidden '>
+    <div className='mt-20 w-full overflow-hidden rounded-lg bg-white shadow-sm'>
+      <div
+        onClick={() => {
+          route.push(`/musicpt/${musicData.id}`);
+        }}
+        className=' aspect-[8/5] w-full cursor-pointer overflow-hidden '>
         <Image
+          className={cn({
+            hidden: selectLang === 'jp',
+            block: selectLang === 'ko',
+          })}
           priority={true}
           src={kothumbnail ? kothumbnail : '/default_card.png'}
+          alt={'음악'}
+          width={0}
+          height={0}
+          sizes='100vw'
+          style={{width: '100%', objectFit: 'cover'}}
+        />
+        <Image
+          className={cn({
+            hidden: selectLang === 'ko',
+            block: selectLang === 'jp',
+          })}
+          priority={true}
+          src={jpthumbnail ? jpthumbnail : '/default_card.png'}
           alt={'음악'}
           width={0}
           height={0}
@@ -54,22 +80,36 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
       <div className='h-[150px] p-5'>
         {/* 카드 윗 줄 */}
         <div className='flex items-center'>
-          <p className='font-medium'>{kosinger}</p>
-          <div className='ml-auto flex gap-2'>
+          <p className='font-medium'>
+            {selectLang === 'ko' ? kosinger : jpsinger}
+          </p>
+          <div className='relative ml-auto flex gap-2'>
             {kolyrics && (
-              <div className='inline-block w-11 rounded-3xl bg-music-blue py-[0.1rem] text-center text-sm text-white'>
+              <button
+                onClick={() => {
+                  setSelectLang('ko');
+                }}
+                type='button'
+                className='inline-block w-11 rounded-3xl bg-music-blue py-[0.1rem] text-center text-sm text-white hover:bg-indigo-500'>
                 KO
-              </div>
+              </button>
             )}
             {jplyrics && (
-              <div className='inline-block w-11 rounded-3xl bg-music-orange py-[0.1rem] text-center text-sm text-white'>
+              <button
+                onClick={() => {
+                  setSelectLang('jp');
+                }}
+                type='button'
+                className='inline-block w-11 rounded-3xl bg-music-orange py-[0.1rem] text-center text-sm text-white hover:bg-music-lightorange'>
                 JP
-              </div>
+              </button>
             )}
           </div>
         </div>
         {/* 카드 제목 */}
-        <h1 className='mt-2 text-2xl font-medium'>{kotitle}</h1>
+        <h1 className='mt-2 text-2xl font-medium'>
+          {selectLang === 'ko' ? kotitle : jptitle}
+        </h1>
       </div>
       {/* 작성자 좋아요 */}
       <div className='flex border-t px-5 py-3'>
