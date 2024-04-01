@@ -95,7 +95,7 @@ export default function SearchMusic() {
   }, []);
 
   return (
-    <main className='flex-1'>
+    <main className='flex-1 bg-music-lightgray sm:bg-white'>
       <div className='container py-20'>
         {/* music 목록 */}
         <SearchMusicTitle />
@@ -141,24 +141,7 @@ export default function SearchMusic() {
         ) : (
           <div>로딩중...</div>
         )}
-        {/* {data ? (
-          data?.pages
-            .map((item) => item.posts)
-            .flat()
-            .map((music, index) => {
-              return (
-                <React.Fragment key={index}>
-                  <div className={cn({'border-t': index != 0})}>
-                    <SearchMusicCard music={music} />
-                  </div>
-                </React.Fragment>
-              );
-            })
-        ) : (
-          <div>없음</div>
-        )} */}
-        {data && <div className='h-4 w-full bg-music-blue' ref={ref}></div>}
-        {/* { <Pagination />} */}
+        {data && <div className='h-4 w-full ' ref={ref}></div>}
       </div>
     </main>
   );

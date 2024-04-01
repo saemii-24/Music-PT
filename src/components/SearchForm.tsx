@@ -48,7 +48,7 @@ export default function SearchForm({
   return (
     <form
       onSubmit={handleSubmit((data: FieldValues) => setSearch(data['search']))}>
-      <div className='flex h-11 items-center justify-center rounded-[100rem] border-2 border-gray-300'>
+      <div className='flex h-11 items-center justify-center rounded-[100rem] border-2 border-gray-300 bg-white'>
         <div className='relative hidden w-[8rem]  flex-col items-center justify-center sm:flex'>
           <div
             className={cn(
@@ -108,7 +108,7 @@ export default function SearchForm({
           type='text'
           {...register('search', {required: true})}
           id='search'
-          className='block flex-1 rounded-md py-1.5 text-base text-gray-900 placeholder:text-gray-400 '
+          className=' ml-[10px] block flex-1 rounded-md py-1.5 text-base text-gray-900 placeholder:text-gray-400 sm:ml-[0px] '
           placeholder='음악 제목을 검색해주세요.'
         />
         <button
@@ -118,61 +118,46 @@ export default function SearchForm({
         </button>
       </div>
       {/* 모바일 사이즈 ui */}
-      {/* <div className='flex flex-wrap justify-between sm:hidden'>
-        <div className='w-full'>검색기준</div>
-        <button
-          type='button'
-          onClick={() => {
-            setSelect('title');
-          }}
-          className={cn(
-            'flex items-center justify-center gap-2 break-keep rounded-md border-2 px-4 py-2 text-sm font-semibold shadow-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 border-music-blue text-music-blue hover:border-music-blue hover:bg-music-blue hover:text-white',
-            {
-              'bg-music-blue text-white': select === 'title',
-            },
-          )}>
-          제목
-        </button>
-        <button
-          type='button'
-          onClick={() => {
-            setSelect('singer');
-          }}
-          className={cn(
-            'flex items-center justify-center gap-2 break-keep rounded-md border-2 px-4 py-2 text-sm font-semibold shadow-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 border-music-blue text-music-blue hover:border-music-blue hover:bg-music-blue hover:text-white',
-            {
-              'bg-music-blue  text-white': select === 'singer',
-            },
-          )}>
-          가수
-        </button>
-        <button
-          type='button'
-          onClick={() => {
-            setSelect('ko');
-          }}
-          className={cn(
-            'flex items-center justify-center gap-2 break-keep rounded-md border-2 px-4 py-2 text-sm font-semibold shadow-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 border-music-blue text-music-blue hover:border-music-blue hover:bg-music-blue hover:text-white',
-            {
-              'bg-music-blue  text-white': select === 'ko',
-            },
-          )}>
-          한국어
-        </button>
-        <button
-          type='button'
-          onClick={() => {
-            setSelect('jp');
-          }}
-          className={cn(
-            'flex items-center justify-center gap-2 break-keep rounded-md border-2 px-4 py-2 text-sm font-semibold shadow-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 border-music-blue text-music-blue hover:border-music-blue hover:bg-music-blue hover:text-white',
-            {
-              'bg-music-blue  text-white': select === 'jp',
-            },
-          )}>
-          일본어
-        </button>
-      </div> */}
+      <div className='mt-10 block sm:hidden'>
+        <ul className='flex gap-8 border-b'>
+          <li
+            onClick={() => {
+              setSelect('all');
+              setClientSelect('모든 음악');
+            }}
+            className={cn(
+              'cursor-pointer break-keep',
+              clientSelect === '모든 음악' &&
+                'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
+            )}>
+            모든 음악
+          </li>
+          <li
+            onClick={() => {
+              setSelect('title');
+              setClientSelect('제목');
+            }}
+            className={cn(
+              'cursor-pointer break-keep',
+              clientSelect === '제목' &&
+                'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
+            )}>
+            제목
+          </li>
+          <li
+            onClick={() => {
+              setSelect('singer');
+              setClientSelect('가수');
+            }}
+            className={cn(
+              'cursor-pointer break-keep',
+              clientSelect === '가수' &&
+                'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
+            )}>
+            가수
+          </li>
+        </ul>
+      </div>
     </form>
   );
 }

@@ -1,17 +1,15 @@
 'use client';
-import {SupabaseType} from '@/types/form';
+import type {LangType, SupabaseType} from '@/types/form';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
 
 import {FaHeart} from 'react-icons/fa6';
 import {MdOutlineUpdate} from 'react-icons/md';
 
-import {useRecoilState, useRecoilValue} from 'recoil';
-import {mode, language, languageMode} from '@/recoil/index';
+import {useRecoilValue} from 'recoil';
+import {languageMode} from '@/recoil/index';
 import {useState} from 'react';
 import cn from 'classnames';
-
-type LangType = 'ko' | 'jp';
 
 export default function MusicCard({musicData}: {musicData: SupabaseType}) {
   const {
@@ -40,8 +38,6 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
 
   //현재 보고 있는 버전 설정
   const [selectLang, setSelectLang] = useState<LangType>(kotitle ? 'ko' : 'jp');
-
-  console.log(selectLang);
 
   return (
     <div className='mt-20 w-full overflow-hidden rounded-lg bg-white shadow-sm'>
