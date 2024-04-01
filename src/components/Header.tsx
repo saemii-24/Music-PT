@@ -33,7 +33,7 @@ export default function Header() {
   const route = useRouter();
 
   return (
-    <header className='fixed z-[100] h-14 w-screen border-b-2 border-gray-100 bg-white'>
+    <header className='fixed z-[100] h-14 w-screen border-b-2 border-gray-100 bg-white '>
       <div className='container relative z-10 flex h-14 items-center'>
         <Link
           href='/'

@@ -25,6 +25,7 @@ export default function RootLayout({
           <ReactQueryDevtools />
           <div className='flex min-h-screen flex-col overflow-x-hidden'>
             <Header />
+            <div className='h-14'></div>
             {children}
             <Footer />
           </div>
