@@ -9,7 +9,7 @@ import {IoMenu, IoClose} from 'react-icons/io5';
 
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {mode, language, languageMode} from '@/recoil/index';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import {signOut, useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
@@ -33,7 +33,7 @@ export default function Header() {
   const route = useRouter();
 
   return (
-    <header className='relative h-14 w-screen border-b-2 border-gray-100'>
+    <header className='fixed z-[100] h-14 w-screen border-b-2 border-gray-100 bg-white'>
       <div className='container relative z-10 flex h-14 items-center'>
         <Link
           href='/'
@@ -42,14 +42,14 @@ export default function Header() {
         </Link>
         {menuOpen ? (
           <IoClose
-            className='ml-auto block text-3xl sm:hidden'
+            className='ml-auto block cursor-pointer text-3xl sm:hidden'
             onClick={() => {
               setMenuOpen(false);
             }}
           />
         ) : (
           <IoMenu
-            className='ml-auto block text-3xl sm:hidden'
+            className='ml-auto block cursor-pointer text-3xl sm:hidden'
             onClick={() => {
               setMenuOpen(true);
             }}
@@ -146,9 +146,9 @@ export default function Header() {
       </div>
       {/* 모바일 사이즈 */}
       {menuOpen && (
-        <ul className='container absolute inset-0 z-0 block h-screen w-screen bg-white pt-20 sm:hidden '>
+        <ul className='container inset-0 z-0 block h-screen w-screen bg-white pt-[30%] sm:hidden '>
           <li>
-            <div className=' mb-4 text-2xl font-extrabold text-music-bluegray'>
+            <div className=' mb-4 text-2xl font-extrabold text-music-blue'>
               Page
             </div>
             <ul>
@@ -158,7 +158,7 @@ export default function Header() {
                     setMenuOpen(false);
                   }}
                   href='/addmusic'
-                  className=' text-lg font-medium hover:text-music-bluegray'>
+                  className=' text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-add']}
                 </Link>
               </li>
@@ -168,7 +168,7 @@ export default function Header() {
                     setMenuOpen(false);
                   }}
                   href='/searchmusic'
-                  className=' text-lg font-medium hover:text-music-bluegray'>
+                  className=' text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-all']}
                 </Link>
               </li>
@@ -178,14 +178,14 @@ export default function Header() {
                     setMenuOpen(false);
                   }}
                   href='/mypage'
-                  className=' text-lg font-medium hover:text-music-bluegray'>
+                  className=' text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-mypage']}
                 </Link>
               </li>
             </ul>
           </li>
           <li>
-            <div className=' mb-4 mt-8 text-2xl  font-extrabold text-music-bluegray'>
+            <div className=' mb-4 mt-8 text-2xl  font-extrabold text-music-blue'>
               Language
             </div>
             <ul>
@@ -208,7 +208,7 @@ export default function Header() {
             </ul>
           </li>
           <li onClick={handleToggleMode}>
-            <div className=' mb-4 mt-8 text-2xl  font-extrabold text-music-bluegray'>
+            <div className=' mb-4 mt-8 text-2xl  font-extrabold text-music-blue'>
               Screen mode
             </div>
             {isDarkMode ? (

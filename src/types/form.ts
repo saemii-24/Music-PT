@@ -77,3 +77,5 @@ export type UploadImagePropsType = {
 };
 
 export type SelectType = 'title' | 'singer' | 'all';
+
+export type LangType = 'ko' | 'jp';
