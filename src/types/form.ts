@@ -37,6 +37,7 @@ export type SupabaseType = {
   kotitle: string | null;
   kotranslate: string | null;
   koyoutube: string | null;
+  count: number | null;
 };
 
 export interface ParamsProps {

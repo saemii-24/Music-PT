@@ -13,7 +13,6 @@ export const PUT = async (req: Request, res: NextResponse) => {
 
     //body 값 받아오기
     const {lyricsLang, lyrics} = await req.json();
-    await main();
 
     //만약 lyricsLang이ko면 한국어 가사, jp면 일본어가사를 업데이트 한다.
     let updateMusic;
