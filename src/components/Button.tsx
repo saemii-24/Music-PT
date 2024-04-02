@@ -1,8 +1,9 @@
 import {MouseEventHandler} from 'react';
 import {BsTranslate} from 'react-icons/bs';
-import {FaRegWindowRestore} from 'react-icons/fa';
+import {FaRegWindowRestore, FaHome} from 'react-icons/fa';
 import {FiEdit} from 'react-icons/fi';
 import {CgAddR} from 'react-icons/cg';
+
 import cn from 'classnames';
 
 type ButtonPropsType = {
@@ -31,6 +32,8 @@ export default function Button({
         return <BsTranslate className='text-lg' />;
       case 'divide':
         return <FaRegWindowRestore className='text-lg' />;
+      case 'home':
+        return <FaHome className='text-lg' />;
       default:
         return <FiEdit className='text-lg' />;
     }

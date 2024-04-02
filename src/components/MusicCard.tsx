@@ -10,6 +10,7 @@ import {useRecoilValue} from 'recoil';
 import {languageMode} from '@/recoil/index';
 import {useState} from 'react';
 import cn from 'classnames';
+import Like from './Like';
 
 export default function MusicCard({musicData}: {musicData: SupabaseType}) {
   const {
@@ -116,8 +117,9 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
           <div className='text-sm'>{date.slice(0, 10)}</div>
         </div>
         <div className='ml-auto flex items-center gap-1 text-sm'>
-          <FaHeart className='text-sm' />
-          <div>32</div>
+          <div>
+            <Like music={musicData} />
+          </div>
         </div>
       </div>
     </div>

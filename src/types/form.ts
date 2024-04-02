@@ -37,6 +37,7 @@ export type SupabaseType = {
   kotitle: string | null;
   kotranslate: string | null;
   koyoutube: string | null;
+  count: number | null;
 };
 
 export interface ParamsProps {
@@ -77,5 +78,11 @@ export type UploadImagePropsType = {
 };
 
 export type SelectType = 'title' | 'singer' | 'all';
+
+export interface UserInterfaceType {
+  name?: string;
+  email?: string;
+  image?: string;
+}
 
 export type LangType = 'ko' | 'jp';
