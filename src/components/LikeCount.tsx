@@ -10,7 +10,7 @@ type LikeType = {
   music: SupabaseType;
 };
 
-export default function Like({music}: LikeType) {
+export default function LikeCount({music}: LikeType) {
   const {data: session} = useSession();
 
   console.log(session);
@@ -66,6 +66,8 @@ export default function Like({music}: LikeType) {
     refetchOnReconnect: false,
   });
 
+  console.log(likeData, likeCountData);
+
   return (
     <div className='flex items-center gap-2'>
       <button
@@ -85,6 +87,7 @@ export default function Like({music}: LikeType) {
           <FaRegHeart />
         )}
       </button>
+      <div>{likeCountData ? likeCountData?.count : 0}</div>
     </div>
   );
 }

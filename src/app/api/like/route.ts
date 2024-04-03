@@ -3,25 +3,41 @@ import {NextResponse} from 'next/server';
 import {getServerSession} from 'next-auth';
 import {main} from '../music/route';
 import {authOptions} from '../auth/[...nextauth]/route';
-import {getToken} from 'next-auth/jwt';
 
 const prisma = new PrismaClient();
 
-// //like 값을 받아온다.
-// export const GET = async (req: Request, res: NextResponse) => {
-//   try {
-//     await main();
-//     //쿼리스트링 값을 받아옴
-//     const id: number = parseInt(req.url.split('/like/')[1]);
-//     //body 값 받아오기
-//     const {lyricsLang, lyrics} = await req.json();
-//   } catch (err) {
-//     return NextResponse.json({message: 'Error', err}, {status: 500});
-//   } finally {
-//     //error가 발생해도 finally는 반드시 실행 됨
-//     await prisma.$disconnect();
-//   }
-// };
+//like 값을 받아온다.
+//사용자가 이 음악에 like를 표시했는가?
+export const GET = async (req: Request, res: NextResponse) => {
+  try {
+    await main();
+    //쿼리스트링 값을 받아옴
+    const {searchParams} = new URL(req.url);
+    const musicId = Number(searchParams.get('id'));
+    //session 받아오기
+    const session = await getServerSession(authOptions);
+    //해당 사용자가 이 음악에 좋아요를 했던 기록이 있는지 확인한다.
+    let like = await prisma.like.findFirst({
+      where: {
+        musicId: musicId,
+        userId: session?.user?.id,
+      },
+    });
+    if (like) {
+      return NextResponse.json({message: 'Success', like: true}, {status: 200});
+    } else {
+      return NextResponse.json(
+        {message: 'Success', like: false},
+        {status: 200},
+      );
+    }
+  } catch (err) {
+    return NextResponse.json({message: 'Error', err}, {status: 500});
+  } finally {
+    //error가 발생해도 finally는 반드시 실행 됨
+    await prisma.$disconnect();
+  }
+};
 
 //like를 추가한다.
 export const POST = async (req: Request, res: NextResponse) => {
@@ -51,9 +67,8 @@ export const POST = async (req: Request, res: NextResponse) => {
             id: like.id,
           },
         });
-        console.log('삭제');
         return NextResponse.json(
-          {message: 'Success(Cancle Like)'},
+          {message: 'Success(Cancle Like)', now: 'cancle'},
           {status: 201},
         );
       } else {
@@ -63,8 +78,10 @@ export const POST = async (req: Request, res: NextResponse) => {
             userId: session?.user?.id,
           },
         });
-        console.log('추가');
-        return NextResponse.json({message: 'Success(Add Like)'}, {status: 201});
+        return NextResponse.json(
+          {message: 'Success', now: 'add'},
+          {status: 201},
+        );
       }
     }
     return NextResponse.json({message: 'Success'}, {status: 200});

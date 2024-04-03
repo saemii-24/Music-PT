@@ -10,7 +10,7 @@ import {useRecoilValue} from 'recoil';
 import {languageMode} from '@/recoil/index';
 import {useState} from 'react';
 import cn from 'classnames';
-import Like from './Like';
+import LikeCount from './LikeCount';
 
 export default function MusicCard({musicData}: {musicData: SupabaseType}) {
   const {
@@ -118,7 +118,7 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
         </div>
         <div className='ml-auto flex items-center gap-1 text-sm'>
           <div>
-            <Like music={musicData} />
+            <LikeCount music={musicData} />
           </div>
         </div>
       </div>
