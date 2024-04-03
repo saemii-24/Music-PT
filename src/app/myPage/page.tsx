@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
+import LikeCard from '@/components/LikeCard';
 import {UserInterfaceType} from '@/types/form';
 import {signOut, useSession} from 'next-auth/react';
 import {useEffect, useState} from 'react';
@@ -104,7 +105,9 @@ export default function MyPage() {
                 <p className='block text-sm font-medium leading-6 text-gray-900'>
                   음악 목록
                 </p>
-                <div className='mt-2 h-[15rem] w-full bg-music-orange'></div>
+                <div className='mt-2 h-[15rem] w-full bg-music-orange'>
+                  <LikeCard />
+                </div>
               </div>
             </div>
           </div>

@@ -15,6 +15,8 @@ import {signOut, useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
 
 export default function Header() {
+  //session
+
   //recoil값
   const [isDarkMode, setIsDarkMode] = useRecoilState(mode);
   const [nowLanguage, setNowLanguage] = useRecoilState(language);
@@ -29,7 +31,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   //로그인 상태
-  const {status} = useSession();
+  const {status, data} = useSession();
   const route = useRouter();
 
   return (
@@ -85,13 +87,25 @@ export default function Header() {
                   route.push('/mypage');
                 }}
                 className='cursor-pointer'>
-                <Image
-                  priority={true}
-                  src='/default_profile.png'
-                  alt='프로필 이미지'
-                  width={20}
-                  height={20}
-                />
+                <div className='overflow-hidden rounded-[100rem]'>
+                  {data?.user?.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={data.user?.image}
+                      alt='프로필 이미지'
+                      width={20}
+                      height={20}
+                    />
+                  ) : (
+                    <Image
+                      priority={true}
+                      src='/default_profile.png'
+                      alt='프로필 이미지'
+                      width={20}
+                      height={20}
+                    />
+                  )}
+                </div>
               </li>
             </>
           ) : (
