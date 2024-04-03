@@ -46,7 +46,7 @@ export default function Home() {
   if (status === 'error') {
     return <span>에러가 발생</span>;
   }
-  console.log(firstMusicData);
+  // console.log(firstMusicData);
   // console.log(needFetch);
 
   return (

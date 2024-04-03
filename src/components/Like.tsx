@@ -22,7 +22,7 @@ export default function Like({music}: LikeType) {
         });
         //찜하기 취소하기 로직
         if (data.now === 'add') {
-          toast.success('좋아요 한 음악에 등록되었습니다.');
+          toast.success('좋아요 목록에 등록했습니다.');
         } else {
           toast.warning('좋아요를 취소하셨습니다.');
         }
