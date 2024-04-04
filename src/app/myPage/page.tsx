@@ -3,6 +3,7 @@
 
 import LikeCard from '@/components/LikeCard';
 import {UserInterfaceType} from '@/types/form';
+import cn from 'classnames';
 import {signOut, useSession} from 'next-auth/react';
 import {useEffect, useState} from 'react';
 import {CgProfile} from 'react-icons/cg';
@@ -105,7 +106,10 @@ export default function MyPage() {
                 <p className='block text-sm font-medium leading-6 text-gray-900'>
                   음악 목록
                 </p>
-                <div className='mt-2 h-[15rem] w-full bg-music-orange'>
+                <div
+                  className={cn(
+                    'likecard px-6 mt-2 h-[22rem] w-full overflow-auto rounded-md bg-[#fafafa]',
+                  )}>
                   <LikeCard />
                 </div>
               </div>
