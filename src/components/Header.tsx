@@ -18,13 +18,17 @@ export default function Header() {
   //session
 
   //recoil값
-  const [isDarkMode, setIsDarkMode] = useRecoilState(mode);
+  const [theme, setTheme] = useRecoilState(mode);
   const [nowLanguage, setNowLanguage] = useRecoilState(language);
   const lan = useRecoilValue(languageMode);
 
   const handleToggleMode = (): void => {
-    setIsDarkMode((prevMode) => !prevMode);
+    const nowMode = theme === 'light' ? 'dark' : 'light';
+    localStorage.setItem('theme', nowMode);
+    setTheme(nowMode);
   };
+
+  console.log(theme);
 
   //언어 선택창 열기 닫기
   const [lanSelectOpen, setLanSelectOpen] = useState<boolean>(false);
@@ -35,7 +39,7 @@ export default function Header() {
   const route = useRouter();
 
   return (
-    <header className='fixed z-[100] h-14 w-screen border-b-2 border-gray-100 bg-white '>
+    <header className='fixed z-[100] h-14 w-screen border-b-2 border-gray-100 bg-white dark:bg-black '>
       <div className='container relative z-10 flex h-14 items-center'>
         <Link
           href='/'
@@ -150,7 +154,7 @@ export default function Header() {
           </div>
 
           <li className='cursor-pointer ' onClick={handleToggleMode}>
-            {isDarkMode ? (
+            {theme === 'dark' ? (
               <IoMoon className='text-lg text-music-bluegray' />
             ) : (
               <FiSun className='text-lg text-music-bluegray' />
@@ -225,7 +229,7 @@ export default function Header() {
             <div className=' mb-4 mt-8 text-2xl  font-extrabold text-music-blue'>
               Screen mode
             </div>
-            {isDarkMode ? (
+            {theme === 'dark' ? (
               <IoMoon className='text-lg' />
             ) : (
               <FiSun className='text-lg' />
