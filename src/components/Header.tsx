@@ -9,26 +9,52 @@ import {IoMenu, IoClose} from 'react-icons/io5';
 
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {mode, language, languageMode} from '@/recoil/index';
-import {useEffect, useState} from 'react';
+import {useEffect, useLayoutEffect, useState} from 'react';
 
 import {signOut, useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
 
 export default function Header() {
-  //session
+  // theme 값 가져오기
+  const initialTheme =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('theme') || 'light'
+      : 'light';
+  const [now, setNowMode] = useState<string>(initialTheme);
+
+  const handleToggleMode = (): void => {
+    localStorage.setItem('theme', now);
+    if (now === 'dark') {
+      const htmlElement = document.querySelector('html') as HTMLElement;
+      htmlElement.classList.add('dark');
+    } else {
+      const htmlElement = document.querySelector('html') as HTMLElement;
+      htmlElement.classList.remove('dark');
+    }
+  };
+
+  // if (typeof window !== 'undefined') {
+  //   setNowMode(localStorage.getItem('theme') || 'light');
+  // }
+
+  // if (now === 'dark') {
+  //   const htmlElement = document.querySelector('html') as HTMLElement;
+  //   htmlElement.classList.add('dark');
+  // } else {
+  //   const htmlElement = document.querySelector('html') as HTMLElement;
+  //   htmlElement.classList.remove('dark');
+  // }
 
   //recoil값
   const [theme, setTheme] = useRecoilState(mode);
   const [nowLanguage, setNowLanguage] = useRecoilState(language);
   const lan = useRecoilValue(languageMode);
 
-  const handleToggleMode = (): void => {
-    const nowMode = theme === 'light' ? 'dark' : 'light';
-    localStorage.setItem('theme', nowMode);
-    setTheme(nowMode);
-  };
-
-  console.log(theme);
+  // const handleToggleMode = (): void => {
+  //   const nowMode = theme === 'light' ? 'dark' : 'light';
+  //   localStorage.setItem('theme', nowMode);
+  //   setTheme(nowMode);
+  // };
 
   //언어 선택창 열기 닫기
   const [lanSelectOpen, setLanSelectOpen] = useState<boolean>(false);
@@ -39,11 +65,11 @@ export default function Header() {
   const route = useRouter();
 
   return (
-    <header className='fixed z-[100] h-14 w-screen border-b-2 border-gray-100 bg-white dark:bg-black '>
+    <header className='fixed z-[100] h-14 w-screen border-b-2 border-music-basicgray bg-white '>
       <div className='container relative z-10 flex h-14 items-center'>
         <Link
           href='/'
-          className='relative mb-1 cursor-pointer text-2xl font-black tracking-tight'>
+          className='relative mb-1 cursor-pointer text-2xl font-black tracking-tight text-black'>
           Music PT
         </Link>
         {menuOpen ? (
@@ -66,14 +92,14 @@ export default function Header() {
           <li className='cursor-pointer'>
             <Link
               href='/addmusic'
-              className=' font-medium hover:text-music-bluegray'>
+              className='font-medium text-black hover:text-music-bluegray'>
               {lan['header-btn-add']}
             </Link>
           </li>
           <li className="text-after:text-sm cursor-pointer after:ml-10 after:mr-3 after:text-music-darkgray after:content-['|']">
             <Link
               href='/searchmusic'
-              className=' font-medium hover:text-music-bluegray'>
+              className='font-medium text-black hover:text-music-bluegray'>
               {lan['header-btn-all']}
             </Link>
           </li>
@@ -131,7 +157,7 @@ export default function Header() {
                   {' '}
                   <ul className='absolute bottom-[-90px] right-[-50px] z-10 flex w-[120px] flex-col items-center rounded-lg border-2 border-black bg-white px-5 py-2'>
                     <li
-                      className='cursor-pointer font-medium hover:text-music-bluegray'
+                      className='cgursor-pointer font-medium hover:text-music-bluegray dark:text-black'
                       onClick={() => {
                         setNowLanguage('ko');
                         setLanSelectOpen(false);
@@ -139,7 +165,7 @@ export default function Header() {
                       한국어
                     </li>
                     <li
-                      className='mt-1 cursor-pointer font-medium hover:text-music-bluegray'
+                      className='mt-1 cursor-pointer font-medium hover:text-music-bluegray dark:text-black'
                       onClick={() => {
                         setNowLanguage('jp');
                         setLanSelectOpen(false);

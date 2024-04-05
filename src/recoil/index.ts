@@ -6,7 +6,10 @@ import {SupabaseType} from '@/types/form';
 
 export const mode = atom<string>({
   key: 'theme',
-  default: localStorage.getItem('theme') || 'light',
+  default:
+    typeof window !== 'undefined'
+      ? localStorage.getItem('theme') || 'light'
+      : 'light',
 });
 
 export const language = atom<string>({
