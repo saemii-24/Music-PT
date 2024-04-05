@@ -4,9 +4,12 @@ import ko from '@/language/ko.json';
 import jp from '@/language/jp.json';
 import {SupabaseType} from '@/types/form';
 
-export const mode = atom<boolean>({
-  key: 'darkMode',
-  default: false,
+export const mode = atom<string>({
+  key: 'theme',
+  default:
+    typeof window !== 'undefined'
+      ? localStorage.getItem('theme') || 'light'
+      : 'light',
 });
 
 export const language = atom<string>({

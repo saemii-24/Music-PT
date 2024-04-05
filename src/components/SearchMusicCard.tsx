@@ -57,7 +57,7 @@ export default function SearchMusicCard({music}: {music: any}) {
               setSelectLang('ko');
             }}
             type='button'
-            className='inline-block w-11 rounded-3xl bg-music-blue py-[0.1rem] text-center text-sm text-white hover:bg-indigo-500'>
+            className='inline-block w-11 rounded-3xl bg-music-blue py-[0.1rem] text-center text-sm text-white hover:bg-music-lightblue'>
             KO
           </button>
         )}

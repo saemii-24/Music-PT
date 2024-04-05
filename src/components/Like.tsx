@@ -79,10 +79,10 @@ export default function Like({music}: LikeType) {
           likeData?.like ? (
             <FaHeart className='text-music-orange' />
           ) : (
-            <FaRegHeart />
+            <FaRegHeart className='text-black' />
           )
         ) : (
-          <FaRegHeart />
+          <FaRegHeart className='text-black' />
         )}
       </button>
     </div>

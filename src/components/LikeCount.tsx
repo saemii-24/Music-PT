@@ -13,7 +13,6 @@ type LikeType = {
 export default function LikeCount({music}: LikeType) {
   const {data: session} = useSession();
 
-  console.log(session);
   const toggleLike = async () => {
     if (session?.user) {
       try {
@@ -81,13 +80,15 @@ export default function LikeCount({music}: LikeType) {
           likeData?.like ? (
             <FaHeart className='text-music-orange' />
           ) : (
-            <FaRegHeart />
+            <FaRegHeart className='text-black' />
           )
         ) : (
-          <FaRegHeart />
+          <FaRegHeart className='text-black' />
         )}
       </button>
-      <div>{likeCountData ? likeCountData?.count : 0}</div>
+      <div className='text-black '>
+        {likeCountData ? likeCountData?.count : 0}
+      </div>
     </div>
   );
 }
