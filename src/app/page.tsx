@@ -50,7 +50,7 @@ export default function Home() {
   // console.log(needFetch);
 
   return (
-    <main className=' flex-1 bg-music-background'>
+    <main className='flex-1 bg-music-background'>
       <div className='container py-20'>
         <HomeTitle />
         <div className='grid grid-cols-1 justify-between gap-x-20 gap-y-10 lg:grid-cols-2 xl:grid-cols-3'>

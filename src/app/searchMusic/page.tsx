@@ -95,7 +95,7 @@ export default function SearchMusic() {
   }, []);
 
   return (
-    <main className='flex-1 bg-music-lightgray sm:bg-white'>
+    <main className='flex-1 sm:bg-white dark:bg-music-background'>
       <div className='container py-20'>
         {/* music 목록 */}
         <SearchMusicTitle />

@@ -52,9 +52,9 @@ export default function SearchForm({
         <div className='relative hidden w-[8rem]  flex-col items-center justify-center sm:flex'>
           <div
             className={cn(
-              'text-base relative z-20 flex size-full cursor-pointer items-center justify-center text-center',
+              ' bg-white rounded-[100rem] text-black text-base relative z-20 flex size-full cursor-pointer items-center justify-center text-center',
               {
-                'bg-white  border-2 h-11 rounded-[100rem] border-black':
+                'bg-white border-2 h-11 rounded-[100rem] border-black':
                   selectOpen,
               },
             )}
@@ -63,14 +63,14 @@ export default function SearchForm({
             }}>
             {clientSelect}
             <GoTriangleDown
-              className={cn('absolute right-0 transition mr-2', {
+              className={cn('text-black absolute right-0 transition mr-2', {
                 'rotate-180': selectOpen,
               })}
             />
           </div>
           <ul
             className={cn(
-              'overflow-hidden z-10 text-sm pt-5 rounded-b-lg border-2 border-black cursor-pointer ease-in-out absolute duration-1000 w-full top-6 bg-white flex flex-col transition opacity-0',
+              'overflow-hidden z-10 text-sm pt-5 rounded-b-lg border-2 border-black cursor-pointer ease-in-out absolute duration-1000 w-full top-6 bg-white text-black flex flex-col transition opacity-0',
               {
                 'visible opacity-100': selectOpen,
                 'hidden opacity-0': !selectOpen,
@@ -108,7 +108,7 @@ export default function SearchForm({
           type='text'
           {...register('search', {required: true})}
           id='search'
-          className=' ml-[10px] block flex-1 rounded-md py-1.5 text-base text-gray-900 placeholder:text-gray-400 sm:ml-[0px] '
+          className='ml-[10px] block flex-1 rounded-md py-1.5 text-base text-gray-900 placeholder:text-gray-400 sm:ml-[0px] dark:bg-white '
           placeholder='음악 제목을 검색해주세요.'
         />
         <button
