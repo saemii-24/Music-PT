@@ -8,53 +8,38 @@ import {GrLanguage} from 'react-icons/gr';
 import {IoMenu, IoClose} from 'react-icons/io5';
 
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {mode, language, languageMode} from '@/recoil/index';
-import {useEffect, useLayoutEffect, useState} from 'react';
+import {language, languageMode} from '@/recoil/index';
+import {useEffect, useState} from 'react';
 
 import {signOut, useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
 
+type ThemeType = 'light' | 'dark';
+
 export default function Header() {
   // theme 값 가져오기
-  const initialTheme =
+  const initialTheme: ThemeType =
     typeof window !== 'undefined'
-      ? localStorage.getItem('theme') || 'light'
+      ? (localStorage.getItem('theme') as ThemeType) || 'light'
       : 'light';
-  const [now, setNowMode] = useState<string>(initialTheme);
+  const [theme, setTheme] = useState<ThemeType>(initialTheme);
 
-  const handleToggleMode = (): void => {
-    localStorage.setItem('theme', now);
-    if (now === 'dark') {
-      const htmlElement = document.querySelector('html') as HTMLElement;
-      htmlElement.classList.add('dark');
-    } else {
-      const htmlElement = document.querySelector('html') as HTMLElement;
-      htmlElement.classList.remove('dark');
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('theme', theme);
+      if (theme === 'dark') {
+        const htmlElement = document.querySelector('html') as HTMLElement;
+        htmlElement.classList.add('dark');
+      } else {
+        const htmlElement = document.querySelector('html') as HTMLElement;
+        htmlElement.classList.remove('dark');
+      }
     }
-  };
-
-  // if (typeof window !== 'undefined') {
-  //   setNowMode(localStorage.getItem('theme') || 'light');
-  // }
-
-  // if (now === 'dark') {
-  //   const htmlElement = document.querySelector('html') as HTMLElement;
-  //   htmlElement.classList.add('dark');
-  // } else {
-  //   const htmlElement = document.querySelector('html') as HTMLElement;
-  //   htmlElement.classList.remove('dark');
-  // }
+  }, [theme]);
 
   //recoil값
-  const [theme, setTheme] = useRecoilState(mode);
   const [nowLanguage, setNowLanguage] = useRecoilState(language);
   const lan = useRecoilValue(languageMode);
-
-  // const handleToggleMode = (): void => {
-  //   const nowMode = theme === 'light' ? 'dark' : 'light';
-  //   localStorage.setItem('theme', nowMode);
-  //   setTheme(nowMode);
-  // };
 
   //언어 선택창 열기 닫기
   const [lanSelectOpen, setLanSelectOpen] = useState<boolean>(false);
@@ -154,10 +139,9 @@ export default function Header() {
               />
               {lanSelectOpen && (
                 <>
-                  {' '}
                   <ul className='absolute bottom-[-90px] right-[-50px] z-10 flex w-[120px] flex-col items-center rounded-lg border-2 border-black bg-white px-5 py-2'>
                     <li
-                      className='cgursor-pointer font-medium hover:text-music-bluegray dark:text-black'
+                      className='cursor-pointer font-medium hover:text-music-bluegray dark:text-black'
                       onClick={() => {
                         setNowLanguage('ko');
                         setLanSelectOpen(false);
@@ -179,11 +163,21 @@ export default function Header() {
             </li>
           </div>
 
-          <li className='cursor-pointer ' onClick={handleToggleMode}>
+          <li className='cursor-pointer '>
             {theme === 'dark' ? (
-              <IoMoon className='text-lg text-music-bluegray' />
+              <IoMoon
+                onClick={() => {
+                  setTheme('light');
+                }}
+                className='text-lg text-music-bluegray'
+              />
             ) : (
-              <FiSun className='text-lg text-music-bluegray' />
+              <FiSun
+                onClick={() => {
+                  setTheme('dark');
+                }}
+                className='text-lg text-music-bluegray'
+              />
             )}
           </li>
         </ul>
@@ -251,14 +245,24 @@ export default function Header() {
               </li>
             </ul>
           </li>
-          <li onClick={handleToggleMode}>
+          <li>
             <div className=' mb-4 mt-8 text-2xl  font-extrabold text-music-blue'>
               Screen mode
             </div>
             {theme === 'dark' ? (
-              <IoMoon className='text-lg' />
+              <IoMoon
+                onClick={() => {
+                  setTheme('light');
+                }}
+                className='text-lg'
+              />
             ) : (
-              <FiSun className='text-lg' />
+              <FiSun
+                onClick={() => {
+                  setTheme('dark');
+                }}
+                className='text-lg'
+              />
             )}
           </li>
         </ul>
