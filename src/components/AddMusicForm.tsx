@@ -6,11 +6,9 @@ import {useRecoilValue} from 'recoil';
 import {useForm} from 'react-hook-form';
 import type {FormValues} from '@/types/form';
 
-import Error from './Error';
 import {formSubmit} from '@/utils/form';
 import {useRouter} from 'next/navigation';
 
-import UploadImage from './UploadImage';
 import SubmitButton from './SubmitButton';
 import {useState} from 'react';
 import cn from 'classnames';
@@ -39,15 +37,15 @@ export default function AddMusicForm() {
     <form onSubmit={handleSubmit((data) => formSubmit(data, route))}>
       {/* 업로드 음악 버전 선택 */}
       <div>
-        <ul className='flex gap-8 border-b'>
+        <ul className='flex gap-8  border-b-2 border-music-basicgray'>
           <li
             onClick={() => {
               setUploadVer('ko');
             }}
             className={cn(
-              'cursor-pointer break-keep',
+              'dark:text-black cursor-pointer break-keep',
               uploadVer === 'ko' &&
-                'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
+                'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue',
             )}>
             한국어 버전
           </li>
@@ -56,9 +54,9 @@ export default function AddMusicForm() {
               setUploadVer('jp');
             }}
             className={cn(
-              'cursor-pointer break-keep',
+              'dark:text-black cursor-pointer break-keep',
               uploadVer === 'jp' &&
-                'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
+                'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue',
             )}>
             일본어 버전
           </li>

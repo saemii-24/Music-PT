@@ -27,10 +27,10 @@ export default function MusicFormLyrics({
   return (
     <div className='gap-20 border-b border-gray-900/10 py-12 md:grid md:grid-cols-3'>
       <div className='sm:col-span-12 md:col-span-1'>
-        <h2 className='text-base font-semibold leading-7 text-gray-900'>
+        <h2 className='text-base font-semibold leading-7 text-black'>
           {lan['addmusic-lyrics-title']}
         </h2>
-        <p className='mt-1 text-sm leading-6 text-gray-600'>
+        <p className='mt-1 text-sm leading-6 text-music-subtitle'>
           {lan['addmusic-lyrics-description']}
         </p>
       </div>
@@ -38,7 +38,7 @@ export default function MusicFormLyrics({
         <div className='col-span-full'>
           <label
             htmlFor='lyrics'
-            className='block text-sm font-medium leading-6 text-gray-900'>
+            className='block text-sm font-medium leading-6 text-black'>
             {lan['addmusic-input-lyrics']}
           </label>
           <div className='mt-2'>
@@ -46,7 +46,7 @@ export default function MusicFormLyrics({
               id='lyrics'
               {...register(lyrics_lang, {required: true})}
               rows={10}
-              className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6'
+              className='block w-full rounded-md border-0 bg-white py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6 dark:ring-music-basicgray'
               defaultValue={''}
             />
             <Error

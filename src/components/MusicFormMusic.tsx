@@ -33,10 +33,10 @@ export default function MusicFormMusic({
   return (
     <div className='gap-20 border-b border-gray-900/10 py-12 md:grid md:grid-cols-3'>
       <div className='sm:col-span-12 md:col-span-1'>
-        <h2 className='text-base font-semibold leading-7 text-gray-900'>
+        <h2 className='text-base font-semibold leading-7 text-black '>
           {lan['addmusic-music-title']}
         </h2>
-        <p className='mt-1 break-keep text-sm leading-6 text-gray-600 '>
+        <p className='mt-1 break-keep text-sm leading-6 text-music-subtitle '>
           {lan['addmusic-music-description']}
         </p>
       </div>
@@ -45,7 +45,7 @@ export default function MusicFormMusic({
           <div className='w-full'>
             <label
               htmlFor='title'
-              className='block text-sm font-medium leading-6 text-gray-900'>
+              className='block text-sm font-medium leading-6 text-black'>
               {lan['addmusic-input-title']}
             </label>
             <div className='mt-2'>
@@ -54,7 +54,7 @@ export default function MusicFormMusic({
                 {...register(title_lang, {required: true})}
                 id='title'
                 autoComplete='family-name'
-                className='block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6'
+                className='block w-[100%] rounded-md border-0 bg-white py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6 dark:ring-music-basicgray'
               />
               <Error
                 errors={uploadVer === 'ko' ? errors.title_ko : errors.title_jp}
@@ -65,7 +65,7 @@ export default function MusicFormMusic({
           <div className='mt-6 w-full xl:mt-0'>
             <label
               htmlFor='singer'
-              className='block text-sm font-medium leading-6 text-gray-900'>
+              className='block  text-sm font-medium leading-6 text-black'>
               {lan['addmusic-input-singer']}
             </label>
             <div className='mt-2'>
@@ -73,7 +73,7 @@ export default function MusicFormMusic({
                 type='text'
                 {...register(singer_lang, {required: true})}
                 id='singer'
-                className='block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6'
+                className=' block w-[100%] rounded-md border-0 bg-white py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6 dark:ring-music-basicgray'
               />
               <Error
                 errors={
@@ -87,7 +87,7 @@ export default function MusicFormMusic({
         <div className='mt-6 w-full'>
           <label
             htmlFor='youtube'
-            className='block text-sm font-medium leading-6 text-gray-900'>
+            className='block  text-sm font-medium leading-6 text-black'>
             {lan['addmusic-input-link']}
           </label>
           <div className='mt-2'>
@@ -95,7 +95,7 @@ export default function MusicFormMusic({
               type='text'
               {...register(youtube_lang)}
               id='youtube'
-              className='block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6'
+              className='block w-[100%] rounded-md border-0 bg-white py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6 dark:ring-music-basicgray'
             />
           </div>
         </div>
