@@ -54,7 +54,7 @@ export default function UploadImage({
   }, [watch(thumbnail_lang)]);
 
   return (
-    <div className='mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10'>
+    <div className='mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 bg-white px-6 py-10  dark:border-gray-600'>
       {checkImage === 'none' && (
         <div className='text-center'>
           <HiPhoto
@@ -64,7 +64,7 @@ export default function UploadImage({
           <div className='mt-4 flex text-sm leading-6 text-gray-600'>
             <label
               htmlFor='thumbnail'
-              className='relative cursor-pointer rounded-md bg-white font-semibold text-music-blue focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500'>
+              className='relative cursor-pointer rounded-md  font-semibold text-music-blue focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500'>
               <span>앨범 이미지</span>
               <input
                 id='thumbnail'
@@ -75,9 +75,9 @@ export default function UploadImage({
                 className='sr-only'
               />
             </label>
-            <p>를 업로드해주세요.</p>
+            <p className='text-black'>를 업로드해주세요.</p>
           </div>
-          <p className='text-xs leading-5 text-gray-600'>
+          <p className='text-xs leading-5 text-music-subtitle '>
             PNG, JPG, WEBP up to 1MB
           </p>
         </div>

@@ -41,10 +41,10 @@ export default function MusicFormAlbum({
   return (
     <div className='gap-20 border-b border-gray-900/10 py-12 md:grid md:grid-cols-3'>
       <div className='sm:col-span-12 md:col-span-1'>
-        <h2 className='text-base font-semibold leading-7 text-gray-900'>
+        <h2 className='text-base font-semibold leading-7 text-black'>
           {lan['addmusic-album-title']}
         </h2>
-        <p className='mt-1 break-keep text-sm leading-6 text-gray-600 '>
+        <p className='mt-1 break-keep text-sm leading-6 text-music-subtitle '>
           {lan['addmusic-album-description']}
         </p>
       </div>
@@ -53,7 +53,7 @@ export default function MusicFormAlbum({
           <div className='w-full'>
             <label
               htmlFor='album'
-              className='block text-sm font-medium leading-6 text-gray-900'>
+              className='block text-sm font-medium leading-6 text-black '>
               {lan['addmusic-input-album']}
             </label>
             <div className='mt-2'>
@@ -62,7 +62,7 @@ export default function MusicFormAlbum({
                 {...register(album_lang, {required: true})}
                 id='album'
                 autoComplete='family-name'
-                className='block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6'
+                className='block w-[100%] rounded-md border-0 bg-white py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6 dark:ring-music-basicgray'
               />
               <Error
                 errors={uploadVer === 'ko' ? errors.album_ko : errors.album_jp}
@@ -73,7 +73,7 @@ export default function MusicFormAlbum({
           <div className='mt-6 w-full xl:mt-0'>
             <label
               htmlFor='release'
-              className='block text-sm font-medium leading-6 text-gray-900'>
+              className='block text-sm font-medium leading-6 text-black'>
               {lan['addmusic-input-release']}
             </label>
             <div className='mt-2'>
@@ -82,7 +82,7 @@ export default function MusicFormAlbum({
                 {...register(release_lang, {required: true})}
                 id='release'
                 autoComplete='family-name'
-                className='block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6'
+                className='block w-[100%] rounded-md border-0 bg-white py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6 dark:ring-music-basicgray'
               />
               <Error
                 errors={
@@ -96,7 +96,7 @@ export default function MusicFormAlbum({
         <div>
           <label
             htmlFor='thumbnail-upload'
-            className='mt-6 block text-sm font-medium leading-6 text-gray-900'>
+            className='mt-6  block text-sm font-medium leading-6 text-black'>
             {lan['addmusic-input-thumbnail']}
           </label>
           <UploadImage
