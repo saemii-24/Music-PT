@@ -4,8 +4,8 @@ import Image from 'next/image';
 import {useRouter} from 'next/navigation';
 import {useState} from 'react';
 import cn from 'classnames';
-import Like from './Like';
 import LikeCount from './LikeCount';
+import LangButton from './LangButton';
 
 export default function SearchMusicCard({music}: {music: any}) {
   const route = useRouter();
@@ -50,28 +50,14 @@ export default function SearchMusicCard({music}: {music: any}) {
         />
       </div>
       <div className='absolute right-0 top-12 flex gap-2'>
-        {music?.kolyrics && (
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setSelectLang('ko');
-            }}
-            type='button'
-            className='inline-block w-11 rounded-3xl bg-music-blue py-[0.1rem] text-center text-sm text-white hover:bg-music-lightblue'>
-            KO
-          </button>
-        )}
-        {music?.jplyrics && (
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setSelectLang('jp');
-            }}
-            type='button'
-            className='inline-block w-11 rounded-3xl bg-music-orange py-[0.1rem] text-center text-sm text-white hover:bg-music-lightorange'>
-            JP
-          </button>
-        )}
+        <LangButton
+          setSelectLang={setSelectLang}
+          selectLang={selectLang}
+          kosinger={music?.kosinger}
+          jpsinger={music?.jpsinger}
+          kolyrics={music?.kolyrics}
+          jplyrics={music?.jplyrics}
+        />
       </div>
       <div className='flex flex-1 flex-col'>
         <div
@@ -80,21 +66,25 @@ export default function SearchMusicCard({music}: {music: any}) {
           }}>
           <LikeCount music={music} />
         </div>
-        <h1 className='mb-2 mt-1 text-2xl font-medium '>
+        <h1 className='mb-2 mt-1 text-2xl font-medium text-black'>
           {selectLang === 'ko' ? music?.kotitle : music?.jptitle}
         </h1>
 
         <div className='mb-1 flex text-base'>
-          <span className='w-[6.5rem]'>가수</span>
-          <span>{selectLang === 'ko' ? music?.kosinger : music?.jpsinger}</span>
+          <span className='w-[6.5rem] text-black'>가수</span>
+          <span className='text-black'>
+            {selectLang === 'ko' ? music?.kosinger : music?.jpsinger}
+          </span>
         </div>
         <div className='mb-1 flex text-base'>
-          <span className='w-[6.5rem]'>앨범</span>
-          <span>{selectLang === 'ko' ? music?.koalbum : music?.jpalbum}</span>
+          <span className='w-[6.5rem] text-black'>앨범</span>
+          <span className='text-black'>
+            {selectLang === 'ko' ? music?.koalbum : music?.jpalbum}
+          </span>
         </div>
         <div className='mb-1 flex text-base'>
-          <span className='w-[6.5rem]'>발매년도</span>
-          <span>
+          <span className='w-[6.5rem] text-black'>발매년도</span>
+          <span className='text-black'>
             {selectLang === 'ko' ? music?.korelease : music?.jprelease}
           </span>
         </div>

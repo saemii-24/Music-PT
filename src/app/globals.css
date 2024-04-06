@@ -59,6 +59,7 @@ input[type='text'] {
     --black: 51 51 51;
     --background: 248 249 250;
     --basicgray: 243 244 246;
+    --subtitle: 75 85 99;
   }
 
   :root[class~='dark'] {
@@ -74,5 +75,6 @@ input[type='text'] {
     --black: 240 241 243;
     --background: 40 46 57;
     --basicgray: 54 58 74;
+    --subtitle: 206 206 206;
   }
 }
