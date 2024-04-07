@@ -17,6 +17,7 @@ import {needRefetch} from '@/recoil';
 import cn from 'classnames';
 import Like from './Like';
 import LikeCount from './LikeCount';
+import LangButton from './LangButton';
 
 type LangType = 'ko' | 'jp';
 
@@ -40,30 +41,18 @@ export default function MusicProfile({
   );
 
   return (
-    <section>
+    <section className='dark:bg-music-background'>
       <div className=' container grid grid-cols-4 xl:grid-cols-6 2xl:grid-cols-7 '>
         <div className='relative col-span-4 aspect-square overflow-hidden rounded-xl transition after:absolute after:left-0 after:top-0  after:z-10 after:size-full after:bg-black after:opacity-0 after:transition after:content-[""] hover:after:opacity-40 xl:col-span-2 xl:row-span-6 xl:mr-20'>
           <div className='absolute right-4 top-4 z-20 ml-auto flex gap-2'>
-            {music.kolyrics && (
-              <button
-                type='button'
-                onClick={() => {
-                  setSelectLang('ko');
-                }}
-                className='inline-block w-11 cursor-pointer rounded-3xl bg-music-blue py-[0.1rem] text-center text-sm text-white'>
-                KO
-              </button>
-            )}
-            {music.jplyrics && (
-              <button
-                type='button'
-                onClick={() => {
-                  setSelectLang('jp');
-                }}
-                className='inline-block w-11 cursor-pointer rounded-3xl bg-music-orange py-[0.1rem] text-center text-sm text-white'>
-                JP
-              </button>
-            )}
+            <LangButton
+              setSelectLang={setSelectLang}
+              selectLang={selectLang}
+              kosinger={music?.kosinger}
+              jpsinger={music?.jpsinger}
+              kolyrics={music?.kolyrics}
+              jplyrics={music?.jplyrics}
+            />
           </div>
           <Image
             className={cn({
@@ -93,13 +82,13 @@ export default function MusicProfile({
             style={{width: '100%', height: '100%', objectFit: 'cover'}}
           />
         </div>
-        <div className='col-span-4 mb-[0.4rem] mt-5 xl:col-span-3 2xl:col-span-4'>
+        <div className='col-span-4 mb-[0.4rem] mt-5 xl:col-span-4'>
           <LikeCount music={music} />
         </div>
         <div className='order-first col-span-4 mt-[-2.5rem] flex justify-end xl:order-none xl:col-auto xl:mt-5'>
           <div className='right-0 top-[-100vw] flex items-center justify-center gap-2 md:top-0'>
             <p
-              className=' cursor-pointer'
+              className='cursor-pointer text-black'
               onClick={() => {
                 route.push(`/editmusic/${id}/`);
                 setNeedFetch(true);
@@ -108,7 +97,7 @@ export default function MusicProfile({
             </p>
             {status === 'authenticated' && (
               <p
-                className='cursor-pointer before:mr-2 before:content-["|"]'
+                className='cursor-pointer text-black before:mr-2 before:content-["|"]'
                 onClick={async () => {
                   setNeedFetch(true);
                   await deleteMusic(id, route);
@@ -118,19 +107,19 @@ export default function MusicProfile({
             )}
           </div>
         </div>
-        <div className='col-span-4 mb-4 text-4xl font-bold xl:col-span-3  2xl:col-span-5'>
+        <div className='col-span-4 mb-4 text-4xl font-bold text-black xl:col-span-3  2xl:col-span-5'>
           {selectLang === 'ko' ? music?.kotitle : music?.jptitle}
         </div>
-        <div className='leading-7 xl:mt-3'>가수</div>
-        <div className='col-span-3 xl:col-span-3 xl:mt-3 2xl:col-span-4 '>
+        <div className='leading-7 text-black xl:mt-3'>가수</div>
+        <div className='col-span-3 text-black xl:col-span-3 xl:mt-3 2xl:col-span-4 '>
           {selectLang === 'ko' ? music?.kosinger : music?.jpsinger}
         </div>
-        <div className='leading-7'>앨범</div>
-        <div className='col-span-3 xl:col-span-3 2xl:col-span-4 '>
+        <div className='leading-7 text-black'>앨범</div>
+        <div className='col-span-3 text-black xl:col-span-3 2xl:col-span-4 '>
           {selectLang === 'ko' ? music?.koalbum : music?.jpalbum}
         </div>
-        <div className='leading-7'>발매년도</div>
-        <div className='col-span-3 xl:col-span-3 2xl:col-span-4 '>
+        <div className='leading-7 text-black'>발매년도</div>
+        <div className='col-span-3 text-black xl:col-span-3 2xl:col-span-4 '>
           {selectLang === 'ko' ? music?.korelease : music?.jprelease}
         </div>
         <div className=' col-span-4 mb-10 mt-5 flex gap-6 xl:col-span-4 2xl:col-span-5 '>

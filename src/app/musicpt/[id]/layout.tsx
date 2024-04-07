@@ -58,7 +58,7 @@ export default function MusicPtLayout({
   }
 
   return (
-    <div className='flex-1'>
+    <div className='flex-1 dark:bg-music-background'>
       <main className='my-20'></main>
       <MusicProfile music={music?.post} id={id} />
       <div>{children}</div>;
