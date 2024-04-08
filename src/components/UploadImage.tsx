@@ -54,7 +54,7 @@ export default function UploadImage({
   }, [watch(thumbnail_lang)]);
 
   return (
-    <div className='mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 bg-white px-6 py-10 a dark:border-gray-600'>
+    <div className='a mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 bg-white px-6 py-10 dark:border-gray-600'>
       {checkImage === 'none' && (
         <div className='text-center'>
           <HiPhoto
@@ -102,9 +102,9 @@ export default function UploadImage({
                 className='sr-only'
               />
             </label>
-            <p>를 업로드해주세요.</p>
+            <p className='text-black'>를 업로드해주세요.</p>
           </div>
-          <p className='text-xs leading-5 text-gray-600'>
+          <p className='text-xs leading-5 text-music-subtitle '>
             PNG, JPG, WEBP up to 1MB
           </p>
         </div>
@@ -129,10 +129,10 @@ export default function UploadImage({
                 className='sr-only'
               />
             </label>
-            <p>가 업로드되었습니다.</p>
+            <p className='text-black'> 가 업로드되었습니다.</p>
           </div>
           <p
-            className='cursor-pointer text-xs leading-5 text-gray-600 hover:underline'
+            className='cursor-pointer text-xs leading-5 text-music-subtitle hover:underline'
             onClick={() => {
               reset();
             }}>

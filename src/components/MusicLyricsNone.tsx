@@ -4,12 +4,12 @@ import Button from './Button';
 export default function MusicLyricsNone({push}: {push: string}) {
   const route = useRouter();
   return (
-    <div className='grid place-items-center bg-white px-6'>
+    <div className='grid place-items-center px-6'>
       <div className='text-center'>
-        <p className='mt-4 text-3xl font-bold  tracking-tight text-gray-900'>
+        <p className='mt-4 text-3xl font-bold  tracking-tight text-black'>
           등록 된 가사가 없습니다.
         </p>
-        <p className='mt-2 text-base leading-8 text-gray-600 lg:text-lg lg:leading-9'>
+        <p className='mt-2 text-base leading-8 text-music-subtitle lg:text-lg lg:leading-9'>
           가사를 추가하고 번역을 시작해보세요.
         </p>
         <div className='mt-10 flex items-center justify-center gap-x-6'>

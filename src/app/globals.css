@@ -47,6 +47,7 @@ input[type='text'] {
 
 @layer base {
   :root {
+    --disable: 246 248 249;
     --lightgray: 246 248 249;
     --bluegray: 148 163 184;
     --darkgray: 229 232 234;
@@ -63,6 +64,7 @@ input[type='text'] {
   }
 
   :root[class~='dark'] {
+    --disable: 35 36 41;
     --lightgray: 55 60 71;
     --bluegray: 172 190 215;
     --darkgray: 229 232 234;

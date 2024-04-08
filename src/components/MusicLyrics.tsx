@@ -105,7 +105,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
                   ?.split('\n')
                   .map((koline: string, index: number) => (
                     <React.Fragment key={index}>
-                      <p className='text-center text-base leading-8 lg:text-lg lg:leading-9'>
+                      <p className='text-center text-base leading-8 text-black lg:text-lg lg:leading-9'>
                         {koline}
                       </p>
                       <p className='mb-4 text-center text-base leading-8 text-music-blue lg:text-lg lg:leading-9'>
@@ -120,7 +120,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
                   ?.split('\n')
                   .map((koline: string, index: number) => (
                     <p
-                      className='text-center text-base leading-8 lg:text-lg lg:leading-9'
+                      className='text-center text-base leading-8 text-black lg:text-lg lg:leading-9'
                       key={index}>
                       {koline}
                     </p>
@@ -192,7 +192,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
                   ?.split('\n')
                   .map((jpline: string, index: number) => (
                     <React.Fragment key={index}>
-                      <p className='text-center text-base leading-8 lg:text-lg lg:leading-9'>
+                      <p className='text-center text-base leading-8 text-black lg:text-lg lg:leading-9 '>
                         {jpline}
                       </p>
                       <p className='mb-4 text-center text-base leading-8 text-music-blue lg:text-lg lg:leading-9'>
