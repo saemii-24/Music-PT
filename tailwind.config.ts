@@ -55,6 +55,7 @@ const config: Config = {
         lightorange: 'rgb(var(--lightorange) / 1)',
         focusblue: 'rgb(var(--focusblue) / 1)',
         subtitle: 'rgb(var(--subtitle) / 1)',
+        disable: 'rgb(var(--disable) / 1)',
       },
     },
   },
