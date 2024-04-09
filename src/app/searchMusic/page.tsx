@@ -135,7 +135,7 @@ export default function SearchMusic() {
               })
           ) : (
             <div>
-              <p>찾으시는 내용이 없습니다.</p>
+              <p className='text-music-subtitle'>찾으시는 내용이 없습니다.</p>
             </div>
           )
         ) : (

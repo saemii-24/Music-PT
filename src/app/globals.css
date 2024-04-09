@@ -18,11 +18,7 @@
 body {
   color: #333333;
 }
-body * {
-  @apply transition-colors duration-100;
-}
-
-textarea {
+t textarea {
   resize: none;
   padding-left: 10px;
   padding-right: 10px;

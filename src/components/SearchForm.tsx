@@ -119,7 +119,7 @@ export default function SearchForm({
       </div>
       {/* 모바일 사이즈 ui */}
       <div className='mt-10 block sm:hidden'>
-        <ul className='flex gap-8 border-b'>
+        <ul className='flex gap-8 border-b text-black'>
           <li
             onClick={() => {
               setSelect('all');

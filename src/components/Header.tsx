@@ -59,14 +59,14 @@ export default function Header() {
         </Link>
         {menuOpen ? (
           <IoClose
-            className='ml-auto block cursor-pointer text-3xl sm:hidden'
+            className=' ml-auto block cursor-pointer text-3xl text-black sm:hidden'
             onClick={() => {
               setMenuOpen(false);
             }}
           />
         ) : (
           <IoMenu
-            className='ml-auto block cursor-pointer text-3xl sm:hidden'
+            className=' ml-auto block cursor-pointer text-3xl text-black sm:hidden'
             onClick={() => {
               setMenuOpen(true);
             }}
@@ -163,7 +163,7 @@ export default function Header() {
             </li>
           </div>
 
-          <li className='cursor-pointer '>
+          <li className='cursor-pointer'>
             {theme === 'dark' ? (
               <IoMoon
                 onClick={() => {
@@ -184,7 +184,7 @@ export default function Header() {
       </div>
       {/* 모바일 사이즈 */}
       {menuOpen && (
-        <ul className='container inset-0 z-0 block h-screen w-screen bg-white pt-[30%] sm:hidden '>
+        <ul className='container inset-0 z-0 block h-screen w-screen bg-white pt-[30%] text-black sm:hidden '>
           <li>
             <div className=' mb-4 text-2xl font-extrabold text-music-blue'>
               Page
