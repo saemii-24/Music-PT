@@ -18,7 +18,7 @@
 body {
   color: #333333;
 }
-t textarea {
+textarea {
   resize: none;
   padding-left: 10px;
   padding-right: 10px;
@@ -57,6 +57,7 @@ input[type='text'] {
     --background: 248 249 250;
     --basicgray: 243 244 246;
     --subtitle: 75 85 99;
+    --skeleton: 229 232 234;
   }
 
   :root[class~='dark'] {
@@ -74,5 +75,6 @@ input[type='text'] {
     --background: 40 46 57;
     --basicgray: 54 58 74;
     --subtitle: 206 206 206;
+    --skeleton: 72 75 90;
   }
 }
