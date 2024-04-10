@@ -86,3 +86,5 @@ export interface UserInterfaceType {
 }
 
 export type LangType = 'ko' | 'jp';
+
+export type StatusType = 'error' | 'success' | 'pending';

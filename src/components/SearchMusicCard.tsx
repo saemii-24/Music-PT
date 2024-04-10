@@ -1,18 +1,29 @@
 'use client';
-import type {LangType} from '@/types/form';
+import type {LangType, StatusType} from '@/types/form';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
 import {useState} from 'react';
 import cn from 'classnames';
 import LikeCount from './LikeCount';
 import LangButton from './LangButton';
+import SK_SearchCard from '@/app/skeleton/SK_SeachCard';
 
-export default function SearchMusicCard({music}: {music: any}) {
+export default function SearchMusicCard({
+  music,
+  status,
+}: {
+  music: any;
+  status: StatusType;
+}) {
   const route = useRouter();
   //현재 보고 있는 버전 설정
   const [selectLang, setSelectLang] = useState<LangType>(
     music.kotitle ? 'ko' : 'jp',
   );
+
+  if (status === 'pending') {
+    return <SK_SearchCard />;
+  }
 
   return (
     <div className=' relative flex cursor-pointer items-center gap-10 py-10 sm:flex sm:flex-row'>

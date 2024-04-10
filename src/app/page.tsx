@@ -8,6 +8,7 @@ import axios from 'axios';
 import {atom, useRecoilState} from 'recoil';
 import {musicAtom, needRefetch} from '@/recoil';
 import {useEffect} from 'react';
+import SK_Home from './skeleton/SK_Home';
 
 export default function Home() {
   // //recoil
@@ -39,15 +40,13 @@ export default function Home() {
     }
   }, [needFetch]);
 
-  if (status === 'pending') {
-    return <span>Loading...</span>;
-  }
+  // if (status === 'success') {
+  //   return <SK_Home />;
+  // }
 
-  if (status === 'error') {
-    return <span>에러가 발생</span>;
+  if (status === 'pending') {
+    return <SK_Home />;
   }
-  // console.log(firstMusicData);
-  // console.log(needFetch);
 
   return (
     <main className='flex-1 bg-music-background'>
