@@ -108,7 +108,7 @@ export default function SearchForm({
           type='text'
           {...register('search', {required: true})}
           id='search'
-          className='ml-[10px] block flex-1 rounded-md py-1.5 text-base text-gray-900 placeholder:text-gray-400 sm:ml-[0px] dark:bg-white '
+          className='placeholder:text-gray-400sm:ml-[0px] ml-[10px] block flex-1 rounded-md py-1.5 text-base text-black dark:bg-white '
           placeholder='음악 제목을 검색해주세요.'
         />
         <button

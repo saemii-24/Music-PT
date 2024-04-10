@@ -17,6 +17,8 @@ import MusicCard from '@/components/MusicCard';
 import SearchMusicTitle from '@/components/SearchMusicTitle';
 
 import cn from 'classnames';
+import SK_SearchCard from '../skeleton/SK_SeachCard';
+import SK_MusicCard from '../skeleton/SK_MusicCard';
 
 export default function SearchMusic() {
   const {ref, inView} = useInView();
@@ -38,6 +40,7 @@ export default function SearchMusic() {
   };
 
   const {
+    status,
     data,
     fetchNextPage,
     fetchPreviousPage,
@@ -125,9 +128,11 @@ export default function SearchMusic() {
                     ) : (
                       <div
                         className={
-                          index !== 0 ? 'hidden border-t sm:block' : ''
+                          index !== 0
+                            ? 'hidden border-t border-music-basicgray sm:block'
+                            : ''
                         }>
-                        <SearchMusicCard music={music} />
+                        <SearchMusicCard music={music} status={status} />
                       </div>
                     )}
                   </div>
@@ -135,11 +140,16 @@ export default function SearchMusic() {
               })
           ) : (
             <div>
-              <p className='text-music-subtitle'>찾으시는 내용이 없습니다.</p>
+              <p className='mt-[40px] flex h-20 items-center justify-center text-music-subtitle'>
+                찾으시는 음악이 없습니다.
+              </p>
             </div>
           )
+        ) : // 로딩중
+        windowWidth <= 640 ? (
+          <SK_MusicCard />
         ) : (
-          <div>로딩중...</div>
+          <SK_SearchCard />
         )}
         {data && <div className='h-4 w-full ' ref={ref}></div>}
       </div>

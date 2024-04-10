@@ -4,7 +4,7 @@ export default function SearchMusicTitle() {
       <h1 className='flex flex-col gap-3 text-4xl font-extrabold text-black'>
         음악 검색하기
       </h1>
-      <p className='text-music-subtitle mt-2 leading-6'>
+      <p className='mt-2 leading-6 text-music-subtitle'>
         원하시는 기준을 선택하시고, 음악을 검색해주세요.
       </p>
     </div>
