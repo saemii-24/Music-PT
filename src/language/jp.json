@@ -46,5 +46,17 @@
   "music-edit": "編集",
   "music-delete": "削除",
   "music-youtube-ko": "韓国語ver",
-  "music-youtube-jp": "日本語ver"
+  "music-youtube-jp": "日本語ver",
+  "music-edit-korean": "韓国語歌詞編集",
+  "music-edit-japanese": "日本語歌詞編集",
+  "music-add-korean": "韓国語翻訳追加",
+  "music-add-japanese": "日本語翻訳追加",
+  "music-edit-korean-translate": "韓国語翻訳を編集する",
+  "music-edit-japanese-translate": "日本語翻訳を編集する",
+  "music-together-korean": "韓国語翻訳と一緒に見る",
+  "music-together-japanese": "日本語翻訳と一緒に見る",
+  "music-tab-korean": "韓国語ver",
+  "music-tab-japanese": "日本語ver",
+  "music-tab-korean-compare": "韓国語比較",
+  "music-tab-japanese-compare": "日本語比較"
 }
