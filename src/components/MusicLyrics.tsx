@@ -200,7 +200,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
                   ?.split('\n')
                   .map((jpline: string, index: number) => (
                     <p
-                      className='text-center text-base leading-8 lg:text-lg lg:leading-9'
+                      className='text-center text-base leading-8 text-black lg:text-lg lg:leading-9'
                       key={index}>
                       {jpline}
                     </p>
