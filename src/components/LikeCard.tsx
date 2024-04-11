@@ -4,6 +4,8 @@ import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 import Like from './Like';
 import cn from 'classnames';
+import SK_Load from '@/app/skeleton/SK_Load';
+import {useRouter} from 'next/navigation';
 
 type LikeAllDataType = {
   createdAt: Date;
@@ -14,6 +16,8 @@ type LikeAllDataType = {
 };
 
 export default function LikeCard() {
+  const route = useRouter();
+
   //사용자가 이 음악에 좋아요를 눌렀는지 확인이 필요하다.
   const getLikeAllData = async () => {
     const {data} = await axios.get(`/api/likecount`);
@@ -33,14 +37,13 @@ export default function LikeCard() {
   });
 
   if (status === 'pending') {
-    return <span>Loading...</span>;
+    return (
+      <div className='flex h-full items-center justify-center text-center text-music-subtitle'>
+        <SK_Load />
+      </div>
+    );
   }
 
-  if (status === 'error') {
-    return <span>에러가 발생</span>;
-  }
-
-  console.log(likeAllData?.likeAll);
   return (
     <div>
       {likeAllData?.likeAll.map((item: LikeAllDataType, index: number) => {
@@ -53,7 +56,11 @@ export default function LikeCard() {
             <div className='mt-[0.4rem]'>
               <Like music={item?.music} />
             </div>
-            <div>
+            <div
+              className='cursor-pointer'
+              onClick={() => {
+                route.push(`/musicpt/${item?.musicId}`);
+              }}>
               <h2 className='text-base font-medium'>
                 {item?.music.kotitle
                   ? item?.music.kotitle

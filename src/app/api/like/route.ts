@@ -92,19 +92,3 @@ export const POST = async (req: Request, res: NextResponse) => {
     await prisma.$disconnect();
   }
 };
-
-// //like를 삭제한다.
-// export const DELETE = async (req: Request, res: NextResponse) => {
-//   try {
-//     await main();
-//     //쿼리스트링 값을 받아옴
-//     const id: number = parseInt(req.url.split('/like/')[1]);
-//     //body 값 받아오기
-//     const {lyricsLang, lyrics} = await req.json();
-//   } catch (err) {
-//     return NextResponse.json({message: 'Error', err}, {status: 500});
-//   } finally {
-//     //error가 발생해도 finally는 반드시 실행 됨
-//     await prisma.$disconnect();
-//   }
-// };

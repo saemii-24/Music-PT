@@ -20,6 +20,7 @@ type UploadVerType = 'ko' | 'jp';
 export default function AddMusicForm() {
   //recoil 언어모드
   const lan = useRecoilValue(languageMode);
+  console.log(lan);
   const route = useRouter();
 
   //react-hook-form
@@ -47,7 +48,7 @@ export default function AddMusicForm() {
               uploadVer === 'ko' &&
                 'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue',
             )}>
-            한국어 버전
+            {lan['language-button-korean']}
           </li>
           <li
             onClick={() => {
@@ -58,7 +59,7 @@ export default function AddMusicForm() {
               uploadVer === 'jp' &&
                 'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue',
             )}>
-            일본어 버전
+            {lan['language-button-japanese']}
           </li>
         </ul>
       </div>

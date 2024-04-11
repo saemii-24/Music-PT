@@ -42,7 +42,7 @@ export default function LikeCount({music}: LikeType) {
   };
 
   const {data: likeData, refetch: likeDataRefetch} = useQuery({
-    queryKey: ['like', music.id],
+    queryKey: ['like', music?.id],
     queryFn: getLikeData,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
@@ -58,14 +58,12 @@ export default function LikeCount({music}: LikeType) {
   };
 
   const {data: likeCountData, refetch: likeCountRefetch} = useQuery({
-    queryKey: ['likeCount', music.id],
+    queryKey: ['likeCount', music?.id],
     queryFn: likeCount,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
-
-  console.log(likeData, likeCountData);
 
   return (
     <div className='flex items-center gap-2'>

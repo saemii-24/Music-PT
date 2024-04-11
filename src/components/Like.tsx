@@ -13,7 +13,6 @@ type LikeType = {
 export default function Like({music}: LikeType) {
   const {data: session} = useSession();
 
-  console.log(session);
   const toggleLike = async () => {
     if (session?.user) {
       try {
