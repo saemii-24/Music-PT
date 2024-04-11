@@ -5,6 +5,8 @@ import {SupabaseType} from '@/types/form';
 import axios from 'axios';
 import {useQuery} from '@tanstack/react-query';
 import {toast} from 'react-toastify';
+import {languageMode} from '@/recoil';
+import {useRecoilValue} from 'recoil';
 
 type LikeType = {
   music: SupabaseType;
@@ -12,8 +14,8 @@ type LikeType = {
 
 export default function Like({music}: LikeType) {
   const {data: session} = useSession();
+  const lan = useRecoilValue(languageMode);
 
-  console.log(session);
   const toggleLike = async () => {
     if (session?.user) {
       try {
@@ -22,9 +24,9 @@ export default function Like({music}: LikeType) {
         });
         //찜하기 취소하기 로직
         if (data.now === 'add') {
-          toast.success('좋아요 목록에 등록했습니다.');
+          toast.success(lan['toast-music-add']);
         } else {
-          toast.warning('좋아요를 취소하셨습니다.');
+          toast.warning(lan['toast-music-cancle']);
         }
       } catch (err) {
         console.log(err);
@@ -32,7 +34,7 @@ export default function Like({music}: LikeType) {
       likeDataRefetch();
       likeCountRefetch();
     } else {
-      toast.warning('로그인 후 이용해주세요.');
+      toast.warning(lan['toast-music-login']);
     }
   };
 

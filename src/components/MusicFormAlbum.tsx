@@ -105,11 +105,6 @@ export default function MusicFormAlbum({
             reset={reset}
             uploadVer={uploadVer}
           />
-          {/* {errors.thumbnail && (
-            <p className=' mt-1 text-sm text-music-orange'>
-              {errors.thumbnail.message}
-            </p>
-          )} */}
         </div>
       </div>
     </div>

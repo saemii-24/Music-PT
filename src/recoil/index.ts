@@ -14,7 +14,10 @@ export const mode = atom<string>({
 
 export const language = atom<string>({
   key: 'nowLanguage',
-  default: 'ko',
+  default:
+    typeof window !== 'undefined'
+      ? localStorage.getItem('language') || 'ko'
+      : 'ko',
 });
 
 export const languageMode = selector({

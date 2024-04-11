@@ -7,6 +7,8 @@ import cn from 'classnames';
 import LikeCount from './LikeCount';
 import LangButton from './LangButton';
 import SK_SearchCard from '@/app/skeleton/SK_SeachCard';
+import {useRecoilValue} from 'recoil';
+import {languageMode} from '@/recoil';
 
 export default function SearchMusicCard({
   music,
@@ -15,6 +17,8 @@ export default function SearchMusicCard({
   music: any;
   status: StatusType;
 }) {
+  const lan = useRecoilValue(languageMode);
+
   const route = useRouter();
   //현재 보고 있는 버전 설정
   const [selectLang, setSelectLang] = useState<LangType>(
@@ -82,19 +86,19 @@ export default function SearchMusicCard({
         </h1>
 
         <div className='mb-1 flex text-base'>
-          <span className='w-[6.5rem] text-black'>가수</span>
+          <span className='w-[6.5rem] text-black'>{lan['music-singer']}</span>
           <span className='text-black'>
             {selectLang === 'ko' ? music?.kosinger : music?.jpsinger}
           </span>
         </div>
         <div className='mb-1 flex text-base'>
-          <span className='w-[6.5rem] text-black'>앨범</span>
+          <span className='w-[6.5rem] text-black'>{lan['music-album']}</span>
           <span className='text-black'>
             {selectLang === 'ko' ? music?.koalbum : music?.jpalbum}
           </span>
         </div>
         <div className='mb-1 flex text-base'>
-          <span className='w-[6.5rem] text-black'>발매년도</span>
+          <span className='w-[6.5rem] text-black'>{lan['music-release']}</span>
           <span className='text-black'>
             {selectLang === 'ko' ? music?.korelease : music?.jprelease}
           </span>

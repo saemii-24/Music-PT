@@ -45,7 +45,7 @@ export default function Button({
       className={cn(
         `${addclass} flex w-full items-center justify-center gap-2 break-keep rounded-md border-2 px-3 py-2 text-sm font-semibold shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`,
         {
-          'border-music-blue text-music-blue hover:border-music-blue hover:bg-music-blue hover:text-white':
+          'border-music-blue text-music-blue hover:border-music-blue hover:bg-music-blue hover:text-[#fff]':
             defaultclass,
         },
       )}>

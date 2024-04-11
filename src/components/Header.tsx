@@ -95,7 +95,7 @@ export default function Header() {
                   signOut();
                 }}
                 className='cursor-pointer text-music-bluegray'>
-                로그아웃
+                {lan['mypage-profile-logout']}
               </li>
               <li
                 onClick={() => {
@@ -125,7 +125,7 @@ export default function Header() {
             </>
           ) : (
             <li className='cursor-pointer text-music-bluegray'>
-              <Link href='/api/auth/signin'>로그인</Link>
+              <Link href='/api/auth/signin'>{lan['mypage-profile-login']}</Link>
             </li>
           )}
 
@@ -145,6 +145,7 @@ export default function Header() {
                       onClick={() => {
                         setNowLanguage('ko');
                         setLanSelectOpen(false);
+                        localStorage.setItem('language', 'ko');
                       }}>
                       한국어
                     </li>
@@ -153,6 +154,7 @@ export default function Header() {
                       onClick={() => {
                         setNowLanguage('jp');
                         setLanSelectOpen(false);
+                        localStorage.setItem('language', 'jp');
                       }}>
                       日本語
                     </li>
@@ -232,6 +234,7 @@ export default function Header() {
                 onClick={() => {
                   setNowLanguage('ko');
                   setLanSelectOpen(false);
+                  localStorage.setItem('language', 'ko');
                 }}>
                 한국어
               </li>
@@ -240,6 +243,7 @@ export default function Header() {
                 onClick={() => {
                   setNowLanguage('jp');
                   setLanSelectOpen(false);
+                  localStorage.setItem('language', 'jp');
                 }}>
                 日本語
               </li>

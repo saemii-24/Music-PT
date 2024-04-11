@@ -11,8 +11,8 @@ import {IoPlayCircleOutline} from 'react-icons/io5';
 import type {SupabaseType} from '@/types/form';
 import {deleteMusic} from '@/utils/form';
 
-import {useRecoilState} from 'recoil';
-import {needRefetch} from '@/recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
+import {languageMode, needRefetch} from '@/recoil';
 
 import cn from 'classnames';
 import Like from './Like';
@@ -37,13 +37,15 @@ export default function MusicProfile({
 
   //렌더링 될 data
   const [selectLang, setSelectLang] = useState<LangType>(
-    music.kolyrics ? 'ko' : 'jp',
+    music?.kolyrics ? 'ko' : 'jp',
   );
+
+  const lan = useRecoilValue(languageMode);
 
   return (
     <section className='dark:bg-music-background'>
       <div className=' container grid grid-cols-4 lg:grid-cols-6 2xl:grid-cols-7 '>
-        <div className='relative col-span-4 aspect-square overflow-hidden rounded-lg transition after:absolute after:left-0 after:top-0  after:z-10 after:size-full after:bg-black after:opacity-0 after:transition after:content-[""] hover:after:opacity-40 lg:col-span-2 lg:row-span-6 lg:mr-20'>
+        <div className='relative col-span-4 aspect-square overflow-hidden rounded-lg transition after:absolute after:left-0 after:top-0  after:z-10 after:size-full after:bg-[#000] after:opacity-0 after:transition after:content-[""] hover:after:opacity-40 lg:col-span-2 lg:row-span-6 lg:mr-20'>
           <div className='absolute right-4 top-4 z-20 ml-auto flex gap-2'>
             <LangButton
               setSelectLang={setSelectLang}
@@ -82,7 +84,7 @@ export default function MusicProfile({
             style={{width: '100%', height: '100%', objectFit: 'cover'}}
           />
         </div>
-        <div className='col-span-4 mb-[0.4rem] mt-5 md:col-span-3'>
+        <div className='col-span-3 mb-[0.4rem] mt-5 sm:col-span-4'>
           <LikeCount music={music} />
         </div>
         <div className='order-first col-span-4 mt-[-2.5rem] flex justify-end lg:order-none lg:col-auto lg:mt-5'>
@@ -93,7 +95,7 @@ export default function MusicProfile({
                 route.push(`/editmusic/${id}/`);
                 setNeedFetch(true);
               }}>
-              수정
+              {lan['music-edit']}
             </p>
             {status === 'authenticated' && (
               <p
@@ -102,7 +104,7 @@ export default function MusicProfile({
                   setNeedFetch(true);
                   await deleteMusic(id, route);
                 }}>
-                삭제
+                {lan['music-delete']}
               </p>
             )}
           </div>
@@ -110,15 +112,18 @@ export default function MusicProfile({
         <div className='col-span-4 mb-4 text-4xl font-bold text-black lg:col-span-4  2xl:col-span-5'>
           {selectLang === 'ko' ? music?.kotitle : music?.jptitle}
         </div>
-        <div className='leading-7 text-black lg:mt-3'>가수</div>
+        <div className='leading-7 text-black lg:mt-3'>
+          {' '}
+          {lan['music-singer']}
+        </div>
         <div className='col-span-3 text-black lg:col-span-3 lg:mt-3 2xl:col-span-4 '>
           {selectLang === 'ko' ? music?.kosinger : music?.jpsinger}
         </div>
-        <div className='leading-7 text-black'>앨범</div>
+        <div className='leading-7 text-black'> {lan['music-album']}</div>
         <div className='col-span-3 text-black lg:col-span-3 2xl:col-span-4 '>
           {selectLang === 'ko' ? music?.koalbum : music?.jpalbum}
         </div>
-        <div className='leading-7 text-black'>발매년도</div>
+        <div className='leading-7 text-black'> {lan['music-release']}</div>
         <div className='col-span-3 text-black lg:col-span-3 2xl:col-span-4 '>
           {selectLang === 'ko' ? music?.korelease : music?.jprelease}
         </div>
@@ -129,12 +134,12 @@ export default function MusicProfile({
               target='_blank'
               className='flex items-center justify-center gap-2 break-keep rounded-md border-2 border-music-orange px-3 py-2 text-sm font-semibold text-music-orange shadow-sm transition hover:bg-music-orange hover:text-[#fff] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
               <IoPlayCircleOutline className='text-lg' />
-              한국어 버전
+              {lan['music-youtube-ko']}
             </Link>
           ) : (
             <div className=' flex items-center justify-center gap-2 break-keep rounded-md bg-music-disable px-3 py-2 text-sm font-semibold text-[#333] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:text-[#575B6C]'>
               <IoPlayCircleOutline className='text-lg' />
-              한국어 버전
+              {lan['music-youtube-ko']}
             </div>
           )}
           {music?.jpyoutube ? (
@@ -142,12 +147,13 @@ export default function MusicProfile({
               href={music?.jpyoutube}
               target='_blank'
               className='flex items-center justify-center gap-2 break-keep rounded-md border-2 border-music-orange px-3 py-2 text-sm font-semibold text-music-orange shadow-sm transition hover:bg-music-orange hover:text-[#333] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-              일본어 버전 <IoPlayCircleOutline />
+              <IoPlayCircleOutline className='text-lg' />
+              {lan['music-youtube-jp']}
             </Link>
           ) : (
             <div className=' flex items-center justify-center gap-2 break-keep rounded-md bg-music-disable px-3 py-2 text-sm font-semibold text-[#333] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:text-[#575B6C]'>
-              <IoPlayCircleOutline />
-              일본어 버전
+              <IoPlayCircleOutline className='text-lg' />
+              {lan['music-youtube-jp']}
             </div>
           )}
         </div>

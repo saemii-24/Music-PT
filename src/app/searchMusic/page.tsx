@@ -1,13 +1,12 @@
 'use client';
 
-import React, {useEffect, useState} from 'react';
-import Pagination from '@/components/Pagination';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {useInfiniteQuery} from '@tanstack/react-query';
 import axios from 'axios';
 
 import type {SelectType} from '@/types/form';
 
-import {FieldValues, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 
 import {useInView} from 'react-intersection-observer';
 
@@ -16,16 +15,19 @@ import SearchMusicCard from '@/components/SearchMusicCard';
 import MusicCard from '@/components/MusicCard';
 import SearchMusicTitle from '@/components/SearchMusicTitle';
 
-import cn from 'classnames';
 import SK_SearchCard from '../skeleton/SK_SeachCard';
 import SK_MusicCard from '../skeleton/SK_MusicCard';
 
+import {languageMode} from '@/recoil';
+import {useRecoilValue} from 'recoil';
+
 export default function SearchMusic() {
+  const lan = useRecoilValue(languageMode);
+
   const {ref, inView} = useInView();
   const [select, setSelect] = useState<SelectType>('all');
-  const [clientSelect, setClientSelect] = useState('제목');
+  const [clientSelect, setClientSelect] = useState(lan['search-rule-all']);
   const [selectOpen, setSelectOpen] = useState<boolean>(false);
-  const [isNull, setIsNull] = useState<boolean>(false);
 
   // const [music, setMusic] = useState<any>();
   const [search, setSearch] = useState<string>('');
@@ -101,7 +103,7 @@ export default function SearchMusic() {
     <main className='flex-1 sm:bg-white dark:bg-music-background'>
       <div className='container py-20'>
         {/* music 목록 */}
-        <SearchMusicTitle />
+        <SearchMusicTitle lan={lan} />
         <div className='mt-10'>
           <SearchForm
             setSearch={setSearch}
@@ -141,7 +143,7 @@ export default function SearchMusic() {
           ) : (
             <div>
               <p className='mt-[40px] flex h-20 items-center justify-center text-music-subtitle'>
-                찾으시는 음악이 없습니다.
+                {lan['search-none']}
               </p>
             </div>
           )

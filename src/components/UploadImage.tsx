@@ -65,7 +65,7 @@ export default function UploadImage({
             <label
               htmlFor='thumbnail'
               className='relative cursor-pointer rounded-md  font-semibold text-music-blue focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500'>
-              <span>앨범 이미지</span>
+              <span>{lan['addmusic-album-image']}</span>
               <input
                 id='thumbnail'
                 {...register(thumbnail_lang, {
@@ -75,7 +75,7 @@ export default function UploadImage({
                 className='sr-only'
               />
             </label>
-            <p className='text-black'>를 업로드해주세요.</p>
+            <p className='text-black'>{lan['addmusic-album-upload']}</p>
           </div>
           <p className='text-xs leading-5 text-music-subtitle '>
             PNG, JPG, WEBP up to 1MB
@@ -92,7 +92,7 @@ export default function UploadImage({
             <label
               htmlFor='thumbnail'
               className='relative cursor-pointer rounded-md bg-white font-semibold text-music-orange focus-within:outline-none focus-within:ring-2 focus-within:ring-music-lightorange focus-within:ring-offset-2 hover:text-music-lightorange'>
-              <span>앨범 이미지</span>
+              <span>{lan['addmusic-album-image']}</span>
               <input
                 id='thumbnail'
                 {...register(thumbnail_lang, {
@@ -102,7 +102,7 @@ export default function UploadImage({
                 className='sr-only'
               />
             </label>
-            <p className='text-black'>를 업로드해주세요.</p>
+            <p className='text-black'>{lan['addmusic-album-upload']}</p>
           </div>
           <p className='text-xs leading-5 text-music-subtitle '>
             PNG, JPG, WEBP up to 1MB
@@ -119,7 +119,7 @@ export default function UploadImage({
             <label
               htmlFor='thumbnail'
               className='relative cursor-pointer rounded-md bg-white font-semibold text-music-blue focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500'>
-              <span>앨범 이미지</span>
+              <span>{lan['addmusic-album-image']}</span>
               <input
                 id='thumbnail'
                 {...register(thumbnail_lang, {
@@ -129,14 +129,14 @@ export default function UploadImage({
                 className='sr-only'
               />
             </label>
-            <p className='text-black'> 가 업로드되었습니다.</p>
+            <p className='text-black'>{lan['addmusic-album-success']}</p>
           </div>
           <p
             className='cursor-pointer text-xs leading-5 text-music-subtitle hover:underline'
             onClick={() => {
               reset();
             }}>
-            업로드 취소하기
+            {lan['addmusic-album-cancle']}
           </p>
         </div>
       )}

@@ -40,10 +40,6 @@ export default function Home() {
     }
   }, [needFetch]);
 
-  // if (status === 'success') {
-  //   return <SK_Home />;
-  // }
-
   if (status === 'pending') {
     return <SK_Home />;
   }
@@ -58,7 +54,6 @@ export default function Home() {
               return <MusicCard key={index} musicData={musicData} />;
             },
           )}
-          {}
         </div>
       </div>
     </main>

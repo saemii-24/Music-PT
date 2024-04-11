@@ -5,6 +5,8 @@ import {SupabaseType} from '@/types/form';
 import axios from 'axios';
 import {useQuery} from '@tanstack/react-query';
 import {toast} from 'react-toastify';
+import {useRecoilValue} from 'recoil';
+import {languageMode} from '@/recoil';
 
 type LikeType = {
   music: SupabaseType;
@@ -12,6 +14,7 @@ type LikeType = {
 
 export default function LikeCount({music}: LikeType) {
   const {data: session} = useSession();
+  const lan = useRecoilValue(languageMode);
 
   const toggleLike = async () => {
     if (session?.user) {
@@ -21,9 +24,9 @@ export default function LikeCount({music}: LikeType) {
         });
         //찜하기 취소하기 로직
         if (data.now === 'add') {
-          toast.success('좋아요 목록에 등록했습니다.');
+          toast.success(lan['toast-music-add']);
         } else {
-          toast.warning('좋아요를 취소하셨습니다.');
+          toast.warning(lan['toast-music-cancle']);
         }
       } catch (err) {
         console.log(err);
@@ -31,7 +34,7 @@ export default function LikeCount({music}: LikeType) {
       likeDataRefetch();
       likeCountRefetch();
     } else {
-      toast.warning('로그인 후 이용해주세요.');
+      toast.warning(lan['toast-music-login']);
     }
   };
 
@@ -42,7 +45,7 @@ export default function LikeCount({music}: LikeType) {
   };
 
   const {data: likeData, refetch: likeDataRefetch} = useQuery({
-    queryKey: ['like', music.id],
+    queryKey: ['like', music?.id],
     queryFn: getLikeData,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
@@ -58,14 +61,12 @@ export default function LikeCount({music}: LikeType) {
   };
 
   const {data: likeCountData, refetch: likeCountRefetch} = useQuery({
-    queryKey: ['likeCount', music.id],
+    queryKey: ['likeCount', music?.id],
     queryFn: likeCount,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
-
-  console.log(likeData, likeCountData);
 
   return (
     <div className='flex items-center gap-2'>

@@ -1,3 +1,4 @@
+import {language, languageMode} from '@/recoil';
 import {SelectType} from '@/types/form';
 import cn from 'classnames';
 import {Dispatch, SetStateAction, useEffect, useState} from 'react';
@@ -8,6 +9,7 @@ import {
 } from 'react-hook-form';
 import {GoTriangleDown} from 'react-icons/go';
 import {IoMdSearch} from 'react-icons/io';
+import {useRecoilValue} from 'recoil';
 
 interface SearchFormProps {
   setSearch: Dispatch<string>;
@@ -32,18 +34,24 @@ export default function SearchForm({
   selectOpen,
   setSelectOpen,
 }: SearchFormProps) {
+  const lan = useRecoilValue(languageMode);
+
   useEffect(() => {
     switch (select) {
       case 'title':
-        setClientSelect('제목');
+        setClientSelect(lan['search-rule-title']);
         break;
       case 'singer':
-        setClientSelect('가수');
+        setClientSelect(lan['search-rule-singer']);
         break;
       default:
-        setClientSelect('모든 음악');
+        setClientSelect(lan['search-rule-all']);
     }
   }, [select]);
+
+  useEffect(() => {
+    setClientSelect(lan['search-rule-all']);
+  }, [lan]);
 
   return (
     <form
@@ -82,7 +90,7 @@ export default function SearchForm({
                 setSelect('all');
                 setSelectOpen(false);
               }}>
-              모든 음악
+              {lan['search-rule-all']}
             </li>
             <li
               className='py-2 text-center text-sm hover:bg-music-lightgray'
@@ -90,7 +98,7 @@ export default function SearchForm({
                 setSelect('title');
                 setSelectOpen(false);
               }}>
-              제목
+              {lan['search-rule-title']}
             </li>
             <li
               className='py-2 text-center  hover:bg-music-lightgray'
@@ -98,7 +106,7 @@ export default function SearchForm({
                 setSelect('singer');
                 setSelectOpen(false);
               }}>
-              가수
+              {lan['search-rule-singer']}
             </li>
           </ul>
         </div>
@@ -109,7 +117,7 @@ export default function SearchForm({
           {...register('search', {required: true})}
           id='search'
           className='placeholder:text-gray-400sm:ml-[0px] ml-[10px] block flex-1 rounded-md py-1.5 text-base text-black dark:bg-white '
-          placeholder='음악 제목을 검색해주세요.'
+          placeholder={lan['search-input-placeholder']}
         />
         <button
           type='submit'
@@ -123,38 +131,38 @@ export default function SearchForm({
           <li
             onClick={() => {
               setSelect('all');
-              setClientSelect('모든 음악');
+              setClientSelect(lan['search-rule-all']);
             }}
             className={cn(
               'cursor-pointer break-keep',
-              clientSelect === '모든 음악' &&
+              clientSelect === (lan['search-rule-all'] as string) &&
                 'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
             )}>
-            모든 음악
+            {lan['search-rule-all']}
           </li>
           <li
             onClick={() => {
               setSelect('title');
-              setClientSelect('제목');
+              setClientSelect(lan['search-rule-title']);
             }}
             className={cn(
               'cursor-pointer break-keep',
-              clientSelect === '제목' &&
+              clientSelect === lan['search-rule-title'] &&
                 'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
             )}>
-            제목
+            {lan['search-rule-title']}
           </li>
           <li
             onClick={() => {
               setSelect('singer');
-              setClientSelect('가수');
+              setClientSelect(lan['search-rule-singer']);
             }}
             className={cn(
               'cursor-pointer break-keep',
-              clientSelect === '가수' &&
+              clientSelect === lan['search-rule-singer'] &&
                 'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
             )}>
-            가수
+            {lan['search-rule-singer']}
           </li>
         </ul>
       </div>
