@@ -81,5 +81,21 @@
   "mypage-profile-status": "상태",
   "mypage-profile-logout": "로그아웃",
   "mypage-like": "좋아요 한 음악",
-  "mypage-like-list": "음악 목록"
+  "mypage-like-list": "음악 목록",
+  "mypage-profile-login": "로그인",
+  "toast-music-add": "좋아요 목록에 등록했습니다.",
+  "toast-music-cancle": "좋아요를 취소하셨습니다.",
+  "toast-music-login": "로그인 후 이용해주세요.",
+  "toast-music-pending": "음악을 등록 중입니다.",
+  "toast-music-success": "음악이 등록되었습니다.",
+  "toast-music-error": "다시 시도해주세요.",
+  "toast-image-error": "이미지 업로드에 실패했습니다.",
+  "toast-lyrics-pending": "가사를 추가하는 중입니다.",
+  "toast-lyrics-success": "가사가 추가 되었습니다",
+  "toast-lyrics-edit": "가사를 수정 중입니다.",
+  "toast-lyrics-edit-success": "가사가 수정 되었습니다.",
+  "toast-translate-pending": "번역을 등록 중입니다.",
+  "toast-translate-success": "번역이 등록 되었습니다.",
+  "toast-music-delete": "음악이 삭제되었습니다.",
+  "toast-music-edit": "음악이 수정 되었습니다."
 }

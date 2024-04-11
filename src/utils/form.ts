@@ -18,7 +18,6 @@ import {LargeNumberLike} from 'crypto';
 
 //addmusic, editmusic 제출
 export const formSubmit = async (data: any, route: AppRouterInstance) => {
-  console.log(data);
   // 로딩 메시지 표시
   const loadingToast = toast.loading('음악을 등록 중입니다.');
 
@@ -320,7 +319,6 @@ export const editMusicForm = async (
     }
   } else {
     //새로 들어온 이미지가 있는 경우
-    console.log('이전 사진 있음, 새로 들어온 이미지 있음');
     const result = await onImageEdit(data);
     if (result) {
       fileUrl_jp = result;

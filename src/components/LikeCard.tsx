@@ -50,9 +50,12 @@ export default function LikeCard() {
         return (
           <div
             key={index}
-            className={cn('flex items-start gap-3 py-4 border-music-darkgray', {
-              'border-b': likeAllData?.likeAll.length - 1 !== index,
-            })}>
+            className={cn(
+              'flex items-start gap-3 py-4 border-music-basicgray',
+              {
+                'border-b': likeAllData?.likeAll.length - 1 !== index,
+              },
+            )}>
             <div className='mt-[0.4rem]'>
               <Like music={item?.music} />
             </div>
@@ -61,12 +64,12 @@ export default function LikeCard() {
               onClick={() => {
                 route.push(`/musicpt/${item?.musicId}`);
               }}>
-              <h2 className='text-base font-medium'>
+              <h2 className='text-base font-medium text-black'>
                 {item?.music.kotitle
                   ? item?.music.kotitle
                   : item?.music.jptitle}
               </h2>
-              <div className='mt-1 text-sm'>
+              <div className='mt-1 text-sm text-black'>
                 {item?.music.kosinger
                   ? item?.music.kosinger
                   : item?.music.jpsinger}

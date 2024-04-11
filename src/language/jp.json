@@ -81,5 +81,21 @@
   "mypage-profile-status": "ステータス",
   "mypage-profile-logout": "ログアウト",
   "mypage-like": "お気に入りの音楽",
-  "mypage-like-list": "音楽リスト"
+  "mypage-like-list": "音楽リスト",
+  "mypage-profile-login": "ログイン",
+  "toast-music-add": "お気に入りに追加しました。",
+  "toast-music-cancle": "お気に入りをキャンセルしました。",
+  "toast-music-login": "ログイン後にご利用ください。",
+  "toast-music-pending": "音楽を登録中です。",
+  "toast-music-success": "音楽が登録されました。",
+  "toast-music-error": "もう一度お試しください。",
+  "toast-image-error": "イメージのアップロードに失敗しました。",
+  "toast-lyrics-pending": "歌詞を追加中です。",
+  "toast-lyrics-success": "歌詞が追加されました。",
+  "toast-lyrics-edit": "歌詞を編集中です。",
+  "toast-lyrics-edit-success": "歌詞が編集されました。",
+  "toast-translate-pending": "翻訳を登録中です。",
+  "toast-translate-success": "翻訳が登録されました。",
+  "toast-music-delete": "音楽が削除されました。",
+  "toast-music-edit": "音楽が編集されました。"
 }
