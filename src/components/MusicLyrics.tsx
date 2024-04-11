@@ -7,6 +7,8 @@ import type {MusicPtProps} from '@/types/form';
 import {useRouter} from 'next/navigation';
 import React, {useEffect, useState} from 'react';
 import MusicLyricsNone from './MusicLyricsNone';
+import {useRecoilValue} from 'recoil';
+import {languageMode} from '@/recoil';
 
 export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
   const route = useRouter();
@@ -14,28 +16,15 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
   let [condition, setCondition] = useState<number>(11);
   let [showTranslate, setShowTranslate] = useState<boolean>(false);
 
-  /*분기
-  (한국어 버전 탭을 클릭한 경우)
-  1-1.한국어 버전 가사가 등록O, 한TO일 번역 등록O => 한국어 가사 수정하기
-  1-2.한국어 버전 가사가 등록O, 한TO일 번역 등록X => 한국어 가사 수정하기
-  1-2.한국어 버전 가사가 등록X, 한TO일 번역 등록X => 등록 가사 없음 / 한국어 가사 추가하기
-  
-  (일본어 버전 탭울 클릭한 경우)
-  2-1.일본어 버전 가사가 등록O, 일TO한 번역 등록O => 일본어 가사 수정하기
-  2-2.일본어 버전 가사가 등록O, 일TO한 번역 등록X => 일본어 가사 수정하기
-  2-2.일본어 버전 가사가 등록X, 일TO한 번역 등록X => 등록 가사 없음 / 일본어 가사 추가하기
-
-  */
-
   //분기에 따라 state를 교체해준다.
   useEffect(() => {
-    if (lyricsVer === '한국어 버전 가사') {
+    if (lyricsVer === 'koVer') {
       if (music?.kolyrics) {
         setCondition(11);
       } else {
         setCondition(12);
       }
-    } else if (lyricsVer === '일본어 버전 가사') {
+    } else if (lyricsVer === 'jpVer') {
       if (music?.jplyrics) {
         setCondition(21);
       } else {
@@ -43,6 +32,8 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
       }
     }
   }, [lyricsVer, music]);
+
+  const lan = useRecoilValue(languageMode);
 
   return (
     <article className='rounded-lg '>
@@ -52,7 +43,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
           <React.Fragment>
             <div className='grid grid-cols-2 gap-4 sm:grid-cols-3'>
               <Button
-                text={'한국어 가사 수정하기'}
+                text={lan['music-edit-korean']}
                 icon='add'
                 onClick={() => {
                   route.push(`/musicpt/${id}/editlyrics-ko`);
@@ -61,7 +52,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
 
               {music?.kotranslate ? (
                 <Button
-                  text={'일본어 번역 수정하기'}
+                  text={lan['music-edit-japanese-translate']}
                   icon='translate'
                   onClick={() => {
                     route.push(`/musicpt/${id}/edittranslate-ko`);
@@ -69,7 +60,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
                 />
               ) : (
                 <Button
-                  text={'일본어 번역 추가하기'}
+                  text={lan['music-add-japanese']}
                   icon='add'
                   onClick={() => {
                     route.push(`/musicpt/${id}/addtranslate-ko`);
@@ -80,13 +71,14 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
 
               {music?.kotranslate === null || music?.kotranslate === '' ? (
                 <Button
-                  text={'일본어 번역 함께 보기'}
+                  text={lan['music-together-japanese']}
                   icon='divide'
-                  addclass='col-span-2 sm:col-span-1 cursor-default'
+                  addclass='col-span-2 sm:col-span-1 cursor-default bg-music-disable border-none text-music-textdisable'
+                  defaultclass={false}
                 />
               ) : (
                 <Button
-                  text={'일본어 번역 함께 보기'}
+                  text={lan['music-together-japanese']}
                   icon='divide'
                   addclass={
                     showTranslate
@@ -105,7 +97,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
                   ?.split('\n')
                   .map((koline: string, index: number) => (
                     <React.Fragment key={index}>
-                      <p className='text-center text-base leading-8 lg:text-lg lg:leading-9'>
+                      <p className='text-center text-base leading-8 text-black lg:text-lg lg:leading-9'>
                         {koline}
                       </p>
                       <p className='mb-4 text-center text-base leading-8 text-music-blue lg:text-lg lg:leading-9'>
@@ -120,7 +112,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
                   ?.split('\n')
                   .map((koline: string, index: number) => (
                     <p
-                      className='text-center text-base leading-8 lg:text-lg lg:leading-9'
+                      className='text-center text-base leading-8 text-black lg:text-lg lg:leading-9'
                       key={index}>
                       {koline}
                     </p>
@@ -139,7 +131,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
           <React.Fragment>
             <div className='grid grid-cols-2 gap-4 sm:grid-cols-3'>
               <Button
-                text={'일본어 가사 수정하기'}
+                text={lan['music-edit-japanese']}
                 icon='add'
                 onClick={() => {
                   route.push(`/musicpt/${id}/editlyrics-jp`);
@@ -148,7 +140,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
 
               {music?.kotranslate ? (
                 <Button
-                  text={'한국어 번역 수정하기'}
+                  text={lan['music-edit-korean-translate']}
                   icon='translate'
                   onClick={() => {
                     route.push(`/musicpt/${id}/edittranslate-jp`);
@@ -156,7 +148,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
                 />
               ) : (
                 <Button
-                  text={'한국어 번역 추가하기'}
+                  text={lan['music-add-korean']}
                   icon='add'
                   onClick={() => {
                     route.push(`/musicpt/${id}/addtranslate-jp`);
@@ -167,13 +159,14 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
 
               {music?.kotranslate === null || music?.kotranslate === '' ? (
                 <Button
-                  text={'한국어 번역 함께 보기'}
+                  text={lan['music-together-korean']}
                   icon='divide'
-                  addclass='col-span-2 sm:col-span-1 cursor-default'
+                  addclass='col-span-2 sm:col-span-1 cursor-default bg-music-disable border-none text-music-textdisable'
+                  defaultclass={false}
                 />
               ) : (
                 <Button
-                  text={'한국어 번역 함께 보기'}
+                  text={lan['music-together-korean']}
                   icon='divide'
                   addclass={
                     showTranslate
@@ -192,7 +185,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
                   ?.split('\n')
                   .map((jpline: string, index: number) => (
                     <React.Fragment key={index}>
-                      <p className='text-center text-base leading-8 lg:text-lg lg:leading-9'>
+                      <p className='text-center text-base leading-8 text-black lg:text-lg lg:leading-9 '>
                         {jpline}
                       </p>
                       <p className='mb-4 text-center text-base leading-8 text-music-blue lg:text-lg lg:leading-9'>
@@ -207,7 +200,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
                   ?.split('\n')
                   .map((jpline: string, index: number) => (
                     <p
-                      className='text-center text-base leading-8 lg:text-lg lg:leading-9'
+                      className='text-center text-base leading-8 text-black lg:text-lg lg:leading-9'
                       key={index}>
                       {jpline}
                     </p>

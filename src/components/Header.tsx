@@ -8,48 +8,65 @@ import {GrLanguage} from 'react-icons/gr';
 import {IoMenu, IoClose} from 'react-icons/io5';
 
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {mode, language, languageMode} from '@/recoil/index';
-import {useState} from 'react';
+import {language, languageMode} from '@/recoil/index';
+import {useEffect, useLayoutEffect, useState} from 'react';
 
 import {signOut, useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
 
+type ThemeType = 'light' | 'dark';
+
 export default function Header() {
+  // theme 값 가져오기
+  const initialTheme: ThemeType =
+    typeof window !== 'undefined'
+      ? (localStorage.getItem('theme') as ThemeType) || 'light'
+      : 'light';
+  const [theme, setTheme] = useState<ThemeType>(initialTheme);
+
+  useLayoutEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('theme', theme);
+      if (theme === 'dark') {
+        const htmlElement = document.querySelector('html') as HTMLElement;
+        htmlElement.classList.add('dark');
+      } else {
+        const htmlElement = document.querySelector('html') as HTMLElement;
+        htmlElement.classList.remove('dark');
+      }
+    }
+  }, [theme]);
+
   //recoil값
-  const [isDarkMode, setIsDarkMode] = useRecoilState(mode);
   const [nowLanguage, setNowLanguage] = useRecoilState(language);
   const lan = useRecoilValue(languageMode);
-
-  const handleToggleMode = (): void => {
-    setIsDarkMode((prevMode) => !prevMode);
-  };
 
   //언어 선택창 열기 닫기
   const [lanSelectOpen, setLanSelectOpen] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   //로그인 상태
-  const {status} = useSession();
+  const {status, data} = useSession();
   const route = useRouter();
 
   return (
-    <header className='relative h-14 w-screen border-b-2 border-gray-100'>
+    <header className='fixed z-[100] h-14 w-screen border-b-2 border-music-basicgray bg-white '>
       <div className='container relative z-10 flex h-14 items-center'>
         <Link
           href='/'
-          className='relative mb-1 cursor-pointer text-2xl font-black tracking-tight'>
+          className='relative mb-1 cursor-pointer text-2xl font-black tracking-tight text-black'>
           Music PT
         </Link>
         {menuOpen ? (
           <IoClose
-            className='ml-auto block text-3xl sm:hidden'
+            className=' ml-auto block cursor-pointer text-3xl text-black sm:hidden'
             onClick={() => {
               setMenuOpen(false);
             }}
           />
         ) : (
           <IoMenu
-            className='ml-auto block text-3xl sm:hidden'
+            className=' ml-auto block cursor-pointer text-3xl text-black sm:hidden'
             onClick={() => {
               setMenuOpen(true);
             }}
@@ -60,14 +77,14 @@ export default function Header() {
           <li className='cursor-pointer'>
             <Link
               href='/addmusic'
-              className=' font-medium hover:text-music-bluegray'>
+              className='font-medium text-black hover:text-music-bluegray'>
               {lan['header-btn-add']}
             </Link>
           </li>
           <li className="text-after:text-sm cursor-pointer after:ml-10 after:mr-3 after:text-music-darkgray after:content-['|']">
             <Link
               href='/searchmusic'
-              className=' font-medium hover:text-music-bluegray'>
+              className='font-medium text-black hover:text-music-bluegray'>
               {lan['header-btn-all']}
             </Link>
           </li>
@@ -78,25 +95,37 @@ export default function Header() {
                   signOut();
                 }}
                 className='cursor-pointer text-music-bluegray'>
-                로그아웃
+                {lan['mypage-profile-logout']}
               </li>
               <li
                 onClick={() => {
                   route.push('/mypage');
                 }}
                 className='cursor-pointer'>
-                <Image
-                  priority={true}
-                  src='/default_profile.png'
-                  alt='프로필 이미지'
-                  width={20}
-                  height={20}
-                />
+                <div className='overflow-hidden rounded-[100rem]'>
+                  {data?.user?.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={data.user?.image}
+                      alt='프로필 이미지'
+                      width={20}
+                      height={20}
+                    />
+                  ) : (
+                    <Image
+                      priority={true}
+                      src='/default_profile.png'
+                      alt='프로필 이미지'
+                      width={20}
+                      height={20}
+                    />
+                  )}
+                </div>
               </li>
             </>
           ) : (
             <li className='cursor-pointer text-music-bluegray'>
-              <Link href='/api/auth/signin'>로그인</Link>
+              <Link href='/api/auth/signin'>{lan['mypage-profile-login']}</Link>
             </li>
           )}
 
@@ -110,21 +139,22 @@ export default function Header() {
               />
               {lanSelectOpen && (
                 <>
-                  {' '}
                   <ul className='absolute bottom-[-90px] right-[-50px] z-10 flex w-[120px] flex-col items-center rounded-lg border-2 border-black bg-white px-5 py-2'>
                     <li
-                      className='cursor-pointer font-medium hover:text-music-bluegray'
+                      className='cursor-pointer font-medium hover:text-music-bluegray dark:text-black'
                       onClick={() => {
                         setNowLanguage('ko');
                         setLanSelectOpen(false);
+                        localStorage.setItem('language', 'ko');
                       }}>
                       한국어
                     </li>
                     <li
-                      className='mt-1 cursor-pointer font-medium hover:text-music-bluegray'
+                      className='mt-1 cursor-pointer font-medium hover:text-music-bluegray dark:text-black'
                       onClick={() => {
                         setNowLanguage('jp');
                         setLanSelectOpen(false);
+                        localStorage.setItem('language', 'jp');
                       }}>
                       日本語
                     </li>
@@ -135,20 +165,30 @@ export default function Header() {
             </li>
           </div>
 
-          <li className='cursor-pointer ' onClick={handleToggleMode}>
-            {isDarkMode ? (
-              <IoMoon className='text-lg text-music-bluegray' />
+          <li className='cursor-pointer'>
+            {theme === 'dark' ? (
+              <IoMoon
+                onClick={() => {
+                  setTheme('light');
+                }}
+                className='text-lg text-music-bluegray'
+              />
             ) : (
-              <FiSun className='text-lg text-music-bluegray' />
+              <FiSun
+                onClick={() => {
+                  setTheme('dark');
+                }}
+                className='text-lg text-music-bluegray'
+              />
             )}
           </li>
         </ul>
       </div>
       {/* 모바일 사이즈 */}
       {menuOpen && (
-        <ul className='container absolute inset-0 z-0 block h-screen w-screen bg-white pt-20 sm:hidden '>
+        <ul className='container inset-0 z-0 block h-screen w-screen bg-white pt-[30%] text-black sm:hidden '>
           <li>
-            <div className=' mb-4 text-2xl font-extrabold text-music-bluegray'>
+            <div className=' mb-4 text-2xl font-extrabold text-music-blue'>
               Page
             </div>
             <ul>
@@ -158,7 +198,7 @@ export default function Header() {
                     setMenuOpen(false);
                   }}
                   href='/addmusic'
-                  className=' text-lg font-medium hover:text-music-bluegray'>
+                  className=' text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-add']}
                 </Link>
               </li>
@@ -168,7 +208,7 @@ export default function Header() {
                     setMenuOpen(false);
                   }}
                   href='/searchmusic'
-                  className=' text-lg font-medium hover:text-music-bluegray'>
+                  className=' text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-all']}
                 </Link>
               </li>
@@ -178,14 +218,14 @@ export default function Header() {
                     setMenuOpen(false);
                   }}
                   href='/mypage'
-                  className=' text-lg font-medium hover:text-music-bluegray'>
+                  className=' text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-mypage']}
                 </Link>
               </li>
             </ul>
           </li>
           <li>
-            <div className=' mb-4 mt-8 text-2xl  font-extrabold text-music-bluegray'>
+            <div className=' mb-4 mt-8 text-2xl  font-extrabold text-music-blue'>
               Language
             </div>
             <ul>
@@ -194,6 +234,7 @@ export default function Header() {
                 onClick={() => {
                   setNowLanguage('ko');
                   setLanSelectOpen(false);
+                  localStorage.setItem('language', 'ko');
                 }}>
                 한국어
               </li>
@@ -202,19 +243,30 @@ export default function Header() {
                 onClick={() => {
                   setNowLanguage('jp');
                   setLanSelectOpen(false);
+                  localStorage.setItem('language', 'jp');
                 }}>
                 日本語
               </li>
             </ul>
           </li>
-          <li onClick={handleToggleMode}>
-            <div className=' mb-4 mt-8 text-2xl  font-extrabold text-music-bluegray'>
+          <li>
+            <div className=' mb-4 mt-8 text-2xl  font-extrabold text-music-blue'>
               Screen mode
             </div>
-            {isDarkMode ? (
-              <IoMoon className='text-lg' />
+            {theme === 'dark' ? (
+              <IoMoon
+                onClick={() => {
+                  setTheme('light');
+                }}
+                className='text-lg'
+              />
             ) : (
-              <FiSun className='text-lg' />
+              <FiSun
+                onClick={() => {
+                  setTheme('dark');
+                }}
+                className='text-lg'
+              />
             )}
           </li>
         </ul>

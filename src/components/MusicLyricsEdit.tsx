@@ -45,13 +45,13 @@ export default function MusicLyricsEdit({lang, id}: PropsType) {
     <div className='flex flex-col items-center gap-20 '>
       <section className='container mt-[10rem]'>
         <div className='relative'>
-          <p className='mb-1 flex items-center gap-1'>
+          <p className='mb-1 flex items-center gap-1 text-black'>
             <FiEdit /> 가사를 수정합니다.
           </p>
-          <h2 className='text-4xl font-extrabold'>
+          <h2 className='text-4xl font-extrabold text-black'>
             {lang === 'ko' ? '한국어' : '일본어'} 버전 가사 수정
           </h2>
-          <div className='mt-10 flex gap-6 border-b'></div>
+          <div className='mt-10 flex gap-6 border-b-2 border-music-basicgray'></div>
         </div>
       </section>
       <section className='container '>

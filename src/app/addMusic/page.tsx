@@ -11,7 +11,7 @@ export default function AddMusic() {
     description: lan['addmusic-description'],
   };
   return (
-    <main className=' flex-1 '>
+    <main className=' flex-1 dark:bg-music-background'>
       <div className='container py-20'>
         <Title titleInfo={titleInfo} />
         <AddMusicForm />

@@ -7,6 +7,7 @@ import MusicProfile from '@/components/MusicProfile';
 import {atom, useRecoilState} from 'recoil';
 import {musicAtom, needRefetch} from '@/recoil';
 import {useEffect} from 'react';
+import SK_MusicProfile from '@/app/skeleton/SK_MusicProfile';
 
 interface ParamsChildrenProps {
   params: {id: string};
@@ -50,18 +51,19 @@ export default function MusicPtLayout({
   }, [needFetch]);
 
   if (status === 'pending') {
-    return <span>Loading...</span>;
-  }
-
-  if (status === 'error') {
-    return <span>에러가 발생</span>;
+    return (
+      <div className='flex-1 py-20 dark:bg-music-background'>
+        <SK_MusicProfile />;
+      </div>
+    );
   }
 
   return (
-    <div className='flex-1'>
-      <main className='my-20'></main>
-      <MusicProfile music={music?.post} id={id} />
-      <div>{children}</div>;
+    <div className='flex-1 dark:bg-music-background'>
+      <main className='my-20'>
+        <MusicProfile music={music?.post} id={id} />
+        <div>{children}</div>
+      </main>
     </div>
   );
 }

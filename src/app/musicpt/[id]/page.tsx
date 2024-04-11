@@ -5,13 +5,12 @@ import MusicDetail from '@/components/MusicDetail';
 import MusicLyrics from '@/components/MusicLyrics';
 import {musicAtom} from '@/recoil';
 import type {LyricsVerType, ParamsProps} from '@/types/form';
-import {useQuery} from '@tanstack/react-query';
-import axios from 'axios';
+
 import {useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
 export default function MusicPt({params}: ParamsProps) {
-  const [lyricsVer, setLyricsVer] = useState<LyricsVerType>('한국어 버전 가사');
+  const [lyricsVer, setLyricsVer] = useState<LyricsVerType>('koVer');
 
   const id = params.id;
 
@@ -26,7 +25,7 @@ export default function MusicPt({params}: ParamsProps) {
         lyricsVer={lyricsVer}
       />
 
-      {lyricsVer === '일본어 버전 가사' || lyricsVer === '한국어 버전 가사' ? (
+      {lyricsVer === 'jpVer' || lyricsVer === 'koVer' ? (
         <MusicLyrics id={id} lyricsVer={lyricsVer} music={music} />
       ) : (
         <MusicCompare id={id} lyricsVer={lyricsVer} music={music} />

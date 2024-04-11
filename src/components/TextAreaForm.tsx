@@ -26,7 +26,7 @@ export default function TextAreaForm({
         {...register('lyrics', {required: true})}
         rows={length <= 5 ? 5 : length}
         defaultValue={defaultlyrics ? defaultlyrics : ''}
-        className='rounded-lg border-2 border-black py-10 text-center  text-base leading-8 focus-visible:outline-indigo-600 lg:text-lg lg:leading-9'></textarea>
+        className='block h-[20rem] w-full rounded-md border-0 bg-white py-1.5 text-center leading-10 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6 xl:text-lg dark:ring-music-basicgray'></textarea>
       {/* 제출 */}
       <div className='mt-6 flex items-center justify-center gap-x-6'>
         <button
@@ -34,12 +34,12 @@ export default function TextAreaForm({
             route.push(`/musicpt/${id}`);
           }}
           type='button'
-          className='text-sm font-semibold leading-6 text-gray-900'>
+          className='text-sm font-semibold leading-6 text-black '>
           취소하기
         </button>
         <button
           type='submit'
-          className='rounded-md bg-music-blue px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
+          className='rounded-md bg-music-blue px-3 py-2 text-sm font-semibold text-[#fff] shadow-sm transition hover:bg-music-lightblue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
           {buttontext ? buttontext : '수정완료'}
         </button>
       </div>

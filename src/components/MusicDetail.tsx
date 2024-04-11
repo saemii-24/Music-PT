@@ -1,70 +1,99 @@
 'use client';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {MdOutlineUpdate} from 'react-icons/md';
 
 import cn from 'classnames';
 
 import type {MusicPtPropsOmitId} from '@/types/form';
+import {languageMode} from '@/recoil';
+import {useRecoilValue} from 'recoil';
 
 export default function MusicDetail({
   music,
   lyricsVer,
   setLyricsVer,
 }: MusicPtPropsOmitId) {
+  const lan = useRecoilValue(languageMode);
+
+  const [thisTitle, setThisTitle] = useState<string>(lan['music-title-korean']);
+
+  const setTitle = (lyricsVer: string) => {
+    switch (lyricsVer) {
+      case 'koVer':
+        setThisTitle(lan['music-title-korean']);
+        break;
+      case 'jpVer':
+        setThisTitle(lan['music-title-japanese']);
+        break;
+      case 'koCompare':
+        setThisTitle(lan['music-title-jpver-korean']);
+        break;
+      case 'jpCompare':
+        setThisTitle(lan['music-title-kover-japanese']);
+        break;
+      default:
+        setThisTitle(lan['music-title-korean']);
+    }
+  };
+
+  useEffect(() => {
+    setTitle(lyricsVer);
+  }, [lyricsVer]);
+
   return (
     <section className='container mt-0 sm:mt-[10rem]'>
       <article className='relative '>
-        <p className='mb-1 flex items-center gap-1'>
+        <p className='mb-1 flex items-center gap-1 text-black'>
           <MdOutlineUpdate /> {music?.updatedAt?.slice(0, 10)}
         </p>
-        <h2 className='text-4xl font-extrabold'>{lyricsVer}</h2>
+        <h2 className='text-4xl font-extrabold text-black'>{thisTitle}</h2>
 
-        <div className='mt-10 flex gap-6 border-b'>
+        <div className='mt-10 flex gap-6 border-b-2 border-music-basicgray'>
           <ul className='flex gap-8'>
             <li
               onClick={() => {
-                setLyricsVer('한국어 버전 가사');
+                setLyricsVer('koVer');
               }}
               className={cn(
-                'cursor-pointer break-keep',
-                lyricsVer === '한국어 버전 가사' &&
-                  'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
+                'text-center sm:text-left dark:text-black cursor-pointer break-keep',
+                lyricsVer === 'koVer' &&
+                  'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue',
               )}>
-              한국어 버전
+              {lan['music-tab-korean']}
             </li>
             <li
               onClick={() => {
-                setLyricsVer('일본어 버전 가사');
+                setLyricsVer('jpVer');
               }}
               className={cn(
-                'cursor-pointer break-keep',
-                lyricsVer === '일본어 버전 가사' &&
-                  'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
+                'text-center sm:text-left dark:text-black cursor-pointer break-keep',
+                lyricsVer === 'jpVer' &&
+                  'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue',
               )}>
-              일본어 버전
+              {lan['music-tab-japanese']}
             </li>
             <li
               onClick={() => {
-                setLyricsVer('한국어 비교하기');
+                setLyricsVer('koCompare');
               }}
               className={cn(
-                'cursor-pointer break-keep',
-                lyricsVer === '한국어 비교하기' &&
-                  'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
+                'text-center sm:text-left dark:text-black cursor-pointer break-keep',
+                lyricsVer === 'koCompare' &&
+                  'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue',
               )}>
-              한국어 비교하기
+              {lan['music-tab-korean-compare']}
             </li>
             <li
               onClick={() => {
-                setLyricsVer('일본어 비교하기');
+                setLyricsVer('jpCompare');
               }}
               className={cn(
-                'cursor-pointer break-keep',
-                lyricsVer === '일본어 비교하기' &&
-                  'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
+                'text-center sm:text-left dark:text-black cursor-pointer break-keep',
+                lyricsVer === 'jpCompare' &&
+                  'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue',
               )}>
-              일본어 비교하기
+              {lan['music-tab-japanese-compare']}
             </li>
           </ul>
         </div>

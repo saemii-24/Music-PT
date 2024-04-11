@@ -37,6 +37,7 @@ export type SupabaseType = {
   kotitle: string | null;
   kotranslate: string | null;
   koyoutube: string | null;
+  count: number | null;
 };
 
 export interface ParamsProps {
@@ -64,11 +65,7 @@ export type MusicPtPropsOmitId = {
   music: Partial<SupabaseType> | null;
 };
 
-export type LyricsVerType =
-  | '한국어 버전 가사'
-  | '일본어 버전 가사'
-  | '한국어 비교하기'
-  | '일본어 비교하기';
+export type LyricsVerType = 'koVer' | 'jpVer' | 'koCompare' | 'jpCompare';
 
 export type UploadImagePropsType = {
   watch: UseFormWatch<FormValues>;
@@ -83,3 +80,7 @@ export interface UserInterfaceType {
   email?: string;
   image?: string;
 }
+
+export type LangType = 'ko' | 'jp';
+
+export type StatusType = 'error' | 'success' | 'pending';
