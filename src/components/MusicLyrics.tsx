@@ -18,13 +18,13 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
 
   //분기에 따라 state를 교체해준다.
   useEffect(() => {
-    if (lyricsVer === '한국어 버전 가사') {
+    if (lyricsVer === 'koVer') {
       if (music?.kolyrics) {
         setCondition(11);
       } else {
         setCondition(12);
       }
-    } else if (lyricsVer === '일본어 버전 가사') {
+    } else if (lyricsVer === 'jpVer') {
       if (music?.jplyrics) {
         setCondition(21);
       } else {

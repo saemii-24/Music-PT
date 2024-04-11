@@ -58,5 +58,10 @@
   "music-tab-korean": "韓国語ver",
   "music-tab-japanese": "日本語ver",
   "music-tab-korean-compare": "韓国語比較",
-  "music-tab-japanese-compare": "日本語比較"
+  "music-tab-japanese-compare": "日本語比較",
+  "music-title-korean": "韓国語verの歌詞",
+  "music-title-japanese": "日本語verの歌詞",
+  "music-title-jpver-korean": "日本語verの韓国語翻訳歌詞",
+  "music-title-kover-japanese": "韓国語verの日本語翻訳歌詞",
+  "music-lyrics-none": "登録された歌詞がありません。"
 }

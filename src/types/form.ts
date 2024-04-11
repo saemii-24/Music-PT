@@ -65,11 +65,7 @@ export type MusicPtPropsOmitId = {
   music: Partial<SupabaseType> | null;
 };
 
-export type LyricsVerType =
-  | '한국어 버전 가사'
-  | '일본어 버전 가사'
-  | '한국어 비교하기'
-  | '일본어 비교하기';
+export type LyricsVerType = 'koVer' | 'jpVer' | 'koCompare' | 'jpCompare';
 
 export type UploadImagePropsType = {
   watch: UseFormWatch<FormValues>;

@@ -58,5 +58,10 @@
   "music-tab-korean": "한국어 버전",
   "music-tab-japanese": "일본어 버전",
   "music-tab-korean-compare": "한국어 비교하기",
-  "music-tab-japanese-compare": "일본어 비교하기"
+  "music-tab-japanese-compare": "일본어 비교하기",
+  "music-title-korean": "한국어 버전 가사",
+  "music-title-japanese": "일본어 버전 가사",
+  "music-title-jpver-korean": "일본어 버전의 한국어 번역 가사",
+  "music-title-kover-japanese": "한국어 버전의 일본어 번역 가사",
+  "music-lyrics-none": "등록 된 가사가 없습니다."
 }
