@@ -3,7 +3,7 @@ import {useState} from 'react';
 import cn from 'classnames';
 
 import {useForm} from 'react-hook-form';
-import type {FormValues, SupabaseType} from '@/types/form';
+import type {FormValues, LanguageType, SupabaseType} from '@/types/form';
 
 import {editMusicForm} from '@/utils/form';
 import {useRouter} from 'next/navigation';
@@ -12,8 +12,8 @@ import SubmitButton from './SubmitButton';
 import MusicFormKo from './MusicFormKo';
 import MusicFormJp from './MusicFormJp';
 
-import {needRefetch} from '@/recoil';
-import {useRecoilState} from 'recoil';
+import {languageMode, needRefetch} from '@/recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 
 type UploadVerType = 'ko' | 'jp';
 
@@ -25,6 +25,7 @@ export default function EditMusicForm({
   music: Partial<SupabaseType>;
 }) {
   const route = useRouter();
+  const lan: LanguageType = useRecoilValue(languageMode);
 
   //recoil
   const [needFetch, setNeedFetch] = useRecoilState(needRefetch);
@@ -58,7 +59,7 @@ export default function EditMusicForm({
   return (
     <form
       onSubmit={handleSubmit((data) =>
-        editMusicForm(id, data, route, music, setNeedFetch),
+        editMusicForm(id, data, route, music, setNeedFetch, lan),
       )}>
       {/* 업로드 음악 버전 선택 */}
       <div>

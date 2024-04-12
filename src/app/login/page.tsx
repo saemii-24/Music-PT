@@ -6,10 +6,14 @@ import Image from 'next/image';
 import {signIn, useSession} from 'next-auth/react';
 import {useEffect} from 'react';
 import {useRouter} from 'next/navigation';
+import {LanguageType} from '@/types/form';
+import {languageMode} from '@/recoil';
+import {useRecoilValue} from 'recoil';
 
 export default function Login() {
   const {status} = useSession();
   const route = useRouter();
+  const lan: LanguageType = useRecoilValue(languageMode);
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -24,13 +28,14 @@ export default function Login() {
       <div className='container flex flex-col items-center justify-center  py-20'>
         <div className=' flex flex-col items-center justify-center border-gray-900/10'>
           <h1 className='flex flex-col items-center justify-center gap-3 text-center text-4xl font-extrabold leading-tight text-black'>
-            언어를 즐겁게,
-            <br /> Music PT 입니다.
+            {lan['login-title-one']}
+            <br />
+            {lan['login-title-two']}
           </h1>
           <div className='relative'>
             <div className='absolute left-1/2 top-[55%] z-0 w-[20rem] -translate-x-1/2 translate-y-1/2 border border-gray-400 dark:border-[#cccccc]'></div>
             <p className='dark:[#cccccc] relative mt-2 bg-white px-4 leading-6 text-gray-400 dark:bg-music-background dark:text-[#cccccc]'>
-              SNS 계정으로 간편 로그인하기
+              {lan['login-description']}
             </p>
           </div>
         </div>
@@ -40,7 +45,7 @@ export default function Login() {
             type='button'
             className='relative flex  h-12 items-center justify-center rounded-md border-2 bg-[#fff]'>
             <FcGoogle className='absolute left-6 text-xl text-white' />
-            <span>구글로 시작하기</span>
+            <span>{lan['login-google']}</span>
           </button>
           <button
             onClick={() => signIn('kakao', {callbackUrl: '/'})}
@@ -57,14 +62,14 @@ export default function Login() {
                 style={{width: '100%', height: '100%', objectFit: 'cover'}}
               />
             </div>
-            <span className='text-[#191919]'>카카오로 시작하기</span>
+            <span className='text-[#191919]'>{lan['login-kakao']}</span>
           </button>
           <button
             onClick={() => signIn('naver', {callbackUrl: '/'})}
             type='button'
             className='relative flex  h-12 items-center justify-center rounded-md bg-[#03c75a]'>
             <SiNaver className='absolute left-6 text-[#fff]' />
-            <span className='text-[#fff]'>네이버로 시작하기</span>
+            <span className='text-[#fff]'>{lan['login-naver']}</span>
           </button>
         </div>
       </div>

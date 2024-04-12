@@ -54,7 +54,7 @@ export default function UploadImage({
   }, [watch(thumbnail_lang)]);
 
   return (
-    <div className='a mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 bg-white px-6 py-10 dark:border-gray-600'>
+    <div className='mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 bg-white px-6 py-10 dark:border-gray-600'>
       {checkImage === 'none' && (
         <div className='text-center'>
           <HiPhoto
