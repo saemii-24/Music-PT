@@ -1,4 +1,19 @@
 /** @type {import('next').NextConfig} */
+
+export async function headers() {
+  return [
+    {
+      source: '/:path*',
+      headers: [
+        {
+          key: 'Content-Security-Policy',
+          value: 'upgrade-insecure-requests',
+        },
+      ],
+    },
+  ];
+}
+
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
