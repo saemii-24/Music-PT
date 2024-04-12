@@ -9,7 +9,7 @@ import {IoMenu, IoClose} from 'react-icons/io5';
 
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {language, languageMode} from '@/recoil/index';
-import {useEffect, useLayoutEffect, useState} from 'react';
+import {useLayoutEffect, useState} from 'react';
 
 import {signOut, useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
@@ -52,11 +52,13 @@ export default function Header() {
   return (
     <header className='fixed z-[100] h-14 w-screen border-b-2 border-music-basicgray bg-white '>
       <div className='container relative z-10 flex h-14 items-center'>
-        <Link
-          href='/'
+        <div
+          onClick={() => {
+            route.push('/');
+          }}
           className='relative mb-1 cursor-pointer text-2xl font-black tracking-tight text-black'>
           Music PT
-        </Link>
+        </div>
         {menuOpen ? (
           <IoClose
             className=' ml-auto block cursor-pointer text-3xl text-black sm:hidden'
@@ -75,18 +77,22 @@ export default function Header() {
 
         <ul className='ml-auto hidden h-10 items-center gap-7 sm:flex'>
           <li className='cursor-pointer'>
-            <Link
-              href='/addmusic'
+            <div
+              onClick={() => {
+                route.push('/addmusic');
+              }}
               className='font-medium text-black hover:text-music-bluegray'>
               {lan['header-btn-add']}
-            </Link>
+            </div>
           </li>
-          <li className="text-after:text-sm cursor-pointer after:ml-10 after:mr-3 after:text-music-darkgray after:content-['|']">
-            <Link
-              href='/searchmusic'
+          <li className="text-after:text-sm flex cursor-pointer after:ml-10 after:mr-3 after:text-music-darkgray after:content-['|']">
+            <div
+              onClick={() => {
+                route.push('/searchmusic');
+              }}
               className='font-medium text-black hover:text-music-bluegray'>
               {lan['header-btn-all']}
-            </Link>
+            </div>
           </li>
           {status === 'authenticated' ? (
             <>
@@ -125,7 +131,12 @@ export default function Header() {
             </>
           ) : (
             <li className='cursor-pointer text-music-bluegray'>
-              <Link href='/api/auth/signin'>{lan['mypage-profile-login']}</Link>
+              <div
+                onClick={() => {
+                  route.push('/api/auth/signin');
+                }}>
+                {lan['mypage-profile-login']}
+              </div>
             </li>
           )}
 
@@ -193,34 +204,34 @@ export default function Header() {
             </div>
             <ul>
               <li className='mb-2 block'>
-                <Link
+                <div
                   onClick={() => {
                     setMenuOpen(false);
+                    route.push('/addmusic');
                   }}
-                  href='/addmusic'
                   className=' text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-add']}
-                </Link>
+                </div>
               </li>
               <li className='mb-2 block'>
-                <Link
+                <div
                   onClick={() => {
                     setMenuOpen(false);
+                    route.push('/searchmusic');
                   }}
-                  href='/searchmusic'
                   className=' text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-all']}
-                </Link>
+                </div>
               </li>
               <li className='mb-2 block'>
-                <Link
+                <div
                   onClick={() => {
                     setMenuOpen(false);
+                    route.push('/mypage');
                   }}
-                  href='/mypage'
                   className=' text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-mypage']}
-                </Link>
+                </div>
               </li>
             </ul>
           </li>
