@@ -188,6 +188,9 @@ export interface LanguageType {
   'error-release': string;
   'error-lyrics': string;
   'error-required': string;
+  'none-lyrics-title': string;
+  'none-lyrics-description': string;
+  'none-lyrics-button': string;
   'toast-music-add': string;
   'toast-music-cancle': string;
   'toast-music-login': string;

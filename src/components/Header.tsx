@@ -209,7 +209,7 @@ export default function Header() {
                     setMenuOpen(false);
                     route.push('/addmusic');
                   }}
-                  className=' text-lg font-medium hover:text-music-blue'>
+                  className='cursor-pointer text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-add']}
                 </div>
               </li>
@@ -219,7 +219,7 @@ export default function Header() {
                     setMenuOpen(false);
                     route.push('/searchmusic');
                   }}
-                  className=' text-lg font-medium hover:text-music-blue'>
+                  className='cursor-pointer text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-all']}
                 </div>
               </li>
@@ -229,7 +229,7 @@ export default function Header() {
                     setMenuOpen(false);
                     route.push('/mypage');
                   }}
-                  className=' text-lg font-medium hover:text-music-blue'>
+                  className='cursor-pointer text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-mypage']}
                 </div>
               </li>
@@ -269,14 +269,14 @@ export default function Header() {
                 onClick={() => {
                   setTheme('light');
                 }}
-                className='text-lg'
+                className='cursor-pointer text-lg'
               />
             ) : (
               <FiSun
                 onClick={() => {
                   setTheme('dark');
                 }}
-                className='text-lg'
+                className='cursor-pointer text-lg'
               />
             )}
           </li>
