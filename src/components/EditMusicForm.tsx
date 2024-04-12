@@ -73,7 +73,7 @@ export default function EditMusicForm({
               uploadVer === 'ko' &&
                 'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
             )}>
-            한국어 버전
+            {lan['language-button-korean']}
           </li>
           <li
             onClick={() => {
@@ -84,7 +84,7 @@ export default function EditMusicForm({
               uploadVer === 'jp' &&
                 'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
             )}>
-            일본어 버전
+            {lan['language-button-japanese']}
           </li>
         </ul>
       </div>

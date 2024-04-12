@@ -176,6 +176,18 @@ export interface LanguageType {
   'login-google': string;
   'login-kakao': string;
   'login-naver': string;
+  'music-add-lyrics-korean': string;
+  'music-add-lyrics-japanese': string;
+  'music-add-lyrics': string;
+  'music-add-lyrics-title': string;
+  'music-add-lyrics-description': string;
+  'music-add-lyrics-button': string;
+  'error-title': string;
+  'error-singer': string;
+  'error-album': string;
+  'error-release': string;
+  'error-lyrics': string;
+  'error-required': string;
   'toast-music-add': string;
   'toast-music-cancle': string;
   'toast-music-login': string;

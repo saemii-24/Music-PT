@@ -1,13 +1,16 @@
+'use client';
 import {
   FieldErrors,
   UseFormRegister,
   UseFormReset,
   UseFormWatch,
 } from 'react-hook-form';
-import {FormValues} from '@/types/form';
+import {FormValues, LanguageType} from '@/types/form';
 import MusicFormMusic from './MusicFormMusic';
 import MusicFormAlbum from './MusicFormAlbum';
 import MusicFormLyrics from './MusicFormLyrics';
+import {languageMode} from '@/recoil';
+import {useRecoilValue} from 'recoil';
 
 interface MusicFormLyricsProps {
   register: UseFormRegister<FormValues>;
@@ -22,12 +25,19 @@ export default function MusicFormKo({
   watch,
   reset,
 }: MusicFormLyricsProps) {
+  const lan: LanguageType = useRecoilValue(languageMode);
   return (
     <>
       {/* 음악 정보 업로드 */}
-      <MusicFormMusic register={register} errors={errors} uploadVer={'ko'} />
+      <MusicFormMusic
+        lan={lan}
+        register={register}
+        errors={errors}
+        uploadVer={'ko'}
+      />
       {/* 앨범 정보 업로드 */}
       <MusicFormAlbum
+      lan={lan}
         register={register}
         errors={errors}
         watch={watch}

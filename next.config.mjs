@@ -3,8 +3,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  removeConsole: {
-    exclude: ['error', 'warn'],
+  compiler: {
+    removeConsole: {
+      exclude: ['error', 'warn'],
+    },
   },
   images: {
     remotePatterns: [
