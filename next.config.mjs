@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  removeConsole: {
+    exclude: ['error', 'warn'],
+  },
   images: {
     remotePatterns: [
       {

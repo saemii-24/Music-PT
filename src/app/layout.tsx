@@ -6,11 +6,19 @@ import Footer from '@/components/Footer';
 import {NextProvider} from '@/NextProvider';
 
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
+import dynamic from 'next/dynamic';
 
 export const metadata: Metadata = {
   title: 'Music-PT',
   description: '좋아하는 음악으로 공부해요!',
 };
+
+const HeaderComponent = dynamic(() => import('../components/Header'), {
+  ssr: false,
+});
+const FooterComponent = dynamic(() => import('../components/Footer'), {
+  ssr: false,
+});
 
 export default function RootLayout({
   children,
@@ -24,10 +32,10 @@ export default function RootLayout({
         <NextProvider>
           <ReactQueryDevtools />
           <div className='flex min-h-screen flex-col overflow-x-hidden'>
-            <Header />
+            <HeaderComponent />
             <div className='h-14'></div>
             {children}
-            <Footer />
+            <FooterComponent />
           </div>
         </NextProvider>
       </body>

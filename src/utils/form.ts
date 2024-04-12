@@ -5,21 +5,24 @@ import {toast} from 'react-toastify';
 
 import type {
   FormValues,
-  SelectType,
+  LanguageType,
   SupabaseType,
   TextAreaValue,
 } from '@/types/form';
 import type {AppRouterInstance} from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import {SetterOrUpdater} from 'recoil';
 import {FieldValues} from 'react-hook-form';
-import {LargeNumberLike} from 'crypto';
 
 //각 페이지의 폼 제출시 사용되는 함수입니다.
 
 //addmusic, editmusic 제출
-export const formSubmit = async (data: any, route: AppRouterInstance) => {
+export const formSubmit = async (
+  data: any,
+  route: AppRouterInstance,
+  lan: LanguageType,
+) => {
   // 로딩 메시지 표시
-  const loadingToast = toast.loading('음악을 등록 중입니다.');
+  const loadingToast = toast.loading(lan['toast-music-pending']);
 
   /*만약 일본어 버전을 클릭하지 않았을 경우, react-hook-form에서 해당 값을 
   인식하지 못하므로, 기본값을 지정한다.*/
@@ -34,22 +37,22 @@ export const formSubmit = async (data: any, route: AppRouterInstance) => {
   }
 
   try {
-    const res = await onSubmit(data);
+    const res = await onSubmit(data, lan);
     const obj: any = Object.values(res)[1];
 
     //업로드 완료시 로딩메세지 닫고, 페이지 이동
     toast.dismiss(loadingToast);
     route.push('/musicpt/' + obj.id);
-    toast.success('음악이 등록 되었습니다.');
+    toast.success(lan['toast-music-success']);
   } catch (err) {
     toast.dismiss(loadingToast);
     console.error('업로드 오류:', err);
-    toast.error('다시 시도해주세요.');
+    toast.error(lan['toast-music-error']);
   }
 };
 
 //addmusic, editmusic에서 supabase storage thumbnail 업로드
-export const onSubmit = async (data: FormValues) => {
+export const onSubmit = async (data: FormValues, lan: LanguageType) => {
   //일본어 버전의 경우 기본값을 지정해주어야 한다.
 
   const supabase = createClient();
@@ -72,7 +75,7 @@ export const onSubmit = async (data: FormValues) => {
     //만약 업로드가 실패한 경우
     if (error) {
       console.error('이미지 업로드 실패:', error.message);
-      toast.error('이미지 업로드에 실패했습니다.');
+      toast.error(lan['toast-image-error']);
     } else {
       const {data: uploadUrl} = await supabase.storage
         .from('thumbnail')
@@ -90,7 +93,7 @@ export const onSubmit = async (data: FormValues) => {
     //만약 업로드가 실패한 경우
     if (error) {
       console.error('이미지 업로드 실패:', error.message);
-      toast.error('이미지 업로드에 실패했습니다.');
+      toast.error(lan['toast-image-error']);
     } else {
       const {data: uploadUrl} = await supabase.storage
         .from('thumbnail')
@@ -121,7 +124,7 @@ export const onSubmit = async (data: FormValues) => {
     return response.data;
   } catch (err) {
     console.error('에러가 발생했습니다: ', err);
-    toast.error('다시 시도해주세요.');
+    toast.error(lan['toast-music-error']);
   }
 };
 
@@ -155,8 +158,9 @@ export const onSubmitAddLyrics = async (
   lang: string,
   route: AppRouterInstance,
   setNeedFetch: SetterOrUpdater<boolean>,
+  lan: LanguageType,
 ) => {
-  const loadingToast = toast.loading('가사를 추가하는 중입니다.');
+  const loadingToast = toast.loading(lan['toast-lyrics-pending']);
 
   try {
     const {data} = await axios.put(`/api/editlyrics/${id}`, {
@@ -167,11 +171,11 @@ export const onSubmitAddLyrics = async (
     route.push('/musicpt/' + id);
     //내용이 수정되었으므로, data를 refetch 해야한다.
     setNeedFetch(true);
-    toast.success('가사가 추가 되었습니다.');
+    toast.success(lan['toast-lyrics-success']);
   } catch (err) {
     toast.dismiss(loadingToast);
     console.error(err);
-    toast.error('다시 시도해주세요.');
+    toast.error(lan['toast-music-error']);
   }
 };
 
@@ -182,8 +186,9 @@ export const onSubmitEditLyrics = async (
   lang: string,
   route: AppRouterInstance,
   setNeedFetch: SetterOrUpdater<boolean>,
+  lan: LanguageType,
 ) => {
-  const loadingToast = toast.loading('가사를 수정 중입니다.');
+  const loadingToast = toast.loading(lan['toast-lyrics-edit']);
 
   try {
     const {data} = await axios.put(`/api/editlyrics/${id}`, {
@@ -194,12 +199,12 @@ export const onSubmitEditLyrics = async (
     route.push('/musicpt/' + id);
     //내용이 수정되었으므로, data를 refetch 해야한다.
     setNeedFetch(true);
-    toast.success('가사가 수정 되었습니다.');
+    toast.success(lan['toast-lyrics-edit-success']);
     return data;
   } catch (err) {
     toast.dismiss(loadingToast);
     console.error(err);
-    toast.error('다시 시도해주세요.');
+    toast.error(lan['toast-music-error']);
   }
   return;
 };
@@ -211,6 +216,7 @@ export const onSumbitAddTranslate = async (
   lang: string,
   route: AppRouterInstance,
   setNeedFetch: SetterOrUpdater<boolean>,
+  lan: LanguageType,
 ) => {
   //객체형태로 들어오는 폼 데이터들을 줄바꿈된 하나의 string 값으로 바꾼다.
   let lyricsData = Object.values(formdata)
@@ -224,7 +230,7 @@ export const onSumbitAddTranslate = async (
     .reduce((prev: string, cul: string) => prev + cul, '');
 
   // 로딩 메시지 표시
-  const loadingToast = toast.loading('번역을 등록 중입니다.');
+  const loadingToast = toast.loading(lan['toast-translate-pending']);
 
   try {
     const {data} = await axios.put(`/api/addtranslate/${id}`, {
@@ -235,13 +241,13 @@ export const onSumbitAddTranslate = async (
 
     //업로드 완료시 로딩메세지 닫고, 페이지 이동
     route.push('/musicpt/' + id);
-    toast.success('번역이 등록 되었습니다.');
+    toast.success(lan['toast-translate-success']);
     //내용이 수정되었으므로, data를 refetch 해야한다.
     setNeedFetch(true);
     return data;
   } catch (err) {
     console.error('업로드 오류:', err);
-    toast.error('다시 시도해주세요.');
+    toast.error(lan['toast-music-error']);
   }
 };
 
@@ -256,14 +262,18 @@ export function makeDefaultObj(arr: string[]) {
 }
 
 //muiscpt/[id] 음악을 삭제
-export const deleteMusic = async (id: string, route: AppRouterInstance) => {
+export const deleteMusic = async (
+  id: string,
+  route: AppRouterInstance,
+  lan: LanguageType,
+) => {
   try {
     await axios.delete(`/api/music/${id}`);
     route.push('/');
-    toast.success('음악이 삭제되었습니다');
+    toast.success(lan['toast-music-delete']);
   } catch (err) {
     console.error('업로드 오류:', err);
-    toast.error('다시 시도해주세요.');
+    toast.error(lan['toast-music-error']);
   }
 };
 
@@ -274,9 +284,10 @@ export const editMusicForm = async (
   route: AppRouterInstance,
   music: Partial<SupabaseType>,
   setNeedFetch: SetterOrUpdater<boolean>,
+  lan: LanguageType,
 ) => {
   // 로딩 메시지 표시
-  const loadingToast = toast.loading('음악을 등록 중입니다.');
+  const loadingToast = toast.loading(lan['toast-music-pending']);
 
   /*새로 입력된 폼에 이미지가 입력되지 않았다면 
   오류가 발생하므로 기본 값을 설정한다 */
@@ -306,7 +317,7 @@ export const editMusicForm = async (
     }
   } else {
     //새로 들어온 이미지가 있는 경우
-    const result = await onImageEdit(data);
+    const result = await onImageEdit(data, lan);
     if (result) {
       fileUrl_ko = result;
     }
@@ -319,7 +330,7 @@ export const editMusicForm = async (
     }
   } else {
     //새로 들어온 이미지가 있는 경우
-    const result = await onImageEdit(data);
+    const result = await onImageEdit(data, lan);
     if (result) {
       fileUrl_jp = result;
     }
@@ -347,16 +358,16 @@ export const editMusicForm = async (
     toast.dismiss(loadingToast);
     setNeedFetch(true);
     route.push('/musicpt/' + id);
-    toast.success('음악이 수정 되었습니다.');
+    toast.success(lan['toast-music-edit']);
   } catch (err) {
     toast.dismiss(loadingToast);
     console.error('업로드 오류:', err);
-    toast.error('다시 시도해주세요.');
+    toast.error(lan['toast-music-error']);
   }
 };
 
 //addmusic, editmusic에서 supabase storage thumbnail 업로드
-export const onImageEdit = async (data: FormValues) => {
+export const onImageEdit = async (data: FormValues, lan: LanguageType) => {
   //일본어 버전의 경우 기본값을 지정해주어야 한다.
   const supabase = createClient();
 
@@ -378,7 +389,7 @@ export const onImageEdit = async (data: FormValues) => {
     //만약 업로드가 실패한 경우
     if (error) {
       console.error('이미지 업로드 실패:', error.message);
-      toast.error('이미지 업로드에 실패했습니다.');
+      toast.error(lan['toast-image-error']);
       return false;
     } else {
       const {data: uploadUrl} = await supabase.storage
@@ -398,7 +409,7 @@ export const onImageEdit = async (data: FormValues) => {
     //만약 업로드가 실패한 경우
     if (error) {
       console.error('이미지 업로드 실패:', error.message);
-      toast.error('이미지 업로드에 실패했습니다.');
+      toast.error(lan['toast-image-error']);
       return false;
     } else {
       const {data: uploadUrl} = await supabase.storage

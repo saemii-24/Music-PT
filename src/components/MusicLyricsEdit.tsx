@@ -1,5 +1,5 @@
 'use client';
-import {musicAtom, needRefetch} from '@/recoil';
+import {languageMode, musicAtom, needRefetch} from '@/recoil';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {useRouter} from 'next/navigation';
 import {useEffect, useState} from 'react';
@@ -7,12 +7,13 @@ import {FiEdit} from 'react-icons/fi';
 import {useForm} from 'react-hook-form';
 
 import {onSubmitEditLyrics} from '@/utils/form';
-import type {PropsType, TextAreaValue} from '@/types/form';
+import type {LanguageType, PropsType, TextAreaValue} from '@/types/form';
 
 import TextAreaForm from './TextAreaForm';
 
 export default function MusicLyricsEdit({lang, id}: PropsType) {
   const route = useRouter();
+  const lan: LanguageType = useRecoilValue(languageMode);
 
   //recoil
   const music = useRecoilValue(musicAtom);
@@ -58,7 +59,7 @@ export default function MusicLyricsEdit({lang, id}: PropsType) {
         <form
           className='flex flex-col'
           onSubmit={handleSubmit((data) =>
-            onSubmitEditLyrics(data, id, lang, route, setNeedFetch),
+            onSubmitEditLyrics(data, id, lang, route, setNeedFetch, lan),
           )}>
           <TextAreaForm
             register={register}

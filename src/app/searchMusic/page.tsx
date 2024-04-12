@@ -84,21 +84,6 @@ export default function SearchMusic() {
     formState: {errors},
   } = useForm();
 
-  //사이즈 별로 렌더링하기 위해, 사이즈 값을 얻는다.
-  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const windowResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', windowResize);
-
-    return () => {
-      window.removeEventListener('resize', windowResize);
-    };
-  }, []);
-
   return (
     <main className='flex-1 sm:bg-white dark:bg-music-background'>
       <div className='container py-20'>
@@ -125,18 +110,12 @@ export default function SearchMusic() {
               .map((music, index) => {
                 return (
                   <div key={index}>
-                    {windowWidth <= 640 ? (
+                    <div className='block sm:hidden'>
                       <MusicCard musicData={music} />
-                    ) : (
-                      <div
-                        className={
-                          index !== 0
-                            ? 'hidden border-t border-music-basicgray sm:block'
-                            : ''
-                        }>
-                        <SearchMusicCard music={music} status={status} />
-                      </div>
-                    )}
+                    </div>
+                    <div className='hidden border-t border-music-basicgray sm:block'>
+                      <SearchMusicCard music={music} status={status} />
+                    </div>
                   </div>
                 );
               })
@@ -147,11 +126,16 @@ export default function SearchMusic() {
               </p>
             </div>
           )
-        ) : // 로딩중
-        windowWidth <= 640 ? (
-          <SK_MusicCard />
         ) : (
-          <SK_SearchCard />
+          // 로딩중
+          <>
+            <div className='hidden sm:block'>
+              <SK_SearchCard />
+            </div>
+            <div className='block sm:hidden'>
+              <SK_SearchCard />
+            </div>
+          </>
         )}
         {data && <div className='h-4 w-full ' ref={ref}></div>}
       </div>
