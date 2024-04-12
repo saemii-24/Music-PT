@@ -1,5 +1,4 @@
 export default function SearchMusicTitle({lan}: {lan: any}) {
-  console.log(lan);
   return (
     <div className='border-gray-900/10 text-black'>
       <h1 className='flex flex-col gap-3 text-4xl font-extrabold text-black'>

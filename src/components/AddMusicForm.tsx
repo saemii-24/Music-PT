@@ -4,7 +4,7 @@ import {languageMode} from '@/recoil';
 import {useRecoilValue} from 'recoil';
 
 import {useForm} from 'react-hook-form';
-import type {FormValues} from '@/types/form';
+import type {FormValues, LanguageType} from '@/types/form';
 
 import {formSubmit} from '@/utils/form';
 import {useRouter} from 'next/navigation';
@@ -19,7 +19,7 @@ type UploadVerType = 'ko' | 'jp';
 
 export default function AddMusicForm() {
   //recoil 언어모드
-  const lan = useRecoilValue(languageMode);
+  const lan: LanguageType = useRecoilValue(languageMode);
   console.log(lan);
   const route = useRouter();
 
@@ -35,7 +35,7 @@ export default function AddMusicForm() {
   const [uploadVer, setUploadVer] = useState<UploadVerType>('ko');
 
   return (
-    <form onSubmit={handleSubmit((data) => formSubmit(data, route))}>
+    <form onSubmit={handleSubmit((data) => formSubmit(data, route, lan))}>
       {/* 업로드 음악 버전 선택 */}
       <div>
         <ul className='flex gap-8  border-b-2 border-music-basicgray'>

@@ -8,7 +8,7 @@ import {useSession} from 'next-auth/react';
 
 import {IoPlayCircleOutline} from 'react-icons/io5';
 
-import type {SupabaseType} from '@/types/form';
+import type {LanguageType, SupabaseType} from '@/types/form';
 import {deleteMusic} from '@/utils/form';
 
 import {useRecoilState, useRecoilValue} from 'recoil';
@@ -29,6 +29,7 @@ export default function MusicProfile({
   id: string;
 }) {
   const route = useRouter();
+  const lan: LanguageType = useRecoilValue(languageMode);
 
   //recoil
   const [needFetch, setNeedFetch] = useRecoilState(needRefetch);
@@ -39,8 +40,6 @@ export default function MusicProfile({
   const [selectLang, setSelectLang] = useState<LangType>(
     music?.kolyrics ? 'ko' : 'jp',
   );
-
-  const lan = useRecoilValue(languageMode);
 
   return (
     <section className='dark:bg-music-background'>
@@ -102,7 +101,7 @@ export default function MusicProfile({
                 className='cursor-pointer text-black before:mr-2 before:content-["|"]'
                 onClick={async () => {
                   setNeedFetch(true);
-                  await deleteMusic(id, route);
+                  await deleteMusic(id, route, lan);
                 }}>
                 {lan['music-delete']}
               </p>

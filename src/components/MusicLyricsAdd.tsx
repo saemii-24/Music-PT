@@ -3,8 +3,8 @@
 import {useRouter} from 'next/navigation';
 import {useEffect, useState} from 'react';
 
-import {needRefetch} from '@/recoil';
-import {useRecoilState} from 'recoil';
+import {languageMode, needRefetch} from '@/recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 
 import {MdOutlineUpdate} from 'react-icons/md';
 import {IoAlertCircle} from 'react-icons/io5';
@@ -12,11 +12,13 @@ import {IoAlertCircle} from 'react-icons/io5';
 import {useForm} from 'react-hook-form';
 
 import TextAreaForm from './TextAreaForm';
-import type {PropsType, TextAreaValue} from '@/types/form';
+import type {LanguageType, PropsType, TextAreaValue} from '@/types/form';
 import {onSubmitAddLyrics} from '@/utils/form';
 
 export default function MusicLyricsAdd({lang, id}: PropsType) {
   const route = useRouter();
+
+  const lan: LanguageType = useRecoilValue(languageMode);
 
   //recoil
   const [needFetch, setNeedFetch] = useRecoilState(needRefetch);
@@ -63,7 +65,7 @@ export default function MusicLyricsAdd({lang, id}: PropsType) {
         <form
           className='flex flex-col'
           onSubmit={handleSubmit((data) =>
-            onSubmitAddLyrics(data, id, lang, route, setNeedFetch),
+            onSubmitAddLyrics(data, id, lang, route, setNeedFetch, lan),
           )}>
           <TextAreaForm
             register={register}

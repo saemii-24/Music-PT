@@ -8,11 +8,13 @@ import {BsTranslate} from 'react-icons/bs';
 import {useForm} from 'react-hook-form';
 import {useRouter} from 'next/navigation';
 
-import type {PropsType} from '@/types/form';
+import type {LanguageType, PropsType} from '@/types/form';
 import {onSumbitAddTranslate} from '@/utils/form';
 
 export default function MusicTranslateAdd({id, lang}: PropsType) {
   const route = useRouter();
+
+  const lan: LanguageType = useRecoilValue(languageMode);
 
   //recoil
   const music = useRecoilValue(musicAtom);
@@ -24,8 +26,6 @@ export default function MusicTranslateAdd({id, lang}: PropsType) {
     handleSubmit,
     formState: {errors},
   } = useForm();
-
-  const lan = useRecoilValue(languageMode);
 
   return (
     <div className='flex flex-col items-center gap-20 '>
@@ -50,7 +50,7 @@ export default function MusicTranslateAdd({id, lang}: PropsType) {
         <form
           className='flex flex-col'
           onSubmit={handleSubmit((data) =>
-            onSumbitAddTranslate(data, id, lang, route, setNeedFetch),
+            onSumbitAddTranslate(data, id, lang, route, setNeedFetch, lan),
           )}>
           {lang === 'ko'
             ? music?.kolyrics

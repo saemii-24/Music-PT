@@ -2,7 +2,7 @@ import {PrismaClient} from '@prisma/client';
 import {NextResponse} from 'next/server';
 import {getServerSession} from 'next-auth';
 import {main} from '../music/route';
-import {authOptions} from '../auth/[...nextauth]/route';
+import {authOptions} from '../../../utils/authOptions';
 
 const prisma = new PrismaClient();
 
