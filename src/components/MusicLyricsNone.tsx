@@ -1,20 +1,24 @@
 import {useRouter} from 'next/navigation';
 import Button from './Button';
+import {LanguageType} from '@/types/form';
+import {languageMode} from '@/recoil';
+import {useRecoilValue} from 'recoil';
 
 export default function MusicLyricsNone({push}: {push: string}) {
   const route = useRouter();
+  const lan: LanguageType = useRecoilValue(languageMode);
   return (
     <div className='grid place-items-center px-6'>
       <div className='text-center'>
         <p className='mt-4 text-3xl font-bold  tracking-tight text-black'>
-          등록 된 가사가 없습니다.
+          {lan['none-lyrics-title']}
         </p>
         <p className='mt-2 text-base leading-8 text-music-subtitle lg:text-lg lg:leading-9'>
-          가사를 추가하고 번역을 시작해보세요.
+          {lan['none-lyrics-description']}
         </p>
         <div className='mt-10 flex items-center justify-center gap-x-6'>
           <Button
-            text={'가사 등록하기'}
+            text={lan['none-lyrics-button']}
             icon='add'
             addclass='w-fit '
             onClick={() => {

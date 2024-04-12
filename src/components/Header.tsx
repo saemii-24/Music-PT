@@ -79,7 +79,7 @@ export default function Header() {
           <li className='cursor-pointer'>
             <div
               onClick={() => {
-                route.push('/addmusic');
+                route.push('/addMusic');
               }}
               className='font-medium text-black hover:text-music-bluegray'>
               {lan['header-btn-add']}
@@ -88,7 +88,7 @@ export default function Header() {
           <li className="text-after:text-sm flex cursor-pointer after:ml-10 after:mr-3 after:text-music-darkgray after:content-['|']">
             <div
               onClick={() => {
-                route.push('/searchmusic');
+                route.push('/searchMusic');
               }}
               className='font-medium text-black hover:text-music-bluegray'>
               {lan['header-btn-all']}
@@ -105,7 +105,7 @@ export default function Header() {
               </li>
               <li
                 onClick={() => {
-                  route.push('/mypage');
+                  route.push('/myage');
                 }}
                 className='cursor-pointer'>
                 <div className='overflow-hidden rounded-[100rem]'>
@@ -207,9 +207,9 @@ export default function Header() {
                 <div
                   onClick={() => {
                     setMenuOpen(false);
-                    route.push('/addmusic');
+                    route.push('/addMusic');
                   }}
-                  className=' text-lg font-medium hover:text-music-blue'>
+                  className='cursor-pointer text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-add']}
                 </div>
               </li>
@@ -217,9 +217,9 @@ export default function Header() {
                 <div
                   onClick={() => {
                     setMenuOpen(false);
-                    route.push('/searchmusic');
+                    route.push('/searchMusic');
                   }}
-                  className=' text-lg font-medium hover:text-music-blue'>
+                  className='cursor-pointer text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-all']}
                 </div>
               </li>
@@ -227,9 +227,9 @@ export default function Header() {
                 <div
                   onClick={() => {
                     setMenuOpen(false);
-                    route.push('/mypage');
+                    route.push('/myage');
                   }}
-                  className=' text-lg font-medium hover:text-music-blue'>
+                  className='cursor-pointer text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-mypage']}
                 </div>
               </li>
@@ -269,14 +269,14 @@ export default function Header() {
                 onClick={() => {
                   setTheme('light');
                 }}
-                className='text-lg'
+                className='cursor-pointer text-lg'
               />
             ) : (
               <FiSun
                 onClick={() => {
                   setTheme('dark');
                 }}
-                className='text-lg'
+                className='cursor-pointer text-lg'
               />
             )}
           </li>
