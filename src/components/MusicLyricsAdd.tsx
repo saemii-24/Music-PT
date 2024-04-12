@@ -49,18 +49,24 @@ export default function MusicLyricsAdd({lang, id}: PropsType) {
       <section className='container mt-[10rem]'>
         <div className='relative'>
           <p className='mb-1 flex items-center gap-1'>
-            <MdOutlineUpdate /> {lang === 'ko' ? '한국어' : '일본어'} 가사를
-            추가합니다.
+            <MdOutlineUpdate />{' '}
+            {lang === 'ko'
+              ? lan['music-add-lyrics-korean']
+              : lan['music-add-lyrics-japanese']}
+            {lan['music-add-lyrics']}
           </p>
           <h2 className='text-4xl font-extrabold'>
-            {lang === 'ko' ? '한국어' : '일본어'} 가사 추가
+            {lang === 'ko'
+              ? lan['music-add-lyrics-korean']
+              : lan['music-add-lyrics-japanese']}
+            {lan['music-add-lyrics-title']}
           </h2>
           <div className='mt-10 flex gap-6 border-b'></div>
         </div>
       </section>
       <section className='container flex flex-col gap-3'>
         <p className='flex items-center justify-center gap-1 text-music-orange'>
-          <IoAlertCircle />한 문장씩 줄바꿈하며 입력해주세요.
+          <IoAlertCircle /> {lan['music-add-lyrics-description']}
         </p>
         <form
           className='flex flex-col'
@@ -72,7 +78,7 @@ export default function MusicLyricsAdd({lang, id}: PropsType) {
             defaultlyrics={''}
             route={route}
             id={id}
-            buttontext={'작성완료'}
+            buttontext={lan['music-add-lyrics-button']}
             length={length}
           />
         </form>

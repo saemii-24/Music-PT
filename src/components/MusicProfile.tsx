@@ -15,7 +15,6 @@ import {useRecoilState, useRecoilValue} from 'recoil';
 import {languageMode, needRefetch} from '@/recoil';
 
 import cn from 'classnames';
-import Like from './Like';
 import LikeCount from './LikeCount';
 import LangButton from './LangButton';
 

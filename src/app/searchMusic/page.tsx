@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useInfiniteQuery} from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -16,7 +16,6 @@ import MusicCard from '@/components/MusicCard';
 import SearchMusicTitle from '@/components/SearchMusicTitle';
 
 import SK_SearchCard from '../skeleton/SK_SeachCard';
-import SK_MusicCard from '../skeleton/SK_MusicCard';
 
 import {languageMode} from '@/recoil';
 import {useRecoilValue} from 'recoil';
