@@ -1,16 +1,16 @@
 import UploadImage from './UploadImage';
 import Error from './Error';
 
-import {languageMode} from '@/recoil';
-import {useRecoilValue} from 'recoil';
-
 import {
   FieldErrors,
   UseFormRegister,
   UseFormReset,
   UseFormWatch,
 } from 'react-hook-form';
-import {FormValues} from '@/types/form';
+import {FormValues, LanguageType} from '@/types/form';
+
+import {useRecoilValue} from 'recoil';
+import {languageMode} from '@/recoil';
 
 interface MusicFormLyricsProps {
   register: UseFormRegister<FormValues>;
@@ -27,8 +27,7 @@ export default function MusicFormAlbum({
   reset,
   uploadVer,
 }: MusicFormLyricsProps) {
-  //recoil 언어모드
-  const lan = useRecoilValue(languageMode);
+  const lan: LanguageType = useRecoilValue(languageMode);
 
   //uploadVer에 따라서 register값 변경
   const album_lang: 'album_ko' | 'album_jp' = `album_${uploadVer}` as
@@ -66,7 +65,7 @@ export default function MusicFormAlbum({
               />
               <Error
                 errors={uploadVer === 'ko' ? errors.album_ko : errors.album_jp}
-                errorTitle={'앨범명은'}
+                errorTitle={lan['error-album']}
               />
             </div>
           </div>
@@ -82,13 +81,13 @@ export default function MusicFormAlbum({
                 {...register(release_lang, {required: true})}
                 id='release'
                 autoComplete='family-name'
-                className='block w-[100%] rounded-md border-0 bg-white py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6 dark:ring-music-basicgray'
+                className='block w-[100%] rounded-md border-0 bg-white py-1.5 text-black  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6 dark:ring-music-basicgray'
               />
               <Error
                 errors={
                   uploadVer === 'ko' ? errors.release_ko : errors.release_jp
                 }
-                errorTitle={'발매년도는'}
+                errorTitle={lan['error-release']}
               />
             </div>
           </div>

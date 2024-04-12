@@ -1,9 +1,9 @@
-import {languageMode} from '@/recoil';
-import {useRecoilValue} from 'recoil';
-
 import Error from './Error';
 import {FieldErrors, UseFormRegister} from 'react-hook-form';
-import {FormValues} from '@/types/form';
+import {FormValues, LanguageType} from '@/types/form';
+
+import {useRecoilValue} from 'recoil';
+import {languageMode} from '@/recoil';
 
 interface MusicFormLyricsProps {
   register: UseFormRegister<FormValues>;
@@ -16,8 +16,7 @@ export default function MusicFormMusic({
   errors,
   uploadVer,
 }: MusicFormLyricsProps) {
-  //recoil 언어모드
-  const lan = useRecoilValue(languageMode);
+  const lan: LanguageType = useRecoilValue(languageMode);
 
   //uploadVer에 따라서 register값 변경
   const title_lang: 'title_ko' | 'title_jp' = `title_${uploadVer}` as
@@ -58,7 +57,7 @@ export default function MusicFormMusic({
               />
               <Error
                 errors={uploadVer === 'ko' ? errors.title_ko : errors.title_jp}
-                errorTitle={'제목은'}
+                errorTitle={lan['error-title']}
               />
             </div>
           </div>
@@ -79,7 +78,7 @@ export default function MusicFormMusic({
                 errors={
                   uploadVer === 'ko' ? errors.singer_ko : errors.singer_jp
                 }
-                errorTitle={'가수는'}
+                errorTitle={lan['error-singer']}
               />
             </div>
           </div>

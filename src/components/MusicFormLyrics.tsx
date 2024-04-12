@@ -51,7 +51,7 @@ export default function MusicFormLyrics({
             />
             <Error
               errors={uploadVer === 'ko' ? errors.lyrics_ko : errors.lyrics_jp}
-              errorTitle={'가사는'}
+              errorTitle={lan['error-lyrics']}
             />
           </div>
         </div>
