@@ -84,9 +84,6 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
           <div className='relative ml-auto '>
             <LangButton
               setSelectLang={setSelectLang}
-              selectLang={selectLang}
-              kosinger={kosinger}
-              jpsinger={jpsinger}
               kolyrics={kolyrics}
               jplyrics={jplyrics}
             />

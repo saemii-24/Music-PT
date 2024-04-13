@@ -47,9 +47,6 @@ export default function MusicProfile({
           <div className='absolute right-4 top-4 z-20 ml-auto flex gap-2'>
             <LangButton
               setSelectLang={setSelectLang}
-              selectLang={selectLang}
-              kosinger={music?.kosinger}
-              jpsinger={music?.jpsinger}
               kolyrics={music?.kolyrics}
               jplyrics={music?.jplyrics}
             />
@@ -144,7 +141,7 @@ export default function MusicProfile({
             <Link
               href={music?.jpyoutube}
               target='_blank'
-              className='flex items-center justify-center gap-2 break-keep rounded-md border-2 border-music-orange px-3 py-2 text-sm font-semibold text-music-orange shadow-sm transition hover:bg-music-orange hover:text-[#333] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
+              className='flex items-center justify-center gap-2 break-keep rounded-md border-2 border-music-orange px-3 py-2 text-sm font-semibold text-music-orange shadow-sm transition hover:bg-music-orange hover:text-[#fff] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
               <IoPlayCircleOutline className='text-lg' />
               {lan['music-youtube-jp']}
             </Link>
