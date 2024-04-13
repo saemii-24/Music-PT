@@ -3,18 +3,12 @@ import {Dispatch, SetStateAction} from 'react';
 
 interface LangButtonType {
   setSelectLang: Dispatch<SetStateAction<LangType>>;
-  selectLang: LangType;
-  kosinger: string | null;
-  jpsinger: string | null;
   kolyrics: string | null;
   jplyrics: string | null;
 }
 
 export default function LangButton({
   setSelectLang,
-  selectLang,
-  kosinger,
-  jpsinger,
   kolyrics,
   jplyrics,
 }: LangButtonType) {

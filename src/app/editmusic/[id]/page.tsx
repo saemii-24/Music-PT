@@ -35,21 +35,13 @@ export default function EditMusic({
     refetchOnReconnect: false,
   });
 
-  if (status === 'pending') {
-    return <span>Loading...</span>;
-  }
-
-  if (status === 'error') {
-    return <span>에러가 발생</span>;
-  }
-
   const titleInfo = {
     title: '음악 수정하기',
     description: '기존에 등록한 음악 내용을 수정합니다.',
   };
 
   return (
-    <main className=' flex-1 '>
+    <main className=' flex-1 dark:bg-music-background'>
       <div className='container py-20'>
         <Title titleInfo={titleInfo} />
         <EditMusicForm id={id} music={music?.post} />

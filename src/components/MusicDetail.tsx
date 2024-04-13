@@ -6,7 +6,7 @@ import {MdOutlineUpdate} from 'react-icons/md';
 import cn from 'classnames';
 
 import type {MusicPtPropsOmitId} from '@/types/form';
-import {languageMode} from '@/recoil';
+import {language, languageMode} from '@/recoil';
 import {useRecoilValue} from 'recoil';
 
 export default function MusicDetail({
@@ -15,6 +15,7 @@ export default function MusicDetail({
   setLyricsVer,
 }: MusicPtPropsOmitId) {
   const lan = useRecoilValue(languageMode);
+  const nowLanguage = useRecoilValue(language);
 
   const [thisTitle, setThisTitle] = useState<string>(lan['music-title-korean']);
 
@@ -50,15 +51,17 @@ export default function MusicDetail({
         <h2 className='text-4xl font-extrabold text-black'>{thisTitle}</h2>
 
         <div className='mt-10 flex gap-6 border-b-2 border-music-basicgray'>
-          <ul className='flex gap-8'>
+          <ul
+            className={`flex  ${nowLanguage === 'ko' ? 'gap-8' : 'gap-3 sm:gap-8'}`}>
             <li
               onClick={() => {
                 setLyricsVer('koVer');
               }}
               className={cn(
-                'text-center sm:text-left dark:text-black cursor-pointer break-keep',
-                lyricsVer === 'koVer' &&
-                  'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue',
+                'text-center sm:text-left dark:text-black cursor-pointer',
+                lyricsVer === 'koVer'
+                  ? 'break-keep border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue'
+                  : 'break-all',
               )}>
               {lan['music-tab-korean']}
             </li>
@@ -68,8 +71,9 @@ export default function MusicDetail({
               }}
               className={cn(
                 'text-center sm:text-left dark:text-black cursor-pointer break-keep',
-                lyricsVer === 'jpVer' &&
-                  'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue',
+                lyricsVer === 'jpVer'
+                  ? 'break-keep border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue'
+                  : 'break-all',
               )}>
               {lan['music-tab-japanese']}
             </li>
@@ -79,8 +83,9 @@ export default function MusicDetail({
               }}
               className={cn(
                 'text-center sm:text-left dark:text-black cursor-pointer break-keep',
-                lyricsVer === 'koCompare' &&
-                  'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue',
+                lyricsVer === 'koCompare'
+                  ? 'break-keep border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue'
+                  : 'break-all',
               )}>
               {lan['music-tab-korean-compare']}
             </li>
@@ -90,8 +95,9 @@ export default function MusicDetail({
               }}
               className={cn(
                 'text-center sm:text-left dark:text-black cursor-pointer break-keep',
-                lyricsVer === 'jpCompare' &&
-                  'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue',
+                lyricsVer === 'jpCompare'
+                  ? 'break-keep border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue'
+                  : 'break-all',
               )}>
               {lan['music-tab-japanese-compare']}
             </li>

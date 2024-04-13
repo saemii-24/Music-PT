@@ -63,13 +63,13 @@ export default function EditMusicForm({
       )}>
       {/* 업로드 음악 버전 선택 */}
       <div>
-        <ul className='flex gap-8 border-b'>
+        <ul className='flex gap-8 border-b border-music-basicgray'>
           <li
             onClick={() => {
               setUploadVer('ko');
             }}
             className={cn(
-              'cursor-pointer break-keep',
+              'text-black cursor-pointer break-keep',
               uploadVer === 'ko' &&
                 'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
             )}>
@@ -80,7 +80,7 @@ export default function EditMusicForm({
               setUploadVer('jp');
             }}
             className={cn(
-              'cursor-pointer break-keep',
+              'text-black cursor-pointer break-keep',
               uploadVer === 'jp' &&
                 'border-b-2 border-music-blue pb-5 font-bold text-music-blue',
             )}>

@@ -9,7 +9,7 @@ import {IoMenu, IoClose} from 'react-icons/io5';
 
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {language, languageMode} from '@/recoil/index';
-import {useLayoutEffect, useState} from 'react';
+import {useEffect, useLayoutEffect, useState} from 'react';
 
 import {signOut, useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
@@ -24,7 +24,7 @@ export default function Header() {
       : 'light';
   const [theme, setTheme] = useState<ThemeType>(initialTheme);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('theme', theme);
       if (theme === 'dark') {
@@ -105,7 +105,7 @@ export default function Header() {
               </li>
               <li
                 onClick={() => {
-                  route.push('/myage');
+                  route.push('/myPage');
                 }}
                 className='cursor-pointer'>
                 <div className='overflow-hidden rounded-[100rem]'>
@@ -227,7 +227,7 @@ export default function Header() {
                 <div
                   onClick={() => {
                     setMenuOpen(false);
-                    route.push('/myage');
+                    route.push('/myPage');
                   }}
                   className='cursor-pointer text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-mypage']}

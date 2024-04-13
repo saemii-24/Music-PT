@@ -67,9 +67,6 @@ export default function SearchMusicCard({
       <div className='absolute right-0 top-12 flex gap-2'>
         <LangButton
           setSelectLang={setSelectLang}
-          selectLang={selectLang}
-          kosinger={music?.kosinger}
-          jpsinger={music?.jpsinger}
           kolyrics={music?.kolyrics}
           jplyrics={music?.jplyrics}
         />

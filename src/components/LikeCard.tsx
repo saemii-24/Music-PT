@@ -1,11 +1,14 @@
 'use client';
-import {SupabaseType} from '@/types/form';
+import {LangType, SupabaseType} from '@/types/form';
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 import Like from './Like';
 import cn from 'classnames';
 import SK_Load from '@/app/skeleton/SK_Load';
 import {useRouter} from 'next/navigation';
+import LangButton from './LangButton';
+import {useState} from 'react';
+import LikeCardOne from './LikeCardOne';
 
 type LikeAllDataType = {
   createdAt: Date;
@@ -51,30 +54,12 @@ export default function LikeCard() {
           <div
             key={index}
             className={cn(
-              'flex items-start gap-3 py-4 border-music-basicgray',
+              'w-full flex items-start gap-3 py-4 border-music-basicgray',
               {
                 'border-b': likeAllData?.likeAll.length - 1 !== index,
               },
             )}>
-            <div className='mt-[0.4rem]'>
-              <Like music={item?.music} />
-            </div>
-            <div
-              className='cursor-pointer'
-              onClick={() => {
-                route.push(`/musicpt/${item?.musicId}`);
-              }}>
-              <h2 className='text-base font-medium text-black'>
-                {item?.music.kotitle
-                  ? item?.music.kotitle
-                  : item?.music.jptitle}
-              </h2>
-              <div className='mt-1 text-sm text-black'>
-                {item?.music.kosinger
-                  ? item?.music.kosinger
-                  : item?.music.jpsinger}
-              </div>
-            </div>
+            <LikeCardOne music={item?.music} />
           </div>
         );
       })}
