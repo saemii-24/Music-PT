@@ -36,7 +36,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
   const lan = useRecoilValue(languageMode);
 
   return (
-    <article className='rounded-lg '>
+    <article className='container rounded-lg'>
       <div className='flex flex-col items-center py-20'>
         {/* 한국어 버전 탭 */}
         {condition === 11 && (

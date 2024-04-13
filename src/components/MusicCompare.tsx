@@ -25,7 +25,7 @@ export default function MusicCompare({lyricsVer, music, id}: MusicPtProps) {
       <div className=' flex flex-col items-center py-20 '>
         <div className='flex w-full flex-col items-start md:flex-row'>
           <div className='flex w-full flex-col rounded-2xl py-16 md:w-[50%]'>
-            <h2 className='mb-2 text-center text-3xl font-bold text-black'>
+            <h2 className='mb-2 break-all text-center text-3xl font-bold text-black'>
               {lyricsVer === 'koCompare'
                 ? lan['music-title-korean']
                 : lan['music-title-japanese']}
@@ -47,7 +47,7 @@ export default function MusicCompare({lyricsVer, music, id}: MusicPtProps) {
             )}
           </div>
           <div className='container flex size-full flex-col rounded-2xl bg-music-lightgray py-16 md:w-[50%]'>
-            <h2 className='mb-2 text-center text-3xl font-bold text-black'>
+            <h2 className=' mb-2 break-all text-center text-3xl font-bold text-black'>
               {lyricsVer === 'koCompare'
                 ? lan['music-title-jpver-korean']
                 : lan['music-title-kover-japanese']}

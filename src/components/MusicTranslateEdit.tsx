@@ -8,12 +8,13 @@ import {BsTranslate} from 'react-icons/bs';
 import {useForm} from 'react-hook-form';
 import {useRouter} from 'next/navigation';
 
-import type {PropsType} from '@/types/form';
+import type {LanguageType, PropsType} from '@/types/form';
 import {onSumbitAddTranslate, makeDefaultObj} from '@/utils/form';
 import {useEffect, useState} from 'react';
 
 export default function MusicTranslateEdit({id, lang}: PropsType) {
   const route = useRouter();
+  const lan: LanguageType = useRecoilValue(languageMode);
 
   //recoil
   const music = useRecoilValue(musicAtom);
@@ -53,8 +54,6 @@ export default function MusicTranslateEdit({id, lang}: PropsType) {
     defaultValues: defaultFormValue,
   });
 
-  const lan = useRecoilValue(languageMode);
-
   return (
     <div className='flex flex-col items-center gap-20 '>
       <section className='container mt-0 sm:mt-[10rem]'>
@@ -78,7 +77,7 @@ export default function MusicTranslateEdit({id, lang}: PropsType) {
         <form
           className='flex flex-col'
           onSubmit={handleSubmit((data) =>
-            onSumbitAddTranslate(data, id, lang, route, setNeedFetch),
+            onSumbitAddTranslate(data, id, lang, route, setNeedFetch, lan),
           )}>
           {lang === 'jp'
             ? music?.jplyrics
