@@ -23,29 +23,29 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
 
 ## ⚙️사용된 기술
 
-📌**라이브러리/언어**<br/>
-<img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white"> <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
-
+📌**라이브러리/언어**
+<br/>
+- <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white"> <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
 - SSR, SSG 생성을 통한 SEO 향상과 13버전에서 도입된 app router를 이용한 간단한 라우팅 처리를 위해 Next.js를 사용했습니다.
 - 코드 작성 중 의도치 않은 오류를 예방하기 위해 정적타입언어인 Typescript를 도입했습니다.
 
-📌**상태관리**<br/>
-<img src="https://img.shields.io/badge/recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=white">
--React Hook과 비슷한 간결한 코드를 통해 상태관리를 할 수 있어, Recoil을 선택하였고, Recoil을 활용해 다국어 처리를 위한 상태 관리를 구현하였습니다.
+📌**상태관리**
+<br/>
+- <img src="https://img.shields.io/badge/recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=white">
+- React Hook과 비슷한 간결한 코드를 통해 상태관리를 할 수 있어, Recoil을 선택하였고, Recoil을 활용해 다국어 처리를 위한 상태 관리를 구현하였습니다.
 
-📌**비동기처리**<br/>
-<img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">
-
+📌**비동기처리**
+<br/>
+- <img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">
 - 다양한 API를 통해 데이터베이스와 비동기 통신을 효율적으로 처리하고, 무한 스크롤을 구현하기 위해 React Query(Tanstack Query)를 도입했습니다.
 
-📌**스타일링**<br/>
-<img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" >
-
+📌**스타일링**
+<br/>
+- <img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" >
 - Next.js에서 추천하는 스타일링 작성 방식으로,클래스 기반의 스타일링을 통해 속도와 생산성을 향상시키고, 반응형 웹을 구현과 함께 라이트/다크 모드를 적용하기 위해 Tailwind CSS를 선택했습니다.
 
 📌**백엔드(DB)**<br/>
-<img src="https://img.shields.io/badge/supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white"> <img src="https://img.shields.io/badge/prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white">
-
+- <img src="https://img.shields.io/badge/supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white"> <img src="https://img.shields.io/badge/prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white">
 - 프론트엔드단에서 간단하게 DB를 사용하기 위해 Supabase를 선택하였습니다.
 - Prisma ORM기능을 통해 SQL 쿼리가 아닌, JavaScript 작성방식으로, DB와 상호작용하였습니다.
 
@@ -59,29 +59,29 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
     <th style="width:300px">음악 수정</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/saemii-24/BeHealth/assets/139088277/d7a980c7-4eee-4898-bf49-6ecb256e75f1" alt="회원가입, 로그인" width="300px"></td>
-    <td><img src="https://github.com/saemii-24/BeHealth/assets/139088277/8ac0d973-1a06-4d01-90ca-830039d52af8" alt="근처 병원 찾기" width="300px"></td>
-    <td><img src="https://github.com/saemii-24/BeHealth/assets/139088277/ffb61534-9332-44dd-8449-f83403037d61" alt="약 부작용 검색" width="300px"></td>
-    <td><img src="https://github.com/saemii-24/BeHealth/assets/139088277/1d2ecbef-09d0-4e80-99ab-9df786a0d4dc" alt="관련 건강 정보" width="300px"></td>
+    <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/d9a8d33d-bb11-4a39-94f8-422a7af0a5bd" alt="음악 좋아요" width="300px"></td>
+    <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/3abadd65-c283-48c1-89ab-eb3458794517" alt="음악 추가" width="300px"></td>
+    <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/8c28f260-8817-47ec-afc7-4a96fa0948c7" alt="음악 목록(검색)" width="300px"></td>
+    <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/391b6c1d-34ad-4674-bf58-78fe373b3ff2c" alt="음악 수정" width="300px"></td>
   </tr>
 </table>
 
 <table style="width:100%">
   <tr>
-        <th style="width:300px">음악 수정</th>
+    <th style="width:300px">반응형 웹</th>
     <th style="width:300px">OAuth</th>
     <th style="width:300px">라이트/다크 모드</th>
     <th style="width:300px">한국어/일본어 선택</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/saemii-24/BeHealth/assets/139088277/856ba8ee-6411-4642-af5c-5fae795b6de0" alt="일정 추가" width="300px"></td>
-    <td><img src="https://github.com/saemii-24/BeHealth/assets/139088277/6b17ef20-253d-4b7c-9d04-f411d731a984" alt="해당 날짜의 일정 표시" width="300px"></td>
-    <td><img src="https://github.com/saemii-24/BeHealth/assets/139088277/0da2d331-7b1a-430d-9f46-818cac1b27b5" alt="프로필 추가" width="300px"></td>
-    <td><img src="https://github.com/saemii-24/BeHealth/assets/139088277/eb87b29a-c528-4a56-9a23-d0100d32a871" alt="BMI 계산" width="300px"></td>
+    <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/c0660cfb-c969-4d46-9a32-c37bf039ae0d" alt="반응형 웹" width="300px"></td>
+    <td><img src="https://github.com/saemii-24/BeHealth/assets/139088277/6b17ef20-253d-4b7c-9d04-f411d731a984" alt="OAuth" width="300px"></td>
+    <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/c97c004f-4b2d-4792-97d4-9cca6e8455ac" alt="라이트/다크 모드" width="300px"></td>
+    <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/2509365f-fba6-41d5-8e02-bf6f7998feda" alt="한국어/일본어 선택택" width="300px"></td>
   </tr>
 </table>
 
-## 🗂️작성한 next.js API
+## 📫작성한 next.js API
 
 <table>
   <tr>
@@ -140,6 +140,7 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
     <td>사용자의 입력값과 일치하는 데이터를 요청합니다. </td>
   </tr>
 </table>
+
 
 ## 🗂️프로젝트 규칙
 
