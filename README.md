@@ -23,28 +23,27 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
 
 ## ⚙️사용된 기술
 
-📌**라이브러리/언어**
+📌**라이브러리/언어**<br/>
 <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white"> <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
 
 - SSR, SSG 생성을 통한 SEO 향상과 13버전에서 도입된 app router를 이용한 간단한 라우팅 처리를 위해 Next.js를 사용했습니다.
 - 코드 작성 중 의도치 않은 오류를 예방하기 위해 정적타입언어인 Typescript를 도입했습니다.
 
-📌**상태관리**
+📌**상태관리**<br/>
 <img src="https://img.shields.io/badge/recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=white">
 -React Hook과 비슷한 간결한 코드를 통해 상태관리를 할 수 있어, Recoil을 선택하였고, Recoil을 활용해 다국어 처리를 위한 상태 관리를 구현하였습니다.
 
-📌**비동기처리**
+📌**비동기처리**<br/>
 <img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">
 
 - 다양한 API를 통해 데이터베이스와 비동기 통신을 효율적으로 처리하고, 무한 스크롤을 구현하기 위해 React Query(Tanstack Query)를 도입했습니다.
 
-📌**스타일링**
+📌**스타일링**<br/>
 <img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" >
 
 - Next.js에서 추천하는 스타일링 작성 방식으로,클래스 기반의 스타일링을 통해 속도와 생산성을 향상시키고, 반응형 웹을 구현과 함께 라이트/다크 모드를 적용하기 위해 Tailwind CSS를 선택했습니다.
 
-📌**백엔드(DB)**
-
+📌**백엔드(DB)**<br/>
 <img src="https://img.shields.io/badge/supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white"> <img src="https://img.shields.io/badge/prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white">
 
 - 프론트엔드단에서 간단하게 DB를 사용하기 위해 Supabase를 선택하였습니다.
@@ -83,6 +82,64 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
 </table>
 
 ## 🗂️작성한 next.js API
+
+<table>
+  <tr>
+    <th>End Point</th>
+    <th>HTTP Method</th>
+    <th>역할</th>
+  </tr>
+  <tr>
+    <td>Addtranslate</td>
+    <td>PUT</td>
+    <td>각 음악의 번역 내용을 추가합니다. <br/>* 음악 '추가'지만 실질적으로 음악 생성시에는 translate 부분이 null 값으로 등록되고, 해당 값을 ‘수정’하는 형식이므로 PUT method를 사용했습니다.</td>
+  </tr>
+  <tr>
+    <td>Editlyrics</td>
+    <td>PUT</td>
+    <td>음악에 등록된 가사를 수정합니다. </td>
+  </tr>
+  <tr>
+    <td>Like</td>
+    <td>GET</td>
+    <td>사용자가 보고 있는 음악에 좋아요를 기존에 표시했는지 확인합니다. 이 데이터로 사용자가 페이지에 접속시 각 음악에 좋아요가 눌렀거나, 눌리지 않았음을 표시합니다.</td>
+  </tr>
+  <tr>
+    <td>Like</td>
+    <td>POST</td>
+    <td>사용자가 좋아요 버튼을 누를시 트리거 됩니다.</td>
+  </tr>
+  <tr>
+    <td>Likecount</td>
+    <td>POST</td>
+    <td>해당 음악에 총 좋아요 개수를 불러옵니다.</td>
+  </tr>
+  <tr>
+    <td>Likecount</td>
+    <td>GET</td>
+    <td>사용자가 좋아요한 모든 음악 목록을 받아옵니다.</td>
+  </tr>
+  <tr>
+    <td>music</td>
+    <td>POST</td>
+    <td>새로운 음악을 등록합니다.</td>
+  </tr>
+  <tr>
+    <td>Music/[id]</td>
+    <td>DELETE</td>
+    <td>해당 ID의 음악을 삭제합니다.</td>
+  </tr>
+  <tr>
+    <td>Music/[id]</td>
+    <td>PUT</td>
+    <td>해당 ID의 데이터를 수정합니다. <br/>*edit lyrics와 다르게 translate를 제외한 모든 부분을 수정합니다.</td>
+  </tr>
+  <tr>
+    <td>searchmusic</td>
+    <td>GET</td>
+    <td>사용자의 입력값과 일치하는 데이터를 요청합니다. </td>
+  </tr>
+</table>
 
 ## 🗂️프로젝트 규칙
 
