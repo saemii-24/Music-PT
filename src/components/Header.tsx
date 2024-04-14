@@ -81,16 +81,16 @@ export default function Header() {
               onClick={() => {
                 route.push('/addMusic');
               }}
-              className='font-medium text-black hover:text-music-bluegray'>
+              className='md:text-base text-base font-medium text-black hover:text-music-bluegray sm:text-[0.9rem]'>
               {lan['header-btn-add']}
             </div>
           </li>
-          <li className="text-after:text-sm flex cursor-pointer after:ml-10 after:mr-3 after:text-music-darkgray after:content-['|']">
+          <li className="md:text-base text-after:text-sm flex cursor-pointer after:ml-10 after:mr-3 after:text-music-darkgray after:content-['|']">
             <div
               onClick={() => {
                 route.push('/searchMusic');
               }}
-              className='font-medium text-black hover:text-music-bluegray'>
+              className='md:text-base text-base font-medium text-black hover:text-music-bluegray sm:text-[0.9rem]'>
               {lan['header-btn-all']}
             </div>
           </li>
@@ -100,7 +100,7 @@ export default function Header() {
                 onClick={() => {
                   signOut();
                 }}
-                className='cursor-pointer text-music-bluegray'>
+                className='md:text-base cursor-pointer text-base text-music-bluegray sm:text-[0.9rem]'>
                 {lan['mypage-profile-logout']}
               </li>
               <li
@@ -132,6 +132,7 @@ export default function Header() {
           ) : (
             <li className='cursor-pointer text-music-bluegray'>
               <div
+                className='text-base sm:text-[0.9rem] md:text-base'
                 onClick={() => {
                   route.push('/api/auth/signin');
                 }}>

@@ -30,14 +30,14 @@ export default function MusicFormKo({
     <>
       {/* 음악 정보 업로드 */}
       <MusicFormMusic
-        lan={lan}
+
         register={register}
         errors={errors}
         uploadVer={'ko'}
       />
       {/* 앨범 정보 업로드 */}
       <MusicFormAlbum
-      lan={lan}
+
         register={register}
         errors={errors}
         watch={watch}
