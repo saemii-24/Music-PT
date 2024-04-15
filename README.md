@@ -75,7 +75,7 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
   </tr>
   <tr>
     <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/c0660cfb-c969-4d46-9a32-c37bf039ae0d" alt="반응형 웹" width="300px"></td>
-    <td><img src="https://github.com/saemii-24/BeHealth/assets/139088277/6b17ef20-253d-4b7c-9d04-f411d731a984" alt="OAuth" width="300px"></td>
+    <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/187e241f-7559-41ac-b5eb-2888118830f1" alt="OAuth" width="300px"></td>
     <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/c97c004f-4b2d-4792-97d4-9cca6e8455ac" alt="라이트/다크 모드" width="300px"></td>
     <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/2509365f-fba6-41d5-8e02-bf6f7998feda" alt="한국어/일본어 선택택" width="300px"></td>
   </tr>
