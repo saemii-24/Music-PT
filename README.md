@@ -12,7 +12,7 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
 - [개요](#개요)
 - [사용된 기술](#%EF%B8%8F사용된-기술)
 - [주요 기능](#주요-기능)
-- [작성한 Next.js API](#작성한-Next.js-API)
+- [작성한 Next.js API](#작성한-nextjs-api)
 - [프로젝트 규칙](#%EF%B8%8F프로젝트-규칙)
 - [후기](#후기)
 
