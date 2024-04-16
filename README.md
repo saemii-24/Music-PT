@@ -12,13 +12,14 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
 - [개요](#개요)
 - [사용된 기술](#%EF%B8%8F사용된-기술)
 - [주요 기능](#주요-기능)
+- [작성한 Next.js API](#작성한-next.js-api)
 - [프로젝트 규칙](#%EF%B8%8F프로젝트-규칙)
 - [후기](#후기)
 
 ## 📂개요
 
 - 프로젝트: Music PT 💽
-- 제작기간: 24.02.19 - (진행중)
+- 제작기간: 24.02.19 - 24.04.16
 - 기여도: 개인작업 / 100%
 
 ## ⚙️사용된 기술
@@ -34,6 +35,11 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
 - <img src="https://img.shields.io/badge/recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=white">
 - React Hook과 비슷한 간결한 코드를 통해 상태관리를 할 수 있어, Recoil을 선택하였고, Recoil을 활용해 다국어 처리를 위한 상태 관리를 구현하였습니다.
 
+📌**폼 이벤트 처리**
+<br/>
+- <img src="https://img.shields.io/badge/reacthookform-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white">
+- 폼 데이터를 관리, 유효성 검사와 에러처리를 간편하게 처리하기 위해 사용했습니다.
+  
 📌**비동기처리**
 <br/>
 - <img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">
@@ -44,10 +50,12 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
 - <img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" >
 - Next.js에서 추천하는 스타일링 작성 방식으로,클래스 기반의 스타일링을 통해 속도와 생산성을 향상시키고, 반응형 웹을 구현과 함께 라이트/다크 모드를 적용하기 위해 Tailwind CSS를 선택했습니다.
 
-📌**백엔드(DB)**<br/>
+📌**백엔드(DB)**
+<br/>
 - <img src="https://img.shields.io/badge/supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white"> <img src="https://img.shields.io/badge/prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white">
 - 프론트엔드단에서 간단하게 DB를 사용하기 위해 Supabase를 선택하였습니다.
 - Prisma ORM기능을 통해 SQL 쿼리가 아닌, JavaScript 작성방식으로, DB와 상호작용하였습니다.
+
 
 ## 💻주요 기능
 
@@ -81,7 +89,7 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
   </tr>
 </table>
 
-## 📫작성한 next.js API
+## 📫작성한 Next.js API
 
 <table>
   <tr>
@@ -212,12 +220,12 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
 </table>
 
 ## 📝후기
+이번 프로젝트의 주요 목표는 Next.js를 이용해 새로 학습한 다양한 라이브러리를 도입한 풀스택 웹을 제작하는 것이었습니다. 
 
-이번 프로젝트는 크게, <u>**Firebase, openAPI활용, git Flow와 github의 협업 기능**</u>을 공부할 수 있는 프로젝트 였습니다.
+프로젝트 시작 전, Next.js를 학습하며, Next.js를 도입하는 이유와 배경을 이해하고 SEO, SSR, SSG와 같이 Next.js와 연관된 주요 개념과 장점을 학습하였습니다. 12버전을 제작하고 13버전으로 migration 해보며, 어떠한 점이 달라졌는지 확인할 수 있었고, 이번 프로젝트에서는 13 버전에서 제공되는 app router를 활용하여 React로 진행한 프로젝트보다 간편하게 폴더 방식의 라우팅을 구현할 수 있었습니다. 
 
-1. **Firebase**
-   사용자의 이메일 주소를 이용해 간단히 회원가입 기능을 구현할 수 있었습니다. Firestore에서 제공하는 DB를 통해, 개별 uid로 구별되는 사용자의 정보를 개인화 하고, 사용자가 업데이트 한 정보를 실시간으로 받아와 렌더링 할 수 있었습니다.
-2. **Open API**
-   공공데이터 포털의 Open API와 Axios를 통해 데이터를 요청하고 응답받을 수 있었습니다. 응답받은 데이터를 렌더링 하는 과정에서 발생할 수 있는 다양한 예외사항을 고려하고, 각 상황에서 사용자에게 '정보가 없음', 또는 '로딩 중' 등 적절한 내용을 표시할 수 있었습니다.
-3. **협업**
-   정해진 규칙을 준수하며 협업하자 서로 어떤 작업을 했었는지 쉽게 파악할 수 있었고, 충돌이 발생하는 일이 줄었으며, 원활하게 하나의 프로젝트를 완성할 수 있었습니다.
+또한 그동안 새롭게 학습했던 recoil과 tanstack query와 같은 상태관리 및 비동기 상태 처리 라이브러리를 도입하여 개발 효율을 높일 수 있었습니다. 특히, DB와 상호작용이 필요할 경우에는 Next.js를 통해 RESTful API를 작성하고 axios와 tanstack query를 활용하여, 데이터가 로딩 중일 때는 skeleton UI를 보여주는 등 사용자 경험을 향상시킬 수 있었습니다. 그리고 recoil을 통한 상태관리는 redux보다 훨씬 간결하고 직관적이어 전역상태관리 코드 작성에 대한 부담감을 낮출 수 있었습니다.
+
+이번 프로젝트에서는 SNS 로그인 기능을 구현하기 위해 next-auth를 도입하였고, 구글, 카카오, 네이버와 같은 다양한 제공자의 로그인 기능을 구현하는 한편 각 provider의 디자인 가이드를 준수하고, OAuth를 통한 로그인 프로세스를 습득하는 데에 도움이 되었습니다. 
+
+마지막으로, react-hook-form, tailwind등과 같이 편리하게 웹 제작을 할 수 있도록 도와주는 라이브러리를 활용하기위해 공식 문서를 읽고, 연습해보고, 블로그에 정리하는 과정을 거치면서, 학습의 효율성을 높일 수 있었던 프로젝트가 되었습니다.
