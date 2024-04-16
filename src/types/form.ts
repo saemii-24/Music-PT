@@ -89,6 +89,7 @@ export interface LanguageType {
   'header-btn-add': string;
   'header-btn-all': string;
   'header-btn-mypage': string;
+  'header-btn-login': string;
   'home-title': string;
   'footer-introduce': string;
   'footer-notice': string;

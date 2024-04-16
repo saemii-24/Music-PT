@@ -81,16 +81,16 @@ export default function Header() {
               onClick={() => {
                 route.push('/addMusic');
               }}
-              className='md:text-base text-base font-medium text-black hover:text-music-bluegray sm:text-[0.9rem]'>
+              className='text-base font-medium text-black hover:text-music-bluegray sm:text-[0.9rem] md:text-base'>
               {lan['header-btn-add']}
             </div>
           </li>
-          <li className="md:text-base text-after:text-sm flex cursor-pointer after:ml-10 after:mr-3 after:text-music-darkgray after:content-['|']">
+          <li className="text-after:text-sm flex cursor-pointer after:ml-10 after:mr-3 after:text-music-darkgray after:content-['|'] md:text-base">
             <div
               onClick={() => {
                 route.push('/searchMusic');
               }}
-              className='md:text-base text-base font-medium text-black hover:text-music-bluegray sm:text-[0.9rem]'>
+              className='text-base font-medium text-black hover:text-music-bluegray sm:text-[0.9rem] md:text-base'>
               {lan['header-btn-all']}
             </div>
           </li>
@@ -100,7 +100,7 @@ export default function Header() {
                 onClick={() => {
                   signOut();
                 }}
-                className='md:text-base cursor-pointer text-base text-music-bluegray sm:text-[0.9rem]'>
+                className='cursor-pointer text-base text-music-bluegray sm:text-[0.9rem] md:text-base'>
                 {lan['mypage-profile-logout']}
               </li>
               <li
@@ -225,14 +225,25 @@ export default function Header() {
                 </div>
               </li>
               <li className='mb-2 block'>
-                <div
-                  onClick={() => {
-                    setMenuOpen(false);
-                    route.push('/myPage');
-                  }}
-                  className='cursor-pointer text-lg font-medium hover:text-music-blue'>
-                  {lan['header-btn-mypage']}
-                </div>
+                {status === 'authenticated' ? (
+                  <div
+                    onClick={() => {
+                      setMenuOpen(false);
+                      route.push('/myPage');
+                    }}
+                    className='cursor-pointer text-lg font-medium hover:text-music-blue'>
+                    {lan['header-btn-mypage']}
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => {
+                      setMenuOpen(false);
+                      route.push('/login');
+                    }}
+                    className='cursor-pointer text-lg font-medium hover:text-music-blue'>
+                    {lan['header-btn-login']}
+                  </div>
+                )}
               </li>
             </ul>
           </li>
