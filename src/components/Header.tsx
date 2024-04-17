@@ -157,7 +157,6 @@ export default function Header() {
                       onClick={() => {
                         setNowLanguage('ko');
                         setLanSelectOpen(false);
-                        localStorage.setItem('language', 'ko');
                       }}>
                       한국어
                     </li>
@@ -166,7 +165,6 @@ export default function Header() {
                       onClick={() => {
                         setNowLanguage('jp');
                         setLanSelectOpen(false);
-                        localStorage.setItem('language', 'jp');
                       }}>
                       日本語
                     </li>
@@ -257,7 +255,6 @@ export default function Header() {
                 onClick={() => {
                   setNowLanguage('ko');
                   setLanSelectOpen(false);
-                  localStorage.setItem('language', 'ko');
                 }}>
                 한국어
               </li>
@@ -266,7 +263,6 @@ export default function Header() {
                 onClick={() => {
                   setNowLanguage('jp');
                   setLanSelectOpen(false);
-                  localStorage.setItem('language', 'jp');
                 }}>
                 日本語
               </li>
