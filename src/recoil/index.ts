@@ -16,10 +16,11 @@ export const language = atom<string>({
   key: 'nowLanguage',
   default:
     typeof window !== 'undefined'
-      ? localStorage.getItem('language') || 'ko'
+      ? navigator.languages.some((lang) => lang.startsWith('ja'))
+        ? 'jp'
+        : 'ko'
       : 'ko',
 });
-
 export const languageMode = selector({
   key: 'languageDataSelector',
   get: ({get}) => {
