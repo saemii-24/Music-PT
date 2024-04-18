@@ -79,7 +79,7 @@ export default function MusicProfile({
             style={{width: '100%', height: '100%', objectFit: 'cover'}}
           />
         </div>
-        <div className='col-span-3 mb-[0.4rem] mt-5 sm:col-span-4'>
+        <div className='col-span-3 mb-[0.4rem] mt-5 2xl:col-span-4'>
           <LikeCount music={music} />
         </div>
         <div className='order-first col-span-4 mt-[-2.5rem] flex justify-end lg:order-none lg:col-auto lg:mt-5'>
@@ -104,7 +104,7 @@ export default function MusicProfile({
             )}
           </div>
         </div>
-        <div className='col-span-4 mb-4 text-4xl font-bold text-black lg:col-span-4  2xl:col-span-5'>
+        <div className='col-span-4 mb-4 text-4xl font-bold text-black xl:col-span-4  2xl:col-span-5'>
           {selectLang === 'ko' ? music?.kotitle : music?.jptitle}
         </div>
         <div className='leading-7 text-black lg:mt-3'>

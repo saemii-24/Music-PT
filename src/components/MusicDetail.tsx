@@ -43,12 +43,14 @@ export default function MusicDetail({
   }, [lyricsVer]);
 
   return (
-    <section className='container mt-0 sm:mt-[10rem]'>
+    <section className='container mt-[5rem] sm:mt-[10rem]'>
       <article className='relative '>
         <p className='mb-1 flex items-center gap-1 text-black'>
           <MdOutlineUpdate /> {music?.updatedAt?.slice(0, 10)}
         </p>
-        <h2 className='text-4xl font-extrabold text-black'>{thisTitle}</h2>
+        <h2 className='min-h-[90px] text-4xl font-extrabold text-black sm:min-h-fit'>
+          {thisTitle}
+        </h2>
 
         <div className='mt-10 flex gap-6 border-b-2 border-music-basicgray'>
           <ul
@@ -60,8 +62,9 @@ export default function MusicDetail({
               className={cn(
                 'text-center sm:text-left dark:text-black cursor-pointer',
                 lyricsVer === 'koVer'
-                  ? 'break-keep border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue'
-                  : 'break-all',
+                  ? 'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue'
+                  : '',
+                nowLanguage === 'ko' ? 'break-keep' : 'break-all',
               )}>
               {lan['music-tab-korean']}
             </li>
@@ -70,10 +73,11 @@ export default function MusicDetail({
                 setLyricsVer('jpVer');
               }}
               className={cn(
-                'text-center sm:text-left dark:text-black cursor-pointer break-keep',
+                'text-center sm:text-left dark:text-black cursor-pointer',
                 lyricsVer === 'jpVer'
-                  ? 'break-keep border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue'
-                  : 'break-all',
+                  ? 'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue'
+                  : '',
+                nowLanguage === 'ko' ? 'break-keep' : 'break-all',
               )}>
               {lan['music-tab-japanese']}
             </li>
@@ -82,10 +86,11 @@ export default function MusicDetail({
                 setLyricsVer('koCompare');
               }}
               className={cn(
-                'text-center sm:text-left dark:text-black cursor-pointer break-keep',
+                'text-center sm:text-left dark:text-black cursor-pointer',
                 lyricsVer === 'koCompare'
-                  ? 'break-keep border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue'
-                  : 'break-all',
+                  ? 'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue'
+                  : '',
+                nowLanguage === 'ko' ? 'break-keep' : 'break-all',
               )}>
               {lan['music-tab-korean-compare']}
             </li>
@@ -94,10 +99,11 @@ export default function MusicDetail({
                 setLyricsVer('jpCompare');
               }}
               className={cn(
-                'text-center sm:text-left dark:text-black cursor-pointer break-keep',
+                'text-center sm:text-left dark:text-black cursor-pointer',
                 lyricsVer === 'jpCompare'
-                  ? 'break-keep border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue'
-                  : 'break-all',
+                  ? 'border-b-2 border-music-blue pb-5 font-bold text-music-blue dark:text-music-blue'
+                  : '',
+                nowLanguage === 'ko' ? 'break-keep' : 'break-all',
               )}>
               {lan['music-tab-japanese-compare']}
             </li>
