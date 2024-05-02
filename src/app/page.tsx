@@ -41,7 +41,14 @@ export default function Home() {
   }, [needFetch]);
 
   if (status === 'pending') {
-    return <SK_Home />;
+    return (
+      <main className='flex-1  bg-music-background'>
+        <div className='container py-20'>
+          <HomeTitle />
+          <SK_Home />
+        </div>
+      </main>
+    );
   }
 
   return (
