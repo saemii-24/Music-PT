@@ -55,10 +55,14 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
           })}>
           {selectLang === 'ko' && (
             <Image
-              priority={true}
               src={kothumbnail ? kothumbnail : '/default_card.png'}
+              fill={true}
+              sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
               alt={'음악'}
-              fill
+              loading='lazy'
+              placeholder='blur'
+              blurDataURL={kothumbnail ? kothumbnail : '/default_card.png'}
+              onLoad={(e) => console.log(e)}
             />
           )}
         </div>
@@ -69,10 +73,14 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
           })}>
           {selectLang === 'jp' && (
             <Image
-              priority={true}
               src={jpthumbnail ? jpthumbnail : '/default_card.png'}
+              fill={true}
+              sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
               alt={'음악'}
-              fill
+              loading='lazy'
+              placeholder='blur'
+              blurDataURL={jpthumbnail ? jpthumbnail : '/default_card.png'}
+              onLoad={(e) => console.log(e)}
             />
           )}
         </div>
