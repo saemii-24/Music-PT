@@ -47,8 +47,37 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
         onClick={() => {
           route.push(`/musicpt/${musicData.id}`);
         }}
-        className=' aspect-[8/5] w-full cursor-pointer overflow-hidden '>
-        <Image
+        className='aspect-[8/5] w-full cursor-pointer overflow-hidden '>
+        <div
+          className={cn('relative aspect-square w-full', {
+            hidden: selectLang === 'jp',
+            block: selectLang === 'ko',
+          })}>
+          {selectLang === 'ko' && (
+            <Image
+              priority={true}
+              src={kothumbnail ? kothumbnail : '/default_card.png'}
+              alt={'음악'}
+              fill
+            />
+          )}
+        </div>
+        <div
+          className={cn('relative aspect-square w-full', {
+            hidden: selectLang === 'ko',
+            block: selectLang === 'jp',
+          })}>
+          {selectLang === 'jp' && (
+            <Image
+              priority={true}
+              src={jpthumbnail ? jpthumbnail : '/default_card.png'}
+              alt={'음악'}
+              fill
+            />
+          )}
+        </div>
+
+        {/* <Image
           className={cn({
             hidden: selectLang === 'jp',
             block: selectLang === 'ko',
@@ -73,7 +102,7 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
           height={0}
           sizes='100vw'
           style={{width: '100%', objectFit: 'cover'}}
-        />
+        /> */}
       </div>
       <div className='h-[150px] p-5'>
         {/* 카드 윗 줄 */}
