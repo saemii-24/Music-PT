@@ -152,6 +152,10 @@ export interface LanguageType {
   'music-title-jpver-korean': string;
   'music-title-kover-japanese': string;
   'music-lyrics-none': string;
+  'edit-lyrics-title': string;
+  'edit-lyrics-description': string;
+  'edit-lyrics-korean': string;
+  'edit-lyrics-japanese': string;
   'addtranslate-description-korean': string;
   'addtranslate-description-japanese': string;
   'addtranslate-title-korean': string;

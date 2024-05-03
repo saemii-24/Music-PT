@@ -4,14 +4,18 @@
 
 @font-face {
   font-family: 'noto';
-  src: url('../../public/font/NotoSansJP-VariableFont_wght.ttf')
-    format('truetype');
+  src:
+    url('../../public/font/NotoSansJP-VariableFont_wght.woff2') format('woff2'),
+    url('../../public/font/NotoSansJP-VariableFont_wght.woff') format('woff'),
+    url('../../public/font/NotoSansJP-VariableFont_wght.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'noto';
-  src: url('../../public/font/NotoSansKR-VariableFont_wght.ttf')
-    format('truetype');
+  src:
+    url('../../public/font/NotoSansKR-VariableFont_wght.woff2') format('woff2'),
+    url('../../public/font/NotoSansKR-VariableFont_wght.woff') format('woff'),
+    url('../../public/font/NotoSansKR-VariableFont_wght.ttf') format('truetype');
   unicode-range: U+AC00-D7A3;
 }
 
