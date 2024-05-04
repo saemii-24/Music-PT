@@ -4,19 +4,106 @@
 
 @font-face {
   font-family: 'noto';
+  font-weight: 400;
   src:
-    url('../../public/font/NotoSansJP-VariableFont_wght.woff2') format('woff2'),
-    url('../../public/font/NotoSansJP-VariableFont_wght.woff') format('woff'),
-    url('../../public/font/NotoSansJP-VariableFont_wght.ttf') format('truetype');
+    url('../../public/font/NotoSansKR-Regular-Subset.woff2') format('woff2'),
+    url('../../public/font/NotoSansKR-Regular-Subset.woff') format('woff'),
+    url('../../public/font/NotoSansKR-Regular-Subset.ttf') format('truetype');
+  unicode-range: U+AC00-D7A3;
+}
+@font-face {
+  font-family: 'noto';
+  font-weight: 500;
+  src:
+    url('../../public/font/NotoSansKR-Medium-Subset.woff2') format('woff2'),
+    url('../../public/font/NotoSansKR-Medium-Subset.woff') format('woff'),
+    url('../../public/font/NotoSansKR-Medium-Subset.ttf') format('truetype');
+  unicode-range: U+AC00-D7A3;
+}
+@font-face {
+  font-family: 'noto';
+  font-weight: 600;
+  src:
+    url('../../public/font/NotoSansKR-Semibold-Subset.woff2') format('woff2'),
+    url('../../public/font/NotoSansKR-Semibold-Subset.woff') format('woff'),
+    url('../../public/font/NotoSansKR-Semibold-Subset.ttf') format('truetype');
+  unicode-range: U+AC00-D7A3;
+}
+@font-face {
+  font-family: 'noto';
+  font-weight: 700;
+  src:
+    url('../../public/font/NotoSansKR-Bold-Subset.woff2') format('woff2'),
+    url('../../public/font/NotoSansKR-Bold-Subset.woff') format('woff'),
+    url('../../public/font/NotoSansKR-Bold-Subset.ttf') format('truetype');
+  unicode-range: U+AC00-D7A3;
+}
+@font-face {
+  font-family: 'noto';
+  font-weight: 800;
+  src:
+    url('../../public/font/NotoSansKR-ExtraBold-Subset.woff2') format('woff2'),
+    url('../../public/font/NotoSansKR-ExtraBold-Subset.woff') format('woff'),
+    url('../../public/font/NotoSansKR-ExtraBold-Subset.ttf') format('truetype');
+  unicode-range: U+AC00-D7A3;
+}
+@font-face {
+  font-family: 'noto';
+  font-weight: 900;
+  src:
+    url('../../public/font/NotoSansKR-Black-Subset.woff2') format('woff2'),
+    url('../../public/font/NotoSansKR-Black-Subset.woff') format('woff'),
+    url('../../public/font/NotoSansKR-Black-Subset.ttf') format('truetype');
+  unicode-range: U+AC00-D7A3;
 }
 
 @font-face {
   font-family: 'noto';
+  font-weight: 400;
   src:
-    url('../../public/font/NotoSansKR-VariableFont_wght.woff2') format('woff2'),
-    url('../../public/font/NotoSansKR-VariableFont_wght.woff') format('woff'),
-    url('../../public/font/NotoSansKR-VariableFont_wght.ttf') format('truetype');
-  unicode-range: U+AC00-D7A3;
+    url('../../public/font/NotoSansJP-Regular-Subset.woff2') format('woff2'),
+    url('../../public/font/NotoSansJP-Regular-Subset.woff') format('woff'),
+    url('../../public/font/NotoSansJP-Regular-Subset.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'noto';
+  font-weight: 500;
+  src:
+    url('../../public/font/NotoSansJP-Medium-Subset.woff2') format('woff2'),
+    url('../../public/font/NotoSansJP-Medium-Subset.woff') format('woff'),
+    url('../../public/font/NotoSansJP-Medium-Subset.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'noto';
+  font-weight: 600;
+  src:
+    url('../../public/font/NotoSansJP-SemiBold-Subset.woff2') format('woff2'),
+    url('../../public/font/NotoSansJP-SemiBold-Subset.woff') format('woff'),
+    url('../../public/font/NotoSansJP-SemiBold-Subset.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'noto';
+  font-weight: 700;
+  src:
+    url('../../public/font/NotoSansJP-Bold-Subset.woff2') format('woff2'),
+    url('../../public/font/NotoSansJP-Bold-Subset.woff') format('woff'),
+    url('../../public/font/NotoSansJP-Bold-Subset.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'noto';
+  font-weight: 800;
+  src:
+    url('../../public/font/NotoSansJP-ExtraBold-Subset.woff2') format('woff2'),
+    url('../../public/font/NotoSansJP-ExtraBold-Subset.woff') format('woff'),
+    url('../../public/font/NotoSansJP-ExtraBold-Subset.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'noto';
+  font-weight: 900;
+  src:
+    url('../../public/font/NotoSansJP-Black-Subset.woff2') format('woff2'),
+    url('../../public/font/NotoSansJP-Black-Subset.woff') format('woff'),
+    url('../../public/font/NotoSansJP-Black-Subset.ttf') format('truetype');
 }
 
 body {
@@ -88,4 +175,9 @@ input[type='text'] {
     --subtitle: 206 206 206;
     --skeleton: 72 75 90;
   }
+}
+
+div,
+p {
+  font-weight: 400;
 }
