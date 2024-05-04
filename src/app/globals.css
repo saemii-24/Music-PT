@@ -24,9 +24,9 @@
   font-family: 'noto';
   font-weight: 600;
   src:
-    url('../../public/font/NotoSansKR-Semibold-Subset.woff2') format('woff2'),
-    url('../../public/font/NotoSansKR-Semibold-Subset.woff') format('woff'),
-    url('../../public/font/NotoSansKR-Semibold-Subset.ttf') format('truetype');
+    url('../../public/font/NotoSansKR-SemiBold-Subset.woff2') format('woff2'),
+    url('../../public/font/NotoSansKR-SemiBold-Subset.woff') format('woff'),
+    url('../../public/font/NotoSansKR-SemiBold-Subset.ttf') format('truetype');
   unicode-range: U+AC00-D7A3;
 }
 @font-face {
