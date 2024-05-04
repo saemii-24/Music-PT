@@ -138,7 +138,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
                 }}
               />
 
-              {music?.kotranslate ? (
+              {music?.jptranslate ? (
                 <Button
                   text={lan['music-edit-korean-translate']}
                   icon='translate'
@@ -157,7 +157,7 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
               )}
               {/* 불가능 할 때 */}
 
-              {music?.kotranslate === null || music?.kotranslate === '' ? (
+              {music?.jptranslate === null || music?.jptranslate === '' ? (
                 <Button
                   text={lan['music-together-korean']}
                   icon='divide'
