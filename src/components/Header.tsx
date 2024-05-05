@@ -9,7 +9,7 @@ import {IoMenu, IoClose} from 'react-icons/io5';
 
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {language, languageMode} from '@/recoil/index';
-import {useEffect, useLayoutEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import {signOut, useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
@@ -52,13 +52,11 @@ export default function Header() {
   return (
     <header className='fixed z-[100] h-14 w-screen border-b-2 border-music-basicgray bg-white '>
       <div className='container relative z-10 flex h-14 items-center'>
-        <div
-          onClick={() => {
-            route.push('/');
-          }}
+        <Link
+          href='/'
           className='relative mb-1 cursor-pointer text-2xl font-black tracking-tight text-black'>
           Music PT
-        </div>
+        </Link>
         {menuOpen ? (
           <IoClose
             className=' ml-auto block cursor-pointer text-3xl text-black sm:hidden'
@@ -77,22 +75,18 @@ export default function Header() {
 
         <ul className='ml-auto hidden h-10 items-center gap-7 sm:flex'>
           <li className='cursor-pointer'>
-            <div
-              onClick={() => {
-                route.push('/addMusic');
-              }}
+            <Link
+              href='/addMusic'
               className='text-base font-medium text-black hover:text-music-bluegray sm:text-[0.9rem] md:text-base'>
               {lan['header-btn-add']}
-            </div>
+            </Link>
           </li>
           <li className="text-after:text-sm flex cursor-pointer after:ml-10 after:mr-3 after:text-music-darkgray after:content-['|'] md:text-base">
-            <div
-              onClick={() => {
-                route.push('/searchMusic');
-              }}
+            <Link
+              href='/searchMusic'
               className='text-base font-medium text-black hover:text-music-bluegray sm:text-[0.9rem] md:text-base'>
               {lan['header-btn-all']}
-            </div>
+            </Link>
           </li>
           {status === 'authenticated' ? (
             <>
@@ -103,12 +97,10 @@ export default function Header() {
                 className='cursor-pointer text-base text-music-bluegray sm:text-[0.9rem] md:text-base'>
                 {lan['mypage-profile-logout']}
               </li>
-              <li
-                onClick={() => {
-                  route.push('/myPage');
-                }}
-                className='cursor-pointer'>
-                <div className='overflow-hidden rounded-[100rem]'>
+              <li className='cursor-pointer'>
+                <Link
+                  href='/myPage'
+                  className='overflow-hidden rounded-[100rem]'>
                   {data?.user?.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -126,18 +118,16 @@ export default function Header() {
                       height={20}
                     />
                   )}
-                </div>
+                </Link>
               </li>
             </>
           ) : (
             <li className='cursor-pointer text-music-bluegray'>
-              <div
+              <Link
                 className='text-base sm:text-[0.9rem] md:text-base'
-                onClick={() => {
-                  route.push('/api/auth/signin');
-                }}>
+                href='/api/auth/signin'>
                 {lan['mypage-profile-login']}
-              </div>
+              </Link>
             </li>
           )}
 
@@ -203,44 +193,44 @@ export default function Header() {
             </div>
             <ul>
               <li className='mb-2 block'>
-                <div
+                <Link
+                  href='/addMusic'
                   onClick={() => {
                     setMenuOpen(false);
-                    route.push('/addMusic');
                   }}
                   className='cursor-pointer text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-add']}
-                </div>
+                </Link>
               </li>
               <li className='mb-2 block'>
-                <div
+                <Link
+                  href='/searchMusic'
                   onClick={() => {
                     setMenuOpen(false);
-                    route.push('/searchMusic');
                   }}
                   className='cursor-pointer text-lg font-medium hover:text-music-blue'>
                   {lan['header-btn-all']}
-                </div>
+                </Link>
               </li>
               <li className='mb-2 block'>
                 {status === 'authenticated' ? (
-                  <div
+                  <Link
+                    href='/myPage'
                     onClick={() => {
                       setMenuOpen(false);
-                      route.push('/myPage');
                     }}
                     className='cursor-pointer text-lg font-medium hover:text-music-blue'>
                     {lan['header-btn-mypage']}
-                  </div>
+                  </Link>
                 ) : (
-                  <div
+                  <Link
+                    href='/login'
                     onClick={() => {
                       setMenuOpen(false);
-                      route.push('/login');
                     }}
                     className='cursor-pointer text-lg font-medium hover:text-music-blue'>
                     {lan['header-btn-login']}
-                  </div>
+                  </Link>
                 )}
               </li>
             </ul>

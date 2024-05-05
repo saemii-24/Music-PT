@@ -3,7 +3,6 @@ import type {LangType, SupabaseType} from '@/types/form';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
 
-import {FaHeart} from 'react-icons/fa6';
 import {MdOutlineUpdate} from 'react-icons/md';
 
 import {useRecoilValue} from 'recoil';
@@ -12,6 +11,7 @@ import {useState} from 'react';
 import cn from 'classnames';
 import LikeCount from './LikeCount';
 import LangButton from './LangButton';
+import Link from 'next/link';
 
 export default function MusicCard({musicData}: {musicData: SupabaseType}) {
   const {
@@ -40,14 +40,15 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
 
   //현재 보고 있는 버전 설정
   const [selectLang, setSelectLang] = useState<LangType>(kotitle ? 'ko' : 'jp');
-
+  const [koLoad, setKoLoad] = useState<boolean>(false);
   return (
     <div className='mt-20 w-full overflow-hidden rounded-lg bg-white shadow-sm'>
-      <div
-        onClick={() => {
-          route.push(`/musicpt/${musicData.id}`);
-        }}
-        className='aspect-[8/5] w-full cursor-pointer overflow-hidden '>
+      <Link
+        href={`/musicpt/${musicData.id}`}
+        // onClick={() => {
+        //   route.push(`/musicpt/${musicData.id}`);
+        // }}
+        className='block aspect-[8/5] w-full cursor-pointer overflow-hidden '>
         <div
           className={cn('relative aspect-square w-full', {
             hidden: selectLang === 'jp',
@@ -62,7 +63,9 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
               loading='lazy'
               placeholder='blur'
               blurDataURL={kothumbnail ? kothumbnail : '/default_card.png'}
-              onLoad={(e) => console.log(e)}
+              onLoad={() => {
+                setKoLoad(true);
+              }}
             />
           )}
         </div>
@@ -80,7 +83,7 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
               loading='lazy'
               placeholder='blur'
               blurDataURL={jpthumbnail ? jpthumbnail : '/default_card.png'}
-              onLoad={(e) => console.log(e)}
+              // onLoad={(e) => console.log(e)}
             />
           )}
         </div>
@@ -111,7 +114,7 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
           sizes='100vw'
           style={{width: '100%', objectFit: 'cover'}}
         /> */}
-      </div>
+      </Link>
       <div className='h-[150px] p-5'>
         {/* 카드 윗 줄 */}
         <div className='flex items-center'>
