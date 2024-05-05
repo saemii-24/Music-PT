@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @font-face {
+  font-display: swap;
   font-family: 'noto';
   font-weight: 400;
   src:
@@ -12,6 +13,7 @@
   unicode-range: U+AC00-D7A3;
 }
 @font-face {
+  font-display: swap;
   font-family: 'noto';
   font-weight: 500;
   src:
@@ -21,6 +23,7 @@
   unicode-range: U+AC00-D7A3;
 }
 @font-face {
+  font-display: swap;
   font-family: 'noto';
   font-weight: 600;
   src:
@@ -30,6 +33,7 @@
   unicode-range: U+AC00-D7A3;
 }
 @font-face {
+  font-display: swap;
   font-family: 'noto';
   font-weight: 700;
   src:
@@ -39,6 +43,7 @@
   unicode-range: U+AC00-D7A3;
 }
 @font-face {
+  font-display: swap;
   font-family: 'noto';
   font-weight: 800;
   src:
@@ -48,6 +53,7 @@
   unicode-range: U+AC00-D7A3;
 }
 @font-face {
+  font-display: swap;
   font-family: 'noto';
   font-weight: 900;
   src:
@@ -58,6 +64,7 @@
 }
 
 @font-face {
+  font-display: swap;
   font-family: 'noto';
   font-weight: 400;
   src:
@@ -66,6 +73,7 @@
     url('../../public/font/NotoSansJP-Regular-Subset.ttf') format('truetype');
 }
 @font-face {
+  font-display: swap;
   font-family: 'noto';
   font-weight: 500;
   src:
@@ -74,6 +82,7 @@
     url('../../public/font/NotoSansJP-Medium-Subset.ttf') format('truetype');
 }
 @font-face {
+  font-display: swap;
   font-family: 'noto';
   font-weight: 600;
   src:
@@ -82,6 +91,7 @@
     url('../../public/font/NotoSansJP-SemiBold-Subset.ttf') format('truetype');
 }
 @font-face {
+  font-display: swap;
   font-family: 'noto';
   font-weight: 700;
   src:
@@ -90,6 +100,7 @@
     url('../../public/font/NotoSansJP-Bold-Subset.ttf') format('truetype');
 }
 @font-face {
+  font-display: swap;
   font-family: 'noto';
   font-weight: 800;
   src:
@@ -98,6 +109,7 @@
     url('../../public/font/NotoSansJP-ExtraBold-Subset.ttf') format('truetype');
 }
 @font-face {
+  font-display: swap;
   font-family: 'noto';
   font-weight: 900;
   src:

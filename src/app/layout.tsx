@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   description: '좋아하는 음악으로 공부해요!',
 };
 
-// const HeaderComponent = dynamic(() => import('../components/Header'), {
-//   ssr: false,
-// });
-// const FooterComponent = dynamic(() => import('../components/Footer'), {
-//   ssr: false,
-// });
+const HeaderComponent = dynamic(() => import('../components/Header'), {
+  ssr: false,
+});
+const FooterComponent = dynamic(() => import('../components/Footer'), {
+  ssr: false,
+});
 
 export default function RootLayout({
   children,
