@@ -1,21 +1,17 @@
 'use client';
 
 import HomeTitle from '@/components/HomeTitle';
-import MusicCard from '@/components/MusicCard';
-import {SupabaseType} from '@/types/form';
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
-import {atom, useRecoilState} from 'recoil';
-import {musicAtom, needRefetch} from '@/recoil';
-import {useEffect, useState} from 'react';
+import {useRecoilState} from 'recoil';
+import {needRefetch} from '@/recoil';
+import {useEffect} from 'react';
 import SK_Home from './skeleton/SK_Home';
 import MusicGrid from '@/components/MusicGrid';
 
 export default function Home() {
   // //recoil
   const [needFetch, setNeedFetch] = useRecoilState(needRefetch);
-
-  const [count, setCount] = useState<number>(0);
 
   const getFirstMusicData = async () => {
     const {data} = await axios.get(
@@ -31,7 +27,6 @@ export default function Home() {
   } = useQuery({
     queryKey: ['music-pt', 'first'],
     queryFn: getFirstMusicData,
-    // refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });

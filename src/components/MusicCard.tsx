@@ -1,6 +1,7 @@
 'use client';
 import type {LangType, SupabaseType} from '@/types/form';
 import Image from 'next/image';
+import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 
 import {MdOutlineUpdate} from 'react-icons/md';
@@ -9,9 +10,10 @@ import {useRecoilValue} from 'recoil';
 import {languageMode} from '@/recoil/index';
 import {memo, useState} from 'react';
 import cn from 'classnames';
+
 import LikeCount from './LikeCount';
 import LangButton from './LangButton';
-import Link from 'next/link';
+import DefaultImage from './DefaultImage';
 
 const MusicCard = ({musicData}: {musicData: SupabaseType}) => {
   const {
@@ -54,17 +56,20 @@ const MusicCard = ({musicData}: {musicData: SupabaseType}) => {
             hidden: selectLang === 'jp',
             block: selectLang === 'ko',
           })}>
-          {selectLang === 'ko' && (
-            <Image
-              src={kothumbnail ? kothumbnail : '/default_card.png'}
-              fill={true}
-              sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
-              alt={'음악'}
-              loading='lazy'
-              placeholder='blur'
-              blurDataURL={kothumbnail ? kothumbnail : '/default_card.png'}
-            />
-          )}
+          {selectLang === 'ko' &&
+            (kothumbnail ? (
+              <Image
+                src={kothumbnail}
+                fill={true}
+                sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
+                alt={'음악'}
+                loading='lazy'
+                placeholder='blur'
+                blurDataURL={kothumbnail}
+              />
+            ) : (
+              <DefaultImage />
+            ))}
         </div>
         <div
           className={cn('relative aspect-square w-full', {
@@ -73,13 +78,13 @@ const MusicCard = ({musicData}: {musicData: SupabaseType}) => {
           })}>
           {selectLang === 'jp' && (
             <Image
-              src={jpthumbnail ? jpthumbnail : '/default_card.png'}
+              src={jpthumbnail ? jpthumbnail : '/default_card.svg'}
               fill={true}
               sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
               alt={'음악'}
               loading='lazy'
               placeholder='blur'
-              blurDataURL={jpthumbnail ? jpthumbnail : '/default_card.png'}
+              blurDataURL={jpthumbnail ? jpthumbnail : '/default_card.svg'}
               // onLoad={(e) => console.log(e)}
             />
           )}
