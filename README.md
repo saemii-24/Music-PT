@@ -192,6 +192,10 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
     <td>Update</td>
     <td>README.md 업데이트</td>
   </tr>
+    <tr>
+    <td>Optimize</td>
+    <td>프로젝트 최적화</td>
+  </tr>
   <tr>
     <td>Chore</td>
     <td>그 외의 변경사항</td>
