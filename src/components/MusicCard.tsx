@@ -7,13 +7,13 @@ import {MdOutlineUpdate} from 'react-icons/md';
 
 import {useRecoilValue} from 'recoil';
 import {languageMode} from '@/recoil/index';
-import {useState} from 'react';
+import {memo, useState} from 'react';
 import cn from 'classnames';
 import LikeCount from './LikeCount';
 import LangButton from './LangButton';
 import Link from 'next/link';
 
-export default function MusicCard({musicData}: {musicData: SupabaseType}) {
+const MusicCard = ({musicData}: {musicData: SupabaseType}) => {
   const {
     id,
     jpalbum,
@@ -40,7 +40,7 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
 
   //현재 보고 있는 버전 설정
   const [selectLang, setSelectLang] = useState<LangType>(kotitle ? 'ko' : 'jp');
-  const [koLoad, setKoLoad] = useState<boolean>(false);
+
   return (
     <div className='mt-20 w-full overflow-hidden rounded-lg bg-white shadow-sm'>
       <Link
@@ -63,9 +63,6 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
               loading='lazy'
               placeholder='blur'
               blurDataURL={kothumbnail ? kothumbnail : '/default_card.png'}
-              onLoad={() => {
-                setKoLoad(true);
-              }}
             />
           )}
         </div>
@@ -87,33 +84,6 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
             />
           )}
         </div>
-
-        {/* <Image
-          className={cn({
-            hidden: selectLang === 'jp',
-            block: selectLang === 'ko',
-          })}
-          priority={true}
-          src={kothumbnail ? kothumbnail : '/default_card.png'}
-          alt={'음악'}
-          width={0}
-          height={0}
-          sizes='100vw'
-          style={{width: '100%', objectFit: 'cover'}}
-        />
-        <Image
-          className={cn({
-            hidden: selectLang === 'ko',
-            block: selectLang === 'jp',
-          })}
-          priority={true}
-          src={jpthumbnail ? jpthumbnail : '/default_card.png'}
-          alt={'음악'}
-          width={0}
-          height={0}
-          sizes='100vw'
-          style={{width: '100%', objectFit: 'cover'}}
-        /> */}
       </Link>
       <div className='h-[150px] p-5'>
         {/* 카드 윗 줄 */}
@@ -150,4 +120,6 @@ export default function MusicCard({musicData}: {musicData: SupabaseType}) {
       </div>
     </div>
   );
-}
+};
+
+export default memo(MusicCard);
