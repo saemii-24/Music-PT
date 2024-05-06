@@ -9,10 +9,14 @@ import {atom, useRecoilState} from 'recoil';
 import {musicAtom, needRefetch} from '@/recoil';
 import {useEffect, useState} from 'react';
 import SK_Home from './skeleton/SK_Home';
+import MusicGrid from '@/components/MusicGrid';
 
 export default function Home() {
   // //recoil
   const [needFetch, setNeedFetch] = useRecoilState(needRefetch);
+
+  const [count, setCount] = useState<number>(0);
+
   const getFirstMusicData = async () => {
     const {data} = await axios.get(
       `/api/searchmusic?pageParam=1&postCount=9&select=all&search=first`,
@@ -27,7 +31,7 @@ export default function Home() {
   } = useQuery({
     queryKey: ['music-pt', 'first'],
     queryFn: getFirstMusicData,
-    refetchOnMount: false,
+    // refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
@@ -52,16 +56,7 @@ export default function Home() {
 
   return (
     <main className='flex-1 bg-music-background'>
-      <div className='container py-20'>
-        <HomeTitle />
-        <div className='grid grid-cols-1 justify-between gap-x-20 gap-y-10 lg:grid-cols-2 xl:grid-cols-3'>
-          {firstMusicData?.posts?.map(
-            (musicData: SupabaseType, index: number) => {
-              return <MusicCard key={index} musicData={musicData} />;
-            },
-          )}
-        </div>
-      </div>
+      <MusicGrid firstMusicData={firstMusicData} />
     </main>
   );
 }

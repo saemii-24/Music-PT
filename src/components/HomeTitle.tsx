@@ -4,8 +4,9 @@ import {languageMode, language} from '@/recoil';
 import {useRecoilValue} from 'recoil';
 
 import cn from 'classnames';
+import {memo} from 'react';
 
-export default function HomeTitle() {
+const HomeTitle = () => {
   const lan = useRecoilValue(languageMode);
   const nowlan = useRecoilValue(language);
 
@@ -22,4 +23,6 @@ export default function HomeTitle() {
       </h1>
     </div>
   );
-}
+};
+
+export default memo(HomeTitle);
