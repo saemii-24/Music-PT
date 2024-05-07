@@ -6,6 +6,7 @@ import {useState} from 'react';
 import cn from 'classnames';
 import LikeCount from './LikeCount';
 import LangButton from './LangButton';
+import DefaultImageSquare from './DefaultImageSquare';
 import SK_SearchCard from '@/app/skeleton/SK_SeachCard';
 import {useRecoilValue} from 'recoil';
 import {languageMode} from '@/recoil';
@@ -37,32 +38,46 @@ export default function SearchMusicCard({
           e.stopPropagation();
           route.push(`/musicpt/${music?.id}`);
         }}>
-        <Image
-          className={cn({
+        <div
+          className={cn('relative aspect-square w-full', {
             hidden: selectLang === 'jp',
             block: selectLang === 'ko',
-          })}
-          priority={true}
-          src={music?.kothumbnail ? music?.kothumbnail : '/default_card.png'}
-          alt={music?.kotitle ? music?.kotitle + '이미지' : '음악 썸네일'}
-          width={0}
-          height={0}
-          sizes='100vw'
-          style={{width: '100%', height: '100%', objectFit: 'cover'}}
-        />
-        <Image
-          className={cn({
+          })}>
+          {selectLang === 'ko' &&
+            (music?.kothumbnail ? (
+              <Image
+                src={music?.kothumbnail}
+                fill={true}
+                sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
+                alt={'음악'}
+                loading='lazy'
+                placeholder='blur'
+                blurDataURL={music?.kothumbnail}
+              />
+            ) : (
+              <DefaultImageSquare />
+            ))}
+        </div>
+        <div
+          className={cn('relative aspect-square w-full', {
             hidden: selectLang === 'ko',
             block: selectLang === 'jp',
-          })}
-          priority={true}
-          src={music?.jpthumbnail ? music?.jpthumbnail : '/default_card.png'}
-          alt={music?.jptitle ? music?.jptitle + '이미지' : '음악 썸네일'}
-          width={0}
-          height={0}
-          sizes='100vw'
-          style={{width: '100%', height: '100%', objectFit: 'cover'}}
-        />
+          })}>
+          {selectLang === 'jp' &&
+            (music?.jpthumbnail ? (
+              <Image
+                src={music?.jpthumbnail}
+                fill={true}
+                sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
+                alt={'음악'}
+                loading='lazy'
+                placeholder='blur'
+                blurDataURL={music?.jpthumbnail}
+              />
+            ) : (
+              <DefaultImageSquare />
+            ))}
+        </div>
       </div>
       <div className='absolute right-0 top-12 flex gap-2'>
         <LangButton
