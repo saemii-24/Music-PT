@@ -15,8 +15,10 @@ import {useRecoilState, useRecoilValue} from 'recoil';
 import {languageMode, needRefetch} from '@/recoil';
 
 import cn from 'classnames';
+
 import LikeCount from './LikeCount';
 import LangButton from './LangButton';
+import DefaultImageSquare from './DefaultImageSquare';
 
 type LangType = 'ko' | 'jp';
 
@@ -51,33 +53,46 @@ export default function MusicProfile({
               jplyrics={music?.jplyrics}
             />
           </div>
-          <Image
-            className={cn({
-              block: selectLang === 'ko',
+          <div
+            className={cn('relative aspect-square w-full', {
               hidden: selectLang === 'jp',
-            })}
-            priority={true}
-            src={music?.kothumbnail ? music?.kothumbnail : '/default_card.png'}
-            alt={music?.kotitle ? music?.kotitle + '이미지' : '음악 썸네일'}
-            width={0}
-            height={0}
-            sizes='100vw'
-            style={{width: '100%', height: '100%', objectFit: 'cover'}}
-          />
-
-          <Image
-            className={cn({
-              block: selectLang === 'jp',
+              block: selectLang === 'ko',
+            })}>
+            {selectLang === 'ko' &&
+              (music?.kothumbnail ? (
+                <Image
+                  src={music?.kothumbnail}
+                  fill={true}
+                  sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
+                  alt={'음악'}
+                  loading='lazy'
+                  placeholder='blur'
+                  blurDataURL={music?.kothumbnail}
+                />
+              ) : (
+                <DefaultImageSquare />
+              ))}
+          </div>
+          <div
+            className={cn('relative aspect-square w-full', {
               hidden: selectLang === 'ko',
-            })}
-            priority={true}
-            src={music?.jpthumbnail ? music?.jpthumbnail : '/default_card.png'}
-            alt={music?.jptitle ? music?.jptitle + '이미지' : '음악 썸네일'}
-            width={0}
-            height={0}
-            sizes='100vw'
-            style={{width: '100%', height: '100%', objectFit: 'cover'}}
-          />
+              block: selectLang === 'jp',
+            })}>
+            {selectLang === 'jp' &&
+              (music?.jpthumbnail ? (
+                <Image
+                  src={music?.jpthumbnail}
+                  fill={true}
+                  sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
+                  alt={'음악'}
+                  loading='lazy'
+                  placeholder='blur'
+                  blurDataURL={music?.jpthumbnail}
+                />
+              ) : (
+                <DefaultImageSquare />
+              ))}
+          </div>
         </div>
         <div className='col-span-3 mb-[0.4rem] mt-5 2xl:col-span-4'>
           <LikeCount music={music} />
