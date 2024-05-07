@@ -76,18 +76,20 @@ const MusicCard = ({musicData}: {musicData: SupabaseType}) => {
             hidden: selectLang === 'ko',
             block: selectLang === 'jp',
           })}>
-          {selectLang === 'jp' && (
-            <Image
-              src={jpthumbnail ? jpthumbnail : '/default_card.svg'}
-              fill={true}
-              sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
-              alt={'음악'}
-              loading='lazy'
-              placeholder='blur'
-              blurDataURL={jpthumbnail ? jpthumbnail : '/default_card.svg'}
-              // onLoad={(e) => console.log(e)}
-            />
-          )}
+          {selectLang === 'jp' &&
+            (jpthumbnail ? (
+              <Image
+                src={jpthumbnail}
+                fill={true}
+                sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
+                alt={'음악'}
+                loading='lazy'
+                placeholder='blur'
+                blurDataURL={jpthumbnail}
+              />
+            ) : (
+              <DefaultImage />
+            ))}
         </div>
       </Link>
       <div className='h-[150px] p-5'>
