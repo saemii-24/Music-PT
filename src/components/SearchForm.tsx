@@ -1,4 +1,4 @@
-import {language, languageMode} from '@/recoil';
+import {languageMode} from '@/recoil';
 import {SelectType} from '@/types/form';
 import cn from 'classnames';
 import {Dispatch, SetStateAction, useEffect, useState} from 'react';
@@ -10,6 +10,7 @@ import {
 import {GoTriangleDown} from 'react-icons/go';
 import {IoMdSearch} from 'react-icons/io';
 import {useRecoilValue} from 'recoil';
+import {memo} from 'react';
 
 interface SearchFormProps {
   setSearch: Dispatch<string>;
@@ -23,7 +24,7 @@ interface SearchFormProps {
   setSelectOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function SearchForm({
+const SearchForm = ({
   setSearch,
   register,
   handleSubmit,
@@ -33,7 +34,7 @@ export default function SearchForm({
   setClientSelect,
   selectOpen,
   setSelectOpen,
-}: SearchFormProps) {
+}: SearchFormProps) => {
   const lan = useRecoilValue(languageMode);
 
   useEffect(() => {
@@ -168,4 +169,6 @@ export default function SearchForm({
       </div>
     </form>
   );
-}
+};
+
+export default memo(SearchForm);

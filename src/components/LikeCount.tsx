@@ -7,12 +7,13 @@ import {useQuery} from '@tanstack/react-query';
 import {toast} from 'react-toastify';
 import {useRecoilValue} from 'recoil';
 import {languageMode} from '@/recoil';
+import {memo} from 'react';
 
 type LikeType = {
   music: SupabaseType;
 };
 
-export default function LikeCount({music}: LikeType) {
+const LikeCount = ({music}: LikeType) => {
   const {data: session} = useSession();
   const lan = useRecoilValue(languageMode);
 
@@ -92,4 +93,6 @@ export default function LikeCount({music}: LikeType) {
       </div>
     </div>
   );
-}
+};
+
+export default memo(LikeCount);

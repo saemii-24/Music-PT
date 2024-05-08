@@ -47,9 +47,6 @@ const MusicCard = ({musicData}: {musicData: SupabaseType}) => {
     <div className='mt-20 w-full overflow-hidden rounded-lg bg-white shadow-sm'>
       <Link
         href={`/musicpt/${musicData.id}`}
-        // onClick={() => {
-        //   route.push(`/musicpt/${musicData.id}`);
-        // }}
         className='block aspect-[8/5] w-full cursor-pointer overflow-hidden '>
         <div
           className={cn('relative aspect-square w-full', {

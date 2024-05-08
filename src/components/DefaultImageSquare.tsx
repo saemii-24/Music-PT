@@ -6,7 +6,11 @@ export default function DefaultImageSquare() {
       viewBox='0 0 350 350'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'>
-      <rect width='350' height='350' fill='#E5E8EA' />
+      <rect
+        width='350'
+        height='350'
+        className='fill-[#E5E8EA] dark:fill-[#3D4353]'
+      />
       <rect
         x='26'
         y='151.301'

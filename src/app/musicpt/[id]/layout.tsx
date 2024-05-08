@@ -6,8 +6,9 @@ import axios from 'axios';
 import MusicProfile from '@/components/MusicProfile';
 import {atom, useRecoilState} from 'recoil';
 import {musicAtom, needRefetch} from '@/recoil';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import SK_MusicProfile from '@/app/skeleton/SK_MusicProfile';
+import Count from '@/components/Count';
 
 interface ParamsChildrenProps {
   params: {id: string};

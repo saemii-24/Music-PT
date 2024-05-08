@@ -1,12 +1,9 @@
 'use client';
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useState, memo} from 'react';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {useSession} from 'next-auth/react';
-
-import {IoPlayCircleOutline} from 'react-icons/io5';
 
 import type {LanguageType, SupabaseType} from '@/types/form';
 import {deleteMusic} from '@/utils/form';
@@ -19,16 +16,11 @@ import cn from 'classnames';
 import LikeCount from './LikeCount';
 import LangButton from './LangButton';
 import DefaultImageSquare from './DefaultImageSquare';
+import YoutubeButton from './YoutubeButton';
 
 type LangType = 'ko' | 'jp';
 
-export default function MusicProfile({
-  music,
-  id,
-}: {
-  music: SupabaseType;
-  id: string;
-}) {
+const MusicProfile = ({music, id}: {music: SupabaseType; id: string}) => {
   const route = useRouter();
   const lan: LanguageType = useRecoilValue(languageMode);
 
@@ -137,37 +129,10 @@ export default function MusicProfile({
         <div className='col-span-3 text-black lg:col-span-3 2xl:col-span-4 '>
           {selectLang === 'ko' ? music?.korelease : music?.jprelease}
         </div>
-        <div className=' col-span-4 mb-10 mt-5 flex gap-6 lg:col-span-4 2xl:col-span-5 '>
-          {music?.koyoutube ? (
-            <Link
-              href={music?.koyoutube}
-              target='_blank'
-              className='flex items-center justify-center gap-2 break-keep rounded-md border-2 border-music-orange px-3 py-2 text-sm font-semibold text-music-orange shadow-sm transition hover:bg-music-orange hover:text-[#fff] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-              <IoPlayCircleOutline className='text-lg' />
-              {lan['music-youtube-ko']}
-            </Link>
-          ) : (
-            <div className=' flex items-center justify-center gap-2 break-keep rounded-md bg-music-disable px-3 py-2 text-sm font-semibold text-[#333] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:text-[#575B6C]'>
-              <IoPlayCircleOutline className='text-lg' />
-              {lan['music-youtube-ko']}
-            </div>
-          )}
-          {music?.jpyoutube ? (
-            <Link
-              href={music?.jpyoutube}
-              target='_blank'
-              className='flex items-center justify-center gap-2 break-keep rounded-md border-2 border-music-orange px-3 py-2 text-sm font-semibold text-music-orange shadow-sm transition hover:bg-music-orange hover:text-[#fff] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-              <IoPlayCircleOutline className='text-lg' />
-              {lan['music-youtube-jp']}
-            </Link>
-          ) : (
-            <div className=' flex items-center justify-center gap-2 break-keep rounded-md bg-music-disable px-3 py-2 text-sm font-semibold text-[#333] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:text-[#575B6C]'>
-              <IoPlayCircleOutline className='text-lg' />
-              {lan['music-youtube-jp']}
-            </div>
-          )}
-        </div>
+        <YoutubeButton music={music} lan={lan} />
       </div>
     </section>
   );
-}
+};
+
+export default memo(MusicProfile);

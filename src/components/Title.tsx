@@ -1,5 +1,6 @@
 'use client';
 import {languageMode} from '@/recoil';
+import {memo} from 'react';
 import {useRecoilValue} from 'recoil';
 
 interface TitleProps {
@@ -8,7 +9,7 @@ interface TitleProps {
     description: string;
   };
 }
-export default function Title({titleInfo}: TitleProps) {
+const Title = ({titleInfo}: TitleProps) => {
   const {title, description} = titleInfo;
   const lan = useRecoilValue(languageMode);
   return (
@@ -19,4 +20,6 @@ export default function Title({titleInfo}: TitleProps) {
       <p className='mt-2 leading-6 text-music-subtitle'>{description}</p>
     </div>
   );
-}
+};
+
+export default memo(Title);

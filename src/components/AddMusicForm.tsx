@@ -10,17 +10,16 @@ import {formSubmit} from '@/utils/form';
 import {useRouter} from 'next/navigation';
 
 import SubmitButton from './SubmitButton';
-import {useState} from 'react';
+import {memo, useState} from 'react';
 import cn from 'classnames';
 import MusicFormKo from './MusicFormKo';
 import MusicFormJp from './MusicFormJp';
 
 type UploadVerType = 'ko' | 'jp';
 
-export default function AddMusicForm() {
+const AddMusicForm = () => {
   //recoil 언어모드
   const lan: LanguageType = useRecoilValue(languageMode);
-  console.log(lan);
   const route = useRouter();
 
   //react-hook-form
@@ -82,4 +81,6 @@ export default function AddMusicForm() {
       <SubmitButton />
     </form>
   );
-}
+};
+
+export default memo(AddMusicForm);
