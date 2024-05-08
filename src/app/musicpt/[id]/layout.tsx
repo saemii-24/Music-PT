@@ -6,8 +6,9 @@ import axios from 'axios';
 import MusicProfile from '@/components/MusicProfile';
 import {atom, useRecoilState} from 'recoil';
 import {musicAtom, needRefetch} from '@/recoil';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import SK_MusicProfile from '@/app/skeleton/SK_MusicProfile';
+import Count from '@/components/Count';
 
 interface ParamsChildrenProps {
   params: {id: string};
@@ -23,6 +24,7 @@ export default function MusicPtLayout({
   //recoil
   const [musicData, setMusicData] = useRecoilState(musicAtom);
   const [needFetch, setNeedFetch] = useRecoilState(needRefetch);
+  const [count, setCount] = useState<number>(0);
 
   //tanstack query사용
   const getMusicData = async () => {
@@ -60,6 +62,7 @@ export default function MusicPtLayout({
 
   return (
     <div className='flex-1 dark:bg-music-background'>
+      <Count setCount={setCount} count={count} />
       <main className='my-20'>
         <MusicProfile music={music?.post} id={id} />
         <div>{children}</div>

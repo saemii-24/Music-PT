@@ -1,23 +1,21 @@
 'use client';
-import type {LangType, StatusType} from '@/types/form';
+import {useState, memo} from 'react';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
-import {useState} from 'react';
+import Link from 'next/link';
+
+import type {LangType, StatusType} from '@/types/form';
+
 import cn from 'classnames';
 import LikeCount from './LikeCount';
 import LangButton from './LangButton';
 import DefaultImageSquare from './DefaultImageSquare';
 import SK_SearchCard from '@/app/skeleton/SK_SeachCard';
+
 import {useRecoilValue} from 'recoil';
 import {languageMode} from '@/recoil';
 
-export default function SearchMusicCard({
-  music,
-  status,
-}: {
-  music: any;
-  status: StatusType;
-}) {
+const SearchMusicCard = ({music, status}: {music: any; status: StatusType}) => {
   const lan = useRecoilValue(languageMode);
 
   const route = useRouter();
@@ -32,11 +30,11 @@ export default function SearchMusicCard({
 
   return (
     <div className=' relative flex cursor-pointer items-center gap-10 py-10 sm:flex sm:flex-row'>
-      <div
+      <Link
         className='aspect-square w-[full] overflow-hidden rounded-xl sm:w-[10.5rem] '
+        href={`/musicpt/${music?.id}`}
         onClick={(e) => {
           e.stopPropagation();
-          route.push(`/musicpt/${music?.id}`);
         }}>
         <div
           className={cn('relative aspect-square w-full', {
@@ -78,7 +76,7 @@ export default function SearchMusicCard({
               <DefaultImageSquare />
             ))}
         </div>
-      </div>
+      </Link>
       <div className='absolute right-0 top-12 flex gap-2'>
         <LangButton
           setSelectLang={setSelectLang}
@@ -118,4 +116,6 @@ export default function SearchMusicCard({
       </div>
     </div>
   );
-}
+};
+
+export default memo(SearchMusicCard);

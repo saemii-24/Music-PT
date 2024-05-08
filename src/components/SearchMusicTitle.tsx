@@ -1,4 +1,6 @@
-export default function SearchMusicTitle({lan}: {lan: any}) {
+import {memo} from 'react';
+
+const SearchMusicTitle = ({lan}: {lan: any}) => {
   return (
     <div className='border-gray-900/10 text-black'>
       <h1 className='flex flex-col gap-3 text-4xl font-extrabold text-black'>
@@ -9,4 +11,5 @@ export default function SearchMusicTitle({lan}: {lan: any}) {
       </p>
     </div>
   );
-}
+};
+export default memo(SearchMusicTitle);
