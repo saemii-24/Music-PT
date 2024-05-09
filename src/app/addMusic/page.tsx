@@ -4,6 +4,7 @@ import {languageMode} from '@/recoil';
 import {useRecoilValue} from 'recoil';
 import Title from '@/components/Title';
 import {useState, useMemo} from 'react';
+import Count from '@/components/Count';
 
 export default function AddMusic() {
   const lan = useRecoilValue(languageMode);
@@ -13,17 +14,9 @@ export default function AddMusic() {
       description: lan['addmusic-description'],
     };
   }, [lan]);
-  const [count, setCount] = useState(0);
 
   return (
     <main className=' flex-1 dark:bg-music-background'>
-      <div
-        onClick={() => {
-          setCount(count + 1);
-        }}>
-        <button>+</button>
-        <div>{count}</div>
-      </div>
       <div className='container py-20'>
         <Title titleInfo={titleInfo} />
         <AddMusicForm />

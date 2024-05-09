@@ -1,5 +1,5 @@
 'use client';
-import React, {useEffect, useState} from 'react';
+import React, {memo, useCallback, useEffect, useState} from 'react';
 
 import {MdOutlineUpdate} from 'react-icons/md';
 
@@ -9,34 +9,33 @@ import type {MusicPtPropsOmitId} from '@/types/form';
 import {language, languageMode} from '@/recoil';
 import {useRecoilValue} from 'recoil';
 
-export default function MusicDetail({
-  music,
-  lyricsVer,
-  setLyricsVer,
-}: MusicPtPropsOmitId) {
+const MusicDetail = ({music, lyricsVer, setLyricsVer}: MusicPtPropsOmitId) => {
   const lan = useRecoilValue(languageMode);
   const nowLanguage = useRecoilValue(language);
 
   const [thisTitle, setThisTitle] = useState<string>(lan['music-title-korean']);
 
-  const setTitle = (lyricsVer: string) => {
-    switch (lyricsVer) {
-      case 'koVer':
-        setThisTitle(lan['music-title-korean']);
-        break;
-      case 'jpVer':
-        setThisTitle(lan['music-title-japanese']);
-        break;
-      case 'koCompare':
-        setThisTitle(lan['music-title-jpver-korean']);
-        break;
-      case 'jpCompare':
-        setThisTitle(lan['music-title-kover-japanese']);
-        break;
-      default:
-        setThisTitle(lan['music-title-korean']);
-    }
-  };
+  const setTitle = useCallback(
+    (lyricsVer: string) => {
+      switch (lyricsVer) {
+        case 'koVer':
+          setThisTitle(lan['music-title-korean']);
+          break;
+        case 'jpVer':
+          setThisTitle(lan['music-title-japanese']);
+          break;
+        case 'koCompare':
+          setThisTitle(lan['music-title-jpver-korean']);
+          break;
+        case 'jpCompare':
+          setThisTitle(lan['music-title-kover-japanese']);
+          break;
+        default:
+          setThisTitle(lan['music-title-korean']);
+      }
+    },
+    [lan],
+  );
 
   useEffect(() => {
     setTitle(lyricsVer);
@@ -112,4 +111,6 @@ export default function MusicDetail({
       </article>
     </section>
   );
-}
+};
+
+export default memo(MusicDetail);

@@ -156,6 +156,8 @@ export interface LanguageType {
   'edit-lyrics-description': string;
   'edit-lyrics-korean': string;
   'edit-lyrics-japanese': string;
+  'edit-music-title': string;
+  'edit-music-description': string;
   'addtranslate-description-korean': string;
   'addtranslate-description-japanese': string;
   'addtranslate-title-korean': string;

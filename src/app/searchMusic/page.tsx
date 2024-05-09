@@ -14,7 +14,6 @@ import SearchForm from '@/components/SearchForm';
 import SearchMusicCard from '@/components/SearchMusicCard';
 import MusicCard from '@/components/MusicCard';
 import SearchMusicTitle from '@/components/SearchMusicTitle';
-import Count from '@/components/Count';
 
 import SK_SearchCard from '../skeleton/SK_SeachCard';
 

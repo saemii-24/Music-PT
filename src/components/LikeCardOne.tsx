@@ -3,9 +3,9 @@ import {useRouter} from 'next/navigation';
 import LangButton from './LangButton';
 import Like from './Like';
 import {LangType, SupabaseType} from '@/types/form';
-import {useState} from 'react';
+import {memo, useState} from 'react';
 
-export default function LikeCardOne({music}: {music: SupabaseType}) {
+const LikeCardOne = ({music}: {music: SupabaseType}) => {
   const route = useRouter();
 
   const [selectLang, setSelectLang] = useState<LangType>('ko');
@@ -38,4 +38,6 @@ export default function LikeCardOne({music}: {music: SupabaseType}) {
       </div>
     </div>
   );
-}
+};
+
+export default memo(LikeCardOne);

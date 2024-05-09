@@ -14,6 +14,24 @@ type ButtonPropsType = {
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
+// 아이콘 반환
+const getIconComponent = (icon: string) => {
+  switch (icon) {
+    case 'add':
+      return <CgAddR className='text-lg' />;
+    case 'modify':
+      return <FiEdit className='text-lg' />;
+    case 'translate':
+      return <BsTranslate className='text-lg' />;
+    case 'divide':
+      return <FaRegWindowRestore className='text-lg' />;
+    case 'home':
+      return <FaHome className='text-lg' />;
+    default:
+      return <FiEdit className='text-lg' />;
+  }
+};
+
 export default function Button({
   addclass = '',
   defaultclass = true,
@@ -21,24 +39,6 @@ export default function Button({
   text,
   onClick,
 }: ButtonPropsType) {
-  // 아이콘 반환
-  const getIconComponent = (icon: string) => {
-    switch (icon) {
-      case 'add':
-        return <CgAddR className='text-lg' />;
-      case 'modify':
-        return <FiEdit className='text-lg' />;
-      case 'translate':
-        return <BsTranslate className='text-lg' />;
-      case 'divide':
-        return <FaRegWindowRestore className='text-lg' />;
-      case 'home':
-        return <FaHome className='text-lg' />;
-      default:
-        return <FiEdit className='text-lg' />;
-    }
-  };
-
   return (
     <button
       onClick={onClick}
