@@ -2,10 +2,10 @@
 import {language, languageMode} from '@/recoil';
 import {MusicPtProps} from '@/types/form';
 import cn from 'classnames';
-import {useEffect, useState} from 'react';
+import {memo, useEffect, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
-export default function MusicCompare({lyricsVer, music, id}: MusicPtProps) {
+const MusicCompare = ({lyricsVer, music, id}: MusicPtProps) => {
   let [thisLyrics, setThisLyrics] = useState<string | null | undefined>();
   let [thisTranslate, setThisTranslate] = useState<string | null | undefined>();
 
@@ -88,4 +88,5 @@ export default function MusicCompare({lyricsVer, music, id}: MusicPtProps) {
       </div>
     </article>
   );
-}
+};
+export default memo(MusicCompare);

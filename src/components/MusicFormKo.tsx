@@ -29,15 +29,9 @@ export default function MusicFormKo({
   return (
     <>
       {/* 음악 정보 업로드 */}
-      <MusicFormMusic
-
-        register={register}
-        errors={errors}
-        uploadVer={'ko'}
-      />
+      <MusicFormMusic register={register} errors={errors} uploadVer={'ko'} />
       {/* 앨범 정보 업로드 */}
       <MusicFormAlbum
-
         register={register}
         errors={errors}
         watch={watch}

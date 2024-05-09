@@ -69,6 +69,8 @@
   "edit-lyrics-description": "verの歌詞を修正します。",
   "edit-lyrics-korean": "韓国語",
   "edit-lyrics-japanese": "日本語",
+  "edit-music-title": "音楽編集",
+  "edit-music-description": "既存の音楽情報を編集します。",
   "addtranslate-description-korean": "韓国語の歌詞を日本語に翻訳します。",
   "addtranslate-description-japanese": "日本語の歌詞を韓国語に翻訳します。",
   "addtranslate-title-korean": "日本語翻訳登録",

@@ -3,6 +3,7 @@
 import MusicCompare from '@/components/MusicCompare';
 import MusicDetail from '@/components/MusicDetail';
 import MusicLyrics from '@/components/MusicLyrics';
+import Count from '@/components/Count';
 import {musicAtom} from '@/recoil';
 import type {LyricsVerType, ParamsProps} from '@/types/form';
 

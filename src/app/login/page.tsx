@@ -56,10 +56,8 @@ export default function Login() {
                 priority={true}
                 src={'/kakao.svg'}
                 alt='카카오 로고'
-                width={0}
-                height={0}
-                sizes='100vw'
-                style={{width: '100%', height: '100%', objectFit: 'cover'}}
+                width={20}
+                height={20}
               />
             </div>
             <span className='text-[#191919]'>{lan['login-kakao']}</span>

@@ -5,6 +5,11 @@ import axios from 'axios';
 
 import EditMusicForm from '@/components/EditMusicForm';
 import Title from '@/components/Title';
+import Count from '@/components/Count';
+import {useMemo, useState} from 'react';
+
+import {languageMode} from '@/recoil';
+import {useRecoilValue} from 'recoil';
 
 interface ParamsChildrenProps {
   params: {id: string};
@@ -22,6 +27,14 @@ export default function EditMusic({
     const {data} = await axios.get(`/api/music/${id}`);
     return data;
   };
+  const lan = useRecoilValue(languageMode);
+
+  const titleInfo = useMemo(() => {
+    return {
+      title: lan['edit-music-title'],
+      description: lan['edit-music-description'],
+    };
+  }, [lan]);
 
   const {
     status,
@@ -34,11 +47,6 @@ export default function EditMusic({
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
-
-  const titleInfo = {
-    title: '음악 수정하기',
-    description: '기존에 등록한 음악 내용을 수정합니다.',
-  };
 
   return (
     <main className=' flex-1 dark:bg-music-background'>

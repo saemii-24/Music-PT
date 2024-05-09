@@ -5,12 +5,12 @@ import Button from './Button';
 import type {MusicPtProps} from '@/types/form';
 
 import {useRouter} from 'next/navigation';
-import React, {useEffect, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import MusicLyricsNone from './MusicLyricsNone';
 import {useRecoilValue} from 'recoil';
 import {languageMode} from '@/recoil';
 
-export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
+const Lyrics = ({lyricsVer, music, id}: MusicPtProps) => {
   const route = useRouter();
 
   let [condition, setCondition] = useState<number>(11);
@@ -216,4 +216,6 @@ export default function Lyrics({lyricsVer, music, id}: MusicPtProps) {
       </div>
     </article>
   );
-}
+};
+
+export default memo(Lyrics);

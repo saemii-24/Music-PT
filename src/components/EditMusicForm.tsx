@@ -1,5 +1,5 @@
 'use client';
-import {useState} from 'react';
+import {memo, useState} from 'react';
 import cn from 'classnames';
 
 import {useForm} from 'react-hook-form';
@@ -17,13 +17,13 @@ import {useRecoilState, useRecoilValue} from 'recoil';
 
 type UploadVerType = 'ko' | 'jp';
 
-export default function EditMusicForm({
+const EditMusicForm = ({
   id,
   music,
 }: {
   id: string;
   music: Partial<SupabaseType>;
-}) {
+}) => {
   const route = useRouter();
   const lan: LanguageType = useRecoilValue(languageMode);
 
@@ -107,4 +107,6 @@ export default function EditMusicForm({
       <SubmitButton />
     </form>
   );
-}
+};
+
+export default memo(EditMusicForm);

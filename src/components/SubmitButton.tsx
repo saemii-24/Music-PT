@@ -1,7 +1,8 @@
 import {languageMode} from '@/recoil';
+import {memo} from 'react';
 import {useRecoilValue} from 'recoil';
 
-export default function SubmitButton() {
+const SubmitButton = () => {
   //recoil 언어모드
   const lan = useRecoilValue(languageMode);
 
@@ -19,4 +20,5 @@ export default function SubmitButton() {
       </button>
     </div>
   );
-}
+};
+export default memo(SubmitButton);

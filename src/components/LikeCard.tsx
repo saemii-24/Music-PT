@@ -34,7 +34,6 @@ export default function LikeCard() {
   } = useQuery({
     queryKey: ['likeAll'],
     queryFn: getLikeAllData,
-    refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
