@@ -18,14 +18,14 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  compiler: {
-    removeConsole: {
-      exclude: ['error', 'warn'],
-    },
-  },
+  // compiler: {
+  //   removeConsole: {
+  //     exclude: ['error', 'warn'],
+  //   },
+  // },
   images: {
-    imageSizes: [16, 32, 48, 64, 96],
-    deviceSizes: [640, 750, 828, 1080, 1200],
+    imageSizes: [300, 700, 400],
+    deviceSizes: [640, 768, 1024],
     remotePatterns: [
       {
         protocol: 'https',

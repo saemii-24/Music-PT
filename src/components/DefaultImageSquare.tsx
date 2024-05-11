@@ -1,8 +1,7 @@
 export default function DefaultImageSquare() {
   return (
     <svg
-      width='initial'
-      height='initial'
+      width='100%'
       viewBox='0 0 350 350'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'>
@@ -84,11 +83,11 @@ export default function DefaultImageSquare() {
         cy='175.013'
         r='76.0128'
         className='fill-[#E5E8EA] stroke-[#ffffff] dark:fill-[#3D4353] dark:stroke-[#9A9EAD]'
-        stroke-width='8'
+        strokeWidth='8'
       />
       <path
-        fill-rule='evenodd'
-        clip-rule='evenodd'
+        fillRule='evenodd'
+        clipRule='evenodd'
         d='M211.184 173.256C211.206 172.735 211.217 172.211 211.217 171.685C211.217 151.683 195.002 135.468 175 135.468C154.998 135.468 138.783 151.683 138.783 171.685C138.783 172.211 138.794 172.735 138.817 173.256H131.811C131.793 172.735 131.783 172.211 131.783 171.685C131.783 147.817 151.132 128.468 175 128.468C198.868 128.468 218.217 147.817 218.217 171.685C218.217 172.211 218.208 172.735 218.189 173.256H211.184Z'
         className='fill-[#ffffff] dark:fill-[#9A9EAD]'
       />

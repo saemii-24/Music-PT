@@ -18,24 +18,38 @@ type ThemeType = 'light' | 'dark';
 
 export default function Header() {
   // theme 값 가져오기
-  const initialTheme: ThemeType =
-    typeof window !== 'undefined'
-      ? (localStorage.getItem('theme') as ThemeType) || 'light'
-      : 'light';
-  const [theme, setTheme] = useState<ThemeType>(initialTheme);
+  const [theme, setTheme] = useState<ThemeType>('light');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('theme', theme);
-      if (theme === 'dark') {
-        const htmlElement = document.querySelector('html') as HTMLElement;
-        htmlElement.classList.add('dark');
+      const storedTheme = localStorage.getItem('theme') as ThemeType;
+
+      if (storedTheme) {
+        if (storedTheme === 'dark') {
+          setDarkTheme();
+        } else if (storedTheme === 'light') {
+          setLightTheme();
+        }
       } else {
-        const htmlElement = document.querySelector('html') as HTMLElement;
-        htmlElement.classList.remove('dark');
+        setLightTheme();
       }
     }
-  }, [theme]);
+  }, []);
+
+  //theme 설정 함수들
+  const setLightTheme = () => {
+    localStorage.setItem('theme', 'light');
+    setTheme('light');
+    const htmlElement = document.querySelector('html') as HTMLElement;
+    htmlElement.classList.remove('dark');
+  };
+
+  const setDarkTheme = () => {
+    localStorage.setItem('theme', 'dark');
+    setTheme('dark');
+    const htmlElement = document.querySelector('html') as HTMLElement;
+    htmlElement.classList.add('dark');
+  };
 
   //recoil값
   const [nowLanguage, setNowLanguage] = useRecoilState(language);
@@ -170,6 +184,7 @@ export default function Header() {
               <IoMoon
                 onClick={() => {
                   setTheme('light');
+                  setLightTheme();
                 }}
                 className='text-lg text-music-bluegray'
               />
@@ -177,6 +192,7 @@ export default function Header() {
               <FiSun
                 onClick={() => {
                   setTheme('dark');
+                  setDarkTheme();
                 }}
                 className='text-lg text-music-bluegray'
               />
@@ -266,6 +282,7 @@ export default function Header() {
               <IoMoon
                 onClick={() => {
                   setTheme('light');
+                  setLightTheme();
                 }}
                 className='cursor-pointer text-lg'
               />
@@ -273,6 +290,7 @@ export default function Header() {
               <FiSun
                 onClick={() => {
                   setTheme('dark');
+                  setDarkTheme();
                 }}
                 className='cursor-pointer text-lg'
               />

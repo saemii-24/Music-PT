@@ -55,11 +55,9 @@ const MusicProfile = ({music, id}: {music: SupabaseType; id: string}) => {
                 <Image
                   src={music?.kothumbnail}
                   fill={true}
-                  sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
-                  alt={'음악'}
-                  loading='lazy'
-                  placeholder='blur'
-                  blurDataURL={music?.kothumbnail}
+                  sizes='(min-width: 1280px) 300px (min-width: 1024px) 250px, (min-width: 640px) 600px, 100vw'
+                  alt={music?.kotitle + '앨범 이미지'}
+                  priority={true}
                 />
               ) : (
                 <DefaultImageSquare />
@@ -75,11 +73,8 @@ const MusicProfile = ({music, id}: {music: SupabaseType; id: string}) => {
                 <Image
                   src={music?.jpthumbnail}
                   fill={true}
-                  sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
-                  alt={'음악'}
-                  loading='lazy'
-                  placeholder='blur'
-                  blurDataURL={music?.jpthumbnail}
+                  sizes='(min-width: 1280px) 300px (min-width: 1024px) 250px, (min-width: 640px) 600px, 100vw'
+                  alt={music?.jptitle + '앨범 이미지'}
                 />
               ) : (
                 <DefaultImageSquare />
