@@ -18,8 +18,6 @@ export default function Login() {
   useEffect(() => {
     if (status === 'authenticated') {
       route.replace('/');
-    } else if (status === 'loading') {
-      //스켈레톤 추가 예정
     }
   }, [route, status]);
 

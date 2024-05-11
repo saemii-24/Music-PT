@@ -45,12 +45,9 @@ const SearchMusicCard = ({music, status}: {music: any; status: StatusType}) => {
             (music?.kothumbnail ? (
               <Image
                 src={music?.kothumbnail}
-                fill={true}
-                sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
-                alt={'음악'}
-                loading='lazy'
-                placeholder='blur'
-                blurDataURL={music?.kothumbnail}
+                width={168}
+                height={168}
+                alt={music?.kotitle + '앨범 이미지'}
               />
             ) : (
               <DefaultImageSquare />
@@ -65,12 +62,9 @@ const SearchMusicCard = ({music, status}: {music: any; status: StatusType}) => {
             (music?.jpthumbnail ? (
               <Image
                 src={music?.jpthumbnail}
-                fill={true}
-                sizes='(max-width: 768px) 100vw, (max-width: 1023px) 704px, 400px'
-                alt={'음악'}
-                loading='lazy'
-                placeholder='blur'
-                blurDataURL={music?.jpthumbnail}
+                width={168}
+                height={168}
+                alt={music?.jptitle + '앨범 이미지'}
               />
             ) : (
               <DefaultImageSquare />

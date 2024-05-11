@@ -6,6 +6,7 @@ import {SupabaseType} from '@/types/form';
 
 export const mode = atom<string>({
   key: 'theme',
+  // default: 'light',
   default:
     typeof window !== 'undefined'
       ? localStorage.getItem('theme') || 'light'
@@ -14,6 +15,7 @@ export const mode = atom<string>({
 
 export const language = atom<string>({
   key: 'nowLanguage',
+  // default: 'ko',
   default:
     typeof window !== 'undefined'
       ? navigator.languages.some((lang) => lang.startsWith('ja'))

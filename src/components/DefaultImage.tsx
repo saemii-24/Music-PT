@@ -1,14 +1,8 @@
-import {mode} from '@/recoil';
-import {useRecoilValue} from 'recoil';
-
 export default function DefaultImage() {
-  const thisMode = useRecoilValue(mode);
-
   return (
     <div className='h-auto w-full'>
       <svg
-        width='initial'
-        height='initial'
+        width='100%'
         viewBox='0 0 350 350'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'>
@@ -90,11 +84,11 @@ export default function DefaultImage() {
           cy='115'
           r='76.0128'
           className='fill-[#E5E8EA] stroke-[#ffffff] dark:fill-[#3D4353] dark:stroke-[#9A9EAD]'
-          stroke-width='8'
+          strokeWidth='8'
         />
         <path
-          fill-rule='evenodd'
-          clip-rule='evenodd'
+          fillRule='evenodd'
+          clipRule='evenodd'
           d='M211.184 113.244C211.206 112.723 211.217 112.199 211.217 111.672C211.217 91.67 195.002 75.4551 175 75.4551C154.998 75.4551 138.783 91.67 138.783 111.672C138.783 112.199 138.794 112.723 138.817 113.244H131.811C131.793 112.722 131.783 112.198 131.783 111.672C131.783 87.804 151.132 68.4551 175 68.4551C198.868 68.4551 218.217 87.804 218.217 111.672C218.217 112.198 218.208 112.722 218.189 113.244H211.184Z'
           className='fill-[#ffffff] dark:fill-[#9A9EAD]'
         />
