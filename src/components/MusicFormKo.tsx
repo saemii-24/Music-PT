@@ -25,7 +25,7 @@ export default function MusicFormKo({
   watch,
   reset,
 }: MusicFormLyricsProps) {
-  const lan: LanguageType = useRecoilValue(languageMode);
+  const lan = useRecoilValue(languageMode);
   return (
     <>
       {/* 음악 정보 업로드 */}

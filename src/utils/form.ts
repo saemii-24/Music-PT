@@ -19,7 +19,7 @@ import {FieldValues} from 'react-hook-form';
 export const formSubmit = async (
   data: any,
   route: AppRouterInstance,
-  lan: LanguageType,
+  lan: any,
 ) => {
   // 로딩 메시지 표시
   const loadingToast = toast.loading(lan['toast-music-pending']);
@@ -284,7 +284,7 @@ export const editMusicForm = async (
   route: AppRouterInstance,
   music: Partial<SupabaseType>,
   setNeedFetch: SetterOrUpdater<boolean>,
-  lan: LanguageType,
+  lan: any,
 ) => {
   // 로딩 메시지 표시
   const loadingToast = toast.loading(lan['toast-music-pending']);

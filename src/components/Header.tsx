@@ -9,10 +9,11 @@ import {IoMenu, IoClose} from 'react-icons/io5';
 
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {language, languageMode} from '@/recoil/index';
+import {jpThumbnailAtom, koThumbnailAtom, checkImageAtom} from '@/recoil';
 import {useEffect, useState} from 'react';
 
 import {signOut, useSession} from 'next-auth/react';
-import {useRouter} from 'next/navigation';
+import {usePathname, useRouter} from 'next/navigation';
 
 type ThemeType = 'light' | 'dark';
 
@@ -21,18 +22,16 @@ export default function Header() {
   const [theme, setTheme] = useState<ThemeType>('light');
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedTheme = localStorage.getItem('theme') as ThemeType;
+    const storedTheme = localStorage.getItem('theme') as ThemeType;
 
-      if (storedTheme) {
-        if (storedTheme === 'dark') {
-          setDarkTheme();
-        } else if (storedTheme === 'light') {
-          setLightTheme();
-        }
-      } else {
+    if (storedTheme) {
+      if (storedTheme === 'dark') {
+        setDarkTheme();
+      } else if (storedTheme === 'light') {
         setLightTheme();
       }
+    } else {
+      setLightTheme();
     }
   }, []);
 
@@ -62,6 +61,19 @@ export default function Header() {
   //로그인 상태
   const {status, data} = useSession();
   const route = useRouter();
+
+  const pathname = usePathname();
+  const [koThumbnail, setKoThumbnail] = useRecoilState(koThumbnailAtom);
+  const [jpThumbnail, setJpThumbnail] = useRecoilState(jpThumbnailAtom);
+  const [checkImage, setCheckImage] = useRecoilState(checkImageAtom);
+
+  useEffect(() => {
+    if (pathname === '/addMusic') {
+      setKoThumbnail(null);
+      setJpThumbnail(null);
+      setCheckImage('none');
+    }
+  }, [pathname]);
 
   return (
     <header className='fixed z-[100] h-14 w-screen border-b-2 border-music-basicgray bg-white '>
@@ -118,6 +130,7 @@ export default function Header() {
                   {data?.user?.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
+                      className='block rounded-[100rem]'
                       src={data.user?.image}
                       alt='프로필 이미지'
                       width={20}

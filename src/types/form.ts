@@ -102,7 +102,12 @@ export interface LanguageType {
   'addmusic-input-link': string;
   'addmusic-album-title': string;
   'addmusic-album-description': string;
-  'addmusic-album-image': string;
+  'addmusic-album-image-none': string;
+  'addmusic-album-upload-none': string;
+  'addmusic-album-image-bad': string;
+  'addmusic-album-upload-bad': string;
+  'addmusic-album-image-ok': string;
+  'addmusic-album-upload-ok': string;
   'addmusic-album-upload': string;
   'addmusic-album-success': string;
   'addmusic-album-cancle': string;

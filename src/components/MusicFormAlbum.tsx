@@ -27,7 +27,7 @@ export default function MusicFormAlbum({
   reset,
   uploadVer,
 }: MusicFormLyricsProps) {
-  const lan: LanguageType = useRecoilValue(languageMode);
+  const lan = useRecoilValue(languageMode);
 
   //uploadVer에 따라서 register값 변경
   const album_lang: 'album_ko' | 'album_jp' = `album_${uploadVer}` as
@@ -60,7 +60,6 @@ export default function MusicFormAlbum({
                 type='text'
                 {...register(album_lang, {required: true})}
                 id='album'
-                autoComplete='family-name'
                 className='block w-[100%] rounded-md border-0 bg-white py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6 dark:ring-music-basicgray'
               />
               <Error
@@ -80,7 +79,6 @@ export default function MusicFormAlbum({
                 type='text'
                 {...register(release_lang, {required: true})}
                 id='release'
-                autoComplete='family-name'
                 className='block w-[100%] rounded-md border-0 bg-white py-1.5 text-black  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6 dark:ring-music-basicgray'
               />
               <Error

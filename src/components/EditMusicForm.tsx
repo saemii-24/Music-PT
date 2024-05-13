@@ -25,7 +25,7 @@ const EditMusicForm = ({
   music: Partial<SupabaseType>;
 }) => {
   const route = useRouter();
-  const lan: LanguageType = useRecoilValue(languageMode);
+  const lan = useRecoilValue(languageMode);
 
   //recoil
   const [needFetch, setNeedFetch] = useRecoilState(needRefetch);

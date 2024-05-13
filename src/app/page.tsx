@@ -8,6 +8,7 @@ import {needRefetch} from '@/recoil';
 import {useEffect} from 'react';
 import SK_Home from './skeleton/SK_Home';
 import MusicGrid from '@/components/MusicGrid';
+import Preview from '@/components/Preview';
 
 export default function Home() {
   // //recoil
