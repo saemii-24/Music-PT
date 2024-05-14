@@ -1,4 +1,5 @@
-import UploadImage from './UploadImage';
+import KoUploadImage from './KoUploadImage';
+import JpUploadImage from './JpUploadImage';
 import Error from './Error';
 
 import {
@@ -27,7 +28,7 @@ export default function MusicFormAlbum({
   reset,
   uploadVer,
 }: MusicFormLyricsProps) {
-  const lan: LanguageType = useRecoilValue(languageMode);
+  const lan = useRecoilValue(languageMode);
 
   //uploadVer에 따라서 register값 변경
   const album_lang: 'album_ko' | 'album_jp' = `album_${uploadVer}` as
@@ -60,11 +61,10 @@ export default function MusicFormAlbum({
                 type='text'
                 {...register(album_lang, {required: true})}
                 id='album'
-                autoComplete='family-name'
                 className='block w-[100%] rounded-md border-0 bg-white py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6 dark:ring-music-basicgray'
               />
               <Error
-                errors={uploadVer === 'ko' ? errors.album_ko : errors.album_jp}
+                errors={uploadVer === 'jp' ? errors.album_ko : errors.album_jp}
                 errorTitle={lan['error-album']}
               />
             </div>
@@ -80,7 +80,6 @@ export default function MusicFormAlbum({
                 type='text'
                 {...register(release_lang, {required: true})}
                 id='release'
-                autoComplete='family-name'
                 className='block w-[100%] rounded-md border-0 bg-white py-1.5 text-black  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-music-blue sm:text-sm sm:leading-6 dark:ring-music-basicgray'
               />
               <Error
@@ -98,12 +97,22 @@ export default function MusicFormAlbum({
             className='mt-6  block text-sm font-medium leading-6 text-black'>
             {lan['addmusic-input-thumbnail']}
           </label>
-          <UploadImage
-            watch={watch}
-            register={register}
-            reset={reset}
-            uploadVer={uploadVer}
-          />
+
+          {uploadVer === 'ko' ? (
+            <KoUploadImage
+              watch={watch}
+              register={register}
+              reset={reset}
+              uploadVer={uploadVer}
+            />
+          ) : (
+            <JpUploadImage
+              watch={watch}
+              register={register}
+              reset={reset}
+              uploadVer={uploadVer}
+            />
+          )}
         </div>
       </div>
     </div>

@@ -43,7 +43,6 @@ export default function EditMusic({
   } = useQuery({
     queryKey: ['music-pt', id],
     queryFn: getMusicData,
-    refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });

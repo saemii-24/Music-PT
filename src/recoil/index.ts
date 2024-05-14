@@ -6,7 +6,6 @@ import {SupabaseType} from '@/types/form';
 
 export const mode = atom<string>({
   key: 'theme',
-  // default: 'light',
   default:
     typeof window !== 'undefined'
       ? localStorage.getItem('theme') || 'light'
@@ -15,7 +14,6 @@ export const mode = atom<string>({
 
 export const language = atom<string>({
   key: 'nowLanguage',
-  // default: 'ko',
   default:
     typeof window !== 'undefined'
       ? navigator.languages.some((lang) => lang.startsWith('ja'))
@@ -40,4 +38,23 @@ export const musicAtom = atom<Partial<SupabaseType>>({
 export const needRefetch = atom<boolean>({
   key: 'musicRefetch',
   default: false,
+});
+
+export const koThumbnailAtom = atom<string | null | undefined>({
+  key: 'koThumbnail',
+  default: null,
+});
+export const jpThumbnailAtom = atom<string | null | undefined>({
+  key: 'jpThumbnail',
+  default: null,
+});
+type CheckImageType = 'ok' | 'bad' | 'none';
+
+export const koCheckImageAtom = atom<CheckImageType>({
+  key: 'koCheckImage',
+  default: 'none',
+});
+export const jpCheckImageAtom = atom<CheckImageType>({
+  key: 'jpCheckImage',
+  default: 'none',
 });

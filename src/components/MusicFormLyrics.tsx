@@ -38,7 +38,7 @@ export default function MusicFormLyrics({
         <div className='col-span-full'>
           <label
             htmlFor='lyrics'
-            className='block text-sm font-medium leading-6 text-black'>
+            className='mt-6 block text-sm font-medium leading-6 text-black md:mt-0'>
             {lan['addmusic-input-lyrics']}
           </label>
           <div className='mt-2'>

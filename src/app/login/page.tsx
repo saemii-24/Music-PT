@@ -6,7 +6,7 @@ import Image from 'next/image';
 import {signIn, useSession} from 'next-auth/react';
 import {useEffect} from 'react';
 import {useRouter} from 'next/navigation';
-import {LanguageType} from '@/types/form';
+import {LangType, LanguageType} from '@/types/form';
 import {languageMode} from '@/recoil';
 import {useRecoilValue} from 'recoil';
 

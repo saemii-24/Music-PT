@@ -37,7 +37,7 @@ const MusicProfile = ({music, id}: {music: SupabaseType; id: string}) => {
   return (
     <section className='dark:bg-music-background'>
       <div className=' container grid grid-cols-4 lg:grid-cols-6 2xl:grid-cols-7 '>
-        <div className='relative col-span-4 aspect-square overflow-hidden rounded-lg transition after:absolute after:left-0 after:top-0  after:z-10 after:size-full after:bg-[#000] after:opacity-0 after:transition after:content-[""] hover:after:opacity-40 lg:col-span-2 lg:row-span-6 lg:mr-20'>
+        <div className='relative col-span-4 aspect-square overflow-hidden rounded-lg transition after:absolute after:left-0 after:top-0  after:z-10 after:size-full after:bg-[#000] after:opacity-0 after:transition after:content-[""] hover:after:opacity-40  lg:col-span-2 lg:row-span-6 lg:mr-10 xl:mr-20'>
           <div className='absolute right-4 top-4 z-20 ml-auto flex gap-2'>
             <LangButton
               setSelectLang={setSelectLang}
@@ -46,7 +46,7 @@ const MusicProfile = ({music, id}: {music: SupabaseType; id: string}) => {
             />
           </div>
           <div
-            className={cn('relative aspect-square w-full', {
+            className={cn('overflow-hidden relative aspect-square w-full', {
               hidden: selectLang === 'jp',
               block: selectLang === 'ko',
             })}>
@@ -56,8 +56,9 @@ const MusicProfile = ({music, id}: {music: SupabaseType; id: string}) => {
                   src={music?.kothumbnail}
                   fill={true}
                   sizes='(min-width: 1280px) 300px (min-width: 1024px) 250px, (min-width: 640px) 600px, 100vw'
-                  alt={music?.kotitle + '앨범 이미지'}
+                  alt={music?.kotitle + ' 앨범 이미지'}
                   priority={true}
+                  style={{objectFit: 'cover'}}
                 />
               ) : (
                 <DefaultImageSquare />
@@ -74,7 +75,8 @@ const MusicProfile = ({music, id}: {music: SupabaseType; id: string}) => {
                   src={music?.jpthumbnail}
                   fill={true}
                   sizes='(min-width: 1280px) 300px (min-width: 1024px) 250px, (min-width: 640px) 600px, 100vw'
-                  alt={music?.jptitle + '앨범 이미지'}
+                  alt={music?.jptitle + ' 앨범 이미지'}
+                  style={{objectFit: 'cover'}}
                 />
               ) : (
                 <DefaultImageSquare />

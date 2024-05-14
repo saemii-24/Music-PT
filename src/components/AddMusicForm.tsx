@@ -19,7 +19,7 @@ type UploadVerType = 'ko' | 'jp';
 
 const AddMusicForm = () => {
   //recoil 언어모드
-  const lan: LanguageType = useRecoilValue(languageMode);
+  const lan = useRecoilValue(languageMode);
   const route = useRouter();
 
   //react-hook-form
@@ -83,4 +83,4 @@ const AddMusicForm = () => {
   );
 };
 
-export default memo(AddMusicForm);
+export default AddMusicForm;
