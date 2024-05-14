@@ -57,10 +57,11 @@ const MusicCard = ({musicData}: {musicData: SupabaseType}) => {
             (kothumbnail ? (
               <Image
                 src={kothumbnail}
-                fill={true}
-                sizes='(min-width: 1024px) 400px, (min-width: 640px) 600px, 100vw'
+                sizes='(min-width: 1024px) 20vw, (min-width: 640px) 600px, 100vw'
                 alt={kotitle + '앨범 이미지'}
                 priority={true}
+                fill={true}
+                quality={80}
               />
             ) : (
               <DefaultImage />
@@ -75,10 +76,11 @@ const MusicCard = ({musicData}: {musicData: SupabaseType}) => {
             (jpthumbnail ? (
               <Image
                 src={jpthumbnail}
-                fill={true}
-                sizes='(min-width: 1024px) 400px, (min-width: 640px) 600px, 100vw'
+                sizes='(min-width: 1024px) 20vw, (min-width: 640px) 600px, 100vw'
                 alt={jptitle + '앨범 이미지'}
                 priority={true}
+                fill={true}
+                quality={80}
               />
             ) : (
               <DefaultImage />
