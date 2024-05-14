@@ -9,7 +9,12 @@ import {IoMenu, IoClose} from 'react-icons/io5';
 
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {language, languageMode} from '@/recoil/index';
-import {jpThumbnailAtom, koThumbnailAtom, checkImageAtom} from '@/recoil';
+import {
+  jpThumbnailAtom,
+  koThumbnailAtom,
+  koCheckImageAtom,
+  jpCheckImageAtom,
+} from '@/recoil';
 import {useEffect, useState} from 'react';
 
 import {signOut, useSession} from 'next-auth/react';
@@ -65,13 +70,15 @@ export default function Header() {
   const pathname = usePathname();
   const [koThumbnail, setKoThumbnail] = useRecoilState(koThumbnailAtom);
   const [jpThumbnail, setJpThumbnail] = useRecoilState(jpThumbnailAtom);
-  const [checkImage, setCheckImage] = useRecoilState(checkImageAtom);
+  const [koCheckImage, setkoCheckImage] = useRecoilState(koCheckImageAtom);
+  const [jpCheckImage, setjpCheckImage] = useRecoilState(jpCheckImageAtom);
 
   useEffect(() => {
     if (pathname === '/addMusic') {
       setKoThumbnail(null);
       setJpThumbnail(null);
-      setCheckImage('none');
+      setkoCheckImage('none');
+      setjpCheckImage('none');
     }
   }, [pathname]);
 

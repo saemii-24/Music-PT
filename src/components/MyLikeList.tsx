@@ -4,7 +4,7 @@ import cn from 'classnames';
 import {memo} from 'react';
 import {IoHeartCircleOutline} from 'react-icons/io5';
 
-const MyLikeList = ({lan}: {lan: any}) => {
+const MyLikeList = ({lan}: {lan: LanguageType}) => {
   return (
     <div className='gap-20 border-gray-900/10 py-12 md:grid md:grid-cols-3'>
       <div className='sm:col-span-12 md:col-span-1'>

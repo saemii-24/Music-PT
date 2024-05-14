@@ -108,7 +108,6 @@ export interface LanguageType {
   'addmusic-album-upload-bad': string;
   'addmusic-album-image-ok': string;
   'addmusic-album-upload-ok': string;
-  'addmusic-album-upload': string;
   'addmusic-album-success': string;
   'addmusic-album-cancle': string;
   'addmusic-input-album': string;

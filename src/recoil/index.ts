@@ -50,7 +50,11 @@ export const jpThumbnailAtom = atom<string | null | undefined>({
 });
 type CheckImageType = 'ok' | 'bad' | 'none';
 
-export const checkImageAtom = atom<CheckImageType>({
-  key: 'checkImage',
+export const koCheckImageAtom = atom<CheckImageType>({
+  key: 'koCheckImage',
+  default: 'none',
+});
+export const jpCheckImageAtom = atom<CheckImageType>({
+  key: 'jpCheckImage',
   default: 'none',
 });

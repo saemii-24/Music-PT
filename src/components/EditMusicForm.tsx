@@ -109,4 +109,4 @@ const EditMusicForm = ({
   );
 };
 
-export default memo(EditMusicForm);
+export default EditMusicForm;
