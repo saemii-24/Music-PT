@@ -55,7 +55,7 @@ const MusicProfile = ({music, id}: {music: SupabaseType; id: string}) => {
                 <Image
                   src={music?.kothumbnail}
                   fill={true}
-                  sizes='(min-width: 1280px) 300px (min-width: 1024px) 250px, (min-width: 640px) 600px, 100vw'
+                  sizes='(min-width: 1024px) 15vw, (min-width) 70vw (min-width: 640px) 80vw, 95vw'
                   alt={music?.kotitle + ' 앨범 이미지'}
                   priority={true}
                   style={{objectFit: 'cover'}}
@@ -74,7 +74,7 @@ const MusicProfile = ({music, id}: {music: SupabaseType; id: string}) => {
                 <Image
                   src={music?.jpthumbnail}
                   fill={true}
-                  sizes='(min-width: 1280px) 300px (min-width: 1024px) 250px, (min-width: 640px) 600px, 100vw'
+                  sizes='(min-width: 1024px) 15vw, (min-width) 70vw (min-width: 640px) 80vw, 95vw'
                   alt={music?.jptitle + ' 앨범 이미지'}
                   style={{objectFit: 'cover'}}
                 />
