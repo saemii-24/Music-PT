@@ -25,7 +25,7 @@ const nextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
-    imageSizes: [300, 400, 580, 705],
+    imageSizes: [20, 170, 310, 400, 580, 705],
     deviceSizes: [640, 768, 1024],
     remotePatterns: [
       {
@@ -33,6 +33,12 @@ const nextConfig = {
         hostname: process.env.NEXT_PUBLIC_HOST_NAME,
         port: '',
         pathname: '/storage/v1/object/public/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 't1.kakaocdn.net',
+        port: '',
+        pathname: '/account_images/**',
       },
     ],
   },
