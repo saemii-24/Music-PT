@@ -11,6 +11,7 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
 
 - [개요](#개요)
 - [사용된 기술](#%EF%B8%8F사용된-기술)
+- [아키텍처](#아키텍처)
 - [주요 기능](#주요-기능)
 - [작성한 Next.js API](#작성한-nextjs-api)
 - [프로젝트 규칙](#%EF%B8%8F프로젝트-규칙)
@@ -55,6 +56,9 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
 - <img src="https://img.shields.io/badge/supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white"> <img src="https://img.shields.io/badge/prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white">
 - 프론트엔드단에서 간단하게 DB를 사용하기 위해 Supabase를 선택하였습니다.
 - Prisma ORM기능을 통해 SQL 쿼리가 아닌, JavaScript 작성방식으로, DB와 상호작용하였습니다.
+- 
+## 🧷아키텍처
+<img src="https://github.com/saemii-24/Music-PT/assets/139088277/d360e12e-8d39-4934-81fa-d28419b32b7b" alt="Music PT 아키텍처" width="800px">
 
 
 ## 💻주요 기능
