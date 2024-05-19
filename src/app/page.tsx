@@ -1,3 +1,4 @@
+//page.tsx
 'use client';
 
 import SK_Home from './skeleton/SK_Home';
