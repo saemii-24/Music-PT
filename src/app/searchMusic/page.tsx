@@ -1,25 +1,22 @@
 'use client';
 
 import React, {useEffect, useState} from 'react';
-import {useInfiniteQuery} from '@tanstack/react-query';
-import axios from 'axios';
 
 import type {SelectType} from '@/types/form';
 
 import {useForm} from 'react-hook-form';
-
 import {useInView} from 'react-intersection-observer';
 
 import SearchForm from '@/components/SearchForm';
 import SearchMusicCard from '@/components/SearchMusicCard';
 import MusicCard from '@/components/MusicCard';
 import SearchMusicTitle from '@/components/SearchMusicTitle';
-
 import SK_SearchCard from '../skeleton/SK_SeachCard';
 
 import {languageMode} from '@/recoil';
 import {useRecoilValue} from 'recoil';
 
+import {useSearchMusic} from '@/hook/useSearchMusic';
 export default function SearchMusic() {
   const lan = useRecoilValue(languageMode);
 
@@ -32,36 +29,12 @@ export default function SearchMusic() {
   const [search, setSearch] = useState<string>('');
 
   //tanstack query사용
-  const getMusicData = async ({pageParam}: {pageParam: number}) => {
-    let postCount: number = 10;
-    const {data} = await axios(
-      `/api/searchmusic?pageParam=${pageParam}&postCount=${postCount}&select=${select}&search=${search}`,
-    );
-    return data;
-  };
-
-  const {
-    status,
-    data,
-    fetchNextPage,
-    fetchPreviousPage,
-    refetch,
-    hasNextPage,
-    hasPreviousPage,
-    isFetchingNextPage,
-    isFetchingPreviousPage,
-    ...result
-  } = useInfiniteQuery({
-    queryKey: ['searchmusic', select, search],
-    queryFn: getMusicData,
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages, lastPageParam) => {
-      if (lastPage.length === 0) {
-        return undefined;
-      }
-      return lastPageParam + 1;
-    },
-  });
+  const {status, data, fetchNextPage, refetch, hasNextPage} = useSearchMusic(
+    select,
+    search,
+    ref,
+    inView,
+  );
 
   useEffect(() => {
     if (inView && hasNextPage) fetchNextPage();

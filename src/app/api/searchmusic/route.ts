@@ -11,7 +11,7 @@ export const GET = async (req: Request, res: NextResponse) => {
   const pageParam = Number(searchParams.get('pageParam'));
   const postCount = Number(searchParams.get('postCount'));
   const select = searchParams.get('select') as SelectType;
-  const search = searchParams.get('search') as string;
+  let search = searchParams.get('search') as string;
 
   await main();
 
@@ -54,11 +54,13 @@ export const GET = async (req: Request, res: NextResponse) => {
             {
               kotitle: {
                 contains: search,
+                mode: 'insensitive',
               },
             },
             {
               jptitle: {
                 contains: search,
+                mode: 'insensitive',
               },
             },
           ],
