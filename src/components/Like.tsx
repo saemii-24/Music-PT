@@ -76,7 +76,8 @@ export default function Like({music}: LikeType) {
           likeCount();
         }}
         type='button'
-        className='cursor-pointer'>
+        className='cursor-pointer'
+        aria-label='좋아요'>
         {session ? (
           likeData?.like ? (
             <FaHeart className='text-music-orange' />

@@ -165,16 +165,18 @@ export default function Header() {
             </li>
           )}
 
-          <div className='relative cursor-pointer '>
-            <li>
-              <GrLanguage
-                className='text-lg text-music-bluegray'
-                onClick={() => {
-                  setLanSelectOpen((lanSelectOpen) => !lanSelectOpen);
-                }}
-              />
+          <li className='relative cursor-pointer '>
+            <ul>
+              <li>
+                <GrLanguage
+                  className='text-lg text-music-bluegray'
+                  onClick={() => {
+                    setLanSelectOpen((lanSelectOpen) => !lanSelectOpen);
+                  }}
+                />
+              </li>
               {lanSelectOpen && (
-                <>
+                <li>
                   <ul className='absolute bottom-[-90px] right-[-50px] z-10 flex w-[120px] flex-col items-center rounded-lg border-2 border-black bg-white px-5 py-2'>
                     <li
                       className='cursor-pointer font-medium hover:text-music-bluegray dark:text-black'
@@ -193,11 +195,11 @@ export default function Header() {
                       日本語
                     </li>
                   </ul>
-                  <div className='absolute top-[30px] z-0 size-4 rotate-45 bg-black'></div>
-                </>
+                  <span className='absolute top-[30px] z-0 block size-4 rotate-45 bg-black'></span>
+                </li>
               )}
-            </li>
-          </div>
+            </ul>
+          </li>
 
           <li className='cursor-pointer'>
             {theme === 'dark' ? (
@@ -224,10 +226,10 @@ export default function Header() {
       {menuOpen && (
         <ul className='container inset-0 z-0 block h-screen w-screen bg-white pt-[30%] text-black sm:hidden '>
           <li>
-            <div className=' mb-4 text-2xl font-extrabold text-music-blue'>
-              Page
-            </div>
             <ul>
+              <li className=' mb-4 text-2xl font-extrabold text-music-blue'>
+                Page
+              </li>
               <li className='mb-2 block'>
                 <Link
                   href='/addMusic'
@@ -272,10 +274,10 @@ export default function Header() {
             </ul>
           </li>
           <li>
-            <div className=' mb-4 mt-8 text-2xl  font-extrabold text-music-blue'>
-              Language
-            </div>
             <ul>
+              <li className=' mb-4 mt-8 text-2xl  font-extrabold text-music-blue'>
+                Language
+              </li>
               <li
                 className='mb-3 cursor-pointer text-lg font-medium tracking-wide'
                 onClick={() => {
@@ -295,9 +297,9 @@ export default function Header() {
             </ul>
           </li>
           <li>
-            <div className=' mb-4 mt-8 text-2xl  font-extrabold text-music-blue'>
+            <span className='mb-4 mt-8 block text-2xl  font-extrabold text-music-blue'>
               Screen mode
-            </div>
+            </span>
             {theme === 'dark' ? (
               <IoMoon
                 onClick={() => {

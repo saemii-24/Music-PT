@@ -154,11 +154,11 @@ input[type='text'] {
     --disable: 246 248 249;
     --textdisable: 51 51 51;
     --lightgray: 246 248 249;
-    --bluegray: 148 163 184;
+    --bluegray: 75 84 114;
     --darkgray: 229 232 234;
     --blue: 31 87 247;
     --lightblue: 121 154 250;
-    --orange: 255 83 10;
+    --orange: 230 38 0;
     --lightorange: 255 150 105;
     --focusblue: 0 25 98;
     --white: 255 255 255;
@@ -177,7 +177,7 @@ input[type='text'] {
     --darkgray: 229 232 234;
     --blue: 46 109 244;
     --lightblue: 121 154 250;
-    --orange: 255 83 10;
+    --orange: 230 38 0;
     --lightorange: 255 150 105;
     --focusblue: 0 25 98;
     --white: 35 36 41;

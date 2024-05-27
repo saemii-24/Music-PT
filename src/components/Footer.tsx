@@ -19,14 +19,15 @@ export default function Footer() {
           <Link
             className='ml-auto flex items-center justify-center'
             href='https://github.com/saemii-24/Music-PT'
-            target='_blank'>
+            target='_blank'
+            aria-label='제작자 깃허브 접속'>
             <FaGithub className='text-3xl text-black' />
           </Link>
         </div>
-        <div className='mt-5 text-sm font-normal text-music-bluegray'>
+        <div className='mt-5 text-sm font-normal text-black '>
           {lan['footer-introduce']}
         </div>
-        <div className='mt-1 text-sm font-normal text-[#cccccc]'>
+        <div className='mt-1 text-sm font-normal text-music-bluegray'>
           {lan['footer-notice']}
         </div>
       </div>
