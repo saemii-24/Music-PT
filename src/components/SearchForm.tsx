@@ -122,6 +122,7 @@ const SearchForm = ({
         />
         <button
           type='submit'
+          aria-label='검색하기 버튼'
           className=' flex aspect-square size-11 items-center justify-center rounded-md border-0 py-1.5 text-gray-900 ring-gray-300 '>
           <IoMdSearch className='text-lg text-music-blue' />
         </button>
