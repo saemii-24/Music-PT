@@ -10,7 +10,9 @@ const MusicGrid = ({firstMusicData}: {firstMusicData: any}) => {
       <div className='grid grid-cols-1 justify-between gap-x-20 gap-y-10 lg:grid-cols-2 xl:grid-cols-3'>
         {firstMusicData?.posts?.map(
           (musicData: SupabaseType, index: number) => {
-            return <MusicCard key={index} musicData={musicData} />;
+            return (
+              <MusicCard key={index} musicData={musicData} index={index} />
+            );
           },
         )}
       </div>

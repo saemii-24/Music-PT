@@ -18,11 +18,11 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  compiler: {
-    removeConsole: {
-      exclude: ['error', 'warn'],
-    },
-  },
+  // compiler: {
+  //   removeConsole: {
+  //     exclude: ['error', 'warn'],
+  //   },
+  // },
   images: {
     formats: ['image/avif', 'image/webp'],
     imageSizes: [20, 170, 310, 400, 580, 705],

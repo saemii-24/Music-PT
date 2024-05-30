@@ -8,14 +8,22 @@ import {MdOutlineUpdate} from 'react-icons/md';
 
 import {useRecoilValue} from 'recoil';
 import {languageMode} from '@/recoil/index';
-import {memo, useState} from 'react';
+import {memo, useEffect, useState} from 'react';
 import cn from 'classnames';
 
 import LikeCount from './LikeCount';
 import LangButton from './LangButton';
 import DefaultImage from './DefaultImage';
 
-const MusicCard = ({musicData}: {musicData: SupabaseType}) => {
+import useWindowSize from '@/hook/useWindowSize';
+
+const MusicCard = ({
+  musicData,
+  index,
+}: {
+  musicData: SupabaseType;
+  index: number;
+}) => {
   const {
     id,
     jpalbum,
@@ -40,6 +48,26 @@ const MusicCard = ({musicData}: {musicData: SupabaseType}) => {
   const lan = useRecoilValue(languageMode);
   const route = useRouter();
 
+  //현재 window 사이즈 확인
+  const {width} = useWindowSize();
+  // const [priority, setPriority] = useState<boolean>(false);
+
+  // useEffect(() => {
+  //   if (width !== undefined) {
+  //     if (width < 1024) {
+  //       setPriority(index === 0);
+  //     } else if (width < 1280) {
+  //       setPriority(index <= 1);
+  //     } else {
+  //       setPriority(index <= 2);
+  //     }
+  //   } else {
+  //     setPriority(true);
+  //   }
+  //   console.log(priority);
+  // }, [width, index]);
+  const isEager = width! <= 640 ? index === 0 : index <= 2;
+
   //현재 보고 있는 버전 설정
   const [selectLang, setSelectLang] = useState<LangType>(kotitle ? 'ko' : 'jp');
 
@@ -59,7 +87,8 @@ const MusicCard = ({musicData}: {musicData: SupabaseType}) => {
                 src={kothumbnail}
                 sizes='(min-width: 1024px) 20vw, (min-width: 640px) 80vw, 95vw'
                 alt={kotitle + '앨범 이미지'}
-                priority={true}
+                loading={isEager ? 'eager' : 'lazy'}
+                priority={isEager}
                 fill={true}
               />
             ) : (
@@ -77,7 +106,8 @@ const MusicCard = ({musicData}: {musicData: SupabaseType}) => {
                 src={jpthumbnail}
                 sizes='(min-width: 1024px) 20vw, (min-width: 640px) 80vw, 95vw'
                 alt={jptitle + '앨범 이미지'}
-                priority={true}
+                loading={isEager ? 'eager' : 'lazy'}
+                priority={isEager}
                 fill={true}
               />
             ) : (
