@@ -90,6 +90,7 @@ const MusicCard = ({
                 loading={isEager ? 'eager' : 'lazy'}
                 priority={isEager}
                 fill={true}
+                style={{objectFit: 'cover'}}
               />
             ) : (
               <DefaultImage />
@@ -109,6 +110,7 @@ const MusicCard = ({
                 loading={isEager ? 'eager' : 'lazy'}
                 priority={isEager}
                 fill={true}
+                style={{objectFit: 'cover'}}
               />
             ) : (
               <DefaultImage />
