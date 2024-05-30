@@ -25,6 +25,7 @@
     "react-intersection-observer": "^9.8.1",
     "react-toastify": "^10.0.4",
     "recoil": "^0.7.7",
+    "sharp": "^0.33.4",
     "supabase": "1.148.6"
   },
   "devDependencies": {
