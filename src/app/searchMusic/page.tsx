@@ -83,7 +83,7 @@ export default function SearchMusic() {
                 return (
                   <div key={index}>
                     <div className='block sm:hidden'>
-                      <MusicCard musicData={music} />
+                      <MusicCard index={index} musicData={music} />
                     </div>
                     <div className='hidden border-t border-music-basicgray sm:block'>
                       <SearchMusicCard music={music} status={status} />

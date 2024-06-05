@@ -12,20 +12,6 @@ export async function main() {
   }
 }
 
-//모든 정보를 불러온다
-// export const GET = async (req: Request, res: NextResponse) => {
-//   try {
-//     await main();
-//     const posts = await prisma.post.findMany();
-//     return NextResponse.json({message: 'Success', posts}, {status: 200});
-//   } catch (err) {
-//     return NextResponse.json({message: 'Error', err}, {status: 500});
-//   } finally {
-//     //error가 발생해도 finally는 반드시 실행 됨
-//     await prisma.$disconnect();
-//   }
-// };
-
 //음악을 작성한다.
 export const POST = async (req: Request, res: NextResponse) => {
   try {
