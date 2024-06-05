@@ -50,22 +50,7 @@ const MusicCard = ({
 
   //현재 window 사이즈 확인
   const {width} = useWindowSize();
-  // const [priority, setPriority] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   if (width !== undefined) {
-  //     if (width < 1024) {
-  //       setPriority(index === 0);
-  //     } else if (width < 1280) {
-  //       setPriority(index <= 1);
-  //     } else {
-  //       setPriority(index <= 2);
-  //     }
-  //   } else {
-  //     setPriority(true);
-  //   }
-  //   console.log(priority);
-  // }, [width, index]);
   const isEager = width! <= 640 ? index === 0 : index <= 2;
 
   //현재 보고 있는 버전 설정

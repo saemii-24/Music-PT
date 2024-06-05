@@ -17,6 +17,8 @@ import {languageMode} from '@/recoil';
 import {useRecoilValue} from 'recoil';
 
 import {useSearchMusic} from '@/hook/useSearchMusic';
+import useWindowSize from '@/hook/useWindowSize';
+import SK_MusicCard from '../skeleton/SK_MusicCard';
 export default function SearchMusic() {
   const lan = useRecoilValue(languageMode);
 
@@ -56,6 +58,9 @@ export default function SearchMusic() {
     formState: {errors},
   } = useForm();
 
+  //현재 window 사이즈 확인
+  const {width} = useWindowSize();
+
   return (
     <main className='flex-1 sm:bg-white dark:bg-music-background'>
       <div className='container py-20'>
@@ -82,12 +87,15 @@ export default function SearchMusic() {
               .map((music, index) => {
                 return (
                   <div key={index}>
-                    <div className='block sm:hidden'>
-                      <MusicCard musicData={music} />
-                    </div>
-                    <div className='hidden border-t border-music-basicgray sm:block'>
-                      <SearchMusicCard music={music} status={status} />
-                    </div>
+                    {width! <= 640 ? (
+                      <div>
+                        <MusicCard index={index} musicData={music} />
+                      </div>
+                    ) : (
+                      <div className='border-t border-music-basicgray'>
+                        <SearchMusicCard music={music} status={status} />
+                      </div>
+                    )}
                   </div>
                 );
               })
@@ -101,12 +109,15 @@ export default function SearchMusic() {
         ) : (
           // 로딩중
           <>
-            <div className='hidden sm:block'>
-              <SK_SearchCard />
-            </div>
-            <div className='block sm:hidden'>
-              <SK_SearchCard />
-            </div>
+            {width! <= 640 ? (
+              <div>
+                <SK_MusicCard />
+              </div>
+            ) : (
+              <div>
+                <SK_SearchCard />
+              </div>
+            )}
           </>
         )}
         {data && <div className='h-4 w-full ' ref={ref}></div>}
