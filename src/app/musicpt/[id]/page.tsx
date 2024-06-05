@@ -2,6 +2,7 @@ import MusicPage from '@/components/MusicPage';
 import {ParamsProps} from '@/types/form';
 import axios from 'axios';
 import {Metadata, ResolvingMetadata} from 'next';
+import ogImage from '../opengraph-image.png';
 
 type Props = {
   params: {id: string};
@@ -20,7 +21,7 @@ const getMusicData = async (id: number) => {
       ? kothumbnail
       : jpthumbnail
         ? jpthumbnail
-        : '';
+        : ogImage.src;
     const title = kotitle ? kotitle : jptitle ? jptitle : '';
 
     return {thumbnail, title};

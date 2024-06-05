@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useLayoutEffect} from 'react';
 
 type WindowType = {
   width: number | undefined;
@@ -7,20 +7,24 @@ type WindowType = {
 
 function useWindowSize() {
   const [size, setSize] = useState<WindowType>({
-    width: undefined,
-    height: undefined,
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0,
   });
 
-  useEffect(() => {
-    function handleResize() {
-      setSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
+  function handleResize() {
+    setSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  }
 
-    window.addEventListener('resize', handleResize);
+  useLayoutEffect(() => {
+    // 컴포넌트가 마운트될 때 한 번만 실행
     handleResize();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
