@@ -2,7 +2,7 @@ import MusicPage from '@/components/MusicPage';
 import {ParamsProps} from '@/types/form';
 import axios from 'axios';
 import {Metadata, ResolvingMetadata} from 'next';
-import ogImage from '../opengraph-image.png';
+import ogImage from '../opengraph-image.jpg';
 
 type Props = {
   params: {id: string};

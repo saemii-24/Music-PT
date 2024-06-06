@@ -1,14 +1,12 @@
 'use client';
 
-import MusicDetail from '@/components/MusicDetail';
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 import MusicProfile from '@/components/MusicProfile';
-import {atom, useRecoilState} from 'recoil';
+import {useRecoilState} from 'recoil';
 import {musicAtom, needRefetch} from '@/recoil';
-import {useEffect, useState} from 'react';
-import SK_MusicProfile from '@/app/skeleton/SK_MusicProfile';
-import Count from '@/components/Count';
+import {useEffect} from 'react';
+import SK_MusicProfile from '@/skeleton/SK_MusicProfile';
 
 interface ParamsChildrenProps {
   params: {id: string};

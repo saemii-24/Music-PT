@@ -1,14 +1,12 @@
 'use client';
-import {LangType, SupabaseType} from '@/types/form';
+import {SupabaseType} from '@/types/form';
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
-import Like from './Like';
 import cn from 'classnames';
-import SK_Load from '@/app/skeleton/SK_Load';
 import {useRouter} from 'next/navigation';
-import LangButton from './LangButton';
-import {useState} from 'react';
+
 import LikeCardOne from './LikeCardOne';
+import SK_Load from '@/skeleton/SK_Load';
 
 type LikeAllDataType = {
   createdAt: Date;

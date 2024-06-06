@@ -1,5 +1,4 @@
 import React from 'react';
-import SK_Title from './SK_Ttitle';
 
 export default function SK_SearchCard() {
   return (
