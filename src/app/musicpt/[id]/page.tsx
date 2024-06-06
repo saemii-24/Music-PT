@@ -15,19 +15,22 @@ const getMusicData = async (id: number) => {
       `https://music-pt.vercel.app/api/music/${id}`,
     );
 
-    const {kothumbnail, jpthumbnail, kotitle, jptitle} = data.post;
+    const {kothumbnail, jpthumbnail, kotitle, jptitle, kosinger, jpsinger} =
+      data.post;
 
     const thumbnail = kothumbnail
       ? kothumbnail
       : jpthumbnail
         ? jpthumbnail
         : ogImage.src;
-    const title = kotitle ? kotitle : jptitle ? jptitle : '';
 
-    return {thumbnail, title};
+    const title = kotitle ? kotitle : jptitle ? jptitle : '';
+    const singer = kosinger ? kosinger : jpsinger ? jpsinger : '';
+
+    return {thumbnail, title, singer};
   } catch (err) {
     console.log(err);
-    return {thumbnail: '', title: ''};
+    return {thumbnail: '', title: '', singer: ''};
   }
 };
 
@@ -38,11 +41,11 @@ export async function generateMetadata(
   const id = Number(params.id);
   const data = await getMusicData(id);
 
-  const {thumbnail, title} = data;
+  const {thumbnail, title, singer} = data;
 
   return {
     title: title ? 'Music PT_' + title : 'Music PT',
-    description: 'Music PT에서 언어에 따른 가사의 미묘한 차이를 알아보세요!',
+    description: 'Music PT에서 좋아하는 음악의 언어별 가사를 비교해보세요!',
     metadataBase: new URL('https://music-pt.vercel.app/'),
     alternates: {
       canonical: `/musicpt/${id}`,
@@ -50,28 +53,29 @@ export async function generateMetadata(
     openGraph: {
       title: title + '가사 탐구' || 'Music PT 가사 탐구',
       description:
-        title + '의 언어에 따른 가사의 미묘한 차이를 알아보세요!' ||
-        'Music PT에서 언어에 따른 가사의 미묘한 차이를 알아보세요!',
+        title && singer
+          ? `[${singer}] ` + title + '의 언어별 가사를 비교해보세요!'
+          : 'Music PT에서 언어별 가사를 비교해보세요!',
       images: [
         {
           url: thumbnail,
           width: 1200,
           height: 630,
-          alt: title + '앨범 썸네일',
         },
       ],
     },
     twitter: {
       title: title + '가사 탐구' || 'Music PT 가사 탐구',
       description:
-        title + '의 언어에 따른 가사의 미묘한 차이를 알아보세요!' ||
-        'Music PT에서 언어에 따른 가사의 미묘한 차이를 알아보세요!',
+        title && singer
+          ? `[${singer}] ` + title + '의 언어별 가사를 비교해보세요!'
+          : 'Music PT에서 언어별 가사를 비교해보세요!',
       images: [
         {
           url: thumbnail,
           width: 800,
           height: 600,
-          alt: title + '앨범 썸네일',
+          alt: title ? title + ' 앨범 썸네일' : '앨범 기본 이미지',
         },
       ],
     },

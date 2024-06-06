@@ -1,9 +1,9 @@
 import LoginPage from '@/components/LoginPage';
 import ogImage from './opengraph-image.jpg';
 
-export async function generateMetadata() {
+export function generateMetadata() {
   return {
-    title: 'Music PT 로그인',
+    title: 'Music PT_Login',
     description:
       'Music PT에 로그인하고, 좋아하는 음악을 등록하고 번역해보세요!',
     metadataBase: new URL('https://music-pt.vercel.app/'),

@@ -1,9 +1,9 @@
 'use client';
-import {memo, useState} from 'react';
+import {useState} from 'react';
 import cn from 'classnames';
 
 import {useForm} from 'react-hook-form';
-import type {FormValues, LanguageType, SupabaseType} from '@/types/form';
+import type {FormValues, SupabaseType} from '@/types/form';
 
 import {editMusicForm} from '@/utils/form';
 import {useRouter} from 'next/navigation';
