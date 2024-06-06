@@ -10,10 +10,9 @@ import cn from 'classnames';
 import LikeCount from './LikeCount';
 import LangButton from './LangButton';
 import DefaultImageSquare from './DefaultImageSquare';
-import SK_SearchCard from '@/app/skeleton/SK_SeachCard';
-
 import {useRecoilValue} from 'recoil';
 import {languageMode} from '@/recoil';
+import SK_SearchCard from '@/skeleton/SK_SeachCard';
 
 const SearchMusicCard = ({music, status}: {music: any; status: StatusType}) => {
   const lan = useRecoilValue(languageMode);

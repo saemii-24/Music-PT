@@ -1,58 +1,87 @@
-'use client';
-
-import {useQuery} from '@tanstack/react-query';
+import EditMusicPage from '@/components/EditMusicPage';
+import ogImage from '../opengraph-image.jpg';
 import axios from 'axios';
+import {Metadata, ResolvingMetadata} from 'next';
 
-import EditMusicForm from '@/components/EditMusicForm';
-import Title from '@/components/Title';
-import Count from '@/components/Count';
-import {useMemo, useState} from 'react';
-
-import {languageMode} from '@/recoil';
-import {useRecoilValue} from 'recoil';
-
-interface ParamsChildrenProps {
+type Props = {
   params: {id: string};
-  children: React.ReactNode;
+  searchParams: {[key: string]: string | string[] | undefined};
+};
+
+const getMusicData = async (id: number) => {
+  try {
+    const {data}: any = await axios.get(
+      `https://music-pt.vercel.app/api/music/${id}`,
+    );
+
+    const {kothumbnail, jpthumbnail, kotitle, jptitle, kosinger, jpsinger} =
+      data.post;
+
+    const thumbnail = kothumbnail
+      ? kothumbnail
+      : jpthumbnail
+        ? jpthumbnail
+        : ogImage.src;
+
+    const title = kotitle ? kotitle : jptitle ? jptitle : '';
+    const singer = kosinger ? kosinger : jpsinger ? jpsinger : '';
+
+    return {thumbnail, title, singer};
+  } catch (err) {
+    console.log(err);
+    return {thumbnail: '', title: '', singer: ''};
+  }
+};
+
+export async function generateMetadata(
+  {params, searchParams}: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const id = Number(params.id);
+  const data = await getMusicData(id);
+
+  const {thumbnail, title, singer} = data;
+
+  return {
+    title: title ? 'Music PT_Edit_' + title : 'Music PT_Edit',
+    description: 'Music PT에 등록 된 음악을 수정할 수 있어요!',
+    metadataBase: new URL('https://music-pt.vercel.app/'),
+    alternates: {
+      canonical: `/editmusic/${id}`,
+    },
+    openGraph: {
+      title: title + ' 내용 수정' || 'Music PT 내용 수정',
+      description:
+        title && singer
+          ? `[${singer}] ` + title + '의 등록된 내용을 수정할 수 있어요!'
+          : 'Music PT에 등록된 내용을 수정할 수 있어요!',
+      images: [
+        {
+          url: thumbnail,
+          width: 1200,
+          height: 630,
+          alt: title ? title + ' 앨범 표지' : '기본 이미지',
+        },
+      ],
+    },
+    twitter: {
+      title: title + ' 내용 수정' || 'Music PT 내용 수정',
+      description:
+        title && singer
+          ? `[${singer}] ` + title + '의 등록된 내용을 수정할 수 있어요!'
+          : 'Music PT에 등록된 내용을 수정할 수 있어요!',
+      images: [
+        {
+          url: thumbnail,
+          width: 800,
+          height: 600,
+          alt: title ? title + ' 앨범 표지' : '기본 이미지',
+        },
+      ],
+    },
+  };
 }
 
-export default function EditMusic({
-  children,
-  params,
-}: Readonly<ParamsChildrenProps>) {
-  const id = params.id;
-
-  //tanstack query사용
-  const getMusicData = async () => {
-    const {data} = await axios.get(`/api/music/${id}`);
-    return data;
-  };
-  const lan = useRecoilValue(languageMode);
-
-  const titleInfo = useMemo(() => {
-    return {
-      title: lan['edit-music-title'],
-      description: lan['edit-music-description'],
-    };
-  }, [lan]);
-
-  const {
-    status,
-    data: music,
-    // refetch,
-  } = useQuery({
-    queryKey: ['music-pt', id],
-    queryFn: getMusicData,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-  });
-
-  return (
-    <main className=' flex-1 dark:bg-music-background'>
-      <div className='container py-20'>
-        <Title titleInfo={titleInfo} />
-        <EditMusicForm id={id} music={music?.post} />
-      </div>
-    </main>
-  );
+export default function EditMusic({params}: {params: {id: string}}) {
+  return <EditMusicPage params={params} />;
 }
