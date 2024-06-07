@@ -34,6 +34,54 @@ const getMusicData = async (id: number) => {
   }
 };
 
+// export async function generateMetadata(
+//   {params, searchParams}: Props,
+//   parent: ResolvingMetadata,
+// ): Promise<Metadata> {
+//   const id = Number(params.id);
+//   const data = await getMusicData(id);
+
+//   const {thumbnail, title, singer} = data;
+
+//   return {
+//     title: title ? 'Music PT_' + title : 'Music PT',
+//     description: 'Music PT에서 좋아하는 음악의 언어별 가사를 비교해보세요!',
+//     metadataBase: new URL('https://music-pt.vercel.app/'),
+//     alternates: {
+//       canonical: `/musicpt/${id}`,
+//     },
+//     openGraph: {
+//       title: title + ' 가사 탐구' || 'Music PT 가사 탐구',
+//       description:
+//         title && singer
+//           ? `[${singer}] ` + title + '의 언어별 가사를 비교해보세요!'
+//           : 'Music PT에서 언어별 가사를 비교해보세요!',
+//       images: [
+//         {
+//           url: thumbnail,
+//           width: 1200,
+//           height: 630,
+//         },
+//       ],
+//     },
+//     twitter: {
+//       title: title + ' 가사 탐구' || 'Music PT 가사 탐구',
+//       description:
+//         title && singer
+//           ? `[${singer}] ` + title + '의 언어별 가사를 비교해보세요!'
+//           : 'Music PT에서 언어별 가사를 비교해보세요!',
+//       images: [
+//         {
+//           url: thumbnail,
+//           width: 800,
+//           height: 600,
+//           alt: title ? title + ' 앨범 썸네일' : '앨범 기본 이미지',
+//         },
+//       ],
+//     },
+//   };
+// }
+
 export async function generateMetadata(
   {params, searchParams}: Props,
   parent: ResolvingMetadata,
@@ -51,28 +99,28 @@ export async function generateMetadata(
       canonical: `/musicpt/${id}`,
     },
     openGraph: {
-      title: title + '가사 탐구' || 'Music PT 가사 탐구',
+      title: title + ' 가사 탐구' || 'Music PT 가사 탐구',
       description:
         title && singer
           ? `[${singer}] ` + title + '의 언어별 가사를 비교해보세요!'
           : 'Music PT에서 언어별 가사를 비교해보세요!',
       images: [
         {
-          url: thumbnail,
+          url: `http://localhost:3000/${id}/opengraph-image`,
           width: 1200,
           height: 630,
         },
       ],
     },
     twitter: {
-      title: title + '가사 탐구' || 'Music PT 가사 탐구',
+      title: title + ' 가사 탐구' || 'Music PT 가사 탐구',
       description:
         title && singer
           ? `[${singer}] ` + title + '의 언어별 가사를 비교해보세요!'
           : 'Music PT에서 언어별 가사를 비교해보세요!',
       images: [
         {
-          url: thumbnail,
+          url: `http://localhost:3000/${id}/opengraph-image`,
           width: 800,
           height: 600,
           alt: title ? title + ' 앨범 썸네일' : '앨범 기본 이미지',
