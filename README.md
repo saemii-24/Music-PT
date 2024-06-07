@@ -68,28 +68,37 @@ Music-PT는 Music Please Translation의 약어로, 음악을 번역하고 공부
     <th style="width:300px">음악 좋아요</th>
     <th style="width:300px">음악 추가</th>
     <th style="width:300px">음악 목록(검색)</th>
-    <th style="width:300px">음악 수정</th>
   </tr>
   <tr>
     <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/d9a8d33d-bb11-4a39-94f8-422a7af0a5bd" alt="음악 좋아요" width="300px"></td>
     <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/3abadd65-c283-48c1-89ab-eb3458794517" alt="음악 추가" width="300px"></td>
     <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/8c28f260-8817-47ec-afc7-4a96fa0948c7" alt="음악 목록(검색)" width="300px"></td>
-    <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/391b6c1d-34ad-4674-bf58-78fe373b3ff2c" alt="음악 수정" width="300px"></td>
   </tr>
 </table>
 
 <table style="width:100%">
   <tr>
+    <th style="width:300px">음악 수정</th>
     <th style="width:300px">반응형 웹</th>
     <th style="width:300px">OAuth</th>
-    <th style="width:300px">라이트/다크 모드</th>
-    <th style="width:300px">한국어/일본어 선택</th>
   </tr>
   <tr>
+    <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/391b6c1d-34ad-4674-bf58-78fe373b3ff2c" alt="음악 수정" width="300px"></td>
     <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/c0660cfb-c969-4d46-9a32-c37bf039ae0d" alt="반응형 웹" width="300px"></td>
     <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/187e241f-7559-41ac-b5eb-2888118830f1" alt="OAuth" width="300px"></td>
+  </tr>
+</table>
+
+<table style="width:100%">
+  <tr>
+    <th style="width:300px">라이트/다크 모드</th>
+    <th style="width:300px">한국어/일본어 선택</th>
+  <th style="width:300px">오픈그래프/트위터카드</th>
+  </tr>
+  <tr>
     <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/c97c004f-4b2d-4792-97d4-9cca6e8455ac" alt="라이트/다크 모드" width="300px"></td>
-    <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/2509365f-fba6-41d5-8e02-bf6f7998feda" alt="한국어/일본어 선택택" width="300px"></td>
+    <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/2509365f-fba6-41d5-8e02-bf6f7998feda" alt="한국어/일본어 선택" width="300px"></td>
+  <td><img src="https://github.com/saemii-24/Music-PT/assets/139088277/65f9382e-b935-435f-a542-6d87960549c7" alt="오픈그래프/트위터카드" width="300px"></td>
   </tr>
 </table>
 
