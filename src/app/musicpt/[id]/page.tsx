@@ -3,6 +3,7 @@ import {ParamsProps} from '@/types/form';
 import axios from 'axios';
 import {Metadata, ResolvingMetadata} from 'next';
 import ogImage from '../opengraph-image.jpg';
+import Image from '../[id]/opengraph-image/page.png';
 
 type Props = {
   params: {id: string};
@@ -106,7 +107,7 @@ export async function generateMetadata(
           : 'Music PT에서 언어별 가사를 비교해보세요!',
       images: [
         {
-          url: `http://localhost:3000/${id}/opengraph-image`,
+          url: `http://localhost:3000/musicpt/${id}/opengraph-image`,
           width: 1200,
           height: 630,
         },
@@ -120,7 +121,7 @@ export async function generateMetadata(
           : 'Music PT에서 언어별 가사를 비교해보세요!',
       images: [
         {
-          url: `http://localhost:3000/${id}/opengraph-image`,
+          url: `http://localhost:3000/musicpt/${id}/opengraph-image`,
           width: 800,
           height: 600,
           alt: title ? title + ' 앨범 썸네일' : '앨범 기본 이미지',
