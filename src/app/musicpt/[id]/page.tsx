@@ -18,11 +18,30 @@ const getMusicData = async (id: number) => {
     const {kothumbnail, jpthumbnail, kotitle, jptitle, kosinger, jpsinger} =
       data.post;
 
-    const thumbnail = kothumbnail
-      ? kothumbnail
-      : jpthumbnail
-        ? jpthumbnail
-        : ogImage.src;
+    let thumbnail = kothumbnail ? kothumbnail : jpthumbnail ? jpthumbnail : '';
+
+    //이미지가 허용되는 형식인지 확인한다.
+    //만약 허용되지 않는 형식인 경우 thumbnail값을 공백으로 두어, 기본 og를 사용하도록 한다.
+    if (thumbnail) {
+      try {
+        const response = await axios.get(thumbnail, {responseType: 'blob'});
+        const contentType = response.headers['content-type'];
+
+        // 형식 체크
+        if (
+          !(
+            contentType === 'image/png' ||
+            contentType === 'image/jpeg' ||
+            contentType === 'image/jpg'
+          )
+        ) {
+          thumbnail = '';
+        }
+      } catch (err) {
+        console.log(err);
+        thumbnail = '';
+      }
+    }
 
     const title = kotitle ? kotitle : jptitle ? jptitle : '';
     const singer = kosinger ? kosinger : jpsinger ? jpsinger : '';
@@ -51,28 +70,28 @@ export async function generateMetadata(
       canonical: `/musicpt/${id}`,
     },
     openGraph: {
-      title: title + '가사 탐구' || 'Music PT 가사 탐구',
+      title: title + ' 가사 탐구' || 'Music PT 가사 탐구',
       description:
         title && singer
           ? `[${singer}] ` + title + '의 언어별 가사를 비교해보세요!'
           : 'Music PT에서 언어별 가사를 비교해보세요!',
       images: [
         {
-          url: thumbnail,
+          url: thumbnail ? `/musicpt/${id}/opengraph-image` : ogImage.src,
           width: 1200,
           height: 630,
         },
       ],
     },
     twitter: {
-      title: title + '가사 탐구' || 'Music PT 가사 탐구',
+      title: title + ' 가사 탐구' || 'Music PT 가사 탐구',
       description:
         title && singer
           ? `[${singer}] ` + title + '의 언어별 가사를 비교해보세요!'
           : 'Music PT에서 언어별 가사를 비교해보세요!',
       images: [
         {
-          url: thumbnail,
+          url: thumbnail ? `/musicpt/${id}/opengraph-image` : ogImage.src,
           width: 800,
           height: 600,
           alt: title ? title + ' 앨범 썸네일' : '앨범 기본 이미지',
